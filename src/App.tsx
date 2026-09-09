@@ -11,7 +11,7 @@ import { products as defaultProducts, settings as defaultSettings } from './data
 import { Award, ArrowRight, Code2 } from 'lucide-react';
 import CodeViewerModal from './components/CodeViewerModal';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v3';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v4';
 
 export default function App() {
   const currentPath = usePath();
@@ -27,7 +27,8 @@ export default function App() {
   // Primary data initialized with local storage persistence fallback
   const [products, setProducts] = useState<Product[]>(() => {
     try {
-      // Clear legacy storage keys that may have cached demo listing items
+      // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v3');
       localStorage.removeItem('safetyline_catalogue_v2');
       localStorage.removeItem('safetyline_catalogue_v1');
       const saved = localStorage.getItem(LOCAL_STORAGE_PRODUCTS_KEY);

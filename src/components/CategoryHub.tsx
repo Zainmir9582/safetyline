@@ -87,7 +87,7 @@ export default function CategoryHub({
     if (isGearwear) {
       return ['All', 'Tops & Compression', 'Bottoms & Shorts', 'Weather Shells'];
     } else {
-      return ['All', 'Performance Socks', 'Silk & Fine Knits', 'Tights & Compression'];
+      return ['All', 'Activewear & Sets', 'Jackets & Outerwear', 'Tanks & Tops', 'Fine Knits & Legwear'];
     }
   }, [isGearwear]);
 
@@ -119,14 +119,15 @@ export default function CategoryHub({
           if (selectedSubcat === 'Bottoms & Shorts') matchSubcat = nameDesc.includes('short') || nameDesc.includes('legging') || nameDesc.includes('pant');
           if (selectedSubcat === 'Weather Shells') matchSubcat = nameDesc.includes('shell') || nameDesc.includes('jacket') || nameDesc.includes('weather');
         } else {
-          if (selectedSubcat === 'Performance Socks') matchSubcat = nameDesc.includes('sock') || nameDesc.includes('cashmere') || nameDesc.includes('lounge');
-          if (selectedSubcat === 'Silk & Fine Knits') matchSubcat = nameDesc.includes('silk') || nameDesc.includes('stocking') || nameDesc.includes('lace');
-          if (selectedSubcat === 'Tights & Compression') matchSubcat = nameDesc.includes('tight') || nameDesc.includes('compression') || nameDesc.includes('sheer');
+          if (selectedSubcat === 'Activewear & Sets') matchSubcat = nameDesc.includes('set') || nameDesc.includes('bra') || nameDesc.includes('tights') || nameDesc.includes('legging') || nameDesc.includes('aeroflex');
+          if (selectedSubcat === 'Jackets & Outerwear') matchSubcat = nameDesc.includes('jacket') || nameDesc.includes('puffer') || nameDesc.includes('parka') || nameDesc.includes('storm') || nameDesc.includes('shell');
+          if (selectedSubcat === 'Tanks & Tops') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('stringer') || nameDesc.includes('crew') || nameDesc.includes('pullover') || nameDesc.includes('top');
+          if (selectedSubcat === 'Fine Knits & Legwear') matchSubcat = nameDesc.includes('sock') || nameDesc.includes('silk') || nameDesc.includes('stocking') || nameDesc.includes('cashmere') || nameDesc.includes('tights');
         }
       }
 
-      // Size filter
-      const matchSize = selectedSize === 'All' || (p.sizes && p.sizes.includes(selectedSize));
+      // Size filter (only applies to accessories)
+      const matchSize = isGearwear || selectedSize === 'All' || (p.sizes && p.sizes.includes(selectedSize));
 
       return matchQuery && matchSubcat && matchSize;
     });
@@ -575,19 +576,21 @@ export default function CategoryHub({
               />
             </div>
 
-            {/* Size Dropdown filter */}
-            <div className="flex items-center space-x-2">
-              <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Size:</span>
-              <select
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
-                className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
-              >
-                {allSizes.map(s => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-            </div>
+            {/* Size Dropdown filter (only for accessories, hidden for gearwear) */}
+            {!isGearwear && (
+              <div className="flex items-center space-x-2">
+                <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Size:</span>
+                <select
+                  value={selectedSize}
+                  onChange={(e) => setSelectedSize(e.target.value)}
+                  className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
+                >
+                  {allSizes.map(s => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+              </div>
+            )}
 
           </div>
 

@@ -428,8 +428,8 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 </div>
               </div>
 
-              {/* Available Sizes */}
-              {product.sizes && product.sizes.length > 0 && (
+              {/* Available Sizes - Hidden for Gearwear */}
+              {!isGearwear && product.sizes && product.sizes.length > 0 && (
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <h3 className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider">

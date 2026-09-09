@@ -137,19 +137,21 @@ export default function ProductList({ categorySlug, products, categories }: Prod
               <span>Filters:</span>
             </div>
 
-            {/* Size Dropdown */}
-            <select
-              id="filter-size-select"
-              value={selectedSize}
-              onChange={(e) => setSelectedSize(e.target.value)}
-              className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-800 outline-none focus:border-[#0B3D3B] cursor-pointer transition-colors"
-            >
-              {filterOptions.sizes.map(size => (
-                <option key={size} value={size}>
-                  {size === 'All' ? 'All Sizes' : `Size: ${size}`}
-                </option>
-              ))}
-            </select>
+            {/* Size Dropdown - Hidden for gearwear */}
+            {currentCategory !== 'gearwear' && (
+              <select
+                id="filter-size-select"
+                value={selectedSize}
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-800 outline-none focus:border-[#0B3D3B] cursor-pointer transition-colors"
+              >
+                {filterOptions.sizes.map(size => (
+                  <option key={size} value={size}>
+                    {size === 'All' ? 'All Sizes' : `Size: ${size}`}
+                  </option>
+                ))}
+              </select>
+            )}
 
             {/* Color Dropdown */}
             <select
@@ -232,9 +234,11 @@ export default function ProductList({ categorySlug, products, categories }: Prod
                       <span>View Specs</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </span>
-                    <span className="text-[10px] text-slate-400 font-mono">
-                      {p.sizes.length} Sizes
-                    </span>
+                    {currentCategory !== 'gearwear' && p.sizes && p.sizes.length > 0 && (
+                      <span className="text-[10px] text-slate-400 font-mono">
+                        {p.sizes.length} Sizes
+                      </span>
+                    )}
                   </div>
                 </div>
               </motion.div>

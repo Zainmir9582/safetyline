@@ -8,9 +8,9 @@
     },
     {
       "id": "cat-hosiery",
-      "name": "Hosiery",
-      "slug": "hosiery",
-      "description": "Ultra-luxurious, fine-gauge socks, tights, and stockings crafted with premium mulberry silk, combed Egyptian cotton, and Mongolian cashmere."
+      "name": "Accessories",
+      "slug": "accessories",
+      "description": "Ultra-luxurious, fine-gauge socks, tights, stockings, and performance activewear accessories crafted with precision textiles."
     }
   ],
   "products": [
@@ -21,16 +21,9 @@
       "categoryId": "cat-gearwear",
       "categoryName": "Gearwear",
       "shortDescription": "Unrivaled lightweight compression top with target-zoned aerodynamic breathability.",
-      "longDescription": "Engineered for high-intensity athletic performance, the Apex Pro Aero Compression Tee utilizes a ultra-dense polyamide composite that stabilizes micro-muscle groups while maximizing heat dissipation. Advanced flatlock structural stitching eliminates friction completely, and 4-way elastic memory keeps its exact ergonomic shape session after session.",
+      "longDescription": "Engineered for high-intensity athletic performance, the Apex Pro Aero Compression Tee utilizes an ultra-dense polyamide composite that stabilizes micro-muscle groups while maximizing heat dissipation. Advanced flatlock structural stitching eliminates friction completely, and 4-way elastic memory maintains its exact ergonomic shape session after session.",
       "material": "82% Aero-Polyamide, 18% Elastane Composite",
-      "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "sizes": [],
       "colors": [
         "Obsidian Black",
         "Chamber Slate",
@@ -40,7 +33,8 @@
         "Target-zoned moisture-wicking capillary channels",
         "Anti-microbial silver-ion thread technology",
         "Aerodynamic shoulder-seam optimization",
-        "Reflective micro-branding elements"
+        "Reflective micro-branding elements",
+        "Flatlock anti-chafe construction"
       ],
       "productCode": "GW-APX-01",
       "status": "Active",
@@ -49,9 +43,9 @@
       "galleryImages": [
         "/src/assets/images/regenerated_image_1788784305175.jpg"
       ],
-      "seoTitle": "Apex Pro Aero Compression Tee - Elite Performance Gearwear",
+      "seoTitle": "Apex Pro Aero Compression Tee | High-Performance Gearwear",
       "seoDescription": "Discover the ultimate lightweight compression tee with target-zoned aerodynamic breathability and silver-ion odor resistance.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "createdAt": "2026-01-15T08:00:00.000Z"
     },
     {
       "id": "prod-znt-02",
@@ -62,12 +56,7 @@
       "shortDescription": "Ultra-lightweight windproof and hydrophobic outdoor performance shell.",
       "longDescription": "Designed to combat unpredictable weather, the Zenith Stormshell features a triple-layer hydrophobic membrane that repels high-pressure rain while maintaining an incredibly high breathability rating. Includes fully taped inner seams, responsive adjustable cuffs, and dedicated concealed media compartments.",
       "material": "100% Recycled Hydrophobic Polyester Ribbon",
-      "sizes": [
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
+      "sizes": [],
       "colors": [
         "Nordic Mist",
         "Forest Charcoal",
@@ -77,7 +66,8 @@
         "15,000mm hydrostatic head waterproof rating",
         "Underarm dual-zipper thermal regulators",
         "Helmet-compatible dynamic drawcord hood",
-        "Internal bonded multimedia port"
+        "Internal bonded multimedia port",
+        "Laser-cut aerodynamic venting"
       ],
       "productCode": "GW-ZNT-02",
       "status": "Active",
@@ -86,9 +76,9 @@
       "galleryImages": [
         "/src/assets/images/regenerated_image_1788784337552.jpg"
       ],
-      "seoTitle": "Zenith Hydrophobic Stormshell - Waterproof Active Jacket",
-      "seoDescription": "The Zenith Stormshell is a premium waterproof, windproof active training jacket perfect for rugged outdoor adventures.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "seoTitle": "Zenith Hydrophobic Stormshell | Waterproof Active Jacket",
+      "seoDescription": "The Zenith Stormshell is a premium waterproof, windproof active training jacket perfect for rugged outdoor adventures and training.",
+      "createdAt": "2026-02-01T08:00:00.000Z"
     },
     {
       "id": "prod-chr-03",
@@ -96,15 +86,10 @@
       "slug": "chronos-thermal-compression-leggings",
       "categoryId": "cat-gearwear",
       "categoryName": "Gearwear",
-      "shortDescription": "Brushed thermal interior leggings providing compression and cold-weather insulation.",
+      "shortDescription": "Brushed thermal interior leggings providing graduated compression and cold-weather insulation.",
       "longDescription": "The Chronos Thermal Leggings provide optimal cold-weather performance. Featuring an insulating micro-brushed lining, these compression tights support blood flow, improve recovery times, and shield your muscles from sudden temperature drops during outdoor runs or sub-zero sessions.",
       "material": "78% Thermal Polyamide, 22% Lycra Extra Life",
-      "sizes": [
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
+      "sizes": [],
       "colors": [
         "Stellar Silver",
         "Deep Maroon",
@@ -114,7 +99,8 @@
         "Micro-brushed internal thermal fleece lining",
         "High-waisted compression lumbar stabilizer",
         "Concealed anti-bounce phone pocket",
-        "Reinforced knee flex-zones"
+        "Reinforced knee flex-zones",
+        "Graduated vascular return compression"
       ],
       "productCode": "GW-CHR-03",
       "status": "Active",
@@ -123,9 +109,9 @@
       "galleryImages": [
         "/src/assets/images/regenerated_image_1788784410117.jpg"
       ],
-      "seoTitle": "Chronos Thermal Compression Leggings | Premium Men & Women Leggings",
+      "seoTitle": "Chronos Thermal Compression Leggings | High-Tech Activewear",
       "seoDescription": "Perform your best in freezing conditions with our Chronos Thermal Compression Leggings featuring insulating fleece and high lumbar support.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "createdAt": "2026-02-10T08:00:00.000Z"
     },
     {
       "id": "prod-str-04",
@@ -133,16 +119,10 @@
       "slug": "stratum-seamless-training-shorts",
       "categoryId": "cat-gearwear",
       "categoryName": "Gearwear",
-      "shortDescription": "Seamless multi-stretch gym shorts designed for boundless dynamic movement.",
-      "longDescription": "Constructed using a proprietary zero-friction circular knit technique, the Stratum Shorts prevent chafing completely. With an integrated inner supportive liner and multi-directional knit ventilation, they deliver extreme comfort during the most challenging squat and sprints sessions.",
+      "shortDescription": "Seamless multi-stretch athletic shorts designed for boundless dynamic movement.",
+      "longDescription": "Constructed using a proprietary zero-friction circular knit technique, the Stratum Shorts prevent chafing completely. With an integrated inner supportive liner and multi-directional knit ventilation, they deliver extreme comfort during the most challenging squat and sprint sessions.",
       "material": "90% Nylon, 10% Spandex Core",
-      "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
+      "sizes": [],
       "colors": [
         "Concrete Grey",
         "Petrol Blue",
@@ -152,7 +132,8 @@
         "Advanced 3D seamless structural design",
         "Integrated sweat-absorbent athletic brief liner",
         "Secure-grip silicone waistband inserts",
-        "Double-stitched high-tensile seams"
+        "Double-stitched high-tensile seams",
+        "Side zip key & card storage compartment"
       ],
       "productCode": "GW-STR-04",
       "status": "Active",
@@ -161,19 +142,389 @@
       "galleryImages": [
         "/src/assets/images/regenerated_image_1788784447014.jpg"
       ],
-      "seoTitle": "Stratum Seamless Training Shorts - Active Gym Gearwear",
-      "seoDescription": "Zero-chafing circular knit training shorts with integrated support lining for gym workout and high performance.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "seoTitle": "Stratum Seamless Training Shorts | Active Gym Gearwear",
+      "seoDescription": "Zero-chafing circular knit training shorts with integrated support lining for gym workouts and elite athletic performance.",
+      "createdAt": "2026-02-18T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-afx-01",
+      "name": "AeroFlex Compression Bra & Leggings Set",
+      "slug": "aeroflex-compression-bra-and-leggings-set",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "High-density 4-way stretch compression sports bra paired with high-waisted targeted-support ankle leggings.",
+      "longDescription": "Engineered for aerodynamic studio training, athletic gym conditioning, and high-impact cardio. Features an elasticized wide underband for bounce control and high-rise sculpting waistband with zero-dig soft compression. Emblazoned with authentic white Safety Line emblem branding.",
+      "material": "78% Recycled Poly-Spandex Microfiber, 22% High-Tension Lycra",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Obsidian Black"
+      ],
+      "features": [
+        "Targeted core & glute compression support",
+        "Sweat-wicking micro-porous capillary weave",
+        "Chafe-free ergonomic flatlock seam construction",
+        "Anti-roll 3-inch high-tension compression waistband",
+        "Reflective Safety Line emblem branding"
+      ],
+      "productCode": "AC-AFX-01",
+      "status": "Active",
+      "displayOrder": 1,
+      "coverImage": "/src/assets/images/women_sports_set_1788984867763.jpg",
+      "galleryImages": [
+        "/src/assets/images/women_sports_set_1788984867763.jpg"
+      ],
+      "seoTitle": "AeroFlex Compression Bra & Leggings Set | Safety Line Accessories",
+      "seoDescription": "High-density 4-way stretch compression sports bra and high-waisted athletic performance leggings set with Safety Line emblem.",
+      "createdAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-bor-02",
+      "name": "Boreal Alpine Quilted Down Puffer Parka",
+      "slug": "boreal-alpine-quilted-down-puffer-parka",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Heavyweight 700-fill thermal quilted puffer jacket with insulated draft hood and reinforced storm closure.",
+      "longDescription": "Designed for severe mountain climates and outdoor winter training. Constructed with deep horizontal down baffles, a wind-blocking snap storm placket over an airtight YKK dual-direction zipper, insulated chin guard, and signature red Safety Line chest embroidery.",
+      "material": "100% Ripstop High-Density Nylon Shell, 90/10 RDS Goose Down Fill (700 Fill Power)",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Forest Olive",
+        "Stealth Graphite"
+      ],
+      "features": [
+        "700 Fill-Power responsibly sourced goose down",
+        "DWR (Durable Water Repellent) windproof nylon shell",
+        "Full-coverage insulated storm hood with dual cinch cords",
+        "Dual-entry fleece-lined zippered hand warmer pockets",
+        "Signature red Safety Line embroidered chest insignia"
+      ],
+      "productCode": "AC-BOR-02",
+      "status": "Active",
+      "displayOrder": 2,
+      "coverImage": "/src/assets/images/green_puffer_jacket_1788984892378.jpg",
+      "galleryImages": [
+        "/src/assets/images/green_puffer_jacket_1788984892378.jpg"
+      ],
+      "seoTitle": "Boreal Alpine Quilted Down Puffer Parka | Heavyweight Winter Outerwear",
+      "seoDescription": "700 fill-power thermal quilted goose down parka with insulated hood, storm placket, and red Safety Line crest.",
+      "createdAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-str-03",
+      "name": "Strata Pro Long-Sleeve Performance Crew",
+      "slug": "strata-pro-long-sleeve-performance-crew",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Pristine white moisture-wicking long-sleeve athletic technical crew with split hem and anatomical sleeve draping.",
+      "longDescription": "Formulated with ultra-fine spun athletic poly-blend fibers for immediate perspiration expulsion during intensive training. Features ergonomic raglan shoulder seams for unrestricted overhead reach, reinforced split side hem for hip mobility, and the distinguished red & black Safety Line crest.",
+      "material": "88% Micro-Mesh Polyester, 12% Spandex Ultra-Lite",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Crisp White",
+        "Chamber Grey"
+      ],
+      "features": [
+        "Rapid-dry hydrophilic vapor transport system",
+        "Ergonomic raglan sleeve articulation for zero shoulder pull",
+        "Split side-seam hem vents for increased mobility",
+        "UV 50+ solar radiation dermal barrier",
+        "Screen-printed Safety Line emblem chest crest"
+      ],
+      "productCode": "AC-STR-03",
+      "status": "Active",
+      "displayOrder": 3,
+      "coverImage": "/src/assets/images/white_long_sleeve_1788984915227.jpg",
+      "galleryImages": [
+        "/src/assets/images/white_long_sleeve_1788984915227.jpg"
+      ],
+      "seoTitle": "Strata Pro Long-Sleeve Performance Crew | Athletic Training Shirt",
+      "seoDescription": "Pristine white moisture-wicking long-sleeve athletic performance crew with ergonomic split hem and Safety Line crest.",
+      "createdAt": "2026-03-02T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-vec-04",
+      "name": "Vector Tech Quarter-Zip Hybrid Pullover",
+      "slug": "vector-tech-quarter-zip-hybrid-pullover",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Dual-tone heather grey quarter-zip running pullover with mock collar and micro-fleece thermal backing.",
+      "longDescription": "The Vector Quarter-Zip bridges high-cadence morning runs and cool-weather layering. Featuring contrasting heather texture on the sleeves, reverse-coil semi-locking zipper, low-profile chin garage, and embroidered Safety Line insignia on the left chest.",
+      "material": "90% Technical Heather Polyester, 10% Elastane Brushed Knit",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Heather Pewter / Slate"
+      ],
+      "features": [
+        "Semi-auto lock 1/4 zipper with protective chin garage",
+        "Brushed thermal interior micro-fleece for gentle warmth",
+        "Contrast textured raglan sleeve paneling",
+        "4-way athletic stretch recovery matrix",
+        "Embroidered Safety Line performance crest"
+      ],
+      "productCode": "AC-VEC-04",
+      "status": "Active",
+      "displayOrder": 4,
+      "coverImage": "/src/assets/images/grey_halfzip_shirt_1788984931150.jpg",
+      "galleryImages": [
+        "/src/assets/images/grey_halfzip_shirt_1788984931150.jpg"
+      ],
+      "seoTitle": "Vector Tech Quarter-Zip Hybrid Pullover | Running Mid-Layer",
+      "seoDescription": "Dual-tone heather grey quarter-zip athletic pullover with brushed thermal backing and Safety Line insignia.",
+      "createdAt": "2026-03-02T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-aur-05",
+      "name": "Aura Sculpt Zip-Up Contoured Training Jacket",
+      "slug": "aura-sculpt-zip-up-contoured-training-jacket",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Second-skin dusty mauve zip-up compression silhouette with contour-enhancing stitch lines and thumbhole cuffs.",
+      "longDescription": "Crafted from buttery-soft brushed nylon-elastane fabric that sculpts and elongates the torso. Curved princess seamlines provide an aerodynamic silhouette, while the mock turtle neck keeps out wind drafts during outdoor runs or warm-ups. Includes extended cuffs with reinforced thumbholes.",
+      "material": "75% Tactel Micro-Nylon, 25% Spandex Feather-Soft Knit",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Dusty Mauve",
+        "Black Plum"
+      ],
+      "features": [
+        "Ergonomic princess seam sculpting architecture",
+        "Extended sleeve cuffs with integrated thumbholes",
+        "Full-length smooth gliding YKK zip closure",
+        "High-stretch anti-pilling and squat-proof composite",
+        "Concealed zippered invisible hip utility pockets"
+      ],
+      "productCode": "AC-AUR-05",
+      "status": "Active",
+      "displayOrder": 5,
+      "coverImage": "/src/assets/images/mauve_zip_jacket_1788984951352.jpg",
+      "galleryImages": [
+        "/src/assets/images/mauve_zip_jacket_1788984951352.jpg"
+      ],
+      "seoTitle": "Aura Sculpt Zip-Up Contoured Training Jacket | Form-Fitting Activewear",
+      "seoDescription": "Dusty mauve compression workout jacket with contouring princess seams, mock neck, and thumbhole sleeves.",
+      "createdAt": "2026-03-03T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-glc-06",
+      "name": "GlacierPeak Alpine Waterproof Storm Jacket",
+      "slug": "glacierpeak-alpine-waterproof-storm-jacket",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "20,000mm hydrostatic mountain storm shell jacket in dual-tone ocean teal and charcoal with sealed AquaGuard zips.",
+      "longDescription": "Engineered for alpine ski ascents, severe wind, and wet winter storms. Triple-layer laminate membrane delivers impenetrable water protection while maintaining breathability. Fully seam-sealed with water-repellent aqua zipper tape, pit zips for rapid ventilation, helmet-compatible hood, and wrist gaiters.",
+      "material": "3-Layer Toray Dermizax Membrane, 100% Recycled Technical Polyester Shell",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Deep Ocean / Charcoal Graphite"
+      ],
+      "features": [
+        "20,000mm hydrostatic waterproof rating with taped seams",
+        "AquaGuard waterproof contrast zippered pockets",
+        "Helmet-compatible 3-point adjustable storm hood",
+        "Underarm bilateral zippered climate ventilation ports",
+        "Internal snow skirt and Velcro adjustable cuff seals"
+      ],
+      "productCode": "AC-GLC-06",
+      "status": "Active",
+      "displayOrder": 6,
+      "coverImage": "/src/assets/images/alpine_ski_jacket_1788984968075.jpg",
+      "galleryImages": [
+        "/src/assets/images/alpine_ski_jacket_1788984968075.jpg"
+      ],
+      "seoTitle": "GlacierPeak Alpine Waterproof Storm Jacket | Technical Mountain Shell",
+      "seoDescription": "20,000mm hydrostatic waterproof ski storm jacket in ocean teal and charcoal with taped AquaGuard zips.",
+      "createdAt": "2026-03-03T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-ter-07",
+      "name": "Terracotta Breeze Racerback Training Tank",
+      "slug": "terracotta-breeze-racerback-training-tank",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Ultra-lightweight heather coral terracotta athletic racerback tank with dropped armholes and curved scallop hem.",
+      "longDescription": "Featherlight running and gym tank top spun from micro-open knit slub jersey. Provides generous airflow through relaxed drop armholes, natural drape, and quick evaporation properties during intense sweat sessions or outdoor summer runs.",
+      "material": "85% Micro-Modal, 15% Performance Polyester Slub",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Terracotta Coral",
+        "Dusty Rose"
+      ],
+      "features": [
+        "Open-pore micro-knit fiber structure for instant cool-down",
+        "Deep cut armholes for full sports bra visibility and freedom",
+        "Curved dropped scallop rear hem for added coverage",
+        "Anti-odor natural fiber infusion",
+        "Non-restrictive relaxed athletic silhouette"
+      ],
+      "productCode": "AC-TER-07",
+      "status": "Active",
+      "displayOrder": 7,
+      "coverImage": "/src/assets/images/terracotta_run_tank_1788984988331.jpg",
+      "galleryImages": [
+        "/src/assets/images/terracotta_run_tank_1788984988331.jpg"
+      ],
+      "seoTitle": "Terracotta Breeze Racerback Training Tank | Lightweight Gym Top",
+      "seoDescription": "Ultra-light heather terracotta racerback tank with dropped armholes and curved scallop hem.",
+      "createdAt": "2026-03-04T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-nor-08",
+      "name": "Nordic Ice Piping Contrast Muscle Tank",
+      "slug": "nordic-ice-piping-contrast-muscle-tank",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Pastel powder blue high-neck sleeveless gym tank top finished with contrasting black athletic binding trim.",
+      "longDescription": "Minimalist athletic elegance meets raw performance. Tailored with a clean crew collar, contrast black edge binding around the neckline and deep armholes, and subtle Safety Line monogram on the upper chest. Pairs seamlessly with compression shorts or high-rise tights.",
+      "material": "92% Combed Athletic Cotton, 8% Lycra Soft-Flex",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Powder Ice Blue / Onyx Black"
+      ],
+      "features": [
+        "Contrast black reinforced rib-knit edge binding",
+        "Soft-brushed combed cotton hand with dynamic 4-way stretch",
+        "High-neck cut for active modesty during inverted poses",
+        "Precision heat-sealed Safety Line chest insignia",
+        "Pre-shrunk dimensional shape retention"
+      ],
+      "productCode": "AC-NOR-08",
+      "status": "Active",
+      "displayOrder": 8,
+      "coverImage": "/src/assets/images/blue_muscle_tank_1788985004892.jpg",
+      "galleryImages": [
+        "/src/assets/images/blue_muscle_tank_1788985004892.jpg"
+      ],
+      "seoTitle": "Nordic Ice Piping Contrast Muscle Tank | Athletic Workout Top",
+      "seoDescription": "Ice powder blue sleeveless muscle tank top with contrasting black piping trim and Safety Line monogram.",
+      "createdAt": "2026-03-04T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-onx-09",
+      "name": "Onyx Pro Y-Back Athletic Bodybuilding Stringer",
+      "slug": "onyx-pro-y-back-athletic-bodybuilding-stringer",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Deep cut Y-back racerback weightlifting stringer in stealth jet black with reinforced chest emblem zone.",
+      "longDescription": "The quintessential bodybuilding training stringer. Features razor-thin shoulder straps, low scoop neck, and deep open sides that allow full back lat activation and muscle feedback during heavy bench, row, and deadlift workouts.",
+      "material": "95% Ringspun Combed Cotton, 5% Spandex Elastomeric Blend",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Stealth Jet Black"
+      ],
+      "features": [
+        "Deep cut ultra-thin Y-back racerback strap profile",
+        "Maximized side lat ventilation and zero shoulder restriction",
+        "Reinforced bound neckline and armhole edging",
+        "Engineered chest logo display window",
+        "Breathable ringspun cotton for maximum sweat absorption"
+      ],
+      "productCode": "AC-ONX-09",
+      "status": "Active",
+      "displayOrder": 9,
+      "coverImage": "/src/assets/images/black_gym_stringer_1788985021668.jpg",
+      "galleryImages": [
+        "/src/assets/images/black_gym_stringer_1788985021668.jpg"
+      ],
+      "seoTitle": "Onyx Pro Y-Back Athletic Bodybuilding Stringer | Gym Tank",
+      "seoDescription": "Classic jet black Y-back bodybuilding workout stringer with ultra-thin straps and open lat cut.",
+      "createdAt": "2026-03-05T08:00:00.000Z"
+    },
+    {
+      "id": "prod-acc-kin-10",
+      "name": "Kinetics Red-Script Graphic Sleeveless Tank",
+      "slug": "kinetics-red-script-graphic-sleeveless-tank",
+      "categoryId": "cat-hosiery",
+      "categoryName": "Accessories",
+      "shortDescription": "Raw-hem athletic white muscle tank featuring dynamic red brush-lettered \"WORK HARD PLAY FUN\" chest artwork.",
+      "longDescription": "Infusing streetwear energy with athletic functionality, this relaxed white gym tank is cut from heavy-gauge breathable combed cotton. Boasts an expressive distressed red graphic, relaxed shoulder drop, and reinforced crew collar for daily workouts or urban casual wear.",
+      "material": "100% Heavy-Gauge Pre-Washed Combed Cotton",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Optic White / Crimson Red"
+      ],
+      "features": [
+        "Distressed crimson screen-printed graphic art",
+        "Heavyweight 220 GSM breathable cotton jersey",
+        "Relaxed drop-armhole muscle silhouette",
+        "Ribbed reinforced collar that resists baconing",
+        "Enzyme-washed for vintage super-soft hand feel"
+      ],
+      "productCode": "AC-KIN-10",
+      "status": "Active",
+      "displayOrder": 10,
+      "coverImage": "/src/assets/images/white_graphic_tank_1788985040768.jpg",
+      "galleryImages": [
+        "/src/assets/images/white_graphic_tank_1788985040768.jpg"
+      ],
+      "seoTitle": "Kinetics Red-Script Graphic Sleeveless Tank | Workout Muscle Top",
+      "seoDescription": "White relaxed graphic athletic muscle tank with crimson script art and heavyweight 220 GSM combed cotton.",
+      "createdAt": "2026-03-05T08:00:00.000Z"
     },
     {
       "id": "prod-aur-01",
       "name": "Aurelia Pure Silk Lace Stockings",
       "slug": "aurelia-pure-silk-lace-stockings",
       "categoryId": "cat-hosiery",
-      "categoryName": "Hosiery",
-      "shortDescription": "Exquisite stockings made from authentic mulberry silk with hand-woven lace borders.",
-      "longDescription": "Evoking timeless elegance, the Aurelia Stockings represent the pinnacle of luxury legwear. Spun from long-fiber Grade-A mulberry silk, they lay weightlessly on the skin, presenting a subtle pearlescent sheen. Hand-trimmed French lace thigh cuffs are lined with skin-safe silicone to stay perfectly in place without compression.",
-      "material": "85% Pure Mulberry Silk, 15% Premium Lycra (for elasticity)",
+      "categoryName": "Accessories",
+      "shortDescription": "Exquisite stay-up stockings made from authentic mulberry silk with hand-woven lace borders.",
+      "longDescription": "Evoking timeless elegance, the Aurelia Stockings represent the pinnacle of luxury legwear. Spun from long-fiber Grade-A mulberry silk, they lay weightlessly on the skin, presenting a subtle pearlescent sheen. Hand-trimmed French lace thigh cuffs are lined with skin-safe silicone to stay perfectly in place without compression or slippage.",
+      "material": "85% Pure Grade-6A Mulberry Silk, 15% Premium Lycra",
       "sizes": [
         "S",
         "M",
@@ -185,31 +536,33 @@
         "Soft Rose"
       ],
       "features": [
-        "Grade 6A Mulberry Silk fibers",
-        "Hand-woven French lace thigh-high cuffs",
+        "Grade 6A raw Mulberry Silk filament yarn",
+        "Hand-woven French Calais lace thigh-high cuffs",
         "Dual-strip skin-friendly hypoallergenic silicone grip",
-        "Invisible, ultra-sheer reinforced toe construction"
+        "Invisible, ultra-sheer reinforced toe construction",
+        "Anti-snag weave matrix for enhanced durability"
       ],
       "productCode": "HS-AUR-01",
       "status": "Active",
-      "displayOrder": 5,
-      "coverImage": "https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=600",
+      "displayOrder": 11,
+      "coverImage": "https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800",
       "galleryImages": [
-        "https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=600",
-        "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=600"
+        "https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800",
+        "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=800",
+        "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800"
       ],
-      "seoTitle": "Aurelia Pure Silk Lace Stockings | Premium Silk Hosiery",
-      "seoDescription": "Indulge in maximum luxury with pure mulberry silk stockings featuring delicate French lace borders and dual-silicone comfort grips.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "seoTitle": "Aurelia Pure Silk Lace Stockings | Luxury Silk Hosiery",
+      "seoDescription": "Indulge in maximum luxury with pure mulberry silk stay-up stockings featuring delicate French lace borders and dual-silicone comfort grips.",
+      "createdAt": "2026-01-20T08:00:00.000Z"
     },
     {
       "id": "prod-csh-02",
       "name": "Cashmere Blend Lounge Socks",
       "slug": "cashmere-blend-lounge-socks",
       "categoryId": "cat-hosiery",
-      "categoryName": "Hosiery",
-      "shortDescription": "Unbelievably soft Mongolian cashmere socks for premium domestic leisure.",
-      "longDescription": "Crafted using a high-gauge blend of long-staple Mongolian cashmere and merino wool, the Cashmere Blend Lounge Socks provide ultimate comfort and temperature control. A non-binding soft ribbed ankle band holds without pressure, creating an ideal companion for luxury indoor relaxation and cold evenings.",
+      "categoryName": "Accessories",
+      "shortDescription": "Unbelievably soft Mongolian cashmere socks for premium domestic leisure and cozy warmth.",
+      "longDescription": "Crafted using a high-gauge blend of long-staple Mongolian cashmere and fine merino wool, the Cashmere Blend Lounge Socks provide ultimate comfort and temperature control. A non-binding soft ribbed ankle band holds without pressure, creating an ideal companion for luxury indoor relaxation and cold winter evenings.",
       "material": "70% Mongolian Cashmere, 20% Fine Merino Wool, 10% Stretch Elastic",
       "sizes": [
         "One Size (Fits 36-44)"
@@ -223,28 +576,30 @@
         "Plush, heavy-gauge knitted cashmere stitch",
         "Non-binding relaxed-elastic ribbing",
         "Hand-linked ultra-smooth seamless toes",
-        "Double-ply wear-prone heel reinforcement"
+        "Double-ply wear-prone heel reinforcement",
+        "Natural thermoregulation and moisture absorption"
       ],
       "productCode": "HS-CSH-02",
       "status": "Active",
-      "displayOrder": 6,
-      "coverImage": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=600",
+      "displayOrder": 12,
+      "coverImage": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800",
       "galleryImages": [
-        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=600",
-        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600"
+        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800",
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800",
+        "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800"
       ],
-      "seoTitle": "Cashmere Blend Lounge Socks - Luxury Comfy Hosiery",
+      "seoTitle": "Cashmere Blend Lounge Socks | Luxury Comfy Hosiery",
       "seoDescription": "Relax in total comfort with lounge socks made from rare Mongolian cashmere and Merino wool, featuring hand-linked seams.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "createdAt": "2026-02-05T08:00:00.000Z"
     },
     {
       "id": "prod-sov-03",
       "name": "Sovereign Sheer Microfiber Tights",
       "slug": "sovereign-sheer-microfiber-tights",
       "categoryId": "cat-hosiery",
-      "categoryName": "Hosiery",
-      "shortDescription": "Elegant, ultra-durable 15-denier semi-sheer support tights.",
-      "longDescription": "Crafted with double-wrapped Lycra microfibers, the Sovereign Tights deliver a flawless, high-definition cosmetic leg appearance. Designed with a soft, anatomically sculpted control waistband that gently shapes without restricting breathing, they are highly run-resistant and soft to the touch.",
+      "categoryName": "Accessories",
+      "shortDescription": "Elegant, ultra-durable 15-denier semi-sheer support tights with a satin-matte sheen.",
+      "longDescription": "Crafted with double-wrapped Lycra microfibers, the Sovereign Tights deliver a flawless, high-definition cosmetic leg appearance. Designed with a soft, anatomically sculpted control waistband that gently shapes without restricting breathing, they are highly run-resistant and velvety soft to the touch.",
       "material": "84% Micro-Polyamide, 16% Lycra Satin-Skin",
       "sizes": [
         "XS",
@@ -261,30 +616,31 @@
       "features": [
         "Resilient double-wrapped run-resistant microfiber",
         "Anatomically sculpted control comfort top",
-        "Cotton hygienic gusset with flat seams",
-        "High-sheen light reflective satin finish"
+        "Cotton hygienic breathable gusset with flat seams",
+        "High-sheen light reflective satin finish",
+        "Invisible sandal-toe reinforcement"
       ],
       "productCode": "HS-SOV-03",
       "status": "Active",
-      "displayOrder": 7,
-      "coverImage": "https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=600",
+      "displayOrder": 13,
+      "coverImage": "https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800",
       "galleryImages": [
-        "https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=600",
-        "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=600"
+        "https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800",
+        "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800"
       ],
-      "seoTitle": "Sovereign Sheer Microfiber Tights - Flawless Leg Hosiery",
+      "seoTitle": "Sovereign Sheer Microfiber Tights | Flawless 15-Denier Legwear",
       "seoDescription": "Shop our flawless 15-denier support tights constructed with dual-wrapped resilient microfiber for run-resistance and subtle satin shimmer.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "createdAt": "2026-02-14T08:00:00.000Z"
     },
     {
       "id": "prod-int-04",
       "name": "Integra Combed Cotton Ribbed Socks",
       "slug": "integra-combed-cotton-ribbed-socks",
       "categoryId": "cat-hosiery",
-      "categoryName": "Hosiery",
-      "shortDescription": "Premium Egyptian combed cotton everyday dress socks.",
-      "longDescription": "The Integra Ribbed Socks are the perfect blend of classical business aesthetics and incredible softness. Woven from Egyptian Giza cotton on traditional Italian high-cylinder knitting machines, they provide breathable daily thermal regulation, a beautiful vertical drape, and excellent longevity.",
-      "material": "92% Giza Combed Cotton, 6% Nylon, 2% Lycra Core",
+      "categoryName": "Accessories",
+      "shortDescription": "Premium Egyptian combed cotton everyday dress socks crafted on Italian cylinders.",
+      "longDescription": "The Integra Ribbed Socks are the perfect blend of classical business aesthetics and incredible softness. Woven from Egyptian Giza cotton on traditional Italian high-cylinder knitting machines, they provide breathable daily thermal regulation, a beautiful vertical drape, and exceptional longevity.",
+      "material": "92% Giza Combed Cotton, 6% Polyamide, 2% Lycra Core",
       "sizes": [
         "38-41",
         "42-45",
@@ -298,20 +654,21 @@
       "features": [
         "Premium extra-long staple Giza cotton",
         "Classic 5x1 flat-rib stretch pattern",
-        "Pressure-free hand-linked seamless hand closures",
-        "Double-ply heel and ball-of-foot padding"
+        "Pressure-free hand-linked seamless toe closures",
+        "Double-ply heel and ball-of-foot padding",
+        "Colorfast reactive dye processing"
       ],
       "productCode": "HS-INT-04",
       "status": "Active",
-      "displayOrder": 8,
-      "coverImage": "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=600",
+      "displayOrder": 14,
+      "coverImage": "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800",
       "galleryImages": [
-        "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=600",
-        "https://images.unsplash.com/photo-1582966772680-860e372bb558?q=80&w=600"
+        "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800",
+        "https://images.unsplash.com/photo-1582966772680-860e372bb558?q=80&w=800"
       ],
       "seoTitle": "Integra Combed Cotton Ribbed Socks | Luxury Dress Socks",
       "seoDescription": "The pinnacle of classical office fashion. Breathable Egyptian combed cotton socks featuring dynamic 5x1 rib knitting and hand-linked toes.",
-      "createdAt": "2026-09-02T11:11:43.071Z"
+      "createdAt": "2026-02-25T08:00:00.000Z"
     }
   ],
   "settings": {
