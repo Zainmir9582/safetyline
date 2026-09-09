@@ -1,14 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Search, ShieldCheck, Cpu, ArrowRight, MessageCircle, Star, PhoneCall, 
-  Mail, Clock, Calendar, Sparkles, Activity, Layers, Award, FileCheck2, 
+  Mail, Sparkles, Activity, Layers, Award, FileCheck2, 
   CheckCircle2, Compass, Send, ArrowUpRight, Filter, ChevronRight, Menu, X,
-  Instagram, Facebook, ExternalLink, MapPin, Edit3, Plus, Image as ImageIcon
+  Instagram, Facebook, ExternalLink, MapPin, Plus, Image as ImageIcon
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, Settings } from '../types';
-import { articles } from '../data/articles';
 import { certifications, testimonials } from '../data';
 import SEO from './SEO';
 import ListingModal from './ListingModal';
@@ -45,11 +44,6 @@ export default function CategoryHub({
 
   const openNewListingModal = () => {
     setProductToEdit(null);
-    setIsListingModalOpen(true);
-  };
-
-  const openEditListingModal = (p: Product) => {
-    setProductToEdit(p);
     setIsListingModalOpen(true);
   };
 
@@ -137,25 +131,6 @@ export default function CategoryHub({
       return matchQuery && matchSubcat && matchSize;
     });
   }, [categoryProducts, searchQuery, selectedSubcat, selectedSize, isGearwear]);
-
-  // Category-specific articles
-  const categoryArticles = useMemo(() => {
-    if (isGearwear) {
-      return articles.filter(a => 
-        a.slug.includes('gearwear') || 
-        a.slug.includes('activewear') || 
-        a.slug.includes('bio-polymer') || 
-        a.tags.some(t => t.toLowerCase().includes('activewear') || t.toLowerCase().includes('fabric'))
-      );
-    } else {
-      return articles.filter(a => 
-        a.slug.includes('hosiery') || 
-        a.slug.includes('compression') || 
-        a.slug.includes('facility') || 
-        a.tags.some(t => t.toLowerCase().includes('hosiery') || t.toLowerCase().includes('compression'))
-      );
-    }
-  }, [isGearwear]);
 
   // Category-specific features
   const categoryFeatures = useMemo(() => {
@@ -318,12 +293,6 @@ export default function CategoryHub({
               Standards
             </button>
             <button 
-              onClick={() => navScroll('articles-section')}
-              className="text-white/80 hover:text-white transition-colors cursor-pointer py-1"
-            >
-              Guides
-            </button>
-            <button 
               onClick={() => navigate('/about')}
               className="text-[#D9F0EC] hover:text-white transition-colors cursor-pointer py-1 font-bold"
             >
@@ -393,12 +362,6 @@ export default function CategoryHub({
               className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white"
             >
               Standards & Tech
-            </button>
-            <button 
-              onClick={() => navScroll('articles-section')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white"
-            >
-              Guides & Care
             </button>
             <button 
               onClick={() => navigate('/about')}
@@ -671,17 +634,6 @@ export default function CategoryHub({
                     <div className="absolute top-3 left-3 bg-[#0B3D3B] text-white px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase shadow-xs">
                       {p.productCode}
                     </div>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openEditListingModal(p);
-                      }}
-                      title="Edit Product Details"
-                      className="absolute top-3 right-3 bg-white/90 hover:bg-[#FF5A36] text-slate-700 hover:text-white p-1.5 rounded-lg shadow-xs transition-colors z-10 cursor-pointer"
-                    >
-                      <Edit3 className="w-3.5 h-3.5" />
-                    </button>
                   </div>
 
                   {/* Card Body */}
@@ -798,82 +750,7 @@ export default function CategoryHub({
         </div>
       </section>
 
-      {/* =========================================================================
-          BLOG / TECHNICAL GUIDES SECTION (Category Specific)
-         ========================================================================= */}
-      <section id="articles-section" className="py-20 bg-[#FAFCFB] border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#D9F0EC] text-[#0B3D3B] text-xs font-mono font-bold uppercase tracking-wider">
-                <span>Knowledge Base</span>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#0B3D3B] tracking-tight">
-                {isGearwear ? 'Gearwear Science & Care Guides' : 'Accessories Care & Preservation Guides'}
-              </h2>
-            </div>
-            <p className="text-slate-600 text-xs sm:text-sm max-w-md">
-              Technical whitepapers, wash protocols, and fiber breakdowns compiled by our textile laboratory.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {categoryArticles.map((art) => (
-              <article
-                key={art.id}
-                onClick={() => navigate(`/blog/${art.slug}`)}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="aspect-[16/10] bg-slate-100 overflow-hidden relative">
-                    <img
-                      src={art.coverImage}
-                      alt={art.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute top-3 left-3 bg-[#0B3D3B] text-white px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase">
-                      {art.category}
-                    </div>
-                  </div>
-
-                  <div className="p-6 space-y-3">
-                    <div className="flex items-center space-x-3 text-[11px] text-slate-400 font-mono">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {art.publishedAt}
-                      </span>
-                      <span>•</span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {art.readTime}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display font-bold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug line-clamp-2">
-                      {art.title}
-                    </h3>
-
-                    <p className="text-slate-600 font-normal text-xs leading-relaxed line-clamp-3">
-                      {art.excerpt}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-6 pt-0 border-t border-slate-100 mt-4 flex items-center justify-between">
-                  <span className="text-xs text-slate-700 font-medium">{art.author.name}</span>
-                  <span className="text-[11px] font-bold text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 transition-transform group-hover:translate-x-1">
-                    <span>Read Guide</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-
-        </div>
-      </section>
 
       {/* =========================================================================
           TESTIMONIALS SECTION
@@ -1207,7 +1084,6 @@ export default function CategoryHub({
               <ul className="space-y-2 text-slate-600">
                 <li><button onClick={() => navScroll('items-section')} className="hover:text-[#0B3D3B] cursor-pointer">Browse Items</button></li>
                 <li><button onClick={() => navScroll('features-section')} className="hover:text-[#0B3D3B] cursor-pointer">Standards & Specifications</button></li>
-                <li><button onClick={() => navScroll('articles-section')} className="hover:text-[#0B3D3B] cursor-pointer">Care Guides</button></li>
                 <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer font-medium">Company Profile</button></li>
               </ul>
             </div>

@@ -3,14 +3,13 @@ import {
   ChevronLeft, ChevronRight, CornerDownLeft, ShieldCheck, HelpCircle, PhoneCall, 
   AlertTriangle, MessageSquare, ZoomIn, Star, Loader2, Share2, MessageCircle, 
   Twitter, Linkedin, Link2, Check, ArrowRight, Sparkles, Activity, Layers, 
-  CheckCircle2, Award, MapPin, Mail, Phone, Instagram, Facebook, ExternalLink, Edit3 
+  CheckCircle2, Award, MapPin, Mail, Phone, Instagram, Facebook, ExternalLink 
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, ProductFeedback } from '../types';
 import { settings } from '../data';
 import SEO from './SEO';
-import ListingModal from './ListingModal';
 
 interface ProductDetailsProps {
   slug: string;
@@ -19,8 +18,6 @@ interface ProductDetailsProps {
 }
 
 export default function ProductDetails({ slug, products, onUpdateProduct }: ProductDetailsProps) {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
   const product = useMemo(() => {
     return products.find(p => p.slug === slug);
   }, [products, slug]);
@@ -393,14 +390,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                     <span className="text-[10px] font-mono text-[#0B3D3B] bg-[#D9F0EC] px-2.5 py-1 rounded-md font-bold uppercase">
                       Catalogue Active
                     </span>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditModalOpen(true)}
-                      className="text-[10px] font-mono font-bold text-slate-600 hover:text-[#0B3D3B] bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-md uppercase transition-colors inline-flex items-center gap-1 cursor-pointer"
-                    >
-                      <Edit3 className="w-3 h-3 text-[#FF5A36]" />
-                      <span>Edit Listing</span>
-                    </button>
                   </div>
                 </div>
                 
@@ -942,19 +931,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
           </div>
         </div>
       </footer>
-
-      {product && (
-        <ListingModal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          productToEdit={product}
-          defaultCategory={isGearwear ? 'gearwear' : 'accessories'}
-          onSave={(updated) => {
-            if (onUpdateProduct) onUpdateProduct(updated);
-            setIsEditModalOpen(false);
-          }}
-        />
-      )}
     </div>
   );
 }
