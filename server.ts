@@ -528,8 +528,7 @@ app.delete('/api/feedbacks/:id', authenticateAdmin, (req, res) => {
 
 async function startServer() {
   const distPath = path.join(process.cwd(), 'dist');
-  const distIndexExists = fs.existsSync(path.join(distPath, 'index.html'));
-  const isProduction = process.env.NODE_ENV === 'production' || distIndexExists;
+  const isProduction = process.env.NODE_ENV === 'production';
 
   if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');

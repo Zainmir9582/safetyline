@@ -674,6 +674,17 @@ export default function CategoryHub({
                     <div className="absolute top-3 left-3 bg-[#0B3D3B] text-white px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase shadow-xs">
                       {p.productCode}
                     </div>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openEditListingModal(p);
+                      }}
+                      title="Edit Product Listing Window"
+                      className="absolute top-3 right-3 bg-white/90 hover:bg-[#FF5A36] text-slate-700 hover:text-white p-1.5 rounded-lg shadow-xs transition-colors z-10 cursor-pointer"
+                    >
+                      <Edit3 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
 
                   {/* Card Body */}
@@ -1234,6 +1245,16 @@ export default function CategoryHub({
           </div>
         </div>
       </footer>
+
+      {/* Listing Modal for Adding/Editing Product Listings */}
+      <ListingModal
+        isOpen={isListingModalOpen}
+        onClose={() => setIsListingModalOpen(false)}
+        productToEdit={productToEdit}
+        defaultCategory={isGearwear ? 'gearwear' : 'accessories'}
+        onSave={handleSaveListing}
+        onDelete={onDeleteProduct}
+      />
     </div>
   );
 }

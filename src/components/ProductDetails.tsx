@@ -290,7 +290,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               <CornerDownLeft className="w-4 h-4 text-[#FF5A36]" />
               <span>Back to {parentCategoryLabel} Collection</span>
             </button>
-          </div>
         </div>
 
         {/* 2-Column Athletic Details Layout */}
@@ -390,9 +389,19 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   <span className="text-[#FF5A36] font-mono text-xs uppercase tracking-wider font-bold">
                     CODE: {product.productCode}
                   </span>
-                  <span className="text-[10px] font-mono text-[#0B3D3B] bg-[#D9F0EC] px-2.5 py-1 rounded-md font-bold uppercase">
-                    Catalogue Active
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono text-[#0B3D3B] bg-[#D9F0EC] px-2.5 py-1 rounded-md font-bold uppercase">
+                      Catalogue Active
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditModalOpen(true)}
+                      className="text-[10px] font-mono font-bold text-slate-600 hover:text-[#0B3D3B] bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-md uppercase transition-colors inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <Edit3 className="w-3 h-3 text-[#FF5A36]" />
+                      <span>Edit Listing</span>
+                    </button>
+                  </div>
                 </div>
                 
                 <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#0B3D3B] tracking-tight leading-tight">
