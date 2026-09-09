@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Modern Athletic Minimalism Exact Palette */
+  --color-primary: #0B3D3B;     /* Deep teal */
+  --color-secondary: #FF5A36;   /* Coral-orange */
+  --color-accent: #D9F0EC;      /* Soft mint */
+  --color-page-bg: #FFFFFF;     /* Pure background */
+  --color-copy: #1A1A1A;        /* High-contrast body text */
+}
+
+/* Base resets & theme styles */
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+}
+
+/* Custom Athletic Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4FAF9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B2DFD8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0B3D3B;
+}
+
+/* Selection */
+::selection {
+  background-color: #FF5A36;
+  color: #FFFFFF;
+}
+
+/* Subtle performance dot grid pattern utility */
+.athletic-grid-pattern {
+  background-image: radial-gradient(rgba(11, 61, 59, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.athletic-grid-pattern-dark {
+  background-image: radial-gradient(rgba(217, 240, 236, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

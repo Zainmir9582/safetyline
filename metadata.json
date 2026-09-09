@@ -1,0 +1,6 @@
+{
+  "name": "Safety Line Performance Showcase",
+  "description": "A modern, premium static business product showcase and digital catalogue for high-performance Gearwear and technical Accessories apparel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

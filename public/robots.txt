@@ -1,0 +1,10 @@
+# robots.txt for Safety Line
+User-agent: *
+Allow: /
+
+# Exclude Admin areas from index
+Disallow: /admin
+Disallow: /admin-dashboard
+
+# Sitemap location
+Sitemap: https://safetyline.com/sitemap.xml
