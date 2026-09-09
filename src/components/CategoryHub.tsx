@@ -59,18 +59,7 @@ export default function CategoryHub({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSubcat, setSelectedSubcat] = useState<string>('All');
   const [selectedSize, setSelectedSize] = useState<string>('All');
-
-  // Contact form state
-  const [formData, setFormData] = useState({
-    fullName: '',
-    companyName: '',
-    email: '',
-    phone: '',
-    inquiryType: isGearwear ? 'Gearwear Wholesale & Team Kits' : 'Accessories Wholesale & Custom Orders',
-    message: ''
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<string>('All');
 
   // Filter products by category
   const categoryProducts = useMemo(() => {
@@ -97,6 +86,14 @@ export default function CategoryHub({
       p.sizes?.forEach(s => sizeSet.add(s));
     });
     return ['All', ...Array.from(sizeSet)];
+  }, [categoryProducts]);
+
+  const allColors = useMemo(() => {
+    const colorSet = new Set<string>();
+    categoryProducts.forEach(p => {
+      p.colors?.forEach(c => colorSet.add(c));
+    });
+    return ['All', ...Array.from(colorSet)];
   }, [categoryProducts]);
 
   // Filtered products list
@@ -129,9 +126,12 @@ export default function CategoryHub({
       // Size filter (only applies to accessories)
       const matchSize = isGearwear || selectedSize === 'All' || (p.sizes && p.sizes.includes(selectedSize));
 
-      return matchQuery && matchSubcat && matchSize;
+      // Color filter
+      const matchColor = selectedColor === 'All' || (p.colors && p.colors.includes(selectedColor));
+
+      return matchQuery && matchSubcat && matchSize && matchColor;
     });
-  }, [categoryProducts, searchQuery, selectedSubcat, selectedSize, isGearwear]);
+  }, [categoryProducts, searchQuery, selectedSubcat, selectedSize, selectedColor, isGearwear]);
 
   // Category-specific features
   const categoryFeatures = useMemo(() => {
@@ -200,28 +200,6 @@ export default function CategoryHub({
       return testimonials.filter(t => t.id !== 't-02');
     }
   }, [isGearwear]);
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.message) return;
-    setFormSubmitting(true);
-    setTimeout(() => {
-      setFormSubmitting(false);
-      setFormSubmitted(true);
-      setFormData({
-        fullName: '',
-        companyName: '',
-        email: '',
-        phone: '',
-        inquiryType: isGearwear ? 'Gearwear Wholesale & Team Kits' : 'Accessories Wholesale & Custom Orders',
-        message: ''
-      });
-    }, 1000);
-  };
-
-  const whatsappUrl = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    `Hello Safety Line Concierge, I am inquiring regarding the ${isGearwear ? 'Gearwear Athletic Collection' : 'Technical Accessories Collection'}. Please share wholesale catalogue specifications and swatch availability.`
-  )}`;
 
   const navScroll = (id: string) => {
     setMobileMenuOpen(false);
@@ -307,7 +285,7 @@ export default function CategoryHub({
             </button>
           </div>
 
-          {/* Right Action: Return to Main Portal button & Inquiry CTA */}
+          {/* Right Action: Return to Main Portal button & Contact Us CTA */}
           <div className="hidden sm:flex items-center space-x-3">
             <button
               onClick={() => navigate('/')}
@@ -318,14 +296,14 @@ export default function CategoryHub({
             </button>
 
             <button
-              onClick={() => navScroll('contact-section')}
+              onClick={() => navigate('/contact')}
               className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer inline-flex items-center gap-1.5 ${
                 isGearwear 
                   ? 'bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-[#FF5A36]/30' 
                   : 'bg-[#D9F0EC] hover:bg-white text-[#0B3D3B]'
               }`}
             >
-              <span>Inquire</span>
+              <span>Contact Us</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -368,18 +346,6 @@ export default function CategoryHub({
               onClick={() => navigate('/about')}
               className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-[#D9F0EC] font-bold"
             >
-              About Us & Company Profile
-            </button>
-            <button 
-              onClick={() => navScroll('contact-section')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white"
-            >
-              Inquiry Desk
-            </button>
-            <button 
-              onClick={() => navigate('/about')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-[#D9F0EC] font-bold"
-            >
               About Safety Line
             </button>
             <button 
@@ -396,12 +362,12 @@ export default function CategoryHub({
                 ← Main Portal
               </button>
               <button
-                onClick={() => navScroll('contact-section')}
+                onClick={() => navigate('/contact')}
                 className={`w-1/2 py-2.5 text-center rounded-lg text-xs font-bold uppercase ${
                   isGearwear ? 'bg-[#FF5A36] text-white' : 'bg-[#D9F0EC] text-[#0B3D3B]'
                 }`}
               >
-                Inquire Desk
+                Contact Us
               </button>
             </div>
           </div>
@@ -477,10 +443,10 @@ export default function CategoryHub({
               </button>
 
               <button
-                onClick={() => navScroll('contact-section')}
+                onClick={() => navigate('/contact')}
                 className="px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer"
               >
-                <span>Request Wholesale Pack</span>
+                <span>Contact & Wholesale Desk</span>
                 <ArrowUpRight className="w-4 h-4 text-[#D9F0EC]" />
               </button>
             </motion.div>
@@ -583,6 +549,20 @@ export default function CategoryHub({
               </div>
             )}
 
+            {/* Color Dropdown filter */}
+            <div className="flex items-center space-x-2">
+              <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Color:</span>
+              <select
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
+                className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
+              >
+                {allColors.map(c => (
+                  <option key={c} value={c}>{c === 'All' ? 'All Colors' : c}</option>
+                ))}
+              </select>
+            </div>
+
           </div>
 
           {/* Subcategory Pills */}
@@ -673,7 +653,7 @@ export default function CategoryHub({
             <p className="text-xs text-slate-500 max-w-xs mx-auto">Try resetting your search query or selecting "All" subcategories.</p>
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
-                onClick={() => { setSearchQuery(''); setSelectedSubcat('All'); setSelectedSize('All'); }}
+                onClick={() => { setSearchQuery(''); setSelectedSubcat('All'); setSelectedSize('All'); setSelectedColor('All'); }}
                 className="bg-[#0B3D3B] text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer shadow-xs hover:bg-[#072725] transition-colors"
               >
                 Reset Filters
@@ -780,272 +760,6 @@ export default function CategoryHub({
       </section>
 
       {/* =========================================================================
-          CONTACT & WHOLESALE INQUIRY SECTION (Category Specific)
-         ========================================================================= */}
-      <section id="contact-section" className="py-20 bg-[#0B3D3B] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#D9F0EC]/15 text-[#D9F0EC] text-xs font-mono font-bold uppercase tracking-wider border border-[#D9F0EC]/20">
-              <PhoneCall className="w-3.5 h-3.5 text-[#FF5A36]" />
-              <span>{isGearwear ? 'Gearwear Concierge' : 'Accessories Concierge'}</span>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Request {isGearwear ? 'Gearwear' : 'Accessories'} Specifications & Sample Swatches
-            </h2>
-            <p className="text-slate-300 font-normal text-xs sm:text-sm leading-relaxed">
-              Connect directly with our materials advisory team for bulk sample swatches, team kit configurations, or stockist allocations.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Left Portal Information */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="bg-white/10 p-7 rounded-2xl border border-white/15 space-y-4">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <h3 className="font-display font-bold text-lg text-white">
-                      Direct Advisory Channels
-                    </h3>
-                  </div>
-                  <span className="text-[10px] font-mono text-[#D9F0EC] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/10 border border-white/15">
-                    {isGearwear ? 'Gearwear Advisory' : 'Accessories Advisory'}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Our materials laboratory and production engineers welcome performance teams, sportswear brands, and bulk retail stockists for direct consultations.
-                </p>
-
-                <div className="space-y-3 pt-1 text-xs font-mono">
-                  <div className="flex items-center space-x-3 text-slate-200 bg-white/5 p-2.5 rounded-xl border border-white/10">
-                    <Mail className="w-4 h-4 text-[#FF5A36] shrink-0" />
-                    <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 uppercase">General Inquiry</span>
-                      <a href={`mailto:${settings.contactEmail}`} className="hover:text-white font-medium transition-colors">
-                        {settings.contactEmail}
-                      </a>
-                    </div>
-                  </div>
-                  {settings.salesEmail && (
-                    <div className="flex items-center space-x-3 text-slate-200 bg-white/5 p-2.5 rounded-xl border border-white/10">
-                      <Mail className="w-4 h-4 text-[#D9F0EC] shrink-0" />
-                      <div className="flex flex-col">
-                        <span className="text-[10px] text-slate-400 uppercase">Sales & Wholesale Desk</span>
-                        <a href={`mailto:${settings.salesEmail}`} className="hover:text-white font-medium transition-colors">
-                          {settings.salesEmail}
-                        </a>
-                      </div>
-                    </div>
-                  )}
-                  <div className="flex items-center space-x-3 text-slate-200 bg-white/5 p-2.5 rounded-xl border border-white/10">
-                    <PhoneCall className="w-4 h-4 text-[#FF5A36] shrink-0" />
-                    <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 uppercase">Direct Phone & WhatsApp</span>
-                      <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="hover:text-white font-semibold transition-colors">
-                        {settings.contactPhone}
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3 text-slate-200 bg-white/5 p-2.5 rounded-xl border border-white/10">
-                    <MapPin className="w-4 h-4 text-[#FF5A36] shrink-0 mt-0.5" />
-                    <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 uppercase">Factory & Showroom</span>
-                      <span className="text-slate-200 font-medium">{settings.officeAddress}</span>
-                      {settings.googleMapsUrl && (
-                        <a
-                          href={settings.googleMapsUrl}
-                          target="_blank"
-                          referrerPolicy="no-referrer"
-                          className="inline-flex items-center gap-1 text-[11px] text-[#D9F0EC] hover:text-white underline underline-offset-2 transition-colors mt-1 font-semibold"
-                        >
-                          <span>Open in Google Maps</span>
-                          <ExternalLink className="w-2.5 h-2.5" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Instant WhatsApp Button */}
-                <div className="pt-2">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    referrerPolicy="no-referrer"
-                    className="w-full bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs tracking-wider uppercase py-3.5 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md cursor-pointer"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Inquire via WhatsApp Advisory</span>
-                  </a>
-                </div>
-
-                {/* Link to Contact Us portion for full corporate directory & social channels */}
-                <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                  <span className="text-slate-300 text-[11px]">Official social & corporate channels:</span>
-                  <button
-                    onClick={() => navigate('/contact')}
-                    className="text-[#D9F0EC] hover:text-white font-bold underline transition-colors cursor-pointer text-[11px]"
-                  >
-                    View on Contact Us →
-                  </button>
-                </div>
-              </div>
-
-              {/* Factory Location & Showroom Map Portion */}
-              <div className="bg-white/10 p-4 rounded-2xl border border-white/15 space-y-3">
-                <div className="flex items-center justify-between px-1">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-200">
-                    <MapPin className="w-4 h-4 text-[#FF5A36]" />
-                    <div>
-                      <span className="font-mono text-[11px] font-bold block text-white">Factory Location & Showroom</span>
-                      <span className="text-[10px] text-slate-400 font-mono">Safetylineindustriesofficial • Sialkot, Pakistan</span>
-                    </div>
-                  </div>
-                  {settings.googleMapsUrl && (
-                    <a
-                      href={settings.googleMapsUrl}
-                      target="_blank"
-                      referrerPolicy="no-referrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-mono text-[#D9F0EC] hover:text-white font-bold transition-colors underline underline-offset-2 px-2 py-1 rounded bg-white/10 hover:bg-white/20"
-                    >
-                      <span>Open in Maps</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-                <div className="rounded-xl overflow-hidden border border-white/15 aspect-[16/9] bg-slate-800 shadow-inner">
-                  <iframe
-                    title="Safety Line Headquarters and Factory Location"
-                    src={settings.googleMapEmbedUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <p className="text-[10px] font-mono text-slate-400 px-1">
-                  Visits for sample verification, technical fabric audits, and production inspections are scheduled through the advisory channel.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Inquiry Form */}
-            <div className="lg:col-span-7 bg-white text-[#1A1A1A] p-8 sm:p-10 rounded-2xl shadow-xl space-y-6">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono font-bold uppercase text-[#FF5A36] tracking-wider">
-                  Official Technical Request
-                </span>
-                <h3 className="font-display text-2xl font-extrabold text-[#0B3D3B]">
-                  Submit {isGearwear ? 'Gearwear' : 'Accessories'} Inquiry
-                </h3>
-              </div>
-
-              {formSubmitted ? (
-                <div className="bg-emerald-50 border border-emerald-200 p-8 rounded-xl text-center space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-700 mx-auto" />
-                  <h4 className="font-display font-bold text-emerald-900 text-lg">Inquiry Received Successfully</h4>
-                  <p className="text-emerald-800 text-xs max-w-sm mx-auto leading-relaxed">
-                    Thank you. Your message has been routed to our {isGearwear ? 'Gearwear' : 'Accessories'} technical desk. A specialist will respond within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setFormSubmitted(false)}
-                    className="mt-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold uppercase tracking-wider py-2 px-5 rounded-lg transition-colors cursor-pointer"
-                  >
-                    Send Another Inquiry
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Full Name *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="E.g., Marcus Vance"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Organization / Club</label>
-                      <input
-                        type="text"
-                        placeholder="E.g., Apex Sports Club"
-                        value={formData.companyName}
-                        onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Work Email *</label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="E.g., marcus@apex.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Phone Number</label>
-                      <input
-                        type="tel"
-                        placeholder="+1 (555) 0199"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Inquiry Requirements *</label>
-                    <textarea
-                      required
-                      rows={4}
-                      placeholder={`Please describe your ${isGearwear ? 'gearwear' : 'accessories'} requirements, requested quantity, or sizing inquiries...`}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={formSubmitting}
-                    className={`w-full py-3.5 px-6 rounded-lg text-white font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center space-x-2 transition-all shadow-md cursor-pointer disabled:opacity-50 ${
-                      isGearwear ? 'bg-[#FF5A36] hover:bg-[#e44e2b]' : 'bg-[#0B3D3B] hover:bg-[#072725]'
-                    }`}
-                  >
-                    {formSubmitting ? (
-                      <span>Sending Inquiry...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>Send {isGearwear ? 'Gearwear' : 'Accessories'} Inquiry</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
           CATEGORY-SPECIFIC FOOTER
          ========================================================================= */}
       <footer className="bg-white border-t border-slate-200 py-12 text-slate-600 font-sans text-xs">
@@ -1094,7 +808,7 @@ export default function CategoryHub({
                 </li>
                 <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer">About Safety Line</button></li>
                 <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Contact & Advisory Desk</button></li>
-                <li><button onClick={() => navScroll('contact-section')} className="hover:text-[#0B3D3B] cursor-pointer">Wholesale Desk</button></li>
+                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Wholesale Desk</button></li>
               </ul>
             </div>
 

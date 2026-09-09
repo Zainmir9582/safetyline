@@ -457,20 +457,30 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                     <span className="text-[10px] text-slate-400 font-mono">Selected: {selectedColor}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {product.colors.map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => setSelectedColor(c)}
-                        className={`inline-flex items-center text-xs px-3.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                          selectedColor === c
-                            ? 'bg-[#0B3D3B] text-white border-[#0B3D3B] shadow-xs ring-2 ring-[#0B3D3B]/20'
-                            : 'bg-white text-slate-800 hover:bg-slate-50 border-slate-200'
-                        }`}
-                      >
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5A36] mr-2" />
-                        <span>{c}</span>
-                      </button>
-                    ))}
+                    {product.colors.map((c) => {
+                      const lower = c.toLowerCase();
+                      let dotColor = 'bg-[#FF5A36]';
+                      if (lower.includes('yellow')) dotColor = 'bg-amber-400 border border-amber-500/40';
+                      else if (lower.includes('black')) dotColor = 'bg-neutral-950 border border-neutral-700';
+                      else if (lower.includes('red')) dotColor = 'bg-red-600 border border-red-700/40';
+                      else if (lower.includes('blue')) dotColor = 'bg-blue-600 border border-blue-700/40';
+                      else if (lower.includes('brown')) dotColor = 'bg-[#B58863] border border-[#8A5A36]/40';
+
+                      return (
+                        <button
+                          key={c}
+                          onClick={() => setSelectedColor(c)}
+                          className={`inline-flex items-center text-xs px-3.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                            selectedColor === c
+                              ? 'bg-[#0B3D3B] text-white border-[#0B3D3B] shadow-xs ring-2 ring-[#0B3D3B]/20 font-semibold'
+                              : 'bg-white text-slate-800 hover:bg-slate-50 border-slate-200'
+                          }`}
+                        >
+                          <span className={`w-3 h-3 rounded-full mr-2 shrink-0 ${dotColor}`} />
+                          <span>{c}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
