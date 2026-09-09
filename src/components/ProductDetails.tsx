@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ChevronLeft, ChevronRight, CornerDownLeft, ShieldCheck, HelpCircle, PhoneCall, 
-  AlertTriangle, MessageSquare, ZoomIn, Star, Loader2, Share2, MessageCircle, 
-  Twitter, Linkedin, Link2, Check, ArrowRight, Sparkles, Activity, Layers, 
-  CheckCircle2, Award, MapPin, Mail, Phone, Instagram, Facebook, ExternalLink 
+  AlertTriangle, MessageSquare, ZoomIn, Star, Loader2, MessageCircle, 
+  ArrowRight, CheckCircle2 
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
@@ -35,7 +34,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedSize, setSelectedSize] = useState<string>('');
-  const [copiedLink, setCopiedLink] = useState(false);
 
   // Feedback states
   const [feedbacks, setFeedbacks] = useState<ProductFeedback[]>([
@@ -104,12 +102,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   const handleThumbnailClick = (idx: number) => {
     setIsAutoPlaying(false);
     setActiveIndex(idx);
-  };
-
-  const handleCopyUrl = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
   };
 
   const handleSubmitFeedback = (e: React.FormEvent) => {
@@ -537,51 +529,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   This item is part of our digital product catalogue. Direct ordering, bespoke team specifications, and wholesale sample swatch packs are handled directly by our concierge.
                 </p>
               </div>
-
-              {/* Social Share Strip */}
-              <div className="pt-2 flex items-center justify-between border-t border-slate-100">
-                <span className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5 font-bold">
-                  <Share2 className="w-3.5 h-3.5 text-[#FF5A36]" />
-                  Share Product:
-                </span>
-                <div className="flex items-center space-x-2">
-                  <a
-                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out ${product.name} on Safety Line Catalogue: ${window.location.href}`)}`}
-                    target="_blank"
-                    referrerPolicy="no-referrer"
-                    className="p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-colors"
-                    title="Share on WhatsApp"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                  </a>
-                  <a
-                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${product.name} on Safety Line:`)}&url=${encodeURIComponent(window.location.href)}`}
-                    target="_blank"
-                    referrerPolicy="no-referrer"
-                    className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-[#0B3D3B] hover:text-white transition-colors"
-                    title="Share on X"
-                  >
-                    <Twitter className="w-4 h-4" />
-                  </a>
-                  <a
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
-                    target="_blank"
-                    referrerPolicy="no-referrer"
-                    className="p-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-700 hover:text-white transition-colors"
-                    title="Share on LinkedIn"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </a>
-                  <button
-                    onClick={handleCopyUrl}
-                    className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
-                    title="Copy Link"
-                  >
-                    {copiedLink ? <Check className="w-4 h-4 text-green-600" /> : <Link2 className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-
             </div>
 
             {/* Action Buttons (Strictly NO Cart / NO Buy Now) */}
@@ -597,89 +544,12 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               </a>
 
               <button
-                onClick={() => navigate(`/${product.categoryId === 'cat-gearwear' ? 'gearwear' : 'hosiery'}`)}
+                onClick={() => navigate(`/${parentCategorySlug}`)}
                 className="bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs tracking-wider uppercase py-4 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm cursor-pointer"
               >
                 <PhoneCall className="w-4 h-4 text-[#D9F0EC]" />
-                <span>{product.categoryName} Hub</span>
+                <span>{parentCategoryLabel} Hub</span>
               </button>
-            </div>
-
-            {/* Direct Manufacturer & Location Information Card */}
-            <div className="mt-6 p-4 bg-[#FAFCFB] border border-slate-200 rounded-2xl space-y-3">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                <span className="text-[10px] font-mono text-[#0B3D3B] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF5A36]" />
-                  Direct Manufacturer Desk
-                </span>
-                <span className="text-[10px] font-mono text-slate-500">
-                  {product.categoryName} Division
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-                <div className="flex items-center space-x-2 text-slate-700">
-                  <Phone className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
-                  <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="hover:text-[#0B3D3B] font-semibold transition-colors">
-                    {settings.contactPhone}
-                  </a>
-                </div>
-
-                <div className="flex items-center space-x-2 text-slate-700">
-                  <MessageCircle className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
-                  <a 
-                    href={`https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello Safety Line team, I am inquiring about the ${product.name} (${product.sku}).`)}`}
-                    target="_blank"
-                    referrerPolicy="no-referrer"
-                    className="hover:text-[#0B3D3B] font-semibold text-[#1EBE5D] transition-colors"
-                  >
-                    WhatsApp: {settings.whatsappNumber}
-                  </a>
-                </div>
-
-                <div className="flex items-center space-x-2 text-slate-700">
-                  <Mail className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
-                  <a href={`mailto:${settings.contactEmail}`} className="hover:text-[#0B3D3B] transition-colors truncate">
-                    {settings.contactEmail}
-                  </a>
-                </div>
-
-                {settings.salesEmail && (
-                  <div className="flex items-center space-x-2 text-slate-700">
-                    <Mail className="w-3.5 h-3.5 text-[#0B3D3B] shrink-0" />
-                    <a href={`mailto:${settings.salesEmail}`} className="hover:text-[#0B3D3B] transition-colors truncate">
-                      {settings.salesEmail}
-                    </a>
-                  </div>
-                )}
-
-                <div className="flex items-center space-x-2 text-slate-700 sm:col-span-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
-                  {settings.googleMapsUrl ? (
-                    <a
-                      href={settings.googleMapsUrl}
-                      target="_blank"
-                      referrerPolicy="no-referrer"
-                      className="inline-flex items-center gap-1 text-[#0B3D3B] hover:text-[#FF5A36] font-bold underline underline-offset-2 transition-colors"
-                    >
-                      <span>Factory: {settings.officeAddress}</span>
-                      <ExternalLink className="w-2.5 h-2.5" />
-                    </a>
-                  ) : (
-                    <span>Factory: {settings.officeAddress}</span>
-                  )}
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-mono">
-                <span className="text-slate-500">Need customized technical specs?</span>
-                <button
-                  onClick={() => navigate('/contact')}
-                  className="text-[#0B3D3B] hover:text-[#FF5A36] font-bold underline cursor-pointer"
-                >
-                  Visit Contact & Wholesale Desk →
-                </button>
-              </div>
             </div>
           </div>
 
@@ -700,7 +570,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 </h3>
               </div>
               <button
-                onClick={() => navigate(`/${product.categoryId === 'cat-gearwear' ? 'gearwear' : 'hosiery'}`)}
+                onClick={() => navigate(`/${parentCategorySlug}`)}
                 className="text-xs font-bold text-[#0B3D3B] hover:text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer transition-colors"
               >
                 <span>View Full Line</span>

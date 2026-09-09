@@ -3,7 +3,7 @@ import {
   Search, ShieldCheck, Cpu, ArrowRight, MessageCircle, Star, PhoneCall, 
   Mail, Sparkles, Activity, Layers, Award, FileCheck2, 
   CheckCircle2, Compass, Send, ArrowUpRight, Filter, ChevronRight, Menu, X,
-  Instagram, Facebook, ExternalLink, MapPin, Plus, Image as ImageIcon
+  Instagram, Facebook, ExternalLink, MapPin, Image as ImageIcon
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
@@ -549,15 +549,6 @@ export default function CategoryHub({
               : "Discover pure silk lace stockings, cashmere lounge socks, graduated compression wear, and technical textile accessories."
             }
           </p>
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <button
-              onClick={openNewListingModal}
-              className="bg-[#0B3D3B] hover:bg-[#072725] text-white text-xs font-mono font-bold px-5 py-2.5 rounded-xl transition-all cursor-pointer inline-flex items-center gap-2 shadow-md shadow-[#0B3D3B]/20"
-            >
-              <Plus className="w-4 h-4 text-[#FF5A36]" />
-              <span>+ Add Product</span>
-            </button>
-          </div>
         </div>
 
         {/* Filter & Search Toolbar */}
