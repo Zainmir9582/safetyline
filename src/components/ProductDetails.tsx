@@ -282,18 +282,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
             <span className="text-[#0B3D3B] font-bold truncate max-w-xs">{product.name}</span>
           </div>
 
-          <div className="flex items-center gap-3">
-            {onUpdateProduct && (
-              <button
-                onClick={() => setIsEditModalOpen(true)}
-                className="inline-flex items-center space-x-1.5 text-xs font-mono font-bold bg-[#D9F0EC] hover:bg-[#0B3D3B] text-[#0B3D3B] hover:text-white px-3.5 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
-                title="Add images or edit details"
-              >
-                <Edit3 className="w-3.5 h-3.5 text-[#FF5A36]" />
-                <span>Edit Listing &amp; Images</span>
-              </button>
-            )}
-
             <button
               id="back-to-products-btn"
               onClick={() => navigate(`/${parentCategorySlug}`)}
@@ -312,17 +300,17 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               LEFT SIDE: GALLERY SLIDER WITH ZOOM
              ========================================== */}
           <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
-            {/* Main Stage Frame */}
+            {/* Main Stage Frame (Full Shape Product View) */}
             <div 
-              className="relative w-full aspect-[4/5] bg-slate-100 rounded-xl overflow-hidden shadow-xs group cursor-zoom-in border border-slate-200"
+              className="relative w-full aspect-[4/5] sm:aspect-square bg-slate-50 rounded-2xl overflow-hidden shadow-xs group cursor-zoom-in border border-slate-200 flex items-center justify-center p-4 sm:p-6"
               onMouseEnter={() => setIsAutoPlaying(false)}
             >
-              {/* Main Image Layer */}
+              {/* Main Image Layer in Full Shape */}
               <img
                 src={images[activeIndex]}
                 alt={`${product.name} showcase view`}
-                className={`w-full h-full object-cover transition-transform duration-500 ease-out origin-center ${
-                  isZoomed ? 'scale-175' : 'group-hover:scale-108'
+                className={`w-full h-full object-contain transition-transform duration-500 ease-out origin-center ${
+                  isZoomed ? 'scale-175' : 'group-hover:scale-105'
                 }`}
                 loading="eager"
                 decoding="async"
@@ -371,16 +359,16 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   <button
                     key={idx}
                     onClick={() => handleThumbnailClick(idx)}
-                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer bg-slate-50 flex items-center justify-center p-1.5 ${
                       idx === activeIndex
                         ? 'border-[#FF5A36] ring-2 ring-[#FF5A36]/20 scale-95 shadow-xs'
-                        : 'border-slate-200 opacity-60 hover:opacity-100 hover:border-slate-400'
+                        : 'border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400'
                     }`}
                   >
                     <img 
                       src={img} 
                       alt="Thumbnail view" 
-                      className="w-full h-full object-cover" 
+                      className="w-full h-full object-contain" 
                       loading="lazy"
                       decoding="async"
                     />

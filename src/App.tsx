@@ -116,9 +116,6 @@ export default function App() {
           categorySlug="gearwear" 
           products={products} 
           settings={settings} 
-          onUpdateProduct={handleUpdateProduct}
-          onAddProduct={handleAddProduct}
-          onDeleteProduct={handleDeleteProduct}
         />
       );
     }
@@ -130,9 +127,6 @@ export default function App() {
           categorySlug="accessories" 
           products={products} 
           settings={settings} 
-          onUpdateProduct={handleUpdateProduct}
-          onAddProduct={handleAddProduct}
-          onDeleteProduct={handleDeleteProduct}
         />
       );
     }
@@ -144,7 +138,6 @@ export default function App() {
         <ProductDetails 
           slug={slug} 
           products={products} 
-          onUpdateProduct={handleUpdateProduct}
         />
       );
     }

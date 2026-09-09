@@ -42,9 +42,7 @@ export const defaultProducts: Product[] = [
     displayOrder: 1,
     coverImage: prod1Img,
     galleryImages: [
-      prod1Img,
-      'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?q=80&w=600',
-      'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600'
+      prod1Img
     ],
     seoTitle: 'Apex Pro Aero Compression Tee - Elite Performance Gearwear',
     seoDescription: 'Discover the ultimate lightweight compression tee with target-zoned aerodynamic breathability and silver-ion odor resistance.',
@@ -72,9 +70,7 @@ export const defaultProducts: Product[] = [
     displayOrder: 2,
     coverImage: prod2Img,
     galleryImages: [
-      prod2Img,
-      'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600',
-      'https://images.unsplash.com/photo-1479064555552-3ef4979f8908?q=80&w=600'
+      prod2Img
     ],
     seoTitle: 'Zenith Hydrophobic Stormshell - Waterproof Active Jacket',
     seoDescription: 'The Zenith Stormshell is a premium waterproof, windproof active training jacket perfect for rugged outdoor adventures.',
@@ -102,8 +98,7 @@ export const defaultProducts: Product[] = [
     displayOrder: 3,
     coverImage: prod3Img,
     galleryImages: [
-      prod3Img,
-      'https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=600'
+      prod3Img
     ],
     seoTitle: 'Chronos Thermal Compression Leggings | Premium Men & Women Leggings',
     seoDescription: 'Perform your best in freezing conditions with our Chronos Thermal Compression Leggings featuring insulating fleece and high lumbar support.',
@@ -131,8 +126,7 @@ export const defaultProducts: Product[] = [
     displayOrder: 4,
     coverImage: prod4Img,
     galleryImages: [
-      prod4Img,
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600'
+      prod4Img
     ],
     seoTitle: 'Stratum Seamless Training Shorts - Active Gym Gearwear',
     seoDescription: 'Zero-chafing circular knit training shorts with integrated support lining for gym workout and high performance.',

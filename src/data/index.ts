@@ -23,8 +23,8 @@ export const products = allProducts;
 
 export const settings: Settings = {
   companyName: 'Safety Line',
-  slogan: 'Precision Sportswear & Performance Accessories',
-  aboutText: 'Established in 2012, Safety Line is a dedicated design house specializing in two distinct, masterfully engineered textile lines: high-compression high-tech athletic Gearwear, and ultra-fine, hand-finished precision Accessories. Our garments are defined by luxury craftsmanship, scientific fiber selection, and a relentless commitment to minimalist elegance.',
+  slogan: 'Leading International Manufacturers & Exporters of Safety Protective Gloves & Garments',
+  aboutText: 'Family-owned business since 2008. Safety Line is a leading international manufacturer and exporter of safety protective gloves in all sorts and garments. Employing 90 experienced craftsmen and 70 stitching machines with state-of-the-art press cutting in Pakistan.',
   contactEmail: 'info@safetylineind.com',
   salesEmail: 'sales@safetylineind.com',
   contactPhone: '+92 3040000445',
