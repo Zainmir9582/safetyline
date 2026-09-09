@@ -4,8 +4,6 @@ import prod2Img from '../assets/images/regenerated_image_1788784337552.jpg';
 import prod3Img from '../assets/images/regenerated_image_1788784410117.jpg';
 import prod4Img from '../assets/images/regenerated_image_1788784447014.jpg';
 
-export const LISTING_PLACEHOLDER_IMAGE = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600' fill='none'><rect width='800' height='600' fill='%230F2423'/><rect x='30' y='30' width='740' height='540' rx='18' stroke='%23285753' stroke-width='2' stroke-dasharray='10 10'/><circle cx='400' cy='250' r='54' fill='%230B3D3B' stroke='%23FF5A36' stroke-width='2.5'/><path d='M400 226v48M376 250h48' stroke='%23FF5A36' stroke-width='3.5' stroke-linecap='round'/><text x='400' y='360' font-family='system-ui, sans-serif' font-size='22' font-weight='800' fill='%23FFFFFF' text-anchor='middle' letter-spacing='1'>LISTING WINDOW</text><text x='400' y='395' font-family='system-ui, sans-serif' font-size='14' font-weight='600' fill='%23D9F0EC' text-anchor='middle'>Ready For Custom Product Imagery &amp; Details</text><text x='400' y='430' font-family='system-ui, sans-serif' font-size='13' font-weight='500' fill='%23FF5A36' text-anchor='middle'>+ Click &quot;Add Image &amp; Details&quot; to Populate</text></svg>";
-
 export const gearwearProducts: Product[] = [
   {
     id: 'prod-apx-01',
@@ -114,109 +112,6 @@ export const gearwearProducts: Product[] = [
     seoTitle: 'Stratum Seamless Training Shorts | Active Gym Gearwear',
     seoDescription: 'Zero-chafing circular knit training shorts with integrated support lining for gym workouts and elite athletic performance.',
     createdAt: '2026-02-18T08:00:00.000Z'
-  },
-  {
-    id: 'prod-vng-05',
-    name: 'Vanguard Pro Compression Baselayer',
-    slug: 'vanguard-pro-compression-baselayer',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'High-compression ergonomic baselayer with graduated muscular support and thermal breathability.',
-    longDescription: 'High-performance athletic gearwear engineered with precision 4-way stretch polyamide knit. Features zoned moisture evaporation channels, flatlock friction-free seams, and advanced thermal regulation for intense training and cold-weather workouts.',
-    material: '85% Technical Polyamide, 15% Spandex',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Obsidian Black', 'Chamber Grey', 'Navy Blue'],
-    features: [
-      'Target-zoned moisture evaporation matrix',
-      'High-density flatlock anti-friction stitching',
-      'Thermal regulation under high exertion',
-      'Full custom private labeling and brand embroidery'
-    ],
-    productCode: 'GW-VNG-05',
-    status: 'Active',
-    displayOrder: 5,
-    coverImage: LISTING_PLACEHOLDER_IMAGE,
-    galleryImages: [LISTING_PLACEHOLDER_IMAGE],
-    seoTitle: 'Vanguard Pro Compression Baselayer | Safety Line Gearwear',
-    seoDescription: 'High-compression ergonomic baselayer engineered for elite athletes with zoned moisture control.',
-    createdAt: '2026-03-01T08:00:00.000Z'
-  },
-  {
-    id: 'prod-ttn-06',
-    name: 'Titanium Active Compression Top',
-    slug: 'titanium-active-compression-top',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Ultra-lightweight aerodynamic active top engineered with Aero-Dri microfiber filaments.',
-    longDescription: 'Designed for high-tensile gymwear and endurance sports. Ergonomic raglan sleeve architecture provides full unrestricted range of motion, while hydrophobic micro-yarns pull moisture instantly from the skin surface.',
-    material: '88% Aero-Dri Microfiber, 12% Elastane',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Stealth Charcoal', 'Cobalt Blue', 'Matte Black'],
-    features: [
-      '4-way multidirectional stretch fiber',
-      'Ergonomic raglan sleeves for unrestricted mobility',
-      'Sublimation & screen-printing compatible',
-      'Quick-dry hydrophobic yarn weave'
-    ],
-    productCode: 'GW-TTN-06',
-    status: 'Active',
-    displayOrder: 6,
-    coverImage: LISTING_PLACEHOLDER_IMAGE,
-    galleryImages: [LISTING_PLACEHOLDER_IMAGE],
-    seoTitle: 'Titanium Active Compression Top | Safety Line Gearwear',
-    seoDescription: 'Ultra-lightweight aerodynamic active top engineered for elite gym training and high output.',
-    createdAt: '2026-03-05T08:00:00.000Z'
-  },
-  {
-    id: 'prod-end-07',
-    name: 'Endurance 4-Way Technical Shorts',
-    slug: 'endurance-4way-technical-shorts',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Multi-stretch athletic training shorts with reinforced inner liner and moisture-wicking waistband.',
-    longDescription: 'Engineered for high-intensity athletic conditioning, squatting, and track sprints. Built with lightweight rip-resistant stretch nylon, a secure concealed zipper pocket, and custom-tension jacquard elastic.',
-    material: '92% Performance Nylon, 8% Spandex',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Granite Grey', 'Olive Drab', 'Deep Navy'],
-    features: [
-      'Reinforced gusset for unrestricted squats & sprints',
-      'Hidden zipper pocket for secure storage',
-      'Water-repellent durable outer surface coating',
-      'Custom jacquard elastic waistbands'
-    ],
-    productCode: 'GW-END-07',
-    status: 'Active',
-    displayOrder: 7,
-    coverImage: LISTING_PLACEHOLDER_IMAGE,
-    galleryImages: [LISTING_PLACEHOLDER_IMAGE],
-    seoTitle: 'Endurance 4-Way Technical Shorts | Safety Line Gearwear',
-    seoDescription: 'Multi-stretch athletic workout shorts built with reinforced gusset and moisture-wicking waistband.',
-    createdAt: '2026-03-10T08:00:00.000Z'
-  },
-  {
-    id: 'prod-hys-08',
-    name: 'Hydro-Shield Lightweight Storm Jacket',
-    slug: 'hydro-shield-lightweight-storm-jacket',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Weather-sealed ripstop technical shell with dual underarm ventilation and storm collar.',
-    longDescription: 'Ultralight performance storm jacket designed to protect athletes in unpredictable outdoor environments. Features seam-sealed waterproof membranes, high-airflow underarm vents, and 3M safety reflective accents.',
-    material: '100% Ripstop Hydrophobic Polyester Shell',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Alpine White', 'Signal Orange', 'Matte Black'],
-    features: [
-      'Waterproof membrane with taped internal seams',
-      'Dual underarm ventilation zippers',
-      'Adjustable storm hood with toggle locks',
-      'Reflective 3M safety piping'
-    ],
-    productCode: 'GW-HYS-08',
-    status: 'Active',
-    displayOrder: 8,
-    coverImage: LISTING_PLACEHOLDER_IMAGE,
-    galleryImages: [LISTING_PLACEHOLDER_IMAGE],
-    seoTitle: 'Hydro-Shield Lightweight Storm Jacket | Safety Line Gearwear',
-    seoDescription: 'Weather-sealed ripstop athletic shell jacket with dual ventilation and reflective safety trims.',
-    createdAt: '2026-03-15T08:00:00.000Z'
   }
 ];
+

@@ -190,7 +190,6 @@ export default function ListingModal({
       displayOrder: productToEdit?.displayOrder || 10,
       coverImage: coverImage.trim() || 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600',
       galleryImages,
-      isListingSlot: true,
       seoTitle: `${name.trim()} | Safety Line`,
       seoDescription: shortDescription.trim(),
       createdAt: productToEdit?.createdAt || new Date().toISOString()
@@ -215,10 +214,10 @@ export default function ListingModal({
             <Sparkles className="w-5 h-5 text-[#FF5A36]" />
             <div>
               <h2 className="font-display font-bold text-base">
-                {isEditing ? `Edit Listing Window: ${productToEdit?.name}` : 'Create New Product Listing Window'}
+                {isEditing ? `Edit Product: ${productToEdit?.name}` : 'Add New Product'}
               </h2>
               <p className="text-xs text-[#D9F0EC]/80 font-mono">
-                {isEditing ? 'Update specifications, imagery, and variant parameters' : 'Define a customizable showcase card with live images & technical specs'}
+                {isEditing ? 'Update specifications, imagery, and variant parameters' : 'Enter product specifications, custom imagery, and parameters'}
               </p>
             </div>
           </div>
@@ -575,7 +574,7 @@ export default function ListingModal({
                   className="text-rose-600 hover:text-rose-700 hover:bg-rose-50 border border-rose-200 px-4 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
-                  <span>Delete Listing</span>
+                  <span>Delete Product</span>
                 </button>
               )}
             </div>
@@ -593,7 +592,7 @@ export default function ListingModal({
                 className="bg-[#0B3D3B] hover:bg-[#072725] text-white px-6 py-2.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all shadow-md shadow-[#0B3D3B]/20 inline-flex items-center gap-2 cursor-pointer"
               >
                 <Check className="w-4 h-4 text-[#FF5A36]" />
-                <span>{isEditing ? 'Save Product Changes' : 'Publish Listing Window'}</span>
+                <span>{isEditing ? 'Save Product Changes' : 'Publish Product'}</span>
               </button>
             </div>
           </div>

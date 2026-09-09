@@ -591,11 +591,8 @@ export default function CategoryHub({
               className="bg-[#0B3D3B] hover:bg-[#072725] text-white text-xs font-mono font-bold px-5 py-2.5 rounded-xl transition-all cursor-pointer inline-flex items-center gap-2 shadow-md shadow-[#0B3D3B]/20"
             >
               <Plus className="w-4 h-4 text-[#FF5A36]" />
-              <span>+ Add Listing Window</span>
+              <span>+ Add Product</span>
             </button>
-            <span className="text-xs text-slate-500 font-mono">
-              (Create customizable product slots to add images &amp; details)
-            </span>
           </div>
         </div>
 
@@ -680,7 +677,7 @@ export default function CategoryHub({
                         e.stopPropagation();
                         openEditListingModal(p);
                       }}
-                      title="Edit Product Listing Window"
+                      title="Edit Product Details"
                       className="absolute top-3 right-3 bg-white/90 hover:bg-[#FF5A36] text-slate-700 hover:text-white p-1.5 rounded-lg shadow-xs transition-colors z-10 cursor-pointer"
                     >
                       <Edit3 className="w-3.5 h-3.5" />

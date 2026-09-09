@@ -523,6 +523,115 @@ app.delete('/api/feedbacks/:id', authenticateAdmin, (req, res) => {
 });
 
 // ==========================================
+// CODE INSPECTOR API (Allow previewing source code)
+// ==========================================
+
+const ALLOWED_EXTS = ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.html', '.md'];
+const FORBIDDEN_PATHS = ['node_modules', '.git', 'dist', '.env'];
+
+app.get('/api/code/tree', (req, res) => {
+  const allowedRoots = ['src', 'public'];
+  const rootFiles = ['package.json', 'server.ts', 'vite.config.ts', 'tsconfig.json', 'index.html', 'metadata.json'];
+
+  const results: Array<{ path: string; name: string; category: string; size: number }> = [];
+
+  // Add root files
+  for (const rf of rootFiles) {
+    const fullPath = path.join(process.cwd(), rf);
+    if (fs.existsSync(fullPath)) {
+      const stat = fs.statSync(fullPath);
+      results.push({
+        path: rf,
+        name: rf,
+        category: 'Config & Server',
+        size: stat.size,
+      });
+    }
+  }
+
+  // Helper to walk dir
+  function walkDir(currentDir: string, category: string) {
+    if (!fs.existsSync(currentDir)) return;
+    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      const relPath = path.relative(process.cwd(), path.join(currentDir, entry.name));
+      if (FORBIDDEN_PATHS.some(f => relPath.includes(f))) continue;
+
+      if (entry.isDirectory()) {
+        const subCategory = relPath.startsWith('src/components') ? 'Components'
+          : relPath.startsWith('src/data') ? 'Data & Models'
+          : relPath.startsWith('src/lib') ? 'Utilities'
+          : category;
+        walkDir(path.join(currentDir, entry.name), subCategory);
+      } else {
+        const ext = path.extname(entry.name).toLowerCase();
+        if (ALLOWED_EXTS.includes(ext)) {
+          const stat = fs.statSync(path.join(currentDir, entry.name));
+          results.push({
+            path: relPath,
+            name: entry.name,
+            category,
+            size: stat.size,
+          });
+        }
+      }
+    }
+  }
+
+  for (const root of allowedRoots) {
+    const fullRoot = path.join(process.cwd(), root);
+    const cat = root === 'src' ? 'Application Code' : 'Public Assets';
+    walkDir(fullRoot, cat);
+  }
+
+  res.json(results);
+});
+
+app.get('/api/code/file', (req, res) => {
+  const reqPath = String(req.query.path || '').trim();
+  if (!reqPath) {
+    return res.status(400).json({ error: 'File path query parameter is required' });
+  }
+
+  // Security checks
+  const normalized = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
+  if (normalized.includes('..') || FORBIDDEN_PATHS.some(f => normalized.includes(f))) {
+    return res.status(403).json({ error: 'Access to this file path is forbidden' });
+  }
+
+  const ext = path.extname(normalized).toLowerCase();
+  if (!ALLOWED_EXTS.includes(ext)) {
+    return res.status(400).json({ error: 'File type not permitted for inspection' });
+  }
+
+  const fullPath = path.join(process.cwd(), normalized);
+  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) {
+    return res.status(404).json({ error: 'File not found' });
+  }
+
+  try {
+    const content = fs.readFileSync(fullPath, 'utf-8');
+    const lang = ext === '.tsx' || ext === '.ts' ? 'typescript'
+      : ext === '.json' ? 'json'
+      : ext === '.css' ? 'css'
+      : ext === '.html' ? 'html'
+      : ext === '.md' ? 'markdown'
+      : 'javascript';
+
+    res.json({
+      path: normalized,
+      name: path.basename(normalized),
+      language: lang,
+      size: content.length,
+      lineCount: content.split('\n').length,
+      content,
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: 'Failed to read file: ' + err.message });
+  }
+});
+
+// ==========================================
 // VITE OR STATIC FILE SERVING
 // ==========================================
 

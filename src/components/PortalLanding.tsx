@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, ShieldCheck, Cpu, Layers, Phone, Mail, Instagram, Facebook, MessageCircle, MapPin } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Cpu, Layers, Phone, Mail, Instagram, Facebook, MessageCircle, MapPin, Code2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
 import { settings } from '../data';
@@ -334,8 +334,17 @@ export default function PortalLanding() {
                 <MessageCircle className="w-4 h-4 fill-white" />
               </a>
               <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent('open-code-viewer'))}
+                title="Inspect Project Source Code in Preview"
+                className="ml-2 text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg border border-slate-300 hover:border-[#0B3D3B] text-slate-700 hover:text-[#0B3D3B] bg-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
+              >
+                <Code2 className="w-3.5 h-3.5 text-[#FF5A36]" />
+                <span>Inspect Code</span>
+              </button>
+              <button
                 onClick={() => navigate('/contact')}
-                className="ml-2 text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-[#0B3D3B] hover:bg-[#072725] text-white transition-colors cursor-pointer"
+                className="ml-1 text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-[#0B3D3B] hover:bg-[#072725] text-white transition-colors cursor-pointer"
               >
                 Contact Us
               </button>
