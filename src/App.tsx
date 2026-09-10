@@ -10,7 +10,7 @@ import { Product, Settings } from './types';
 import { products as defaultProducts, settings as defaultSettings } from './data';
 import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v7';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v8';
 
 export default function App() {
   const currentPath = usePath();
@@ -19,6 +19,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v7');
       localStorage.removeItem('safetyline_catalogue_v6');
       localStorage.removeItem('safetyline_catalogue_v5');
       localStorage.removeItem('safetyline_catalogue_v4');
@@ -29,12 +30,7 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const cleaned = parsed.filter((p: Product) =>
-            !p.isListingSlot &&
-            !p.coverImage?.includes('LISTING WINDOW') &&
-            !['prod-vng-05', 'prod-ttn-06', 'prod-end-07', 'prod-hys-08', 'prod-vel-05', 'prod-mer-06'].includes(p.id)
-          );
-          if (cleaned.length > 0) return cleaned;
+          return parsed;
         }
       }
     } catch (err) {
