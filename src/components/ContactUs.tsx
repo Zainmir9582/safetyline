@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, MessageSquare, Clock, Send, CheckCircle2, Sparkles, MessageCircle, ShieldCheck, ArrowRight, Info, Instagram, Facebook, ExternalLink } from 'lucide-react';
+import React from 'react';
+import { Mail, Phone, MapPin, Clock, CheckCircle2, Sparkles, MessageCircle, ShieldCheck, Instagram, Facebook, ExternalLink, Building2, Globe2, Truck, FileCheck } from 'lucide-react';
 import { Settings } from '../types';
 import { navigate } from '../lib/router';
 import SEO from './SEO';
@@ -9,37 +9,6 @@ interface ContactUsProps {
 }
 
 export default function ContactUs({ settings }: ContactUsProps) {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    companyName: '',
-    email: '',
-    phone: '',
-    messageCategory: 'Wholesale Inquiry',
-    message: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.message) return;
-    
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        fullName: '',
-        companyName: '',
-        email: '',
-        phone: '',
-        messageCategory: 'Wholesale Inquiry',
-        message: ''
-      });
-    }, 1000);
-  };
-
   const whatsappUrl = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
     `Hello Safety Line Advisory Desk, I am inquiring regarding wholesale orders and technical specifications.`
   )}`;
@@ -58,7 +27,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                 <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
               </span>
               <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/10 text-[#FF5A36] font-bold ml-1">
-                Inquiry Desk
+                Advisory Desk
               </span>
             </div>
           </div>
@@ -93,43 +62,44 @@ export default function ContactUs({ settings }: ContactUsProps) {
       </header>
 
       <SEO 
-        title="Contact Us & Wholesale Inquiry Desk | Safety Line"
+        title="Contact Us & Corporate Advisory Desk | Safety Line"
         description="Get in touch with Safety Line corporate offices and advisory desk for wholesale inquiries, custom team kits, and performance catalogue distribution."
         keywords="Safety Line contact, athletic gearwear inquiry, custom sportswear order, wholesale accessories distribution, performance textiles"
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 pt-6">
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 pt-6">
         
         {/* Breadcrumbs */}
         <div className="flex items-center space-x-2 text-xs font-mono text-slate-500">
           <button onClick={() => navigate('/')} className="hover:text-[#0B3D3B] transition-colors cursor-pointer">Portal</button>
           <span>/</span>
-          <span className="text-[#0B3D3B] font-bold">Contact & Inquiry Desk</span>
+          <span className="text-[#0B3D3B] font-bold">Contact & Advisory Desk</span>
         </div>
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-[#D9F0EC] text-[#0B3D3B] text-xs font-mono font-bold tracking-wider uppercase">
             <Sparkles className="w-3.5 h-3.5 text-[#FF5A36]" />
-            <span>Global Inquiries & Advisory Desk</span>
+            <span>Corporate Headquarters & Advisory Desk</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#0B3D3B] tracking-tight">
+          <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-[#0B3D3B] tracking-tight">
             Connect With Our Specialists
           </h1>
-          <p className="text-slate-600 font-normal text-base sm:text-lg leading-relaxed">
-            Submit fabric specification requests, team kit inquiries, or catalogue sample requests directly to our advisory desk.
+          <p className="text-slate-600 font-normal text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            Direct channels for wholesale stockists, team kit specifications, custom OEM/ODM manufacturing, and product sample requests.
           </p>
         </div>
 
         {/* 2-Column Portal Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-            {/* Left Column: Direct Corporate Contacts */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Left Column: Direct Corporate Contacts */}
+          <div className="lg:col-span-6 space-y-6">
             <div className="bg-[#0B3D3B] text-white p-8 rounded-2xl space-y-6 relative overflow-hidden shadow-md">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[#D9F0EC] font-mono text-xs uppercase tracking-wider block font-bold">
-                    Corporate Headquarters
+                    Executive Headquarters & Plant
                   </span>
                   <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
@@ -140,13 +110,13 @@ export default function ContactUs({ settings }: ContactUsProps) {
                   Safety Line Industries
                 </h2>
                 <p className="text-white/80 font-normal text-xs leading-relaxed">
-                  Our materials laboratory, design division, and executive showroom welcome sports organizations, retail stockists, and corporate partners.
+                  Our materials laboratory, manufacturing plant, and executive showroom welcome sports organizations, international stockists, and corporate partners.
                 </p>
               </div>
 
               <div className="space-y-3.5 text-xs font-normal border-t border-white/10 pt-5 font-mono">
                 {/* Address */}
-                <div className="flex items-start space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="flex items-start space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
                   <MapPin className="w-4 h-4 text-[#FF5A36] mt-0.5 shrink-0" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-white/60 uppercase">Factory & Showroom</span>
@@ -166,7 +136,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="flex items-center space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
                   <Phone className="w-4 h-4 text-[#FF5A36] shrink-0" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-white/60 uppercase">Direct Phone / WhatsApp</span>
@@ -177,7 +147,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                 </div>
 
                 {/* General Inquiry Email */}
-                <div className="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="flex items-center space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
                   <Mail className="w-4 h-4 text-[#FF5A36] shrink-0" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-white/60 uppercase">General Inquiries</span>
@@ -189,7 +159,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
 
                 {/* Sales Inquiry Email */}
                 {settings.salesEmail && (
-                  <div className="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                  <div className="flex items-center space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
                     <Mail className="w-4 h-4 text-[#D9F0EC] shrink-0" />
                     <div className="flex flex-col">
                       <span className="text-[10px] text-white/60 uppercase">Sales & Wholesale Desk</span>
@@ -201,7 +171,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                 )}
 
                 {/* Business Hours */}
-                <div className="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="flex items-center space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
                   <Clock className="w-4 h-4 text-[#FF5A36] shrink-0" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-white/60 uppercase">Operating Hours</span>
@@ -266,164 +236,93 @@ export default function ContactUs({ settings }: ContactUsProps) {
               </div>
             </div>
 
-            {/* Response Time Guarantees */}
+            {/* Advisory Commitments */}
             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-              <h3 className="font-display text-sm font-bold text-[#0B3D3B] uppercase tracking-wider">
-                Advisory Commitments
+              <h3 className="font-display text-sm font-bold text-[#0B3D3B] uppercase tracking-wider flex items-center gap-2">
+                <FileCheck className="w-4 h-4 text-[#FF5A36]" />
+                <span>Advisory & Production Commitments</span>
               </h3>
-              <div className="space-y-3 text-xs text-slate-600">
-                <div className="flex items-start space-x-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600">
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-xl border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-[#0B3D3B] shrink-0 mt-0.5" />
                   <span><strong>12-Hour SLA:</strong> All sample orders and catalogue pricing sheets dispatched within one business day.</span>
                 </div>
-                <div className="flex items-start space-x-2.5">
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-xl border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-[#0B3D3B] shrink-0 mt-0.5" />
-                  <span><strong>Lab Certificates:</strong> OEKO-TEX Standard 100 and tensile stress test sheets provided with fabric swatches.</span>
+                  <span><strong>Lab Certificates:</strong> OEKO-TEX Standard 100 & tensile stress test sheets provided with fabric swatches.</span>
                 </div>
-                <div className="flex items-start space-x-2.5">
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-xl border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-[#0B3D3B] shrink-0 mt-0.5" />
                   <span><strong>Bespoke Customization:</strong> Sublimation printing, jacquard weaving, and silicone band branding available.</span>
+                </div>
+                <div className="flex items-start space-x-2.5 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="w-4 h-4 text-[#0B3D3B] shrink-0 mt-0.5" />
+                  <span><strong>Global Freight:</strong> DDP/FOB export shipping arrangements to Europe, North America, Middle East, and Asia.</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Interactive Inquiry Form & Map */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-xs space-y-6">
-              <div className="space-y-1">
-                <h2 className="font-display text-xl font-bold text-[#0B3D3B]">
-                  Send an Inquiry
+          {/* Right Column: Factory Location & Direct Departments */}
+          <div className="lg:col-span-6 space-y-6">
+            
+            {/* Direct Department Directory Cards */}
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-display text-base font-bold text-[#0B3D3B] uppercase tracking-wider flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-[#FF5A36]" />
+                  <span>Department Directory</span>
                 </h2>
-                <p className="text-slate-500 font-normal text-xs">
-                  Fill out the form below and our textile technicians will review your specifications.
-                </p>
+                <span className="text-[11px] font-mono text-slate-400">Direct Routing</span>
               </div>
 
-              {isSubmitted ? (
-                <div className="bg-[#D9F0EC]/40 border border-[#0B3D3B]/20 rounded-xl p-8 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-[#0B3D3B] text-white flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-6 h-6 text-[#D9F0EC]" />
+              <div className="space-y-3">
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-[#0B3D3B]/30 transition-all space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-[#0B3D3B]">Wholesale & Global Distribution</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">B2B Sales</span>
                   </div>
-                  <h3 className="font-display text-lg font-bold text-[#0B3D3B]">
-                    Inquiry Received
-                  </h3>
-                  <p className="text-xs text-slate-600 font-normal max-w-md mx-auto leading-relaxed">
-                    Thank you for reaching out to Safety Line. A senior textile representative has received your request and will contact you via email or phone within 12 hours.
-                  </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="bg-[#0B3D3B] hover:bg-[#072725] text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
-                  >
-                    Submit Another Inquiry
-                  </button>
+                  <p className="text-xs text-slate-600">Bulk distributor orders, minimum order quantities (MOQs), and regional distribution agreements.</p>
+                  <div className="flex items-center gap-4 text-xs font-mono pt-1">
+                    <a href={`mailto:${settings.salesEmail || settings.contactEmail}`} className="text-[#0B3D3B] hover:text-[#FF5A36] font-semibold transition-colors flex items-center gap-1">
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>{settings.salesEmail || settings.contactEmail}</span>
+                    </a>
+                  </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Full Name */}
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Full Name *</label>
-                      <input
-                        required
-                        type="text"
-                        placeholder="E.g., Marcus Vance"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none transition-colors"
-                      />
-                    </div>
 
-                    {/* Company / Organization */}
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Company / Club Name</label>
-                      <input
-                        type="text"
-                        placeholder="E.g., Alpine Athletic Club"
-                        value={formData.companyName}
-                        onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none transition-colors"
-                      />
-                    </div>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-[#0B3D3B]/30 transition-all space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-[#0B3D3B]">Custom OEM/ODM & Team Kits</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold">Design Lab</span>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Email */}
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Business Email *</label>
-                      <input
-                        required
-                        type="email"
-                        placeholder="E.g., contact@organization.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none transition-colors"
-                      />
-                    </div>
-
-                    {/* Phone */}
-                    <div className="space-y-1">
-                      <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Phone Number</label>
-                      <input
-                        type="tel"
-                        placeholder="E.g., +1 (555) 0199"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none transition-colors"
-                      />
-                    </div>
+                  <p className="text-xs text-slate-600">Technical CAD files, team colorway matching, custom siliconized grips, and bespoke athletic sizing.</p>
+                  <div className="flex items-center gap-4 text-xs font-mono pt-1">
+                    <a href={`mailto:${settings.contactEmail}`} className="text-[#0B3D3B] hover:text-[#FF5A36] font-semibold transition-colors flex items-center gap-1">
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>{settings.contactEmail}</span>
+                    </a>
                   </div>
+                </div>
 
-                  {/* Message Category */}
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Inquiry Category</label>
-                    <select
-                      value={formData.messageCategory}
-                      onChange={(e) => setFormData({ ...formData, messageCategory: e.target.value })}
-                      className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none transition-colors cursor-pointer"
-                    >
-                      <option value="Wholesale Inquiry">B2B Wholesale / Stockist Application</option>
-                      <option value="Fabric Customization">Custom Team Kit & Specifications</option>
-                      <option value="Sample Request">Material Swatch & Sample Order</option>
-                      <option value="Other">General Inquiry</option>
-                    </select>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-[#0B3D3B]/30 transition-all space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-[#0B3D3B]">Material Swatches & Physical Samples</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">Sample Desk</span>
                   </div>
-
-                  {/* Message details */}
-                  <div className="space-y-1">
-                    <label className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Requirements & Message *</label>
-                    <textarea
-                      required
-                      rows={5}
-                      placeholder="Please describe your requirements, desired quantity scale, or sizing inquiries..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3.5 py-2.5 text-xs text-[#1A1A1A] outline-none transition-colors resize-none"
-                    />
+                  <p className="text-xs text-slate-600">Physical fabric swatches, compression test certificates, and sample garment dispatches.</p>
+                  <div className="flex items-center gap-4 text-xs font-mono pt-1">
+                    <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="text-[#0B3D3B] hover:text-[#FF5A36] font-semibold transition-colors flex items-center gap-1">
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>{settings.contactPhone}</span>
+                    </a>
                   </div>
-
-                  {/* Submit Button */}
-                  <button
-                    id="submit-inquiry-btn"
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#FF5A36] hover:bg-[#e44e2b] text-white font-bold text-xs tracking-wider uppercase py-3.5 px-6 rounded-lg inline-flex items-center justify-center space-x-2 transition-all shadow-md shadow-[#FF5A36]/25 cursor-pointer disabled:opacity-50"
-                  >
-                    {isSubmitting ? (
-                      <span>Sending Inquiry...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>Send Official Inquiry</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
+                </div>
+              </div>
             </div>
 
             {/* Factory Location & Showroom Map Card */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm aspect-[16/9] flex flex-col space-y-2.5">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col space-y-3.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <MapPin className="w-4 h-4 text-[#FF5A36]" />
@@ -448,7 +347,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                   </a>
                 )}
               </div>
-              <div className="w-full flex-grow rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-inner">
+              <div className="w-full h-80 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-inner">
                 <iframe
                   title="Safety Line Headquarters Map Location"
                   src={settings.googleMapEmbedUrl}
@@ -461,6 +360,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                 />
               </div>
             </div>
+
           </div>
 
         </div>

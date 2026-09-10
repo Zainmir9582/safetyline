@@ -9,6 +9,7 @@ import terracottaRunTankImg from '../assets/images/terracotta_run_tank_178898498
 import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
 import blackGymStringerImg from '../assets/images/black_gym_stringer_1788985021668.jpg';
 import whiteGraphicTankImg from '../assets/images/white_graphic_tank_1788985040768.jpg';
+
 import prod1Img from '../assets/images/regenerated_image_1788784305175.jpg';
 import prod2Img from '../assets/images/regenerated_image_1788784337552.jpg';
 import prod3Img from '../assets/images/regenerated_image_1788784410117.jpg';
@@ -17,20 +18,19 @@ import prod4Img from '../assets/images/regenerated_image_1788784447014.jpg';
 export const gearwearProducts: Product[] = [
   {
     id: 'prod-gw-afx-01',
-    name: 'AeroFlex Compression Bra & Sculpt Leggings Set',
-    slug: 'aeroflex-compression-bra-and-sculpt-leggings-set',
+    name: 'AeroFlex Compression Bra & Leggings Set',
+    slug: 'aeroflex-compression-bra-and-leggings-set',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
-    shortDescription: 'High-density 4-way stretch matching compression sports bra paired with high-waisted targeted-support ankle leggings.',
-    longDescription: 'Engineered for aerodynamic studio training, athletic gym conditioning, and high-impact cardio. Features an elasticized wide underband for bounce control and high-rise sculpting waistband with zero-dig soft compression. Tailored with ergonomic contour stitch lines and authentic white Safety Line emblem branding.',
-    material: '78% Recycled Poly-Spandex Microfiber, 22% High-Tension Lycra Core',
+    shortDescription: 'High-density 4-way stretch compression sports bra paired with high-waisted targeted-support ankle leggings.',
+    longDescription: 'Engineered for aerodynamic studio training, athletic gym conditioning, and high-impact cardio. Features an elasticized wide underband for bounce control and high-rise sculpting waistband with zero-dig soft compression. Emblazoned with authentic white Safety Line emblem branding.',
+    material: '78% Recycled Poly-Spandex Microfiber, 22% High-Tension Lycra',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
-      'Two-piece matching athletic sports bra and high-waist compression leggings',
-      'Targeted core & glute ergonomic sculpting architecture',
-      'Sweat-wicking micro-porous capillary weave for rapid heat dissipation',
-      'Chafe-free ergonomic flatlock 4-needle seam construction',
+      'Targeted core & glute compression support',
+      'Sweat-wicking micro-porous capillary weave',
+      'Chafe-free ergonomic flatlock seam construction',
       'Anti-roll 3-inch high-tension compression waistband',
       'Reflective Safety Line emblem branding'
     ],
@@ -49,17 +49,16 @@ export const gearwearProducts: Product[] = [
     slug: 'boreal-alpine-quilted-down-puffer-parka',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
-    shortDescription: 'Heavyweight 700-fill thermal quilted horizontal baffle puffer jacket with insulated draft hood and storm flap closure.',
-    longDescription: 'Designed for severe mountain climates and outdoor winter training. Constructed with deep horizontal down baffles in olive green, a wind-blocking snap storm placket over an airtight YKK dual-direction zipper, insulated chin guard, dual fleece hand pockets, and signature red Safety Line chest embroidery.',
+    shortDescription: 'Heavyweight 700-fill thermal quilted puffer jacket with insulated draft hood and reinforced storm closure.',
+    longDescription: 'Designed for severe mountain climates and outdoor winter training. Constructed with deep horizontal down baffles, a wind-blocking snap storm placket over an airtight YKK dual-direction zipper, insulated chin guard, and signature red Safety Line chest embroidery.',
     material: '100% Ripstop High-Density Nylon Shell, 90/10 RDS Goose Down Fill (700 Fill Power)',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
-      '700 Fill-Power responsibly sourced thermal goose down insulation',
-      'DWR (Durable Water Repellent) windproof tear-resistant nylon ripstop shell',
-      'Full-coverage insulated high-neck storm hood with dual cinch bungees',
-      'Dual-entry fleece-lined zippered hand warmer pockets & interior security chest pocket',
-      'Heavy-duty snap-button storm placket over airtight dual-way zipper',
+      '700 Fill-Power responsibly sourced goose down',
+      'DWR (Durable Water Repellent) windproof nylon shell',
+      'Full-coverage insulated storm hood with dual cinch cords',
+      'Dual-entry fleece-lined zippered hand warmer pockets',
       'Signature red Safety Line embroidered chest insignia'
     ],
     productCode: 'GW-BOR-02',
@@ -67,7 +66,7 @@ export const gearwearProducts: Product[] = [
     displayOrder: 2,
     coverImage: greenPufferJacketImg,
     galleryImages: [greenPufferJacketImg],
-    seoTitle: 'Boreal Alpine Quilted Down Puffer Parka | Heavyweight Winter Gearwear',
+    seoTitle: 'Boreal Alpine Quilted Down Puffer Parka | Heavyweight Winter Outerwear',
     seoDescription: '700 fill-power thermal quilted goose down parka with insulated hood, storm placket, and red Safety Line crest.',
     createdAt: '2026-03-01T08:00:00.000Z'
   },
@@ -80,13 +79,13 @@ export const gearwearProducts: Product[] = [
     shortDescription: 'Pristine white moisture-wicking long-sleeve athletic technical crew with split hem and anatomical sleeve draping.',
     longDescription: 'Formulated with ultra-fine spun athletic poly-blend fibers for immediate perspiration expulsion during intensive training. Features ergonomic raglan shoulder seams for unrestricted overhead reach, reinforced split side hem for hip mobility, and the distinguished red & black Safety Line crest.',
     material: '88% Micro-Mesh Polyester, 12% Spandex Ultra-Lite',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Rapid-dry hydrophilic vapor transport system',
       'Ergonomic raglan sleeve articulation for zero shoulder pull',
-      'Reinforced split side-seam hem vents for increased hip mobility',
-      'UV 50+ solar radiation dermal barrier for outdoor sessions',
+      'Split side-seam hem vents for increased mobility',
+      'UV 50+ solar radiation dermal barrier',
       'Screen-printed Safety Line emblem chest crest'
     ],
     productCode: 'GW-STR-03',
@@ -104,15 +103,15 @@ export const gearwearProducts: Product[] = [
     slug: 'vector-tech-quarter-zip-hybrid-pullover',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
-    shortDescription: 'Dual-tone heather grey mock-neck quarter-zip athletic mid-layer pullover with contrast raglan sleeves and chin garage.',
+    shortDescription: 'Dual-tone heather grey quarter-zip running pullover with mock collar and micro-fleece thermal backing.',
     longDescription: 'The Vector Quarter-Zip bridges high-cadence morning runs and cool-weather layering. Featuring contrasting heather texture on the sleeves, reverse-coil semi-locking zipper, low-profile chin garage, and embroidered Safety Line insignia on the left chest.',
     material: '90% Technical Heather Polyester, 10% Elastane Brushed Knit',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
-      'Semi-auto lock 1/4 zipper with protective soft chin garage',
+      'Semi-auto lock 1/4 zipper with protective chin garage',
       'Brushed thermal interior micro-fleece for gentle warmth',
-      'Contrast textured raglan sleeve paneling for dynamic range of motion',
+      'Contrast textured raglan sleeve paneling',
       '4-way athletic stretch recovery matrix',
       'Embroidered Safety Line performance crest'
     ],
@@ -121,7 +120,7 @@ export const gearwearProducts: Product[] = [
     displayOrder: 4,
     coverImage: greyHalfzipShirtImg,
     galleryImages: [greyHalfzipShirtImg],
-    seoTitle: 'Vector Tech Quarter-Zip Hybrid Pullover | Running Mid-Layer Gearwear',
+    seoTitle: 'Vector Tech Quarter-Zip Hybrid Pullover | Running Mid-Layer',
     seoDescription: 'Dual-tone heather grey quarter-zip athletic pullover with brushed thermal backing and Safety Line insignia.',
     createdAt: '2026-03-02T08:00:00.000Z'
   },
@@ -134,12 +133,12 @@ export const gearwearProducts: Product[] = [
     shortDescription: 'Second-skin dusty mauve zip-up compression silhouette with contour-enhancing stitch lines and thumbhole cuffs.',
     longDescription: 'Crafted from buttery-soft brushed nylon-elastane fabric that sculpts and elongates the torso. Curved princess seamlines provide an aerodynamic silhouette, while the mock turtle neck keeps out wind drafts during outdoor runs or warm-ups. Includes extended cuffs with reinforced thumbholes.',
     material: '75% Tactel Micro-Nylon, 25% Spandex Feather-Soft Knit',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: ['XS', 'S', 'M', 'L'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Ergonomic princess seam sculpting architecture',
-      'Extended sleeve cuffs with integrated thumbhole anchors',
-      'Full-length smooth gliding YKK zip closure with mock neckline',
+      'Extended sleeve cuffs with integrated thumbholes',
+      'Full-length smooth gliding YKK zip closure',
       'High-stretch anti-pilling and squat-proof composite',
       'Concealed zippered invisible hip utility pockets'
     ],
@@ -148,7 +147,7 @@ export const gearwearProducts: Product[] = [
     displayOrder: 5,
     coverImage: mauveZipJacketImg,
     galleryImages: [mauveZipJacketImg],
-    seoTitle: 'Aura Sculpt Zip-Up Contoured Training Jacket | Form-Fitting Gearwear',
+    seoTitle: 'Aura Sculpt Zip-Up Contoured Training Jacket | Form-Fitting Activewear',
     seoDescription: 'Dusty mauve compression workout jacket with contouring princess seams, mock neck, and thumbhole sleeves.',
     createdAt: '2026-03-03T08:00:00.000Z'
   },
@@ -164,7 +163,7 @@ export const gearwearProducts: Product[] = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
-      '20,000mm hydrostatic waterproof rating with fully taped seams',
+      '20,000mm hydrostatic waterproof rating with taped seams',
       'AquaGuard waterproof contrast zippered pockets',
       'Helmet-compatible 3-point adjustable storm hood',
       'Underarm bilateral zippered climate ventilation ports',
@@ -188,14 +187,14 @@ export const gearwearProducts: Product[] = [
     shortDescription: 'Ultra-lightweight heather coral terracotta athletic racerback tank with dropped armholes and curved scallop hem.',
     longDescription: 'Featherlight running and gym tank top spun from micro-open knit slub jersey. Provides generous airflow through relaxed drop armholes, natural drape, and quick evaporation properties during intense sweat sessions or outdoor summer runs.',
     material: '85% Micro-Modal, 15% Performance Polyester Slub',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: ['XS', 'S', 'M', 'L'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Open-pore micro-knit fiber structure for instant cool-down',
-      'Deep cut dropped armholes for full sports bra visibility and freedom',
+      'Deep cut armholes for full sports bra visibility and freedom',
       'Curved dropped scallop rear hem for added coverage',
       'Anti-odor natural fiber infusion',
-      'Non-restrictive relaxed athletic racerback silhouette'
+      'Non-restrictive relaxed athletic silhouette'
     ],
     productCode: 'GW-TER-07',
     status: 'Active',
@@ -215,7 +214,7 @@ export const gearwearProducts: Product[] = [
     shortDescription: 'Pastel powder blue high-neck sleeveless gym tank top finished with contrasting black athletic binding trim.',
     longDescription: 'Minimalist athletic elegance meets raw performance. Tailored with a clean crew collar, contrast black edge binding around the neckline and deep armholes, and subtle Safety Line monogram on the upper chest. Pairs seamlessly with compression shorts or high-rise tights.',
     material: '92% Combed Athletic Cotton, 8% Lycra Soft-Flex',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: ['XS', 'S', 'M', 'L'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Contrast black reinforced rib-knit edge binding',
@@ -288,7 +287,7 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-03-05T08:00:00.000Z'
   },
   {
-    id: 'prod-gw-apx-11',
+    id: 'prod-apx-01',
     name: 'Apex Pro Aero Compression Tee',
     slug: 'apex-pro-aero-compression-tee',
     categoryId: 'cat-gearwear',
@@ -296,7 +295,7 @@ export const gearwearProducts: Product[] = [
     shortDescription: 'Unrivaled lightweight compression top with target-zoned aerodynamic breathability.',
     longDescription: 'Engineered for high-intensity athletic performance, the Apex Pro Aero Compression Tee utilizes an ultra-dense polyamide composite that stabilizes micro-muscle groups while maximizing heat dissipation. Advanced flatlock structural stitching eliminates friction completely, and 4-way elastic memory maintains its exact ergonomic shape session after session.',
     material: '82% Aero-Polyamide, 18% Elastane Composite',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Target-zoned moisture-wicking capillary channels',
@@ -305,7 +304,7 @@ export const gearwearProducts: Product[] = [
       'Reflective micro-branding elements',
       'Flatlock anti-chafe construction'
     ],
-    productCode: 'GW-APX-11',
+    productCode: 'GW-APX-01',
     status: 'Active',
     displayOrder: 11,
     coverImage: prod1Img,
@@ -315,7 +314,7 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-01-15T08:00:00.000Z'
   },
   {
-    id: 'prod-gw-znt-12',
+    id: 'prod-znt-02',
     name: 'Zenith Hydrophobic Stormshell',
     slug: 'zenith-hydrophobic-stormshell',
     categoryId: 'cat-gearwear',
@@ -332,7 +331,7 @@ export const gearwearProducts: Product[] = [
       'Internal bonded multimedia port',
       'Laser-cut aerodynamic venting'
     ],
-    productCode: 'GW-ZNT-12',
+    productCode: 'GW-ZNT-02',
     status: 'Active',
     displayOrder: 12,
     coverImage: prod2Img,
@@ -342,7 +341,7 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-02-01T08:00:00.000Z'
   },
   {
-    id: 'prod-gw-chr-13',
+    id: 'prod-chr-03',
     name: 'Chronos Thermal Compression Leggings',
     slug: 'chronos-thermal-compression-leggings',
     categoryId: 'cat-gearwear',
@@ -359,7 +358,7 @@ export const gearwearProducts: Product[] = [
       'Reinforced knee flex-zones',
       'Graduated vascular return compression'
     ],
-    productCode: 'GW-CHR-13',
+    productCode: 'GW-CHR-03',
     status: 'Active',
     displayOrder: 13,
     coverImage: prod3Img,
@@ -369,7 +368,7 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-02-10T08:00:00.000Z'
   },
   {
-    id: 'prod-gw-str-14',
+    id: 'prod-str-04',
     name: 'Stratum Seamless Training Shorts',
     slug: 'stratum-seamless-training-shorts',
     categoryId: 'cat-gearwear',
@@ -377,7 +376,7 @@ export const gearwearProducts: Product[] = [
     shortDescription: 'Seamless multi-stretch athletic shorts designed for boundless dynamic movement.',
     longDescription: 'Constructed using a proprietary zero-friction circular knit technique, the Stratum Shorts prevent chafing completely. With an integrated inner supportive liner and multi-directional knit ventilation, they deliver extreme comfort during the most challenging squat and sprint sessions.',
     material: '90% Nylon, 10% Spandex Core',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Advanced 3D seamless structural design',
@@ -386,7 +385,7 @@ export const gearwearProducts: Product[] = [
       'Double-stitched high-tensile seams',
       'Side zip key & card storage compartment'
     ],
-    productCode: 'GW-STR-14',
+    productCode: 'GW-STR-04',
     status: 'Active',
     displayOrder: 14,
     coverImage: prod4Img,

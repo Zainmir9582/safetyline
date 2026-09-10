@@ -74,9 +74,9 @@ export default function CategoryHub({
   // Extract available subcategories and sizes
   const subcategories = useMemo(() => {
     if (isGearwear) {
-      return ['All', 'Jackets & Outerwear', 'Tanks & Stringers', 'Tops & Compression', 'Bottoms & Sets'];
+      return ['All', 'Jackets & Outerwear', 'Tops & Compression', 'Tanks & Stringers', 'Bottoms & Shorts'];
     } else {
-      return ['All', 'Fine Silk & Hosiery', 'Technical & Cashmere Socks', 'Compression Sleeves & Guards'];
+      return ['All', 'Silk Stockings', 'Lounge & Dress Socks', 'Microfiber Tights'];
     }
   }, [isGearwear]);
 
@@ -110,21 +110,21 @@ export default function CategoryHub({
       // Subcategory heuristic
       let matchSubcat = true;
       if (selectedSubcat !== 'All') {
-        const nameDesc = (p.name + ' ' + p.shortDescription + ' ' + p.material + ' ' + (p.features ? p.features.join(' ') : '')).toLowerCase();
+        const nameDesc = (p.name + ' ' + p.shortDescription + ' ' + p.material).toLowerCase();
         if (isGearwear) {
-          if (selectedSubcat === 'Jackets & Outerwear') matchSubcat = nameDesc.includes('jacket') || nameDesc.includes('puffer') || nameDesc.includes('parka') || nameDesc.includes('shell') || nameDesc.includes('pullover');
-          if (selectedSubcat === 'Tanks & Stringers') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('stringer') || nameDesc.includes('muscle');
-          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('tee') || nameDesc.includes('crew') || nameDesc.includes('compression') || nameDesc.includes('pullover') || nameDesc.includes('long-sleeve');
-          if (selectedSubcat === 'Bottoms & Sets') matchSubcat = nameDesc.includes('short') || nameDesc.includes('legging') || nameDesc.includes('set') || nameDesc.includes('tights');
+          if (selectedSubcat === 'Jackets & Outerwear') matchSubcat = nameDesc.includes('jacket') || nameDesc.includes('puffer') || nameDesc.includes('parka') || nameDesc.includes('storm') || nameDesc.includes('shell') || nameDesc.includes('pullover');
+          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('tee') || nameDesc.includes('crew') || nameDesc.includes('pullover') || nameDesc.includes('compression') || nameDesc.includes('aero');
+          if (selectedSubcat === 'Tanks & Stringers') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('stringer') || nameDesc.includes('sleeveless') || nameDesc.includes('bra');
+          if (selectedSubcat === 'Bottoms & Shorts') matchSubcat = nameDesc.includes('short') || nameDesc.includes('legging') || nameDesc.includes('tights') || nameDesc.includes('set');
         } else {
-          if (selectedSubcat === 'Fine Silk & Hosiery') matchSubcat = nameDesc.includes('silk') || nameDesc.includes('stocking') || nameDesc.includes('tights') || nameDesc.includes('sheer');
-          if (selectedSubcat === 'Technical & Cashmere Socks') matchSubcat = nameDesc.includes('sock') || nameDesc.includes('cashmere') || nameDesc.includes('ribbed') || nameDesc.includes('grip');
-          if (selectedSubcat === 'Compression Sleeves & Guards') matchSubcat = nameDesc.includes('calf') || nameDesc.includes('sleeve') || nameDesc.includes('compression');
+          if (selectedSubcat === 'Silk Stockings') matchSubcat = nameDesc.includes('silk') || nameDesc.includes('stocking') || nameDesc.includes('stay-up');
+          if (selectedSubcat === 'Lounge & Dress Socks') matchSubcat = nameDesc.includes('sock') || nameDesc.includes('cashmere') || nameDesc.includes('cotton');
+          if (selectedSubcat === 'Microfiber Tights') matchSubcat = nameDesc.includes('tights') || nameDesc.includes('microfiber') || nameDesc.includes('denier');
         }
       }
 
-      // Size filter (applies to both if sizes exist)
-      const matchSize = selectedSize === 'All' || (p.sizes && p.sizes.length > 0 && p.sizes.includes(selectedSize));
+      // Size filter
+      const matchSize = selectedSize === 'All' || (p.sizes && p.sizes.includes(selectedSize));
 
       // Color filter
       const matchColor = selectedColor === 'All' || (p.colors && p.colors.includes(selectedColor));
@@ -533,8 +533,8 @@ export default function CategoryHub({
               />
             </div>
 
-            {/* Size Dropdown filter */}
-            {allSizes.length > 1 && (
+            {/* Size Dropdown filter (only for accessories, hidden for gearwear) */}
+            {!isGearwear && (
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Size:</span>
                 <select
@@ -543,7 +543,7 @@ export default function CategoryHub({
                   className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
                 >
                   {allSizes.map(s => (
-                    <option key={s} value={s}>{s === 'All' ? 'All Sizes' : s}</option>
+                    <option key={s} value={s}>{s}</option>
                   ))}
                 </select>
               </div>

@@ -685,7 +685,7 @@ export default function Home({ products, settings }: HomeProps) {
                   onClick={() => navigate('/contact')}
                   className="bg-[#FF5A36] hover:bg-[#e44e2b] text-white font-bold text-xs tracking-wider uppercase py-4 px-8 rounded-xl inline-flex items-center space-x-2 transition-all shadow-md shadow-[#FF5A36]/25 cursor-pointer"
                 >
-                  <span>Open Contact & Inquiry Form</span>
+                  <span>Contact Advisory & Headquarters Desk</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

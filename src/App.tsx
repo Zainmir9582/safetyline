@@ -30,7 +30,12 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          const cleaned = parsed.filter((p: Product) =>
+            !p.isListingSlot &&
+            !p.coverImage?.includes('LISTING WINDOW') &&
+            !['prod-vng-05', 'prod-ttn-06', 'prod-end-07', 'prod-hys-08', 'prod-vel-05', 'prod-mer-06'].includes(p.id)
+          );
+          if (cleaned.length > 0) return cleaned;
         }
       }
     } catch (err) {
