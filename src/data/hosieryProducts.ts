@@ -21,7 +21,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-AUR-01',
     status: 'Active',
-    displayOrder: 1,
+    displayOrder: 15,
     coverImage: 'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
@@ -52,7 +52,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-CSH-02',
     status: 'Active',
-    displayOrder: 2,
+    displayOrder: 16,
     coverImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
@@ -83,7 +83,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-SOV-03',
     status: 'Active',
-    displayOrder: 3,
+    displayOrder: 17,
     coverImage: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
@@ -113,7 +113,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-INT-04',
     status: 'Active',
-    displayOrder: 4,
+    displayOrder: 18,
     coverImage: 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
@@ -143,7 +143,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'AC-GRP-05',
     status: 'Active',
-    displayOrder: 5,
+    displayOrder: 19,
     coverImage: 'https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?q=80&w=800',
@@ -173,7 +173,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'AC-CLF-06',
     status: 'Active',
-    displayOrder: 6,
+    displayOrder: 20,
     coverImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800'
