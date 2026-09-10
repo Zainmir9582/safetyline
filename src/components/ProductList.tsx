@@ -229,6 +229,34 @@ export default function ProductList({ categorySlug, products, categories }: Prod
                     </p>
                   </div>
 
+                  {/* Colors Preview */}
+                  {p.colors && p.colors.length > 0 && (
+                    <div className="flex items-center gap-1.5 pt-1">
+                      <div className="flex items-center -space-x-1">
+                        {p.colors.map((c) => {
+                          const lower = c.toLowerCase();
+                          let dotColor = 'bg-[#FF5A36]';
+                          if (lower.includes('yellow')) dotColor = 'bg-amber-400 border border-amber-500/40';
+                          else if (lower.includes('white')) dotColor = 'bg-white border border-slate-300 shadow-2xs';
+                          else if (lower.includes('black')) dotColor = 'bg-neutral-900 border border-neutral-700';
+                          else if (lower.includes('red')) dotColor = 'bg-red-600 border border-red-700/40';
+                          else if (lower.includes('blue')) dotColor = 'bg-blue-600 border border-blue-700/40';
+                          else if (lower.includes('brown')) dotColor = 'bg-[#B58863] border border-[#8A5A36]/40';
+                          return (
+                            <span
+                              key={c}
+                              title={c}
+                              className={`w-3.5 h-3.5 rounded-full inline-block shadow-2xs ${dotColor}`}
+                            />
+                          );
+                        })}
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-mono ml-1">
+                        {p.colors.length} Colors
+                      </span>
+                    </div>
+                  )}
+
                   <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
                     <span className="text-[11px] font-bold text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                       <span>View Specs</span>

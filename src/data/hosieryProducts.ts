@@ -21,7 +21,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Engineered for aerodynamic studio training, athletic gym conditioning, and high-impact cardio. Features an elasticized wide underband for bounce control and high-rise sculpting waistband with zero-dig soft compression. Emblazoned with authentic white Safety Line emblem branding.',
     material: '78% Recycled Poly-Spandex Microfiber, 22% High-Tension Lycra',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Targeted core & glute compression support',
       'Sweat-wicking micro-porous capillary weave',
@@ -48,7 +48,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Designed for severe mountain climates and outdoor winter training. Constructed with deep horizontal down baffles, a wind-blocking snap storm placket over an airtight YKK dual-direction zipper, insulated chin guard, and signature red Safety Line chest embroidery.',
     material: '100% Ripstop High-Density Nylon Shell, 90/10 RDS Goose Down Fill (700 Fill Power)',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       '700 Fill-Power responsibly sourced goose down',
       'DWR (Durable Water Repellent) windproof nylon shell',
@@ -75,7 +75,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Formulated with ultra-fine spun athletic poly-blend fibers for immediate perspiration expulsion during intensive training. Features ergonomic raglan shoulder seams for unrestricted overhead reach, reinforced split side hem for hip mobility, and the distinguished red & black Safety Line crest.',
     material: '88% Micro-Mesh Polyester, 12% Spandex Ultra-Lite',
     sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Rapid-dry hydrophilic vapor transport system',
       'Ergonomic raglan sleeve articulation for zero shoulder pull',
@@ -102,7 +102,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'The Vector Quarter-Zip bridges high-cadence morning runs and cool-weather layering. Featuring contrasting heather texture on the sleeves, reverse-coil semi-locking zipper, low-profile chin garage, and embroidered Safety Line insignia on the left chest.',
     material: '90% Technical Heather Polyester, 10% Elastane Brushed Knit',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Semi-auto lock 1/4 zipper with protective chin garage',
       'Brushed thermal interior micro-fleece for gentle warmth',
@@ -129,7 +129,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Crafted from buttery-soft brushed nylon-elastane fabric that sculpts and elongates the torso. Curved princess seamlines provide an aerodynamic silhouette, while the mock turtle neck keeps out wind drafts during outdoor runs or warm-ups. Includes extended cuffs with reinforced thumbholes.',
     material: '75% Tactel Micro-Nylon, 25% Spandex Feather-Soft Knit',
     sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Ergonomic princess seam sculpting architecture',
       'Extended sleeve cuffs with integrated thumbholes',
@@ -156,7 +156,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Engineered for alpine ski ascents, severe wind, and wet winter storms. Triple-layer laminate membrane delivers impenetrable water protection while maintaining breathability. Fully seam-sealed with water-repellent aqua zipper tape, pit zips for rapid ventilation, helmet-compatible hood, and wrist gaiters.',
     material: '3-Layer Toray Dermizax Membrane, 100% Recycled Technical Polyester Shell',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       '20,000mm hydrostatic waterproof rating with taped seams',
       'AquaGuard waterproof contrast zippered pockets',
@@ -183,7 +183,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Featherlight running and gym tank top spun from micro-open knit slub jersey. Provides generous airflow through relaxed drop armholes, natural drape, and quick evaporation properties during intense sweat sessions or outdoor summer runs.',
     material: '85% Micro-Modal, 15% Performance Polyester Slub',
     sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Open-pore micro-knit fiber structure for instant cool-down',
       'Deep cut armholes for full sports bra visibility and freedom',
@@ -210,7 +210,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Minimalist athletic elegance meets raw performance. Tailored with a clean crew collar, contrast black edge binding around the neckline and deep armholes, and subtle Safety Line monogram on the upper chest. Pairs seamlessly with compression shorts or high-rise tights.',
     material: '92% Combed Athletic Cotton, 8% Lycra Soft-Flex',
     sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Contrast black reinforced rib-knit edge binding',
       'Soft-brushed combed cotton hand with dynamic 4-way stretch',
@@ -237,7 +237,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'The quintessential bodybuilding training stringer. Features razor-thin shoulder straps, low scoop neck, and deep open sides that allow full back lat activation and muscle feedback during heavy bench, row, and deadlift workouts.',
     material: '95% Ringspun Combed Cotton, 5% Spandex Elastomeric Blend',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Deep cut ultra-thin Y-back racerback strap profile',
       'Maximized side lat ventilation and zero shoulder restriction',
@@ -264,7 +264,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Infusing streetwear energy with athletic functionality, this relaxed white gym tank is cut from heavy-gauge breathable combed cotton. Boasts an expressive distressed red graphic, relaxed shoulder drop, and reinforced crew collar for daily workouts or urban casual wear.',
     material: '100% Heavy-Gauge Pre-Washed Combed Cotton',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Distressed crimson screen-printed graphic art',
       'Heavyweight 220 GSM breathable cotton jersey',
@@ -291,7 +291,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Evoking timeless elegance, the Aurelia Stockings represent the pinnacle of luxury legwear. Spun from long-fiber Grade-A mulberry silk, they lay weightlessly on the skin, presenting a subtle pearlescent sheen. Hand-trimmed French lace thigh cuffs are lined with skin-safe silicone to stay perfectly in place without compression or slippage.',
     material: '85% Pure Grade-6A Mulberry Silk, 15% Premium Lycra',
     sizes: ['S', 'M', 'L'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Grade 6A raw Mulberry Silk filament yarn',
       'Hand-woven French Calais lace thigh-high cuffs',
@@ -322,7 +322,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Crafted using a high-gauge blend of long-staple Mongolian cashmere and fine merino wool, the Cashmere Blend Lounge Socks provide ultimate comfort and temperature control. A non-binding soft ribbed ankle band holds without pressure, creating an ideal companion for luxury indoor relaxation and cold winter evenings.',
     material: '70% Mongolian Cashmere, 20% Fine Merino Wool, 10% Stretch Elastic',
     sizes: ['One Size (Fits 36-44)'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Plush, heavy-gauge knitted cashmere stitch',
       'Non-binding relaxed-elastic ribbing',
@@ -353,7 +353,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Crafted with double-wrapped Lycra microfibers, the Sovereign Tights deliver a flawless, high-definition cosmetic leg appearance. Designed with a soft, anatomically sculpted control waistband that gently shapes without restricting breathing, they are highly run-resistant and velvety soft to the touch.',
     material: '84% Micro-Polyamide, 16% Lycra Satin-Skin',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Resilient double-wrapped run-resistant microfiber',
       'Anatomically sculpted control comfort top',
@@ -383,7 +383,7 @@ export const hosieryProducts: Product[] = [
     longDescription: 'The Integra Ribbed Socks are the perfect blend of classical business aesthetics and incredible softness. Woven from Egyptian Giza cotton on traditional Italian high-cylinder knitting machines, they provide breathable daily thermal regulation, a beautiful vertical drape, and exceptional longevity.',
     material: '92% Giza Combed Cotton, 6% Polyamide, 2% Lycra Core',
     sizes: ['38-41', '42-45', '46-48'],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Premium extra-long staple Giza cotton',
       'Classic 5x1 flat-rib stretch pattern',

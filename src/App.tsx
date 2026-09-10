@@ -8,26 +8,20 @@ import ContactUs from './components/ContactUs';
 import { usePath, navigate } from './lib/router';
 import { Product, Settings } from './types';
 import { products as defaultProducts, settings as defaultSettings } from './data';
-import { Award, ArrowRight, Code2 } from 'lucide-react';
-import CodeViewerModal from './components/CodeViewerModal';
+import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v4';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v7';
 
 export default function App() {
   const currentPath = usePath();
-  const [isCodeViewerOpen, setIsCodeViewerOpen] = useState(false);
-
-  // Global listener to open code viewer from anywhere in the app
-  useEffect(() => {
-    const handleOpenCode = () => setIsCodeViewerOpen(true);
-    window.addEventListener('open-code-viewer', handleOpenCode);
-    return () => window.removeEventListener('open-code-viewer', handleOpenCode);
-  }, []);
 
   // Primary data initialized with local storage persistence fallback
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v6');
+      localStorage.removeItem('safetyline_catalogue_v5');
+      localStorage.removeItem('safetyline_catalogue_v4');
       localStorage.removeItem('safetyline_catalogue_v3');
       localStorage.removeItem('safetyline_catalogue_v2');
       localStorage.removeItem('safetyline_catalogue_v1');
@@ -209,26 +203,6 @@ export default function App() {
       <main className="flex-grow">
         {renderView()}
       </main>
-
-      {/* Floating In-Preview Code Inspector Trigger */}
-      <button
-        id="toggle-code-preview-button"
-        type="button"
-        onClick={() => setIsCodeViewerOpen(true)}
-        title="View Code in Preview"
-        className="fixed bottom-5 right-5 z-40 bg-[#0B3D3B] hover:bg-[#072725] text-white border border-[#D9F0EC]/30 px-3.5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 text-xs font-mono font-bold tracking-wide transition-all transform hover:scale-105 active:scale-95 cursor-pointer group"
-      >
-        <Code2 className="w-4 h-4 text-[#FF5A36] group-hover:rotate-12 transition-transform" />
-        <span className="hidden sm:inline">Show Code in Preview</span>
-        <span className="sm:hidden">Code</span>
-      </button>
-
-      {/* In-Preview Code Inspector Modal */}
-      <CodeViewerModal
-        isOpen={isCodeViewerOpen}
-        onClose={() => setIsCodeViewerOpen(false)}
-        initialFilePath="src/App.tsx"
-      />
     </div>
   );
 }

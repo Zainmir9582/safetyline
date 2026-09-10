@@ -5,14 +5,29 @@ import crypto from 'crypto';
 import type { Category, Product, Settings, CustomerReview, ProductFeedback } from './src/types';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const DB_PATH = path.join(process.cwd(), 'db.json');
 const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
 const JWT_SECRET = process.env.JWT_SECRET || 'vanguard-luxury-secret-key-987';
 
-// Ensure uploads folder exists
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+// Disable X-Powered-By to prevent technology fingerprinting
+app.disable('x-powered-by');
+
+// Security headers middleware
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
+// Ensure uploads folder exists safely
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (err) {
+  console.warn('Could not create uploads directory (may be read-only filesystem):', err);
 }
 
 // Custom Database structure
@@ -74,35 +89,47 @@ const fallbackSettings: Settings = {
   googleMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108035.79541575235!2d74.46468725820311!3d32.49454159999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391ee017fa7259c7%3A0xb355152a514d7a8d!2sSialkot%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus'
 };
 
+// In-memory fallback if file persistence is restricted
+let inMemoryDB: DBStructure | null = null;
+
 // Initialize Database
 function getDB(): DBStructure {
-  if (!fs.existsSync(DB_PATH)) {
-    // admin credentials: admin@showcase.com / admin123
-    const initialDB: DBStructure = {
-      categories: fallbackCategories,
-      products: [],
-      settings: fallbackSettings,
-      users: [
-        {
-          email: 'admin@showcase.com',
-          passwordHash: sha256('admin123'),
-        }
-      ],
-      reviews: [],
-      feedbacks: []
-    };
-    fs.writeFileSync(DB_PATH, JSON.stringify(initialDB, null, 2), 'utf8');
-    return initialDB;
-  }
+  if (inMemoryDB) return inMemoryDB;
+
   try {
+    if (!fs.existsSync(DB_PATH)) {
+      // admin credentials: admin@showcase.com / admin123
+      const initialDB: DBStructure = {
+        categories: fallbackCategories,
+        products: [],
+        settings: fallbackSettings,
+        users: [
+          {
+            email: 'admin@showcase.com',
+            passwordHash: sha256('admin123'),
+          }
+        ],
+        reviews: [],
+        feedbacks: []
+      };
+      try {
+        fs.writeFileSync(DB_PATH, JSON.stringify(initialDB, null, 2), 'utf8');
+      } catch (writeErr) {
+        console.warn('Could not write initial db.json to disk, using in-memory store:', writeErr);
+      }
+      inMemoryDB = initialDB;
+      return initialDB;
+    }
+
     const content = fs.readFileSync(DB_PATH, 'utf8');
     const db = JSON.parse(content);
     if (!db.reviews) db.reviews = [];
     if (!db.feedbacks) db.feedbacks = [];
-    return db as DBStructure;
+    inMemoryDB = db as DBStructure;
+    return inMemoryDB;
   } catch (e) {
-    // Fallback if file corrupted
-    const initialDB: DBStructure = {
+    // Fallback if file corrupted or inaccessible
+    const fallbackDB: DBStructure = {
       categories: fallbackCategories,
       products: [],
       settings: fallbackSettings,
@@ -115,13 +142,18 @@ function getDB(): DBStructure {
       reviews: [],
       feedbacks: []
     };
-    fs.writeFileSync(DB_PATH, JSON.stringify(initialDB, null, 2), 'utf8');
-    return initialDB;
+    inMemoryDB = fallbackDB;
+    return fallbackDB;
   }
 }
 
 function saveDB(db: DBStructure) {
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+  inMemoryDB = db;
+  try {
+    fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+  } catch (err) {
+    console.warn('Could not persist db.json to filesystem (using memory store):', err);
+  }
 }
 
 // Body parsers with larger size limits to allow Base64 image uploads smoothly
@@ -523,115 +555,6 @@ app.delete('/api/feedbacks/:id', authenticateAdmin, (req, res) => {
 });
 
 // ==========================================
-// CODE INSPECTOR API (Allow previewing source code)
-// ==========================================
-
-const ALLOWED_EXTS = ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.html', '.md'];
-const FORBIDDEN_PATHS = ['node_modules', '.git', 'dist', '.env'];
-
-app.get('/api/code/tree', (req, res) => {
-  const allowedRoots = ['src', 'public'];
-  const rootFiles = ['package.json', 'server.ts', 'vite.config.ts', 'tsconfig.json', 'index.html', 'metadata.json'];
-
-  const results: Array<{ path: string; name: string; category: string; size: number }> = [];
-
-  // Add root files
-  for (const rf of rootFiles) {
-    const fullPath = path.join(process.cwd(), rf);
-    if (fs.existsSync(fullPath)) {
-      const stat = fs.statSync(fullPath);
-      results.push({
-        path: rf,
-        name: rf,
-        category: 'Config & Server',
-        size: stat.size,
-      });
-    }
-  }
-
-  // Helper to walk dir
-  function walkDir(currentDir: string, category: string) {
-    if (!fs.existsSync(currentDir)) return;
-    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
-    for (const entry of entries) {
-      const relPath = path.relative(process.cwd(), path.join(currentDir, entry.name));
-      if (FORBIDDEN_PATHS.some(f => relPath.includes(f))) continue;
-
-      if (entry.isDirectory()) {
-        const subCategory = relPath.startsWith('src/components') ? 'Components'
-          : relPath.startsWith('src/data') ? 'Data & Models'
-          : relPath.startsWith('src/lib') ? 'Utilities'
-          : category;
-        walkDir(path.join(currentDir, entry.name), subCategory);
-      } else {
-        const ext = path.extname(entry.name).toLowerCase();
-        if (ALLOWED_EXTS.includes(ext)) {
-          const stat = fs.statSync(path.join(currentDir, entry.name));
-          results.push({
-            path: relPath,
-            name: entry.name,
-            category,
-            size: stat.size,
-          });
-        }
-      }
-    }
-  }
-
-  for (const root of allowedRoots) {
-    const fullRoot = path.join(process.cwd(), root);
-    const cat = root === 'src' ? 'Application Code' : 'Public Assets';
-    walkDir(fullRoot, cat);
-  }
-
-  res.json(results);
-});
-
-app.get('/api/code/file', (req, res) => {
-  const reqPath = String(req.query.path || '').trim();
-  if (!reqPath) {
-    return res.status(400).json({ error: 'File path query parameter is required' });
-  }
-
-  // Security checks
-  const normalized = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
-  if (normalized.includes('..') || FORBIDDEN_PATHS.some(f => normalized.includes(f))) {
-    return res.status(403).json({ error: 'Access to this file path is forbidden' });
-  }
-
-  const ext = path.extname(normalized).toLowerCase();
-  if (!ALLOWED_EXTS.includes(ext)) {
-    return res.status(400).json({ error: 'File type not permitted for inspection' });
-  }
-
-  const fullPath = path.join(process.cwd(), normalized);
-  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile()) {
-    return res.status(404).json({ error: 'File not found' });
-  }
-
-  try {
-    const content = fs.readFileSync(fullPath, 'utf-8');
-    const lang = ext === '.tsx' || ext === '.ts' ? 'typescript'
-      : ext === '.json' ? 'json'
-      : ext === '.css' ? 'css'
-      : ext === '.html' ? 'html'
-      : ext === '.md' ? 'markdown'
-      : 'javascript';
-
-    res.json({
-      path: normalized,
-      name: path.basename(normalized),
-      language: lang,
-      size: content.length,
-      lineCount: content.split('\n').length,
-      content,
-    });
-  } catch (err: any) {
-    res.status(500).json({ error: 'Failed to read file: ' + err.message });
-  }
-});
-
-// ==========================================
 // VITE OR STATIC FILE SERVING
 // ==========================================
 
@@ -640,22 +563,44 @@ async function startServer() {
   const isProduction = process.env.NODE_ENV === 'production';
 
   if (!isProduction) {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true, hmr: false },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
+    try {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: { middlewareMode: true, hmr: false },
+        appType: 'spa',
+      });
+      app.use(vite.middlewares);
+    } catch (err) {
+      console.warn('Vite middleware could not be loaded, using static build:', err);
+      app.use(express.static(distPath));
+      app.get('*', (req, res) => {
+        const indexPath = path.join(distPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+          res.sendFile(indexPath);
+        } else {
+          res.status(200).send('<!DOCTYPE html><html><head><title>Safety Line</title></head><body><div id="root"></div></body></html>');
+        }
+      });
+    }
   } else {
     app.use(express.static(distPath));
     // Support single-page routing
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      const indexPath = path.join(distPath, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.status(200).send('<!DOCTYPE html><html><head><title>Safety Line</title></head><body><div id="root"></div></body></html>');
+      }
     });
   }
 
   const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server successfully started on http://0.0.0.0:${PORT}`);
+  });
+
+  server.on('error', (err: any) => {
+    console.error('Server error encountered:', err);
   });
 
   process.on('SIGTERM', () => {

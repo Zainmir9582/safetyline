@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ChevronLeft, ChevronRight, CornerDownLeft, ShieldCheck, HelpCircle, PhoneCall, 
-  AlertTriangle, MessageSquare, ZoomIn, Star, Loader2, MessageCircle, 
-  ArrowRight, CheckCircle2 
+  AlertTriangle, MessageSquare, ZoomIn, ZoomOut, Maximize2, Minimize2, Move, RotateCcw, 
+  X, Star, Loader2, MessageCircle, ArrowRight, CheckCircle2, Sparkles, Scan
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
@@ -28,12 +28,20 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
       .slice(0, 4);
   }, [product, products]);
 
-  // Gallery slider indexes
+  // Gallery slider & Advanced Pan-Zoom states
   const [activeIndex, setActiveIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [zoomScale, setZoomScale] = useState<number>(2.5);
+  const [zoomPos, setZoomPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const [isFullscreenZoom, setIsFullscreenZoom] = useState(false);
+  const [fullscreenScale, setFullscreenScale] = useState<number>(2.8);
+  const [fullscreenZoomPos, setFullscreenZoomPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
+  const [isFullscreenHovering, setIsFullscreenHovering] = useState(false);
+  const stageRef = useRef<HTMLDivElement>(null);
 
   // Feedback states
   const [feedbacks, setFeedbacks] = useState<ProductFeedback[]>([
@@ -67,8 +75,63 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
       }
       setActiveIndex(0);
       setIsZoomed(false);
+      setZoomPos({ x: 50, y: 50 });
     }
   }, [product]);
+
+  // Handle ESC key to close fullscreen inspector
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullscreenZoom) {
+        setIsFullscreenZoom(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFullscreenZoom]);
+
+  // Cursor following calculations
+  const handleStageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      setZoomPos({ x, y });
+    }
+  };
+
+  const handleStageTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const rect = e.currentTarget.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        const x = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100));
+        setZoomPos({ x, y });
+      }
+    }
+  };
+
+  const handleFullscreenMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      setFullscreenZoomPos({ x, y });
+    }
+  };
+
+  const handleFullscreenTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const rect = e.currentTarget.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        const x = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100));
+        setFullscreenZoomPos({ x, y });
+      }
+    }
+  };
 
   // All gallery images
   const images = useMemo(() => {
@@ -185,7 +248,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   }
 
   const whatsappInquiryUrl = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    `Hello Safety Line Concierge, I am inquiring regarding ${product.name} (Product Code: ${product.productCode}). Please provide full yarn specifications, minimum order quantities, and sample shipment details.`
+    `Hello Safety Line Concierge, I am inquiring regarding ${product.name} (Product Code: ${product.productCode})${selectedColor ? ` in Color: ${selectedColor}` : ''}. Please provide full yarn specifications, minimum order quantities, and sample shipment details.`
   )}`;
 
   const isGearwear = product.categoryId === 'cat-gearwear';
@@ -285,64 +348,173 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
           
           {/* ==========================================
-              LEFT SIDE: GALLERY SLIDER WITH ZOOM
+              LEFT SIDE: GALLERY SLIDER WITH ADVANCED PAN-ZOOM
              ========================================== */}
           <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
-            {/* Main Stage Frame (Full Shape Product View) */}
-            <div 
-              className="relative w-full aspect-[4/5] sm:aspect-square bg-slate-50 rounded-2xl overflow-hidden shadow-xs group cursor-zoom-in border border-slate-200 flex items-center justify-center p-4 sm:p-6"
-              onMouseEnter={() => setIsAutoPlaying(false)}
-            >
-              {/* Main Image Layer in Full Shape */}
-              <img
-                src={images[activeIndex]}
-                alt={`${product.name} showcase view`}
-                className={`w-full h-full object-contain transition-transform duration-500 ease-out origin-center ${
-                  isZoomed ? 'scale-175' : 'group-hover:scale-105'
+            {/* Main Stage Frame with Cursor-Following Pan Zoom */}
+            <div className="space-y-3">
+              <div 
+                ref={stageRef}
+                className={`relative w-full aspect-[4/5] sm:aspect-square bg-slate-50 rounded-2xl overflow-hidden shadow-xs border border-slate-200 flex items-center justify-center p-2 sm:p-4 select-none ${
+                  isZoomed ? 'cursor-move' : 'cursor-crosshair'
                 }`}
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
+                onMouseEnter={() => {
+                  setIsAutoPlaying(false);
+                  setIsHovering(true);
+                }}
+                onMouseLeave={() => {
+                  setIsHovering(false);
+                  if (!isZoomed) {
+                    setZoomPos({ x: 50, y: 50 });
+                  }
+                }}
+                onMouseMove={handleStageMouseMove}
+                onTouchMove={handleStageTouchMove}
                 onClick={() => setIsZoomed(!isZoomed)}
-              />
+              >
+                {/* Main Image with Real-time Cursor Pan-Zoom */}
+                <img
+                  src={images[activeIndex]}
+                  alt={`${product.name} showcase view`}
+                  className="w-full h-full object-contain pointer-events-none will-change-transform"
+                  style={{
+                    transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+                    transform: isZoomed 
+                      ? `scale(${zoomScale})` 
+                      : isHovering 
+                        ? 'scale(1.45)' 
+                        : 'scale(1)',
+                    transition: (isHovering || isZoomed) 
+                      ? 'transform 0.15s ease-out, transform-origin 0.03s linear' 
+                      : 'transform 0.35s ease-out, transform-origin 0.3s ease-out',
+                  }}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
 
-              {/* Slider Next/Prev Arrows */}
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 text-[#0B3D3B] hover:bg-[#FF5A36] hover:text-white p-2 rounded-full shadow-md transition-colors z-10 cursor-pointer"
-                    aria-label="Previous Image"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 text-[#0B3D3B] hover:bg-[#FF5A36] hover:text-white p-2 rounded-full shadow-md transition-colors z-10 cursor-pointer"
-                    aria-label="Next Image"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                </>
-              )}
+                {/* Slider Next/Prev Arrows */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 text-[#0B3D3B] hover:bg-[#FF5A36] hover:text-white p-2 rounded-full shadow-md transition-colors z-20 cursor-pointer"
+                      aria-label="Previous Image"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 text-[#0B3D3B] hover:bg-[#FF5A36] hover:text-white p-2 rounded-full shadow-md transition-colors z-20 cursor-pointer"
+                      aria-label="Next Image"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
 
-              {/* Category tag badge */}
-              <div className="absolute top-3 left-3 z-10">
-                <span className="bg-[#0B3D3B] text-white text-[10px] font-mono tracking-wider uppercase px-3 py-1 rounded-md shadow-xs font-bold">
-                  {product.categoryName}
-                </span>
+                {/* Category tag badge */}
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="bg-[#0B3D3B] text-white text-[10px] font-mono tracking-wider uppercase px-3 py-1 rounded-md shadow-xs font-bold">
+                    {product.categoryName}
+                  </span>
+                </div>
+
+                {/* Fullscreen Inspect Button */}
+                <div className="absolute top-3 right-3 z-20">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsFullscreenZoom(true);
+                    }}
+                    title="Open Fullscreen Macro Inspector"
+                    className="bg-white/90 hover:bg-[#0B3D3B] hover:text-white text-slate-700 p-2 rounded-lg shadow-sm border border-slate-200 transition-colors flex items-center space-x-1 text-xs font-mono cursor-pointer"
+                  >
+                    <Maximize2 className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Cursor Tracking Lens HUD */}
+                {(isHovering || isZoomed) && (
+                  <div className="absolute bottom-3 left-3 bg-neutral-900/85 backdrop-blur-xs text-white px-2.5 py-1 rounded-lg text-[10px] font-mono tracking-wider z-20 flex items-center space-x-1.5 shadow-sm">
+                    <Scan className="w-3.5 h-3.5 text-[#FF5A36] animate-pulse" />
+                    <span>Focus: {Math.round(zoomPos.x)}%, {Math.round(zoomPos.y)}% ({isZoomed ? `${zoomScale}x Lock` : '1.45x Follow'})</span>
+                  </div>
+                )}
+
+                {/* Zoom status hint */}
+                <div className="absolute bottom-3 right-3 bg-black/75 backdrop-blur-xs text-white flex items-center space-x-1.5 px-3 py-1 rounded-md text-[10px] font-mono tracking-wider z-20">
+                  {isZoomed ? (
+                    <>
+                      <Move className="w-3.5 h-3.5 text-[#FF5A36]" />
+                      <span>Pan to Move (Click to Reset)</span>
+                    </>
+                  ) : (
+                    <>
+                      <ZoomIn className="w-3.5 h-3.5 text-[#D9F0EC]" />
+                      <span>Hover / Click to Zoom</span>
+                    </>
+                  )}
+                </div>
               </div>
 
-              {/* Zoom hint */}
-              <div className="absolute bottom-3 right-3 bg-black/75 backdrop-blur-xs text-white flex items-center space-x-1.5 px-3 py-1 rounded-md text-[10px] font-mono tracking-wider">
-                <ZoomIn className="w-3.5 h-3.5 text-[#D9F0EC]" />
-                <span>Click to Zoom</span>
+              {/* Advanced Zoom Controls Toolbar */}
+              <div className="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-100/75 rounded-xl border border-slate-200 text-xs font-mono">
+                <div className="flex items-center space-x-1.5">
+                  <span className="text-slate-500 font-bold uppercase text-[10px] tracking-wider flex items-center space-x-1">
+                    <Sparkles className="w-3 h-3 text-[#FF5A36]" />
+                    <span>Zoom Level:</span>
+                  </span>
+                  {[1.75, 2.5, 3.5].map((lvl) => (
+                    <button
+                      key={lvl}
+                      onClick={() => {
+                        setZoomScale(lvl);
+                        setIsZoomed(true);
+                      }}
+                      className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
+                        zoomScale === lvl && isZoomed
+                          ? 'bg-[#0B3D3B] text-white shadow-2xs'
+                          : 'bg-white text-slate-700 hover:bg-slate-200 border border-slate-300/60'
+                      }`}
+                    >
+                      {lvl}x
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => {
+                      setIsZoomed(!isZoomed);
+                      if (isZoomed) {
+                        setZoomPos({ x: 50, y: 50 });
+                      }
+                    }}
+                    className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors cursor-pointer flex items-center space-x-1 ${
+                      isZoomed 
+                        ? 'bg-[#FF5A36] text-white shadow-2xs' 
+                        : 'bg-white text-[#0B3D3B] border border-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    {isZoomed ? <ZoomOut className="w-3 h-3" /> : <ZoomIn className="w-3 h-3" />}
+                    <span>{isZoomed ? 'Exit Zoom' : 'Lock Zoom'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => setIsFullscreenZoom(true)}
+                    className="px-2.5 py-1 rounded text-[11px] font-bold bg-[#0B3D3B] text-white hover:bg-[#082C2A] transition-colors cursor-pointer flex items-center space-x-1 shadow-2xs"
+                  >
+                    <Maximize2 className="w-3 h-3" />
+                    <span>Full Screen</span>
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Thumbnail Navigation Strip */}
             {images.length > 1 && (
-              <div className="grid grid-cols-5 gap-2.5">
+              <div className="grid grid-cols-5 gap-2.5 pt-1">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
@@ -461,6 +633,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                       const lower = c.toLowerCase();
                       let dotColor = 'bg-[#FF5A36]';
                       if (lower.includes('yellow')) dotColor = 'bg-amber-400 border border-amber-500/40';
+                      else if (lower.includes('white')) dotColor = 'bg-white border border-slate-300 shadow-2xs';
                       else if (lower.includes('black')) dotColor = 'bg-neutral-950 border border-neutral-700';
                       else if (lower.includes('red')) dotColor = 'bg-red-600 border border-red-700/40';
                       else if (lower.includes('blue')) dotColor = 'bg-blue-600 border border-blue-700/40';
@@ -811,6 +984,170 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
           </div>
         </div>
       </footer>
+
+      {/* ==========================================
+          FULLSCREEN MACRO INSPECTOR MODAL
+         ========================================== */}
+      {isFullscreenZoom && (
+        <div 
+          className="fixed inset-0 z-50 bg-neutral-950/95 backdrop-blur-md flex flex-col select-none animate-in fade-in duration-200"
+          onClick={() => setIsFullscreenZoom(false)}
+        >
+          {/* Top Control Bar */}
+          <div 
+            className="flex items-center justify-between px-6 py-4 border-b border-neutral-800 bg-neutral-900/90 text-white z-30"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center space-x-3">
+              <span className="text-[#FF5A36] font-mono font-bold text-xs uppercase tracking-wider">
+                {product.productCode}
+              </span>
+              <span className="text-neutral-500">|</span>
+              <h3 className="text-sm font-bold font-display text-white truncate max-w-sm sm:max-w-md">
+                {product.name}
+              </h3>
+              <span className="bg-neutral-800 text-neutral-300 text-[10px] font-mono px-2 py-0.5 rounded">
+                {activeIndex + 1} / {images.length}
+              </span>
+            </div>
+
+            {/* Scale Controls & Info */}
+            <div className="flex items-center space-x-3">
+              <div className="hidden md:flex items-center space-x-2 bg-neutral-800 px-3 py-1 rounded-lg text-xs font-mono text-neutral-300">
+                <Scan className="w-3.5 h-3.5 text-[#FF5A36] animate-pulse" />
+                <span>Pan: {Math.round(fullscreenZoomPos.x)}%, {Math.round(fullscreenZoomPos.y)}%</span>
+              </div>
+
+              {/* Scale presets */}
+              <div className="flex items-center space-x-1 bg-neutral-800 p-1 rounded-lg">
+                {[1.5, 2.5, 3.5, 5.0].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setFullscreenScale(s)}
+                    className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-all cursor-pointer ${
+                      fullscreenScale === s
+                        ? 'bg-[#FF5A36] text-white'
+                        : 'text-neutral-400 hover:text-white hover:bg-neutral-700'
+                    }`}
+                  >
+                    {s}x
+                  </button>
+                ))}
+              </div>
+
+              {/* Zoom Step Buttons */}
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={() => setFullscreenScale(prev => Math.max(1.2, prev - 0.5))}
+                  title="Zoom Out"
+                  className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors cursor-pointer"
+                >
+                  <ZoomOut className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setFullscreenScale(prev => Math.min(6.0, prev + 0.5))}
+                  title="Zoom In"
+                  className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors cursor-pointer"
+                >
+                  <ZoomIn className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => {
+                    setFullscreenScale(2.5);
+                    setFullscreenZoomPos({ x: 50, y: 50 });
+                  }}
+                  title="Reset Coordinates"
+                  className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors cursor-pointer"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Close Button */}
+              <button
+                onClick={() => setIsFullscreenZoom(false)}
+                title="Close Inspector (ESC)"
+                className="p-1.5 rounded-lg bg-[#FF5A36] hover:bg-[#E04826] text-white transition-colors cursor-pointer ml-2"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Interactive Inspection Canvas Area */}
+          <div 
+            className="flex-1 relative overflow-hidden flex items-center justify-center p-6 cursor-crosshair"
+            onClick={(e) => e.stopPropagation()}
+            onMouseMove={handleFullscreenMouseMove}
+            onTouchMove={handleFullscreenTouchMove}
+            onMouseEnter={() => setIsFullscreenHovering(true)}
+            onMouseLeave={() => setIsFullscreenHovering(false)}
+          >
+            <img
+              src={images[activeIndex]}
+              alt={`${product.name} Fullscreen Inspection`}
+              className="max-w-full max-h-full object-contain pointer-events-none will-change-transform drop-shadow-2xl"
+              style={{
+                transformOrigin: `${fullscreenZoomPos.x}% ${fullscreenZoomPos.y}%`,
+                transform: `scale(${fullscreenScale})`,
+                transition: 'transform 0.15s ease-out, transform-origin 0.03s linear',
+              }}
+            />
+
+            {/* Previous/Next Image Navigation Arrows */}
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 bg-neutral-900/80 hover:bg-[#FF5A36] text-white p-3 rounded-full backdrop-blur-md shadow-xl transition-all cursor-pointer z-30"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                  className="absolute right-6 top-1/2 -translate-y-1/2 bg-neutral-900/80 hover:bg-[#FF5A36] text-white p-3 rounded-full backdrop-blur-md shadow-xl transition-all cursor-pointer z-30"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </>
+            )}
+
+            {/* Instruction Floating Pill */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-neutral-900/85 backdrop-blur-md text-neutral-300 border border-neutral-800 px-4 py-1.5 rounded-full text-xs font-mono flex items-center space-x-2 pointer-events-none shadow-lg z-30">
+              <Move className="w-3.5 h-3.5 text-[#FF5A36] animate-pulse" />
+              <span>Move cursor anywhere to inspect high-definition fabric & seams • ESC to close</span>
+            </div>
+          </div>
+
+          {/* Bottom Thumbnails Strip */}
+          {images.length > 1 && (
+            <div 
+              className="px-6 py-3 border-t border-neutral-800 bg-neutral-900/80 flex items-center justify-center space-x-3 z-30 overflow-x-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
+                  className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all cursor-pointer bg-neutral-800 p-1 flex items-center justify-center shrink-0 ${
+                    idx === activeIndex
+                      ? 'border-[#FF5A36] ring-2 ring-[#FF5A36]/40 scale-105'
+                      : 'border-neutral-700 opacity-60 hover:opacity-100 hover:border-neutral-500'
+                  }`}
+                >
+                  <img 
+                    src={img} 
+                    alt="Thumbnail" 
+                    className="w-full h-full object-contain" 
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

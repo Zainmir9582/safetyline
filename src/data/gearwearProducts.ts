@@ -15,7 +15,7 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Engineered for high-intensity athletic performance, the Apex Pro Aero Compression Tee utilizes an ultra-dense polyamide composite that stabilizes micro-muscle groups while maximizing heat dissipation. Advanced flatlock structural stitching eliminates friction completely, and 4-way elastic memory maintains its exact ergonomic shape session after session.',
     material: '82% Aero-Polyamide, 18% Elastane Composite',
     sizes: [],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Target-zoned moisture-wicking capillary channels',
       'Anti-microbial silver-ion thread technology',
@@ -42,7 +42,7 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Designed to combat unpredictable weather, the Zenith Stormshell features a triple-layer hydrophobic membrane that repels high-pressure rain while maintaining an incredibly high breathability rating. Includes fully taped inner seams, responsive adjustable cuffs, and dedicated concealed media compartments.',
     material: '100% Recycled Hydrophobic Polyester Ribbon',
     sizes: [],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       '15,000mm hydrostatic head waterproof rating',
       'Underarm dual-zipper thermal regulators',
@@ -69,7 +69,7 @@ export const gearwearProducts: Product[] = [
     longDescription: 'The Chronos Thermal Leggings provide optimal cold-weather performance. Featuring an insulating micro-brushed lining, these compression tights support blood flow, improve recovery times, and shield your muscles from sudden temperature drops during outdoor runs or sub-zero sessions.',
     material: '78% Thermal Polyamide, 22% Lycra Extra Life',
     sizes: [],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Micro-brushed internal thermal fleece lining',
       'High-waisted compression lumbar stabilizer',
@@ -96,7 +96,7 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Constructed using a proprietary zero-friction circular knit technique, the Stratum Shorts prevent chafing completely. With an integrated inner supportive liner and multi-directional knit ventilation, they deliver extreme comfort during the most challenging squat and sprint sessions.',
     material: '90% Nylon, 10% Spandex Core',
     sizes: [],
-    colors: ['Yellow', 'Black', 'Red', 'Blue', 'Light Brown'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Advanced 3D seamless structural design',
       'Integrated sweat-absorbent athletic brief liner',

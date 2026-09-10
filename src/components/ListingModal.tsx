@@ -77,7 +77,7 @@ export default function ListingModal({
       setShortDescription('');
       setLongDescription('');
       setSizes(['XS', 'S', 'M', 'L', 'XL']);
-      setColors(['Black', 'Charcoal Grey', 'White']);
+      setColors(['Yellow', 'Red', 'Blue', 'Light Brown', 'White']);
       setFeatures([
         'Breathable circular knit with anti-friction Flatlock seams',
         'Hydrophobic moisture-wicking and thermal regulation',

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight, Code2 } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { navigate, usePath } from '../lib/router';
 import brandLogo from '../assets/images/safetyline_landing.png';
 
@@ -90,17 +90,6 @@ export default function Navbar() {
           {/* Right Action Menu */}
           <div className="hidden md:flex items-center space-x-3">
             <button
-              id="nav-view-code-btn"
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent('open-code-viewer'))}
-              title="Inspect Project Source Code in Preview"
-              className="border border-[#D9F0EC]/30 hover:border-white text-[#D9F0EC] hover:text-white px-3 py-2 rounded-lg text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer inline-flex items-center gap-1.5"
-            >
-              <Code2 className="w-3.5 h-3.5 text-[#FF5A36]" />
-              <span>Code</span>
-            </button>
-
-            <button
               id="nav-inquire-cta"
               onClick={() => handleNav('/contact')}
               className="bg-[#FF5A36] hover:bg-[#e44e2b] active:scale-95 text-white px-5 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-md shadow-[#FF5A36]/25 cursor-pointer inline-flex items-center gap-1.5 group"
@@ -112,16 +101,6 @@ export default function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <div className="flex md:hidden items-center space-x-2">
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent('open-code-viewer'))}
-              className="text-[#D9F0EC] border border-[#D9F0EC]/30 p-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1 cursor-pointer"
-              title="Inspect Code"
-            >
-              <Code2 className="w-4 h-4 text-[#FF5A36]" />
-              <span>Code</span>
-            </button>
-
             <button
               id="mobile-menu-toggle"
               onClick={() => setIsOpen(!isOpen)}
@@ -151,18 +130,6 @@ export default function Navbar() {
             </button>
           ))}
           <div className="border-t border-white/10 pt-4 mt-2 space-y-2">
-            <button
-              type="button"
-              onClick={() => {
-                setIsOpen(false);
-                window.dispatchEvent(new CustomEvent('open-code-viewer'));
-              }}
-              className="w-full text-center border border-white/30 text-[#D9F0EC] py-2.5 rounded-lg text-xs font-mono font-bold tracking-wider uppercase hover:bg-white/10 cursor-pointer inline-flex items-center justify-center gap-2"
-            >
-              <Code2 className="w-4 h-4 text-[#FF5A36]" />
-              <span>Inspect Source Code in Preview</span>
-            </button>
-
             <button
               onClick={() => handleNav('/contact')}
               className="w-full text-center bg-[#FF5A36] text-white py-3 rounded-lg text-xs font-bold tracking-wider uppercase hover:bg-[#e44e2b] cursor-pointer shadow-md inline-flex items-center justify-center gap-2"
