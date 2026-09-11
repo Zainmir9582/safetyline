@@ -133,7 +133,7 @@ export default function ProductList({ categorySlug, products, categories }: Prod
             </div>
 
             {/* Size Dropdown - Hidden for gearwear */}
-            {currentCategory?.slug !== 'gearwear' && (
+            {currentCategory !== 'gearwear' && (
               <select
                 id="filter-size-select"
                 value={selectedSize}

@@ -6,6 +6,7 @@ import { testimonials as defaultTestimonials } from '../data';
 import { articles } from '../data/articles';
 import SEO from './SEO';
 import factoryImg from '../assets/images/safetyline_exact_user_pic_1788337630939.jpg';
+import gearwearHeroImg from '../assets/images/D1211178.jpg';
 
 interface HomeProps {
   products: Product[];
@@ -13,9 +14,11 @@ interface HomeProps {
 }
 
 export default function Home({ products, settings }: HomeProps) {
-  const latestProducts = products
+  // Show 8 top/recent products with newly added products featured prominently
+  const latestProducts = [...products]
     .filter(p => p.status === 'Active')
-    .slice(0, 4);
+    .reverse()
+    .slice(0, 8);
 
   const featuredArticles = articles.slice(0, 3);
 
@@ -172,7 +175,7 @@ export default function Home({ products, settings }: HomeProps) {
               >
                 <div className="absolute inset-0 z-0">
                   <img 
-                    src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=700"
+                    src={gearwearHeroImg}
                     alt="Gearwear Athletic Line"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108 opacity-80 group-hover:opacity-95"
                     loading="eager"

@@ -104,7 +104,7 @@ export default function CategoryHub({
         const nameDesc = (p.name + ' ' + p.shortDescription + ' ' + p.material).toLowerCase();
         if (isGearwear) {
           if (selectedSubcat === 'Jackets & Outerwear') matchSubcat = nameDesc.includes('jacket') || nameDesc.includes('puffer') || nameDesc.includes('parka') || nameDesc.includes('storm') || nameDesc.includes('shell') || nameDesc.includes('pullover');
-          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('tee') || nameDesc.includes('crew') || nameDesc.includes('pullover') || nameDesc.includes('compression') || nameDesc.includes('aero');
+          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('tee') || nameDesc.includes('crew') || nameDesc.includes('pullover') || nameDesc.includes('compression') || nameDesc.includes('aero') || nameDesc.includes('top') || nameDesc.includes('activewear') || nameDesc.includes('sportswear') || nameDesc.includes('apparel') || nameDesc.includes('training') || nameDesc.includes('wear');
           if (selectedSubcat === 'Tanks & Stringers') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('stringer') || nameDesc.includes('sleeveless') || nameDesc.includes('bra');
           if (selectedSubcat === 'Bottoms & Shorts') matchSubcat = nameDesc.includes('short') || nameDesc.includes('legging') || nameDesc.includes('tights') || nameDesc.includes('set');
         } else {
