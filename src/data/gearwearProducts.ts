@@ -1,14 +1,7 @@
 import { Product } from '../types';
-import womenSportsSetImg from '../assets/images/women_sports_set_1788984867763.jpg';
-import greenPufferJacketImg from '../assets/images/green_puffer_jacket_1788984892378.jpg';
-import whiteLongSleeveImg from '../assets/images/white_long_sleeve_1788984915227.jpg';
-import greyHalfzipShirtImg from '../assets/images/grey_halfzip_shirt_1788984931150.jpg';
-import mauveZipJacketImg from '../assets/images/mauve_zip_jacket_1788984951352.jpg';
 import alpineSkiJacketImg from '../assets/images/alpine_ski_jacket_1788984968075.jpg';
-import terracottaRunTankImg from '../assets/images/terracotta_run_tank_1788984988331.jpg';
 import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
 import blackGymStringerImg from '../assets/images/black_gym_stringer_1788985021668.jpg';
-import whiteGraphicTankImg from '../assets/images/white_graphic_tank_1788985040768.jpg';
 
 import d1211178Img from '../assets/images/D1211178.jpg';
 import d1211186Img from '../assets/images/D1211186.jpg';
@@ -30,141 +23,6 @@ import prod4Img from '../assets/images/regenerated_image_1788784447014.jpg';
 
 export const gearwearProducts: Product[] = [
   {
-    id: 'prod-gw-afx-01',
-    name: 'AeroFlex Compression Bra & Leggings Set',
-    slug: 'aeroflex-compression-bra-and-leggings-set',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'High-density 4-way stretch compression sports bra paired with high-waisted targeted-support ankle leggings.',
-    longDescription: 'Engineered for aerodynamic studio training, athletic gym conditioning, and high-impact cardio. Features an elasticized wide underband for bounce control and high-rise sculpting waistband with zero-dig soft compression. Emblazoned with authentic white Safety Line emblem branding.',
-    material: '78% Recycled Poly-Spandex Microfiber, 22% High-Tension Lycra',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Targeted core & glute compression support',
-      'Sweat-wicking micro-porous capillary weave',
-      'Chafe-free ergonomic flatlock seam construction',
-      'Anti-roll 3-inch high-tension compression waistband',
-      'Reflective Safety Line emblem branding'
-    ],
-    productCode: 'GW-AFX-01',
-    status: 'Active',
-    displayOrder: 1,
-    coverImage: womenSportsSetImg,
-    galleryImages: [womenSportsSetImg],
-    seoTitle: 'AeroFlex Compression Bra & Leggings Set | Safety Line Gearwear',
-    seoDescription: 'High-density 4-way stretch compression sports bra and high-waisted athletic performance leggings set with Safety Line emblem.',
-    createdAt: '2026-03-01T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-bor-02',
-    name: 'Boreal Alpine Quilted Down Puffer Parka',
-    slug: 'boreal-alpine-quilted-down-puffer-parka',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Heavyweight 700-fill thermal quilted puffer jacket with insulated draft hood and reinforced storm closure.',
-    longDescription: 'Designed for severe mountain climates and outdoor winter training. Constructed with deep horizontal down baffles, a wind-blocking snap storm placket over an airtight YKK dual-direction zipper, insulated chin guard, and signature red Safety Line chest embroidery.',
-    material: '100% Ripstop High-Density Nylon Shell, 90/10 RDS Goose Down Fill (700 Fill Power)',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      '700 Fill-Power responsibly sourced goose down',
-      'DWR (Durable Water Repellent) windproof nylon shell',
-      'Full-coverage insulated storm hood with dual cinch cords',
-      'Dual-entry fleece-lined zippered hand warmer pockets',
-      'Signature red Safety Line embroidered chest insignia'
-    ],
-    productCode: 'GW-BOR-02',
-    status: 'Active',
-    displayOrder: 2,
-    coverImage: greenPufferJacketImg,
-    galleryImages: [greenPufferJacketImg],
-    seoTitle: 'Boreal Alpine Quilted Down Puffer Parka | Heavyweight Winter Outerwear',
-    seoDescription: '700 fill-power thermal quilted goose down parka with insulated hood, storm placket, and red Safety Line crest.',
-    createdAt: '2026-03-01T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-str-03',
-    name: 'Strata Pro Long-Sleeve Performance Crew',
-    slug: 'strata-pro-long-sleeve-performance-crew',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Pristine white moisture-wicking long-sleeve athletic technical crew with split hem and anatomical sleeve draping.',
-    longDescription: 'Formulated with ultra-fine spun athletic poly-blend fibers for immediate perspiration expulsion during intensive training. Features ergonomic raglan shoulder seams for unrestricted overhead reach, reinforced split side hem for hip mobility, and the distinguished red & black Safety Line crest.',
-    material: '88% Micro-Mesh Polyester, 12% Spandex Ultra-Lite',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Rapid-dry hydrophilic vapor transport system',
-      'Ergonomic raglan sleeve articulation for zero shoulder pull',
-      'Split side-seam hem vents for increased mobility',
-      'UV 50+ solar radiation dermal barrier',
-      'Screen-printed Safety Line emblem chest crest'
-    ],
-    productCode: 'GW-STR-03',
-    status: 'Active',
-    displayOrder: 3,
-    coverImage: whiteLongSleeveImg,
-    galleryImages: [whiteLongSleeveImg],
-    seoTitle: 'Strata Pro Long-Sleeve Performance Crew | Athletic Training Shirt',
-    seoDescription: 'Pristine white moisture-wicking long-sleeve athletic performance crew with ergonomic split hem and Safety Line crest.',
-    createdAt: '2026-03-02T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-vec-04',
-    name: 'Vector Tech Quarter-Zip Hybrid Pullover',
-    slug: 'vector-tech-quarter-zip-hybrid-pullover',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Dual-tone heather grey quarter-zip running pullover with mock collar and micro-fleece thermal backing.',
-    longDescription: 'The Vector Quarter-Zip bridges high-cadence morning runs and cool-weather layering. Featuring contrasting heather texture on the sleeves, reverse-coil semi-locking zipper, low-profile chin garage, and embroidered Safety Line insignia on the left chest.',
-    material: '90% Technical Heather Polyester, 10% Elastane Brushed Knit',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Semi-auto lock 1/4 zipper with protective chin garage',
-      'Brushed thermal interior micro-fleece for gentle warmth',
-      'Contrast textured raglan sleeve paneling',
-      '4-way athletic stretch recovery matrix',
-      'Embroidered Safety Line performance crest'
-    ],
-    productCode: 'GW-VEC-04',
-    status: 'Active',
-    displayOrder: 4,
-    coverImage: greyHalfzipShirtImg,
-    galleryImages: [greyHalfzipShirtImg],
-    seoTitle: 'Vector Tech Quarter-Zip Hybrid Pullover | Running Mid-Layer',
-    seoDescription: 'Dual-tone heather grey quarter-zip athletic pullover with brushed thermal backing and Safety Line insignia.',
-    createdAt: '2026-03-02T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-aur-05',
-    name: 'Aura Sculpt Zip-Up Contoured Training Jacket',
-    slug: 'aura-sculpt-zip-up-contoured-training-jacket',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Second-skin dusty mauve zip-up compression silhouette with contour-enhancing stitch lines and thumbhole cuffs.',
-    longDescription: 'Crafted from buttery-soft brushed nylon-elastane fabric that sculpts and elongates the torso. Curved princess seamlines provide an aerodynamic silhouette, while the mock turtle neck keeps out wind drafts during outdoor runs or warm-ups. Includes extended cuffs with reinforced thumbholes.',
-    material: '75% Tactel Micro-Nylon, 25% Spandex Feather-Soft Knit',
-    sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Ergonomic princess seam sculpting architecture',
-      'Extended sleeve cuffs with integrated thumbholes',
-      'Full-length smooth gliding YKK zip closure',
-      'High-stretch anti-pilling and squat-proof composite',
-      'Concealed zippered invisible hip utility pockets'
-    ],
-    productCode: 'GW-AUR-05',
-    status: 'Active',
-    displayOrder: 5,
-    coverImage: mauveZipJacketImg,
-    galleryImages: [mauveZipJacketImg],
-    seoTitle: 'Aura Sculpt Zip-Up Contoured Training Jacket | Form-Fitting Activewear',
-    seoDescription: 'Dusty mauve compression workout jacket with contouring princess seams, mock neck, and thumbhole sleeves.',
-    createdAt: '2026-03-03T08:00:00.000Z'
-  },
-  {
     id: 'prod-gw-glc-06',
     name: 'GlacierPeak Alpine Waterproof Storm Jacket',
     slug: 'glacierpeak-alpine-waterproof-storm-jacket',
@@ -184,39 +42,12 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-GLC-06',
     status: 'Active',
-    displayOrder: 6,
+    displayOrder: 1,
     coverImage: alpineSkiJacketImg,
     galleryImages: [alpineSkiJacketImg],
     seoTitle: 'GlacierPeak Alpine Waterproof Storm Jacket | Technical Mountain Shell',
     seoDescription: '20,000mm hydrostatic waterproof ski storm jacket in ocean teal and charcoal with taped AquaGuard zips.',
     createdAt: '2026-03-03T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-ter-07',
-    name: 'Terracotta Breeze Racerback Training Tank',
-    slug: 'terracotta-breeze-racerback-training-tank',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Ultra-lightweight heather coral terracotta athletic racerback tank with dropped armholes and curved scallop hem.',
-    longDescription: 'Featherlight running and gym tank top spun from micro-open knit slub jersey. Provides generous airflow through relaxed drop armholes, natural drape, and quick evaporation properties during intense sweat sessions or outdoor summer runs.',
-    material: '85% Micro-Modal, 15% Performance Polyester Slub',
-    sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Open-pore micro-knit fiber structure for instant cool-down',
-      'Deep cut armholes for full sports bra visibility and freedom',
-      'Curved dropped scallop rear hem for added coverage',
-      'Anti-odor natural fiber infusion',
-      'Non-restrictive relaxed athletic silhouette'
-    ],
-    productCode: 'GW-TER-07',
-    status: 'Active',
-    displayOrder: 7,
-    coverImage: terracottaRunTankImg,
-    galleryImages: [terracottaRunTankImg],
-    seoTitle: 'Terracotta Breeze Racerback Training Tank | Lightweight Gym Top',
-    seoDescription: 'Ultra-light heather terracotta racerback tank with dropped armholes and curved scallop hem.',
-    createdAt: '2026-03-04T08:00:00.000Z'
   },
   {
     id: 'prod-gw-nor-08',
@@ -238,7 +69,7 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-NOR-08',
     status: 'Active',
-    displayOrder: 8,
+    displayOrder: 2,
     coverImage: blueMuscleTankImg,
     galleryImages: [blueMuscleTankImg],
     seoTitle: 'Nordic Ice Piping Contrast Muscle Tank | Athletic Workout Top',
@@ -265,38 +96,11 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-ONX-09',
     status: 'Active',
-    displayOrder: 9,
+    displayOrder: 3,
     coverImage: blackGymStringerImg,
     galleryImages: [blackGymStringerImg],
     seoTitle: 'Onyx Pro Y-Back Athletic Bodybuilding Stringer | Gym Tank',
     seoDescription: 'Classic jet black Y-back bodybuilding workout stringer with ultra-thin straps and open lat cut.',
-    createdAt: '2026-03-05T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-kin-10',
-    name: 'Kinetics Red-Script Graphic Sleeveless Tank',
-    slug: 'kinetics-red-script-graphic-sleeveless-tank',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Raw-hem athletic white muscle tank featuring dynamic red brush-lettered "WORK HARD PLAY FUN" chest artwork.',
-    longDescription: 'Infusing streetwear energy with athletic functionality, this relaxed white gym tank is cut from heavy-gauge breathable combed cotton. Boasts an expressive distressed red graphic, relaxed shoulder drop, and reinforced crew collar for daily workouts or urban casual wear.',
-    material: '100% Heavy-Gauge Pre-Washed Combed Cotton',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Distressed crimson screen-printed graphic art',
-      'Heavyweight 220 GSM breathable cotton jersey',
-      'Relaxed drop-armhole muscle silhouette',
-      'Ribbed reinforced collar that resists baconing',
-      'Enzyme-washed for vintage super-soft hand feel'
-    ],
-    productCode: 'GW-KIN-10',
-    status: 'Active',
-    displayOrder: 10,
-    coverImage: whiteGraphicTankImg,
-    galleryImages: [whiteGraphicTankImg],
-    seoTitle: 'Kinetics Red-Script Graphic Sleeveless Tank | Workout Muscle Top',
-    seoDescription: 'White relaxed graphic athletic muscle tank with crimson script art and heavyweight 220 GSM combed cotton.',
     createdAt: '2026-03-05T08:00:00.000Z'
   },
   {
