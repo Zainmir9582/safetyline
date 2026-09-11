@@ -14,13 +14,12 @@ interface ProductListProps {
 export default function ProductList({ categorySlug, products, categories }: ProductListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState<string>('All');
-  const [selectedColor, setSelectedColor] = useState<string>('All');
 
   const currentCategory = useMemo(() => {
     return categories.find(c => c.slug === categorySlug);
   }, [categories, categorySlug]);
 
-  // Filter products by category, search, sizes, and colors
+  // Filter products by category, search, and sizes
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
       if (p.status !== 'Active') return false;
@@ -34,27 +33,23 @@ export default function ProductList({ categorySlug, products, categories }: Prod
         p.material.toLowerCase().includes(s);
 
       const matchesSize = selectedSize === 'All' || p.sizes.includes(selectedSize);
-      const matchesColor = selectedColor === 'All' || p.colors.includes(selectedColor);
 
-      return matchesSearch && matchesSize && matchesColor;
+      return matchesSearch && matchesSize;
     });
-  }, [products, currentCategory, searchQuery, selectedSize, selectedColor]);
+  }, [products, currentCategory, searchQuery, selectedSize]);
 
-  // Extract all available sizes and colors for dynamic filtering dropdowns
+  // Extract all available sizes for dynamic filtering dropdowns
   const filterOptions = useMemo(() => {
     const sizesSet = new Set<string>();
-    const colorsSet = new Set<string>();
 
     products.forEach((p) => {
       if (p.status === 'Active' && currentCategory && p.categoryId === currentCategory.id) {
         p.sizes.forEach(s => sizesSet.add(s));
-        p.colors.forEach(c => colorsSet.add(c));
       }
     });
 
     return {
-      sizes: ['All', ...Array.from(sizesSet)],
-      colors: ['All', ...Array.from(colorsSet)]
+      sizes: ['All', ...Array.from(sizesSet)]
     };
   }, [products, currentCategory]);
 
@@ -138,7 +133,7 @@ export default function ProductList({ categorySlug, products, categories }: Prod
             </div>
 
             {/* Size Dropdown - Hidden for gearwear */}
-            {currentCategory !== 'gearwear' && (
+            {currentCategory?.slug !== 'gearwear' && (
               <select
                 id="filter-size-select"
                 value={selectedSize}
@@ -153,28 +148,13 @@ export default function ProductList({ categorySlug, products, categories }: Prod
               </select>
             )}
 
-            {/* Color Dropdown */}
-            <select
-              id="filter-color-select"
-              value={selectedColor}
-              onChange={(e) => setSelectedColor(e.target.value)}
-              className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-800 outline-none focus:border-[#0B3D3B] cursor-pointer transition-colors"
-            >
-              {filterOptions.colors.map(color => (
-                <option key={color} value={color}>
-                  {color === 'All' ? 'All Colors' : `Color: ${color}`}
-                </option>
-              ))}
-            </select>
-
             {/* Clear Filters Button */}
-            {(searchQuery !== '' || selectedSize !== 'All' || selectedColor !== 'All') && (
+            {(searchQuery !== '' || selectedSize !== 'All') && (
               <button
                 id="clear-filters-btn"
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedSize('All');
-                  setSelectedColor('All');
                 }}
                 className="text-xs text-[#FF5A36] hover:text-[#e44e2b] font-bold tracking-wider uppercase transition-colors inline-flex items-center gap-1 cursor-pointer"
               >
@@ -279,13 +259,12 @@ export default function ProductList({ categorySlug, products, categories }: Prod
               No matching products found
             </h3>
             <p className="text-slate-500 font-normal text-sm max-w-sm mx-auto">
-              Try clearing search terms or selecting a different size or color attribute.
+              Try clearing search terms or selecting a different size attribute.
             </p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setSelectedSize('All');
-                setSelectedColor('All');
               }}
               className="bg-[#0B3D3B] hover:bg-[#072725] text-white px-5 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer"
             >

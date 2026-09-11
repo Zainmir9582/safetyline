@@ -59,7 +59,6 @@ export default function CategoryHub({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSubcat, setSelectedSubcat] = useState<string>('All');
   const [selectedSize, setSelectedSize] = useState<string>('All');
-  const [selectedColor, setSelectedColor] = useState<string>('All');
 
   // Filter products by category
   const categoryProducts = useMemo(() => {
@@ -86,14 +85,6 @@ export default function CategoryHub({
       p.sizes?.forEach(s => sizeSet.add(s));
     });
     return ['All', ...Array.from(sizeSet)];
-  }, [categoryProducts]);
-
-  const allColors = useMemo(() => {
-    const colorSet = new Set<string>();
-    categoryProducts.forEach(p => {
-      p.colors?.forEach(c => colorSet.add(c));
-    });
-    return ['All', ...Array.from(colorSet)];
   }, [categoryProducts]);
 
   // Filtered products list
@@ -126,12 +117,9 @@ export default function CategoryHub({
       // Size filter
       const matchSize = selectedSize === 'All' || (p.sizes && p.sizes.includes(selectedSize));
 
-      // Color filter
-      const matchColor = selectedColor === 'All' || (p.colors && p.colors.includes(selectedColor));
-
-      return matchQuery && matchSubcat && matchSize && matchColor;
+      return matchQuery && matchSubcat && matchSize;
     });
-  }, [categoryProducts, searchQuery, selectedSubcat, selectedSize, selectedColor, isGearwear]);
+  }, [categoryProducts, searchQuery, selectedSubcat, selectedSize, isGearwear]);
 
   // Category-specific features
   const categoryFeatures = useMemo(() => {
@@ -549,20 +537,6 @@ export default function CategoryHub({
               </div>
             )}
 
-            {/* Color Dropdown filter */}
-            <div className="flex items-center space-x-2">
-              <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Color:</span>
-              <select
-                value={selectedColor}
-                onChange={(e) => setSelectedColor(e.target.value)}
-                className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
-              >
-                {allColors.map(c => (
-                  <option key={c} value={c}>{c === 'All' ? 'All Colors' : c}</option>
-                ))}
-              </select>
-            </div>
-
           </div>
 
           {/* Subcategory Pills */}
@@ -653,7 +627,7 @@ export default function CategoryHub({
             <p className="text-xs text-slate-500 max-w-xs mx-auto">Try resetting your search query or selecting "All" subcategories.</p>
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
-                onClick={() => { setSearchQuery(''); setSelectedSubcat('All'); setSelectedSize('All'); setSelectedColor('All'); }}
+                onClick={() => { setSearchQuery(''); setSelectedSubcat('All'); setSelectedSize('All'); }}
                 className="bg-[#0B3D3B] text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer shadow-xs hover:bg-[#072725] transition-colors"
               >
                 Reset Filters
