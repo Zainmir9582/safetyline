@@ -1,7 +1,4 @@
 import { Product } from '../types';
-import alpineSkiJacketImg from '../assets/images/alpine_ski_jacket_1788984968075.jpg';
-import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
-import blackGymStringerImg from '../assets/images/black_gym_stringer_1788985021668.jpg';
 
 import d1211178Img from '../assets/images/D1211178.jpg';
 import d1211186Img from '../assets/images/D1211186.jpg';
@@ -22,87 +19,6 @@ import prod3Img from '../assets/images/regenerated_image_1788784410117.jpg';
 import prod4Img from '../assets/images/regenerated_image_1788784447014.jpg';
 
 export const gearwearProducts: Product[] = [
-  {
-    id: 'prod-gw-glc-06',
-    name: 'GlacierPeak Alpine Waterproof Storm Jacket',
-    slug: 'glacierpeak-alpine-waterproof-storm-jacket',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: '20,000mm hydrostatic mountain storm shell jacket in dual-tone ocean teal and charcoal with sealed AquaGuard zips.',
-    longDescription: 'Engineered for alpine ski ascents, severe wind, and wet winter storms. Triple-layer laminate membrane delivers impenetrable water protection while maintaining breathability. Fully seam-sealed with water-repellent aqua zipper tape, pit zips for rapid ventilation, helmet-compatible hood, and wrist gaiters.',
-    material: '3-Layer Toray Dermizax Membrane, 100% Recycled Technical Polyester Shell',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      '20,000mm hydrostatic waterproof rating with taped seams',
-      'AquaGuard waterproof contrast zippered pockets',
-      'Helmet-compatible 3-point adjustable storm hood',
-      'Underarm bilateral zippered climate ventilation ports',
-      'Internal snow skirt and Velcro adjustable cuff seals'
-    ],
-    productCode: 'GW-GLC-06',
-    status: 'Active',
-    displayOrder: 1,
-    coverImage: alpineSkiJacketImg,
-    galleryImages: [alpineSkiJacketImg],
-    seoTitle: 'GlacierPeak Alpine Waterproof Storm Jacket | Technical Mountain Shell',
-    seoDescription: '20,000mm hydrostatic waterproof ski storm jacket in ocean teal and charcoal with taped AquaGuard zips.',
-    createdAt: '2026-03-03T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-nor-08',
-    name: 'Nordic Ice Piping Contrast Muscle Tank',
-    slug: 'nordic-ice-piping-contrast-muscle-tank',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Pastel powder blue high-neck sleeveless gym tank top finished with contrasting black athletic binding trim.',
-    longDescription: 'Minimalist athletic elegance meets raw performance. Tailored with a clean crew collar, contrast black edge binding around the neckline and deep armholes, and subtle Safety Line monogram on the upper chest. Pairs seamlessly with compression shorts or high-rise tights.',
-    material: '92% Combed Athletic Cotton, 8% Lycra Soft-Flex',
-    sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Contrast black reinforced rib-knit edge binding',
-      'Soft-brushed combed cotton hand with dynamic 4-way stretch',
-      'High-neck cut for active modesty during inverted poses',
-      'Precision heat-sealed Safety Line chest insignia',
-      'Pre-shrunk dimensional shape retention'
-    ],
-    productCode: 'GW-NOR-08',
-    status: 'Active',
-    displayOrder: 2,
-    coverImage: blueMuscleTankImg,
-    galleryImages: [blueMuscleTankImg],
-    seoTitle: 'Nordic Ice Piping Contrast Muscle Tank | Athletic Workout Top',
-    seoDescription: 'Ice powder blue sleeveless muscle tank top with contrasting black piping trim and Safety Line monogram.',
-    createdAt: '2026-03-04T08:00:00.000Z'
-  },
-  {
-    id: 'prod-gw-onx-09',
-    name: 'Onyx Pro Y-Back Athletic Bodybuilding Stringer',
-    slug: 'onyx-pro-y-back-athletic-bodybuilding-stringer',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    shortDescription: 'Deep cut Y-back racerback weightlifting stringer in stealth jet black with reinforced chest emblem zone.',
-    longDescription: 'The quintessential bodybuilding training stringer. Features razor-thin shoulder straps, low scoop neck, and deep open sides that allow full back lat activation and muscle feedback during heavy bench, row, and deadlift workouts.',
-    material: '95% Ringspun Combed Cotton, 5% Spandex Elastomeric Blend',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Deep cut ultra-thin Y-back racerback strap profile',
-      'Maximized side lat ventilation and zero shoulder restriction',
-      'Reinforced bound neckline and armhole edging',
-      'Engineered chest logo display window',
-      'Breathable ringspun cotton for maximum sweat absorption'
-    ],
-    productCode: 'GW-ONX-09',
-    status: 'Active',
-    displayOrder: 3,
-    coverImage: blackGymStringerImg,
-    galleryImages: [blackGymStringerImg],
-    seoTitle: 'Onyx Pro Y-Back Athletic Bodybuilding Stringer | Gym Tank',
-    seoDescription: 'Classic jet black Y-back bodybuilding workout stringer with ultra-thin straps and open lat cut.',
-    createdAt: '2026-03-05T08:00:00.000Z'
-  },
   {
     id: 'prod-apx-01',
     name: 'Apex Pro Aero Compression Tee',

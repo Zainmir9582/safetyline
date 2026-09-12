@@ -2,7 +2,10 @@ import { Product } from '../types';
 import greenPufferJacketImg from '../assets/images/green_puffer_jacket_1788984892378.jpg';
 import greyHalfzipShirtImg from '../assets/images/grey_halfzip_shirt_1788984931150.jpg';
 import mauveZipJacketImg from '../assets/images/mauve_zip_jacket_1788984951352.jpg';
+import alpineSkiJacketImg from '../assets/images/alpine_ski_jacket_1788984968075.jpg';
 import terracottaRunTankImg from '../assets/images/terracotta_run_tank_1788984988331.jpg';
+import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
+import blackGymStringerImg from '../assets/images/black_gym_stringer_1788985021668.jpg';
 import whiteGraphicTankImg from '../assets/images/white_graphic_tank_1788985040768.jpg';
 import whiteLongSleeveImg from '../assets/images/white_long_sleeve_1788984915227.jpg';
 import womenSportsSetImg from '../assets/images/women_sports_set_1788984867763.jpg';
@@ -195,6 +198,87 @@ export const hosieryProducts: Product[] = [
     galleryImages: [whiteGraphicTankImg],
     seoTitle: 'Kinetics Red-Script Graphic Sleeveless Top | Safety Line Accessories',
     seoDescription: 'White relaxed graphic athletic muscle top with crimson script art.',
+    createdAt: '2026-03-05T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-glc-08',
+    name: 'GlacierPeak Alpine Waterproof Storm Jacket',
+    slug: 'glacierpeak-alpine-waterproof-storm-jacket',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: '20,000mm hydrostatic mountain storm shell jacket in dual-tone ocean teal and charcoal with sealed AquaGuard zips.',
+    longDescription: 'Engineered for alpine ski ascents, severe wind, and wet winter storms. Triple-layer laminate membrane delivers impenetrable water protection while maintaining breathability. Fully seam-sealed with water-repellent aqua zipper tape, pit zips for rapid ventilation, helmet-compatible hood, and wrist gaiters.',
+    material: '3-Layer Toray Dermizax Membrane, 100% Recycled Technical Polyester Shell',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      '20,000mm hydrostatic waterproof rating with taped seams',
+      'AquaGuard waterproof contrast zippered pockets',
+      'Helmet-compatible 3-point adjustable storm hood',
+      'Underarm bilateral zippered climate ventilation ports',
+      'Internal snow skirt and Velcro adjustable cuff seals'
+    ],
+    productCode: 'ACC-GLC-08',
+    status: 'Active',
+    displayOrder: 8,
+    coverImage: alpineSkiJacketImg,
+    galleryImages: [alpineSkiJacketImg],
+    seoTitle: 'GlacierPeak Alpine Waterproof Storm Jacket | Safety Line Accessories',
+    seoDescription: '20,000mm hydrostatic waterproof ski storm jacket in ocean teal and charcoal with taped AquaGuard zips.',
+    createdAt: '2026-03-03T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-nor-09',
+    name: 'Nordic Ice Piping Contrast Muscle Tank',
+    slug: 'nordic-ice-piping-contrast-muscle-tank',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Pastel powder blue high-neck sleeveless gym tank top finished with contrasting black athletic binding trim.',
+    longDescription: 'Minimalist athletic elegance meets raw performance. Tailored with a clean crew collar, contrast black edge binding around the neckline and deep armholes, and subtle Safety Line monogram on the upper chest. Pairs seamlessly with compression shorts or high-rise tights.',
+    material: '92% Combed Athletic Cotton, 8% Lycra Soft-Flex',
+    sizes: ['XS', 'S', 'M', 'L'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Contrast black reinforced rib-knit edge binding',
+      'Soft-brushed combed cotton hand with dynamic 4-way stretch',
+      'High-neck cut for active modesty during inverted poses',
+      'Precision heat-sealed Safety Line chest insignia',
+      'Pre-shrunk dimensional shape retention'
+    ],
+    productCode: 'ACC-NOR-09',
+    status: 'Active',
+    displayOrder: 9,
+    coverImage: blueMuscleTankImg,
+    galleryImages: [blueMuscleTankImg],
+    seoTitle: 'Nordic Ice Piping Contrast Muscle Tank | Safety Line Accessories',
+    seoDescription: 'Ice powder blue sleeveless muscle tank top with contrasting black piping trim and Safety Line monogram.',
+    createdAt: '2026-03-04T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-onx-10',
+    name: 'Onyx Pro Y-Back Athletic Bodybuilding Stringer',
+    slug: 'onyx-pro-y-back-athletic-bodybuilding-stringer',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Deep cut Y-back racerback weightlifting stringer in stealth jet black with reinforced chest emblem zone.',
+    longDescription: 'The quintessential bodybuilding training stringer. Features razor-thin shoulder straps, low scoop neck, and deep open sides that allow full back lat activation and muscle feedback during heavy bench, row, and deadlift workouts.',
+    material: '95% Ringspun Combed Cotton, 5% Spandex Elastomeric Blend',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Deep cut ultra-thin Y-back racerback strap profile',
+      'Maximized side lat ventilation and zero shoulder restriction',
+      'Reinforced bound neckline and armhole edging',
+      'Engineered chest logo display window',
+      'Breathable ringspun cotton for maximum sweat absorption'
+    ],
+    productCode: 'ACC-ONX-10',
+    status: 'Active',
+    displayOrder: 10,
+    coverImage: blackGymStringerImg,
+    galleryImages: [blackGymStringerImg],
+    seoTitle: 'Onyx Pro Y-Back Athletic Bodybuilding Stringer | Safety Line Accessories',
+    seoDescription: 'Classic jet black Y-back bodybuilding workout stringer with ultra-thin straps and open lat cut.',
     createdAt: '2026-03-05T08:00:00.000Z'
   },
   {
