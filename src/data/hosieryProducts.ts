@@ -9,7 +9,6 @@ import shirts1Img from '../assets/images/shirts 1.jpeg';
 import gniImg from '../assets/images/gni.jpg';
 import fgknfImg from '../assets/images/fgk nf.jpeg';
 import geminiPtpjhImg from '../assets/images/Gemini_Generated_Image_ptpjhoptpjhoptpj.jpeg';
-import d1211207Img from '../assets/images/D1211207.jpg';
 
 export const hosieryProducts: Product[] = [
   {
@@ -121,33 +120,6 @@ export const hosieryProducts: Product[] = [
     createdAt: '2026-03-15T08:00:00.000Z'
   },
   {
-    id: 'prod-hs-d1211207',
-    name: 'Precision-Flex Athletic Sports Apparel',
-    slug: 'precision-flex-athletic-sports-apparel-d1211207',
-    categoryId: 'cat-hosiery',
-    categoryName: 'Accessories',
-    shortDescription: 'Heavy-duty athletic training apparel crafted with high-tensile stretch composite and moisture-dispersion knit.',
-    longDescription: 'Manufactured with premium Sialkot athletic textile expertise, this precision garment features reinforced seam lines, high-density stretch recovery, and specialized moisture-wicking yarn to provide uncompromising durability during intense training regimes.',
-    material: '88% Technical Poly-Spandex Microfiber, 12% High-Tension Lycra (210 GSM)',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
-    features: [
-      'Multi-directional 4-way stretch recovery matrix',
-      'Hydrophobic outer moisture barrier with rapid evaporation',
-      'High-stress point bar-tack reinforcement',
-      'Chafe-free ergonomic flatlock seam construction',
-      'Authentic Safety Line industrial manufacturer insignia'
-    ],
-    productCode: 'ACC-D1207-05',
-    status: 'Active',
-    displayOrder: 5,
-    coverImage: d1211207Img,
-    galleryImages: [d1211207Img],
-    seoTitle: 'Precision-Flex Athletic Sports Apparel | Safety Line Accessories',
-    seoDescription: 'Heavy-duty athletic training apparel crafted with high-tensile stretch composite and moisture dispersion.',
-    createdAt: '2026-03-15T08:00:00.000Z'
-  },
-  {
     id: 'prod-hs-afx-01',
     name: 'AeroFlex Seamless Compression Set',
     slug: 'aeroflex-seamless-compression-set',
@@ -167,7 +139,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-AFX-01',
     status: 'Active',
-    displayOrder: 6,
+    displayOrder: 5,
     coverImage: womenSportsSetImg,
     galleryImages: [womenSportsSetImg],
     seoTitle: 'AeroFlex Seamless Compression Set | Safety Line Accessories',
@@ -194,7 +166,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-AUR-05',
     status: 'Active',
-    displayOrder: 7,
+    displayOrder: 6,
     coverImage: mauveZipJacketImg,
     galleryImages: [mauveZipJacketImg],
     seoTitle: 'Aura Sculpt Zip-Up Contoured Layer | Safety Line Accessories',
@@ -221,7 +193,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-TER-06',
     status: 'Active',
-    displayOrder: 8,
+    displayOrder: 7,
     coverImage: terracottaRunTankImg,
     galleryImages: [terracottaRunTankImg],
     seoTitle: 'Terracotta Breeze Lightweight Racerback | Safety Line Accessories',
@@ -248,7 +220,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-NOR-09',
     status: 'Active',
-    displayOrder: 9,
+    displayOrder: 8,
     coverImage: blueMuscleTankImg,
     galleryImages: [blueMuscleTankImg],
     seoTitle: 'Nordic Ice Piping Contrast Muscle Tank | Safety Line Accessories',
@@ -275,7 +247,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-AUR-01',
     status: 'Active',
-    displayOrder: 10,
+    displayOrder: 9,
     coverImage: 'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
@@ -306,7 +278,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-CSH-02',
     status: 'Active',
-    displayOrder: 11,
+    displayOrder: 10,
     coverImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
@@ -337,7 +309,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-SOV-03',
     status: 'Active',
-    displayOrder: 12,
+    displayOrder: 11,
     coverImage: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
@@ -367,7 +339,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-INT-04',
     status: 'Active',
-    displayOrder: 13,
+    displayOrder: 12,
     coverImage: 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',

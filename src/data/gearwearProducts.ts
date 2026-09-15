@@ -6,6 +6,7 @@ import d1211192Img from '../assets/images/D1211192.jpg';
 import d1211195Img from '../assets/images/D1211195.jpg';
 import d1211197Img from '../assets/images/D1211197.jpg';
 import d1211199Img from '../assets/images/D1211199.jpg';
+import d1211207Img from '../assets/images/D1211207.jpg';
 import d1211214Img from '../assets/images/D1211214.jpg';
 import d1211216Img from '../assets/images/D1211216.jpg';
 import d1211224Img from '../assets/images/D1211224.jpg';
@@ -287,6 +288,33 @@ export const gearwearProducts: Product[] = [
     galleryImages: [d1211199Img],
     seoTitle: 'Velocity Core Training Activewear | Safety Line Gearwear',
     seoDescription: 'Sleek athletic sportswear designed for fast-paced workouts, agility training, and moisture management.',
+    createdAt: '2026-03-10T08:00:00.000Z'
+  },
+  {
+    id: 'prod-gw-d1211207',
+    name: 'Precision-Flex Athletic Sports Apparel',
+    slug: 'precision-flex-athletic-sports-apparel-d1211207',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    shortDescription: 'Heavy-duty athletic training apparel crafted with high-tensile stretch composite and moisture-dispersion knit.',
+    longDescription: 'Manufactured with premium Sialkot athletic textile expertise, this precision garment features reinforced seam lines, high-density stretch recovery, and specialized moisture-wicking yarn to provide uncompromising durability during intense training regimes.',
+    material: '88% Technical Poly-Spandex Microfiber, 12% High-Tension Lycra (210 GSM)',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Multi-directional 4-way stretch recovery matrix',
+      'Hydrophobic outer moisture barrier with rapid evaporation',
+      'High-stress point bar-tack reinforcement',
+      'Chafe-free ergonomic flatlock seam construction',
+      'Authentic Safety Line industrial manufacturer insignia'
+    ],
+    productCode: 'GW-D1211207',
+    status: 'Active',
+    displayOrder: 21,
+    coverImage: d1211207Img,
+    galleryImages: [d1211207Img],
+    seoTitle: 'Precision-Flex Athletic Sports Apparel | Safety Line Gearwear',
+    seoDescription: 'Heavy-duty athletic training apparel crafted with high-tensile stretch composite and moisture dispersion.',
     createdAt: '2026-03-10T08:00:00.000Z'
   },
   {
