@@ -4,7 +4,149 @@ import terracottaRunTankImg from '../assets/images/terracotta_run_tank_178898498
 import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
 import womenSportsSetImg from '../assets/images/women_sports_set_1788984867763.jpg';
 
+// Newly added accessory and hosiery product images
+import shirts1Img from '../assets/images/shirts 1.jpeg';
+import gniImg from '../assets/images/gni.jpg';
+import fgknfImg from '../assets/images/fgk nf.jpeg';
+import geminiPtpjhImg from '../assets/images/Gemini_Generated_Image_ptpjhoptpjhoptpj.jpeg';
+import d1211207Img from '../assets/images/D1211207.jpg';
+
 export const hosieryProducts: Product[] = [
+  {
+    id: 'prod-hs-shirts1',
+    name: 'AeroClassic Premium Technical Training Shirt',
+    slug: 'aeroclassic-premium-technical-training-shirt',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'High-density micro-pique technical training shirt featuring ergonomic flatlock seaming and rapid vapor transfer.',
+    longDescription: 'Engineered for intensive conditioning and daily activewear, this performance training shirt combines ultra-fine combed poly-cotton filaments with targeted elastane flexibility. The specialized micro-pique knit creates micro-capillary air channels across the torso that accelerate moisture evaporation while maintaining a structured, crisp silhouette.',
+    material: '65% Combed Micro-Polyester, 30% Long-Staple Ringspun Cotton, 5% Lycra Spandex (190 GSM)',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Micro-pique dual-face airflow knitting technology',
+      'Ergonomic raglan shoulder articulation preventing seam friction',
+      'Hydrophilic moisture-wicking capillary channels',
+      'Colorfast reactive dye ensuring long-term vibrancy',
+      'Reinforced double-stitched collar and hem finishing'
+    ],
+    productCode: 'ACC-SHT-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: shirts1Img,
+    galleryImages: [shirts1Img],
+    seoTitle: 'AeroClassic Premium Technical Training Shirt | Safety Line Accessories',
+    seoDescription: 'High-density micro-pique technical activewear shirt with ergonomic flatlock seams and moisture management.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-gni',
+    name: 'Veloce Pro Performance Compression Layer',
+    slug: 'veloce-pro-performance-compression-layer',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Zoned multi-density athletic performance apparel offering core stabilization and dynamic 4-way stretch.',
+    longDescription: 'Constructed on high-gauge Italian circular knitting machines, this technical athletic accessory layer delivers graduated muscle support and friction-free skin contact. The ultra-fine polyamide yarn is blended with high-tension elastane to resist deformation across thousands of stretch cycles while keeping the athlete cool and dry.',
+    material: '82% High-Tenacity Micro-Polyamide, 18% Elastane Power-Spandex (220 GSM)',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Graduated athletic compression for targeted muscle group recovery',
+      'Zero-chafe ultra-flat interlock seam construction',
+      'Anti-microbial silver-ion surface protection for odor control',
+      '4-way omnidirectional elastic memory retention',
+      'Breathable heat-dispersion panels along high-perspiration zones'
+    ],
+    productCode: 'ACC-GNI-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: gniImg,
+    galleryImages: [gniImg],
+    seoTitle: 'Veloce Pro Performance Compression Layer | Safety Line Accessories',
+    seoDescription: 'Zoned multi-density athletic performance layer engineered with high-tenacity micro-polyamide and power-spandex.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-fgknf',
+    name: 'Strata Elite Thermal Athletic Knit Top',
+    slug: 'strata-elite-thermal-athletic-knit-top',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Versatile lightweight knit technical garment with brushed micro-fleece interior and high-tensile exterior.',
+    longDescription: 'Tailored for transitional weather training and active recovery. Features an engineered double-knit jacquard architecture with a brushed thermal micro-fleece interior that gently traps body heat while the smooth, abrasion-resistant outer shell shields against wind drafts and friction.',
+    material: '78% Technical Micro-Poly Jacquard, 16% Modal Fiber, 6% Spandex (240 GSM)',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Dual-faced thermal jacquard weave for balanced microclimate control',
+      'Ultra-soft modal blend delivering a buttery, skin-safe hand feel',
+      'Elasticized comfort cuffs with shape-memory ribbing',
+      'Concealed moisture-wicking underarm ventilation panels',
+      'Anti-pilling enzyme wash finish for enduring softness'
+    ],
+    productCode: 'ACC-FGK-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: fgknfImg,
+    galleryImages: [fgknfImg],
+    seoTitle: 'Strata Elite Thermal Athletic Knit Top | Safety Line Accessories',
+    seoDescription: 'Versatile lightweight knit technical activewear top featuring dual-faced jacquard thermal construction.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-ptpjh',
+    name: 'Quantum Aero Studio Conditioning Top',
+    slug: 'quantum-aero-studio-conditioning-top',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Modern ergonomic studio training top engineered with silky tactile drape and high-cadence airflow channels.',
+    longDescription: 'Designed for studio conditioning, high-mobility yoga, and athletic conditioning. Woven with micro-denier poly-modal filaments that provide an ultra-lightweight, cool-to-touch sensation on the skin with zero cling during high-sweat exertion.',
+    material: '70% Micro-Denier Polyester, 22% Micro-Modal, 8% Lycra Elastane (175 GSM)',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Featherweight 175 GSM open-knit breathable structure',
+      'Silky tactile skin glide with zero-friction draping',
+      'Anatomically sculpted armholes for unrestricted rotational range',
+      'Natural odor-resistant modal fiber integration',
+      'Reinforced bound neckline retaining shape after laundering'
+    ],
+    productCode: 'ACC-PTP-04',
+    status: 'Active',
+    displayOrder: 4,
+    coverImage: geminiPtpjhImg,
+    galleryImages: [geminiPtpjhImg],
+    seoTitle: 'Quantum Aero Studio Conditioning Top | Safety Line Accessories',
+    seoDescription: 'Modern ergonomic studio training top engineered with silky tactile drape and high-cadence airflow channels.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-d1211207',
+    name: 'Precision-Flex Athletic Sports Apparel',
+    slug: 'precision-flex-athletic-sports-apparel-d1211207',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Heavy-duty athletic training apparel crafted with high-tensile stretch composite and moisture-dispersion knit.',
+    longDescription: 'Manufactured with premium Sialkot athletic textile expertise, this precision garment features reinforced seam lines, high-density stretch recovery, and specialized moisture-wicking yarn to provide uncompromising durability during intense training regimes.',
+    material: '88% Technical Poly-Spandex Microfiber, 12% High-Tension Lycra (210 GSM)',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Multi-directional 4-way stretch recovery matrix',
+      'Hydrophobic outer moisture barrier with rapid evaporation',
+      'High-stress point bar-tack reinforcement',
+      'Chafe-free ergonomic flatlock seam construction',
+      'Authentic Safety Line industrial manufacturer insignia'
+    ],
+    productCode: 'ACC-D1207-05',
+    status: 'Active',
+    displayOrder: 5,
+    coverImage: d1211207Img,
+    galleryImages: [d1211207Img],
+    seoTitle: 'Precision-Flex Athletic Sports Apparel | Safety Line Accessories',
+    seoDescription: 'Heavy-duty athletic training apparel crafted with high-tensile stretch composite and moisture dispersion.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
   {
     id: 'prod-hs-afx-01',
     name: 'AeroFlex Seamless Compression Set',
@@ -25,7 +167,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-AFX-01',
     status: 'Active',
-    displayOrder: 1,
+    displayOrder: 6,
     coverImage: womenSportsSetImg,
     galleryImages: [womenSportsSetImg],
     seoTitle: 'AeroFlex Seamless Compression Set | Safety Line Accessories',
@@ -52,7 +194,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-AUR-05',
     status: 'Active',
-    displayOrder: 2,
+    displayOrder: 7,
     coverImage: mauveZipJacketImg,
     galleryImages: [mauveZipJacketImg],
     seoTitle: 'Aura Sculpt Zip-Up Contoured Layer | Safety Line Accessories',
@@ -79,7 +221,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-TER-06',
     status: 'Active',
-    displayOrder: 3,
+    displayOrder: 8,
     coverImage: terracottaRunTankImg,
     galleryImages: [terracottaRunTankImg],
     seoTitle: 'Terracotta Breeze Lightweight Racerback | Safety Line Accessories',
@@ -106,7 +248,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'ACC-NOR-09',
     status: 'Active',
-    displayOrder: 4,
+    displayOrder: 9,
     coverImage: blueMuscleTankImg,
     galleryImages: [blueMuscleTankImg],
     seoTitle: 'Nordic Ice Piping Contrast Muscle Tank | Safety Line Accessories',
@@ -133,7 +275,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-AUR-01',
     status: 'Active',
-    displayOrder: 5,
+    displayOrder: 10,
     coverImage: 'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
@@ -164,7 +306,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-CSH-02',
     status: 'Active',
-    displayOrder: 6,
+    displayOrder: 11,
     coverImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
@@ -195,7 +337,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-SOV-03',
     status: 'Active',
-    displayOrder: 7,
+    displayOrder: 12,
     coverImage: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
@@ -225,7 +367,7 @@ export const hosieryProducts: Product[] = [
     ],
     productCode: 'HS-INT-04',
     status: 'Active',
-    displayOrder: 8,
+    displayOrder: 13,
     coverImage: 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
