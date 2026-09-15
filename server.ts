@@ -5,7 +5,7 @@ import crypto from 'crypto';
 import type { Category, Product, Settings, CustomerReview, ProductFeedback } from './src/types';
 
 const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const PORT = 3000;
 const DB_PATH = path.join(process.cwd(), 'db.json');
 const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
 const JWT_SECRET = process.env.JWT_SECRET || 'vanguard-luxury-secret-key-987';

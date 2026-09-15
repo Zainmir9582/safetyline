@@ -9,8 +9,64 @@ import shirts1Img from '../assets/images/shirts 1.jpeg';
 import gniImg from '../assets/images/gni.jpg';
 import fgknfImg from '../assets/images/fgk nf.jpeg';
 import geminiPtpjhImg from '../assets/images/Gemini_Generated_Image_ptpjhoptpjhoptpj.jpeg';
+import geminiF0dvImg from '../assets/images/Gemini_Generated_Image_f0dv2ff0dv2ff0dv.jpeg';
+import img20240928Img from '../assets/images/20240928_160251.jpg';
 
 export const hosieryProducts: Product[] = [
+  {
+    id: 'prod-hs-gemini-f0dv',
+    name: 'AeroForm Performance Athletic Sleeveless Tank',
+    slug: 'aeroform-performance-athletic-sleeveless-tank',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Precision engineered high-performance athletic tank top featuring ergonomic cut and high-breathability mesh knit.',
+    longDescription: 'Engineered for optimal temperature regulation and active mobility during high-intensity training. Features multi-density poly-spandex knit construction with micro-ventilation zones across the chest and back that disperse moisture rapidly while maintaining structural form.',
+    material: '84% Micro-Poly Performance Filament, 16% Spandex 4-Way Stretch (185 GSM)',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Engineered open-capillary moisture transfer weave',
+      'Ergonomic athletic cut with zero-bind armholes',
+      'Smooth flatlock anti-chafing seam technology',
+      'Anti-microbial and odor-inhibiting yarn treatment',
+      'Reinforced shape-retention neckline binding'
+    ],
+    productCode: 'ACC-AFM-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: geminiF0dvImg,
+    galleryImages: [geminiF0dvImg],
+    seoTitle: 'AeroForm Performance Athletic Sleeveless Tank | Safety Line Accessories',
+    seoDescription: 'High-performance poly-spandex athletic tank top with micro-ventilation zones and ergonomic flatlock seaming.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-hs-20240928',
+    name: 'Vanguard Technical Compression Performance Garment',
+    slug: 'vanguard-technical-compression-performance-garment',
+    categoryId: 'cat-hosiery',
+    categoryName: 'Accessories',
+    shortDescription: 'Heavy-duty commercial-grade athletic training apparel engineered with targeted compression zones and reinforced seaming.',
+    longDescription: 'Crafted using high-density circular knitting technology, this technical activewear piece delivers graduated compression support to core muscle groups. The dual-surface knit draws moisture away from the skin to the exterior face for rapid evaporation during peak exertion.',
+    material: '80% High-Tenacity Micro-Polyester, 20% Elastane Lycra Power Knit (225 GSM)',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
+    features: [
+      'Graduated targeted athletic compression profile',
+      'Reinforced bar-tack stress point construction',
+      'Omnidirectional 4-way elastic recovery matrix',
+      'Ultra-dense friction-free flatlock seam assembly',
+      'Colorfast high-tenacity dye process'
+    ],
+    productCode: 'ACC-VNG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: img20240928Img,
+    galleryImages: [img20240928Img],
+    seoTitle: 'Vanguard Technical Compression Performance Garment | Safety Line Accessories',
+    seoDescription: 'Heavy-duty commercial-grade compression activewear with targeted muscle support and 4-way elastic recovery.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
   {
     id: 'prod-hs-shirts1',
     name: 'AeroClassic Premium Technical Training Shirt',
@@ -29,9 +85,9 @@ export const hosieryProducts: Product[] = [
       'Colorfast reactive dye ensuring long-term vibrancy',
       'Reinforced double-stitched collar and hem finishing'
     ],
-    productCode: 'ACC-SHT-01',
+    productCode: 'ACC-SHT-03',
     status: 'Active',
-    displayOrder: 1,
+    displayOrder: 3,
     coverImage: shirts1Img,
     galleryImages: [shirts1Img],
     seoTitle: 'AeroClassic Premium Technical Training Shirt | Safety Line Accessories',
@@ -56,9 +112,9 @@ export const hosieryProducts: Product[] = [
       '4-way omnidirectional elastic memory retention',
       'Breathable heat-dispersion panels along high-perspiration zones'
     ],
-    productCode: 'ACC-GNI-02',
+    productCode: 'ACC-GNI-04',
     status: 'Active',
-    displayOrder: 2,
+    displayOrder: 4,
     coverImage: gniImg,
     galleryImages: [gniImg],
     seoTitle: 'Veloce Pro Performance Compression Layer | Safety Line Accessories',
@@ -83,9 +139,9 @@ export const hosieryProducts: Product[] = [
       'Concealed moisture-wicking underarm ventilation panels',
       'Anti-pilling enzyme wash finish for enduring softness'
     ],
-    productCode: 'ACC-FGK-03',
+    productCode: 'ACC-FGK-05',
     status: 'Active',
-    displayOrder: 3,
+    displayOrder: 5,
     coverImage: fgknfImg,
     galleryImages: [fgknfImg],
     seoTitle: 'Strata Elite Thermal Athletic Knit Top | Safety Line Accessories',
@@ -110,9 +166,9 @@ export const hosieryProducts: Product[] = [
       'Natural odor-resistant modal fiber integration',
       'Reinforced bound neckline retaining shape after laundering'
     ],
-    productCode: 'ACC-PTP-04',
+    productCode: 'ACC-PTP-06',
     status: 'Active',
-    displayOrder: 4,
+    displayOrder: 6,
     coverImage: geminiPtpjhImg,
     galleryImages: [geminiPtpjhImg],
     seoTitle: 'Quantum Aero Studio Conditioning Top | Safety Line Accessories',
@@ -137,9 +193,9 @@ export const hosieryProducts: Product[] = [
       'Anti-roll 3-inch high-tension compression waistband',
       'Reflective Safety Line emblem branding'
     ],
-    productCode: 'ACC-AFX-01',
+    productCode: 'ACC-AFX-07',
     status: 'Active',
-    displayOrder: 5,
+    displayOrder: 7,
     coverImage: womenSportsSetImg,
     galleryImages: [womenSportsSetImg],
     seoTitle: 'AeroFlex Seamless Compression Set | Safety Line Accessories',
@@ -164,9 +220,9 @@ export const hosieryProducts: Product[] = [
       'High-stretch anti-pilling composite',
       'Concealed zippered invisible hip utility pockets'
     ],
-    productCode: 'ACC-AUR-05',
+    productCode: 'ACC-AUR-08',
     status: 'Active',
-    displayOrder: 6,
+    displayOrder: 8,
     coverImage: mauveZipJacketImg,
     galleryImages: [mauveZipJacketImg],
     seoTitle: 'Aura Sculpt Zip-Up Contoured Layer | Safety Line Accessories',
@@ -191,9 +247,9 @@ export const hosieryProducts: Product[] = [
       'Anti-odor natural fiber infusion',
       'Non-restrictive relaxed athletic silhouette'
     ],
-    productCode: 'ACC-TER-06',
+    productCode: 'ACC-TER-09',
     status: 'Active',
-    displayOrder: 7,
+    displayOrder: 9,
     coverImage: terracottaRunTankImg,
     galleryImages: [terracottaRunTankImg],
     seoTitle: 'Terracotta Breeze Lightweight Racerback | Safety Line Accessories',
@@ -218,9 +274,9 @@ export const hosieryProducts: Product[] = [
       'Precision heat-sealed Safety Line chest insignia',
       'Pre-shrunk dimensional shape retention'
     ],
-    productCode: 'ACC-NOR-09',
+    productCode: 'ACC-NOR-10',
     status: 'Active',
-    displayOrder: 8,
+    displayOrder: 10,
     coverImage: blueMuscleTankImg,
     galleryImages: [blueMuscleTankImg],
     seoTitle: 'Nordic Ice Piping Contrast Muscle Tank | Safety Line Accessories',
@@ -245,9 +301,9 @@ export const hosieryProducts: Product[] = [
       'Invisible, ultra-sheer reinforced toe construction',
       'Anti-snag weave matrix for enhanced durability'
     ],
-    productCode: 'HS-AUR-01',
+    productCode: 'HS-AUR-11',
     status: 'Active',
-    displayOrder: 9,
+    displayOrder: 11,
     coverImage: 'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=800',
@@ -276,9 +332,9 @@ export const hosieryProducts: Product[] = [
       'Double-ply wear-prone heel reinforcement',
       'Natural thermoregulation and moisture absorption'
     ],
-    productCode: 'HS-CSH-02',
+    productCode: 'HS-CSH-12',
     status: 'Active',
-    displayOrder: 10,
+    displayOrder: 12,
     coverImage: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800',
@@ -307,9 +363,9 @@ export const hosieryProducts: Product[] = [
       'High-sheen light reflective satin finish',
       'Invisible sandal-toe reinforcement'
     ],
-    productCode: 'HS-SOV-03',
+    productCode: 'HS-SOV-13',
     status: 'Active',
-    displayOrder: 11,
+    displayOrder: 13,
     coverImage: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=800',
@@ -337,9 +393,9 @@ export const hosieryProducts: Product[] = [
       'Double-ply heel and ball-of-foot padding',
       'Colorfast reactive dye processing'
     ],
-    productCode: 'HS-INT-04',
+    productCode: 'HS-INT-14',
     status: 'Active',
-    displayOrder: 12,
+    displayOrder: 14,
     coverImage: 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
     galleryImages: [
       'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=800',
