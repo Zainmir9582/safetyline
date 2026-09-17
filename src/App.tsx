@@ -10,7 +10,7 @@ import { Product, Settings } from './types';
 import { products as defaultProducts, settings as defaultSettings } from './data';
 import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v15';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v16';
 
 export default function App() {
   const currentPath = usePath();
@@ -19,6 +19,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v15');
       localStorage.removeItem('safetyline_catalogue_v14');
       localStorage.removeItem('safetyline_catalogue_v13');
       localStorage.removeItem('safetyline_catalogue_v12');
@@ -39,6 +40,7 @@ export default function App() {
         if (Array.isArray(parsed) && parsed.length > 0) {
           const cleaned = parsed.filter((p: Product) =>
             !p.isListingSlot &&
+            !p.coverImage?.includes('unsplash') &&
             !p.coverImage?.includes('LISTING WINDOW') &&
             !['prod-vng-05', 'prod-ttn-06', 'prod-end-07', 'prod-hys-08', 'prod-vel-05', 'prod-mer-06'].includes(p.id)
           );
@@ -138,6 +140,9 @@ export default function App() {
           categorySlug="gearwear" 
           products={products} 
           settings={settings} 
+          onAddProduct={handleAddProduct}
+          onUpdateProduct={handleUpdateProduct}
+          onDeleteProduct={handleDeleteProduct}
         />
       );
     }
@@ -149,6 +154,9 @@ export default function App() {
           categorySlug="accessories" 
           products={products} 
           settings={settings} 
+          onAddProduct={handleAddProduct}
+          onUpdateProduct={handleUpdateProduct}
+          onDeleteProduct={handleDeleteProduct}
         />
       );
     }
@@ -160,6 +168,7 @@ export default function App() {
         <ProductDetails 
           slug={slug} 
           products={products} 
+          onUpdateProduct={handleUpdateProduct}
         />
       );
     }

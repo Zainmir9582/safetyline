@@ -75,7 +75,7 @@ export default function CategoryHub({
     if (isGearwear) {
       return ['All', 'Jackets & Outerwear', 'Tops & Compression', 'Tanks & Stringers', 'Bottoms & Shorts'];
     } else {
-      return ['All', 'Silk Stockings', 'Lounge & Dress Socks', 'Microfiber Tights'];
+      return ['All', 'Tops & Compression', 'Tanks & Performance', 'Layering & Outerwear'];
     }
   }, [isGearwear]);
 
@@ -108,9 +108,9 @@ export default function CategoryHub({
           if (selectedSubcat === 'Tanks & Stringers') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('stringer') || nameDesc.includes('sleeveless') || nameDesc.includes('bra');
           if (selectedSubcat === 'Bottoms & Shorts') matchSubcat = nameDesc.includes('short') || nameDesc.includes('legging') || nameDesc.includes('tights') || nameDesc.includes('set');
         } else {
-          if (selectedSubcat === 'Silk Stockings') matchSubcat = nameDesc.includes('silk') || nameDesc.includes('stocking') || nameDesc.includes('stay-up');
-          if (selectedSubcat === 'Lounge & Dress Socks') matchSubcat = nameDesc.includes('sock') || nameDesc.includes('cashmere') || nameDesc.includes('cotton');
-          if (selectedSubcat === 'Microfiber Tights') matchSubcat = nameDesc.includes('tights') || nameDesc.includes('microfiber') || nameDesc.includes('denier');
+          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('shirt') || nameDesc.includes('compression') || nameDesc.includes('layer') || nameDesc.includes('top') || nameDesc.includes('knit');
+          if (selectedSubcat === 'Tanks & Performance') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('sleeveless') || nameDesc.includes('racerback') || nameDesc.includes('set');
+          if (selectedSubcat === 'Layering & Outerwear') matchSubcat = nameDesc.includes('zip') || nameDesc.includes('layer') || nameDesc.includes('jacket') || nameDesc.includes('thermal');
         }
       }
 
@@ -407,7 +407,7 @@ export default function CategoryHub({
             >
               {isGearwear 
                 ? "Engineered with 3D seamless circular looms, graduated vascular compression, and moisture-wicking capillary matrices for elite endurance athletes and trainers."
-                : "Spun from Grade-6A raw Mulberry Silk, combed Egyptian cotton, and calibrated 15-25 mmHg elastomeric cores on high-cylinder Italian circular machines."
+                : "Engineered with high-gauge circular knitting, graduated athletic compression, moisture-wicking capillary matrices, and ergonomic seaming."
               }
             </motion.p>
 
@@ -500,7 +500,7 @@ export default function CategoryHub({
           <p className="text-slate-600 font-normal text-sm sm:text-base leading-relaxed">
             {isGearwear 
               ? "Explore engineered compression tees, hydrophobic shells, and athletic training shorts with full technical specifications."
-              : "Discover pure silk lace stockings, cashmere lounge socks, graduated compression wear, and technical textile accessories."
+              : "Discover precision engineered athletic tanks, compression layers, technical performance shirts, and athletic activewear."
             }
           </p>
         </div>

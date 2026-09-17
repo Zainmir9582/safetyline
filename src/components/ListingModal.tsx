@@ -4,6 +4,8 @@ import {
 } from 'lucide-react';
 import { Product } from '../types';
 
+import defaultFallbackImg from '../assets/images/shirts 1.jpeg';
+
 interface ListingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -84,7 +86,7 @@ export default function ListingModal({
         'OEKO-TEX Standard 100 Certified skin-safe fibers'
       ]);
       setStatus('Active');
-      setCoverImage('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600');
+      setCoverImage('');
       setGalleryImages([]);
       setError(null);
     }
@@ -188,7 +190,7 @@ export default function ListingModal({
       productCode: productCode.trim() || `SL-${Math.floor(1000 + Math.random() * 9000)}`,
       status,
       displayOrder: productToEdit?.displayOrder || 10,
-      coverImage: coverImage.trim() || 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600',
+      coverImage: coverImage.trim() || defaultFallbackImg,
       galleryImages,
       seoTitle: `${name.trim()} | Safety Line`,
       seoDescription: shortDescription.trim(),
