@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import PortalLanding from './components/PortalLanding';
 import CategoryHub from './components/CategoryHub';
 import ProductDetails from './components/ProductDetails';
@@ -221,6 +222,7 @@ export default function App() {
       <main className="flex-grow">
         {renderView()}
       </main>
+      <Analytics />
     </div>
   );
 }
