@@ -47,20 +47,22 @@ export default function Footer({ settings }: FooterProps) {
             </div>
 
             {/* Social Channels */}
-            <div className="pt-2">
-              <span className="block text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider mb-2">
+            <div className="pt-2 space-y-2">
+              <span className="block text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider">
                 Official Channels
               </span>
-              <div className="flex items-center gap-2">
+              <div className="space-y-1.5">
                 {settings.instagramGearwear && (
                   <a
                     href={settings.instagramGearwear}
                     target="_blank"
                     referrerPolicy="no-referrer"
-                    title="Instagram - Safety Line Gearwear"
-                    className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#E1306C] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                    title="Instagram - Gearwear Athletic"
+                    className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-slate-50 hover:bg-[#E1306C] hover:text-white text-slate-700 border border-slate-200/80 transition-all group text-xs font-medium"
                   >
-                    <Instagram className="w-4 h-4" />
+                    <Instagram className="w-3.5 h-3.5 text-[#E1306C] group-hover:text-white shrink-0 transition-colors" />
+                    <span className="text-[11px] font-mono">IG: Gearwear</span>
+                    <ExternalLink className="w-2.5 h-2.5 ml-auto opacity-50" />
                   </a>
                 )}
                 {settings.instagramHosiery && (
@@ -68,19 +70,24 @@ export default function Footer({ settings }: FooterProps) {
                     href={settings.instagramHosiery}
                     target="_blank"
                     referrerPolicy="no-referrer"
-                    title="Instagram - Safety Line Hosiery"
-                    className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#833AB4] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                    title="Instagram - Accessories & Hosiery"
+                    className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-slate-50 hover:bg-[#833AB4] hover:text-white text-slate-700 border border-slate-200/80 transition-all group text-xs font-medium"
                   >
-                    <Instagram className="w-4 h-4" />
+                    <Instagram className="w-3.5 h-3.5 text-[#833AB4] group-hover:text-white shrink-0 transition-colors" />
+                    <span className="text-[11px] font-mono">IG: Accessories</span>
+                    <ExternalLink className="w-2.5 h-2.5 ml-auto opacity-50" />
                   </a>
                 )}
+              </div>
+              
+              <div className="flex items-center gap-2 pt-1">
                 {settings.facebookUrl && (
                   <a
                     href={settings.facebookUrl}
                     target="_blank"
                     referrerPolicy="no-referrer"
                     title="Facebook - Safety Line Industries"
-                    className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#1877F2] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                    className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#1877F2] hover:text-white text-slate-600 flex items-center justify-center transition-colors border border-slate-200/60"
                   >
                     <Facebook className="w-4 h-4" />
                   </a>
@@ -90,7 +97,7 @@ export default function Footer({ settings }: FooterProps) {
                   target="_blank"
                   referrerPolicy="no-referrer"
                   title="WhatsApp Concierge (+92 3040000445)"
-                  className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#25D366] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                  className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#25D366] hover:text-white text-slate-600 flex items-center justify-center transition-colors border border-slate-200/60"
                 >
                   <MessageCircle className="w-4 h-4" />
                 </a>

@@ -1,10 +1,12 @@
 import { Zap, ShieldCheck, Cpu, ArrowRight, MessageCircle, Star, PhoneCall, Mail, Clock, Calendar, Sparkles, Activity, Layers, Compass, Instagram, Facebook, MapPin, ExternalLink } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, Settings } from '../types';
 import { testimonials as defaultTestimonials } from '../data';
 import { articles } from '../data/articles';
 import SEO from './SEO';
+import ProductCard from './ProductCard';
+import SmoothImage from './SmoothImage';
 import factoryImg from '../assets/images/safetyline_exact_user_pic_1788337630939.jpg';
 import gearwearHeroImg from '../assets/images/D1211178.jpg';
 
@@ -361,54 +363,18 @@ export default function Home({ products, settings }: HomeProps) {
           </div>
 
           {/* 4 columns on desktop, 2 on tablet, 1 on mobile */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {latestProducts.map((p) => (
-              <div 
-                key={p.id}
-                onClick={() => navigate(`/product/${p.slug}`)}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
-              >
-                <div className="aspect-square bg-[#F8FAFB] overflow-hidden relative flex items-center justify-center p-3.5 border-b border-slate-100">
-                  <img 
-                    src={p.coverImage} 
-                    alt={p.name}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 right-3 bg-[#0B3D3B] text-white px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-xs">
-                    {p.categoryName}
-                  </div>
-                  <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs text-[#0B3D3B] font-mono text-[9px] px-2 py-0.5 rounded border border-slate-200 font-bold shadow-xs">
-                    {p.productCode}
-                  </div>
-                </div>
-                
-                <div className="p-5 flex flex-col justify-between flex-grow space-y-3">
-                  <div className="space-y-1">
-                    <p className="text-[10px] text-slate-500 font-mono tracking-wider font-semibold uppercase">
-                      {p.material.split(',')[0]}
-                    </p>
-                    <h3 className="font-display font-bold text-[#0B3D3B] text-base group-hover:text-[#FF5A36] transition-colors line-clamp-1">
-                      {p.name}
-                    </h3>
-                    <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal">
-                      {p.shortDescription}
-                    </p>
-                  </div>
-                  
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                      <span>View Details</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-mono">
-                      {p.sizes.length} Sizes
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <AnimatePresence mode="popLayout">
+              {latestProducts.map((p, idx) => (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  priority={idx < 4}
+                  onClick={() => navigate(`/product/${p.slug}`)}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
         </div>
       </section>

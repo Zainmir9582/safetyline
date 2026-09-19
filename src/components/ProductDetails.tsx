@@ -2,13 +2,14 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ChevronLeft, ChevronRight, CornerDownLeft, ShieldCheck, HelpCircle, PhoneCall, 
   AlertTriangle, MessageSquare, ZoomIn, ZoomOut, Maximize2, Minimize2, Move, RotateCcw, 
-  X, Star, Loader2, MessageCircle, ArrowRight, CheckCircle2, Sparkles, Scan
+  X, Star, Loader2, MessageCircle, ArrowRight, CheckCircle2, Sparkles, Scan, Mail
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, ProductFeedback } from '../types';
 import { settings } from '../data';
 import SEO from './SEO';
+import SmoothImage from './SmoothImage';
 
 interface ProductDetailsProps {
   slug: string;
@@ -521,12 +522,12 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                         : 'border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400'
                     }`}
                   >
-                    <img 
+                    <SmoothImage 
                       src={img} 
-                      alt="Thumbnail view" 
+                      alt={`Thumbnail view ${idx + 1}`} 
+                      containerClassName="w-full h-full flex items-center justify-center"
                       className="w-full h-full object-contain" 
-                      loading="lazy"
-                      decoding="async"
+                      priority={idx < 2}
                     />
                   </button>
                 ))}
@@ -683,12 +684,20 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 <span>Inquire via WhatsApp</span>
               </a>
 
+              <a
+                href={`mailto:${settings.contactEmail}?subject=${encodeURIComponent(`Catalogue Inquiry: ${product.name} (SL-${product.productCode})`)}&body=${encodeURIComponent(`Hello Safety Line Advisory Desk,\n\nI am inquiring regarding the ${product.name} (Code: SL-${product.productCode}). Please send the complete specification sheet and sample details.\n\nThank you.`)}`}
+                className="bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs tracking-wider uppercase py-4 px-5 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm cursor-pointer"
+                title={`Email directly to ${settings.contactEmail}`}
+              >
+                <Mail className="w-4 h-4 text-[#D9F0EC]" />
+                <span>Email Specs</span>
+              </a>
+
               <button
                 onClick={() => navigate(`/${parentCategorySlug}`)}
-                className="bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs tracking-wider uppercase py-4 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs tracking-wider uppercase py-4 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all cursor-pointer"
               >
-                <PhoneCall className="w-4 h-4 text-[#D9F0EC]" />
-                <span>{parentCategoryLabel} Hub</span>
+                <span>{parentCategoryLabel}</span>
               </button>
             </div>
           </div>

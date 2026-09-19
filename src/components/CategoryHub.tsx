@@ -5,12 +5,14 @@ import {
   CheckCircle2, Compass, Send, ArrowUpRight, Filter, ChevronRight, Menu, X,
   Instagram, Facebook, ExternalLink, MapPin, Image as ImageIcon
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, Settings } from '../types';
 import { certifications, testimonials } from '../data';
 import SEO from './SEO';
 import ListingModal from './ListingModal';
+import ProductCard from './ProductCard';
+import SmoothImage from './SmoothImage';
 import brandLogo from '../assets/images/safetyline_landing.png';
 import gearwearHeroImg from '../assets/images/regenerated_image_1788778657693.jpg';
 import gearwearHeroBg from '../assets/images/regenerated_image_1788778660220.jpg';
@@ -468,16 +470,15 @@ export default function CategoryHub({
               transition={{ duration: 0.6 }}
               className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 bg-slate-900"
             >
-              <img
+              <SmoothImage
                 src={isGearwear 
                   ? gearwearHeroBg
                   : hosieryHeroImg
                 }
                 alt={isGearwear ? "Athletic Gearwear" : "Technical Accessories Collection"}
-                className="w-full h-full object-cover transition-opacity duration-300"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
+                priority={true}
+                containerClassName="w-full h-full"
+                className="w-full h-full object-cover"
               />
             </motion.div>
           </div>
@@ -558,70 +559,26 @@ export default function CategoryHub({
           </div>
         </div>
 
-        {/* Product Cards Grid */}
+        {/* Product Cards Grid with Smooth Framer Motion Reflow & Preloaded Shimmer */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredProducts.map((p) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                onClick={() => navigate(`/product/${p.slug}`)}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  {/* Full Shape Product Image Container */}
-                  <div className="aspect-square bg-[#F8FAFB] relative overflow-hidden flex items-center justify-center p-3.5 border-b border-slate-100">
-                    <img
-                      src={p.coverImage}
-                      alt={p.name}
-                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="absolute top-3 left-3 bg-[#0B3D3B] text-white px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase shadow-xs">
-                      {p.productCode}
-                    </div>
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-5 space-y-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#FF5A36] font-bold block">
-                      {p.material ? p.material.split(',')[0] : 'Custom Material'}
-                    </span>
-
-                    <h3 className="font-display font-bold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug line-clamp-1">
-                      {p.name}
-                    </h3>
-
-                    <p className="text-slate-600 text-xs font-normal leading-relaxed line-clamp-2">
-                      {p.shortDescription}
-                    </p>
-
-                    {/* Features checklist snippet */}
-                    {p.features && p.features.length > 0 && (
-                      <div className="pt-2 border-t border-slate-100 space-y-1">
-                        <span className="text-[10px] text-slate-500 font-mono flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
-                          <span className="truncate">{p.features[0]}</span>
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Card Action Footer */}
-                <div className="p-5 pt-0">
-                  <div className="w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-between transition-all bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white">
-                    <span>View Specifications</span>
-                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filteredProducts.map((p, idx) => (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  priority={idx < 4}
+                  onClick={() => navigate(`/product/${p.slug}`)}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
         ) : (
-          <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 space-y-3">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16 bg-white rounded-2xl border border-slate-200 space-y-3"
+          >
             <Filter className="w-10 h-10 text-slate-300 mx-auto" />
             <h3 className="font-display text-base font-bold text-[#0B3D3B]">No {isGearwear ? 'Gearwear' : 'Accessories'} items match your filter</h3>
             <p className="text-xs text-slate-500 max-w-xs mx-auto">Try resetting your search query or selecting "All" subcategories.</p>
@@ -633,7 +590,7 @@ export default function CategoryHub({
                 Reset Filters
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
 
       </section>
@@ -738,38 +695,63 @@ export default function CategoryHub({
          ========================================================================= */}
       <footer className="bg-white border-t border-slate-200 py-12 text-slate-600 font-sans text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             
-            <div className="space-y-3">
+            {/* Col 1: Brand & Division Specific Social */}
+            <div className="space-y-4">
               <div className="flex items-center">
                 <div className="flex items-baseline space-x-1">
                   <span className="font-serif font-black text-xs uppercase tracking-wider">
                     <span className="text-[#EA2227]">SAFETY</span> <span className="text-black">LINE</span>
                   </span>
-                  <span className="text-[9px] font-mono font-bold text-slate-400 uppercase ml-1">
+                  <span className="text-[9px] font-mono font-bold text-[#FF5A36] uppercase ml-1">
                     • {isGearwear ? 'GEARWEAR' : 'ACCESSORIES'}
                   </span>
                 </div>
               </div>
               <p className="text-[11px] text-slate-500 leading-relaxed font-normal">
                 {isGearwear 
-                  ? "High-compression aerodynamic sportswear and seamless active knits engineered for athletes."
+                  ? "High-compression aerodynamic sportswear and seamless active knits engineered for elite athletes."
                   : "Technical accessories, luxury legwear, pure mulberry silk stockings, and graduated compression gear."
                 }
               </p>
+
+              {/* Division-Specific Instagram Link */}
+              <div className="pt-1">
+                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold mb-1.5">
+                  {isGearwear ? 'Gearwear Instagram' : 'Accessories Instagram'}
+                </span>
+                <a
+                  href={isGearwear ? settings.instagramGearwear : settings.instagramHosiery}
+                  target="_blank"
+                  referrerPolicy="no-referrer"
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-white font-mono text-[11px] font-bold shadow-xs transition-all ${
+                    isGearwear 
+                      ? 'bg-gradient-to-r from-[#E1306C] to-[#FF5A36] hover:brightness-110'
+                      : 'bg-gradient-to-r from-[#833AB4] to-[#E1306C] hover:brightness-110'
+                  }`}
+                >
+                  <Instagram className="w-3.5 h-3.5 shrink-0" />
+                  <span>{isGearwear ? '@safetyline_industries_official' : '@safetylineindustries__official'}</span>
+                  <ExternalLink className="w-3 h-3 opacity-70 ml-0.5" />
+                </a>
+              </div>
             </div>
 
+            {/* Col 2: Category Sections */}
             <div>
               <h4 className="font-display font-bold text-xs text-[#0B3D3B] uppercase tracking-wider mb-3">
                 {isGearwear ? 'Gearwear Sections' : 'Accessories Sections'}
               </h4>
               <ul className="space-y-2 text-slate-600">
-                <li><button onClick={() => navScroll('items-section')} className="hover:text-[#0B3D3B] cursor-pointer">Browse Items</button></li>
-                <li><button onClick={() => navScroll('features-section')} className="hover:text-[#0B3D3B] cursor-pointer">Standards & Specifications</button></li>
-                <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer font-medium">Company Profile</button></li>
+                <li><button onClick={() => navScroll('items-section')} className="hover:text-[#0B3D3B] cursor-pointer">Browse Catalogue Items</button></li>
+                <li><button onClick={() => navScroll('features-section')} className="hover:text-[#0B3D3B] cursor-pointer">Technical Specifications</button></li>
+                <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer font-medium">Factory Standards & Certs</button></li>
+                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Request Swatches & Samples</button></li>
               </ul>
             </div>
 
+            {/* Col 3: Corporate & Navigation */}
             <div>
               <h4 className="font-display font-bold text-xs text-[#0B3D3B] uppercase tracking-wider mb-3">
                 Corporate & Navigation
@@ -777,12 +759,49 @@ export default function CategoryHub({
               <ul className="space-y-2 text-slate-600">
                 <li>
                   <button onClick={() => navigate('/')} className="hover:text-[#FF5A36] cursor-pointer font-bold inline-flex items-center gap-1">
-                    <span>← Switch Division / Portal</span>
+                    <span>← Switch Division / Main Portal</span>
                   </button>
                 </li>
-                <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer">About Safety Line</button></li>
-                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Contact & Advisory Desk</button></li>
-                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Wholesale Desk</button></li>
+                <li>
+                  <button onClick={() => navigate(isGearwear ? '/accessories' : '/gearwear')} className="hover:text-[#0B3D3B] cursor-pointer">
+                    {isGearwear ? 'Visit Accessories Division' : 'Visit Gearwear Division'}
+                  </button>
+                </li>
+                <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer">About Safety Line Heritage</button></li>
+                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Wholesale & OEM Desk</button></li>
+              </ul>
+            </div>
+
+            {/* Col 4: Contact & Inquiries */}
+            <div className="space-y-3">
+              <h4 className="font-display font-bold text-xs text-[#0B3D3B] uppercase tracking-wider mb-3">
+                Direct Contact Desk
+              </h4>
+              <ul className="space-y-2 text-xs">
+                <li className="flex items-center space-x-2">
+                  <Mail className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
+                  <a href={`mailto:${settings.contactEmail}`} className="text-slate-700 hover:text-[#0B3D3B] font-mono font-medium transition-colors">
+                    {settings.contactEmail}
+                  </a>
+                </li>
+                {settings.salesEmail && (
+                  <li className="flex items-center space-x-2">
+                    <Mail className="w-3.5 h-3.5 text-[#0B3D3B] shrink-0" />
+                    <a href={`mailto:${settings.salesEmail}`} className="text-slate-700 hover:text-[#0B3D3B] font-mono font-medium transition-colors">
+                      {settings.salesEmail}
+                    </a>
+                  </li>
+                )}
+                <li className="flex items-center space-x-2">
+                  <PhoneCall className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
+                  <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="font-mono text-slate-700 hover:text-[#0B3D3B] transition-colors font-medium">
+                    {settings.contactPhone}
+                  </a>
+                </li>
+                <li className="flex items-start space-x-2 pt-1 text-[11px] text-slate-500">
+                  <MapPin className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
+                  <span>Sialkot Manufacturing Complex, Pakistan</span>
+                </li>
               </ul>
             </div>
 

@@ -65,3 +65,13 @@ body {
   background-image: radial-gradient(rgba(217, 240, 236, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+

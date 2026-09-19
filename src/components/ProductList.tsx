@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Search, SlidersHorizontal, ArrowRight, Layers, Sparkles, X } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, Category } from '../types';
 import SEO from './SEO';
+import ProductCard from './ProductCard';
 
 interface ProductListProps {
   categorySlug: 'gearwear' | 'hosiery';
@@ -167,91 +168,18 @@ export default function ProductList({ categorySlug, products, categories }: Prod
 
         {/* Dynamic Products Grid (4 per row desktop, 2 per row tablet, 1 on mobile) */}
         {filteredProducts.length > 0 ? (
-          <div id="product-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredProducts.map((p, idx) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.04, duration: 0.3 }}
-                id={`product-card-${p.slug}`}
-                onClick={() => navigate(`/product/${p.slug}`)}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
-              >
-                {/* Product Cover image - Full shape uncropped */}
-                <div className="aspect-square bg-[#F8FAFB] overflow-hidden relative flex items-center justify-center p-3.5 border-b border-slate-100">
-                  <img
-                    src={p.coverImage}
-                    alt={p.name}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute top-3 right-3 bg-[#0B3D3B] text-white px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-xs">
-                    {p.categoryName}
-                  </div>
-                  <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs text-[#0B3D3B] font-mono text-[9px] px-2 py-0.5 rounded border border-slate-200 font-bold">
-                    {p.productCode}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-5 flex flex-col justify-between flex-grow space-y-3">
-                  <div className="space-y-1">
-                    <p className="text-[10px] text-slate-500 font-mono tracking-wider font-semibold uppercase">
-                      {p.material.split(',')[0]}
-                    </p>
-                    <h2 className="font-display font-bold text-[#0B3D3B] text-base group-hover:text-[#FF5A36] transition-colors line-clamp-1">
-                      {p.name}
-                    </h2>
-                    <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal">
-                      {p.shortDescription}
-                    </p>
-                  </div>
-
-                  {/* Colors Preview */}
-                  {p.colors && p.colors.length > 0 && (
-                    <div className="flex items-center gap-1.5 pt-1">
-                      <div className="flex items-center -space-x-1">
-                        {p.colors.map((c) => {
-                          const lower = c.toLowerCase();
-                          let dotColor = 'bg-[#FF5A36]';
-                          if (lower.includes('yellow')) dotColor = 'bg-amber-400 border border-amber-500/40';
-                          else if (lower.includes('white')) dotColor = 'bg-white border border-slate-300 shadow-2xs';
-                          else if (lower.includes('black')) dotColor = 'bg-neutral-900 border border-neutral-700';
-                          else if (lower.includes('red')) dotColor = 'bg-red-600 border border-red-700/40';
-                          else if (lower.includes('blue')) dotColor = 'bg-blue-600 border border-blue-700/40';
-                          else if (lower.includes('brown')) dotColor = 'bg-[#B58863] border border-[#8A5A36]/40';
-                          return (
-                            <span
-                              key={c}
-                              title={c}
-                              className={`w-3.5 h-3.5 rounded-full inline-block shadow-2xs ${dotColor}`}
-                            />
-                          );
-                        })}
-                      </div>
-                      <span className="text-[10px] text-slate-400 font-mono ml-1">
-                        {p.colors.length} Colors
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                      <span>View Specs</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                    {currentCategory !== 'gearwear' && p.sizes && p.sizes.length > 0 && (
-                      <span className="text-[10px] text-slate-400 font-mono">
-                        {p.sizes.length} Sizes
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div layout id="product-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filteredProducts.map((p, idx) => (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  priority={idx < 4}
+                  onClick={() => navigate(`/product/${p.slug}`)}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
         ) : (
           <div id="no-products-found" className="text-center py-20 bg-white rounded-2xl border border-slate-200 space-y-4">
             <Layers className="w-12 h-12 text-slate-300 mx-auto" />

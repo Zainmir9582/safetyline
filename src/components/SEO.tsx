@@ -86,7 +86,7 @@ export default function SEO({
         '@type': 'ContactPoint',
         'telephone': '+92 3040000445',
         'contactType': 'customer service',
-        'email': 'info@safetylineind.com'
+        'email': 'info@safetyline-ind.com'
       }
     };
 
