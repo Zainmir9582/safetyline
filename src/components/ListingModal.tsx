@@ -38,8 +38,6 @@ export default function ListingModal({
   const [longDescription, setLongDescription] = useState('');
   const [sizes, setSizes] = useState<string[]>(['XS', 'S', 'M', 'L', 'XL']);
   const [newSizeInput, setNewSizeInput] = useState('');
-  const [colors, setColors] = useState<string[]>(['Stealth Black', 'Pure White']);
-  const [newColorInput, setNewColorInput] = useState('');
   const [features, setFeatures] = useState<string[]>([
     'High-gauge ergonomic performance knit',
     'OEKO-TEX Standard 100 Class I Certified'
@@ -62,7 +60,6 @@ export default function ListingModal({
       setShortDescription(productToEdit.shortDescription || '');
       setLongDescription(productToEdit.longDescription || '');
       setSizes(productToEdit.sizes && productToEdit.sizes.length > 0 ? productToEdit.sizes : ['S', 'M', 'L', 'XL']);
-      setColors(productToEdit.colors && productToEdit.colors.length > 0 ? productToEdit.colors : ['Black', 'Navy']);
       setFeatures(productToEdit.features && productToEdit.features.length > 0 ? productToEdit.features : []);
       setStatus(productToEdit.status || 'Active');
       setCoverImage(productToEdit.coverImage || '');
@@ -79,7 +76,6 @@ export default function ListingModal({
       setShortDescription('');
       setLongDescription('');
       setSizes(['XS', 'S', 'M', 'L', 'XL']);
-      setColors(['Yellow', 'Red', 'Blue', 'Light Brown', 'White']);
       setFeatures([
         'Breathable circular knit with anti-friction Flatlock seams',
         'Hydrophobic moisture-wicking and thermal regulation',
@@ -136,13 +132,6 @@ export default function ListingModal({
     }
   };
 
-  const handleAddColor = () => {
-    if (newColorInput.trim() && !colors.includes(newColorInput.trim())) {
-      setColors(prev => [...prev, newColorInput.trim()]);
-      setNewColorInput('');
-    }
-  };
-
   const handleAddFeature = () => {
     if (newFeatureInput.trim()) {
       setFeatures(prev => [...prev, newFeatureInput.trim()]);
@@ -185,7 +174,7 @@ export default function ListingModal({
       longDescription: longDescription.trim() || shortDescription.trim(),
       material: material.trim() || 'Technical Knit Composite',
       sizes: sizes.length > 0 ? sizes : ['One Size'],
-      colors: colors.length > 0 ? colors : ['Standard'],
+      colors: [],
       features: features.length > 0 ? features : ['Precision engineered athletic construction'],
       productCode: productCode.trim() || `SL-${Math.floor(1000 + Math.random() * 9000)}`,
       status,
@@ -447,81 +436,44 @@ export default function ListingModal({
             </div>
           </div>
 
-          {/* Section 3: Technical Features, Sizes & Colors */}
+          {/* Section 3: Technical Features & Sizes */}
           <div className="space-y-4">
             <h3 className="text-xs font-mono font-bold text-[#0B3D3B] uppercase tracking-wider border-b border-slate-100 pb-1.5">
-              3. Variants & Technical Highlights
+              3. Sizing & Technical Highlights
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Sizes */}
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-700">Available Sizes</label>
-                <div className="flex flex-wrap gap-1.5 mb-2">
-                  {sizes.map((s, idx) => (
-                    <span key={idx} className="bg-slate-100 border border-slate-200 text-[#0B3D3B] text-[11px] font-mono px-2 py-0.5 rounded-md flex items-center gap-1.5">
-                      <span>{s}</span>
-                      <button
-                        type="button"
-                        onClick={() => setSizes(prev => prev.filter((_, i) => i !== idx))}
-                        className="text-slate-400 hover:text-rose-500 cursor-pointer"
-                      >
-                        &times;
-                      </button>
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="e.g. XXL or 39-42 EU"
-                    value={newSizeInput}
-                    onChange={(e) => setNewSizeInput(e.target.value)}
-                    className="flex-grow bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-1.5 text-xs outline-none font-mono"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleAddSize}
-                    className="bg-[#0B3D3B] text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer"
-                  >
-                    Add
-                  </button>
-                </div>
+            {/* Sizes */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-slate-700">Available Sizing Specifications</label>
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                {sizes.map((s, idx) => (
+                  <span key={idx} className="bg-slate-100 border border-slate-200 text-[#0B3D3B] text-[11px] font-mono px-2 py-0.5 rounded-md flex items-center gap-1.5">
+                    <span>{s}</span>
+                    <button
+                      type="button"
+                      onClick={() => setSizes(prev => prev.filter((_, i) => i !== idx))}
+                      className="text-slate-400 hover:text-rose-500 cursor-pointer"
+                    >
+                      &times;
+                    </button>
+                  </span>
+                ))}
               </div>
-
-              {/* Colors */}
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-700">Available Colorways</label>
-                <div className="flex flex-wrap gap-1.5 mb-2">
-                  {colors.map((c, idx) => (
-                    <span key={idx} className="bg-slate-100 border border-slate-200 text-[#0B3D3B] text-[11px] font-mono px-2 py-0.5 rounded-md flex items-center gap-1.5">
-                      <span>{c}</span>
-                      <button
-                        type="button"
-                        onClick={() => setColors(prev => prev.filter((_, i) => i !== idx))}
-                        className="text-slate-400 hover:text-rose-500 cursor-pointer"
-                      >
-                        &times;
-                      </button>
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="e.g. Navy Blue or Olive"
-                    value={newColorInput}
-                    onChange={(e) => setNewColorInput(e.target.value)}
-                    className="flex-grow bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-1.5 text-xs outline-none"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleAddColor}
-                    className="bg-[#0B3D3B] text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer"
-                  >
-                    Add
-                  </button>
-                </div>
+              <div className="flex gap-2 max-w-md">
+                <input
+                  type="text"
+                  placeholder="e.g. XXL or 39-42 EU"
+                  value={newSizeInput}
+                  onChange={(e) => setNewSizeInput(e.target.value)}
+                  className="flex-grow bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-1.5 text-xs outline-none font-mono"
+                />
+                <button
+                  type="button"
+                  onClick={handleAddSize}
+                  className="bg-[#0B3D3B] text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer"
+                >
+                  Add
+                </button>
               </div>
             </div>
 

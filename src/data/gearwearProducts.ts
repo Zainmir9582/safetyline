@@ -30,7 +30,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Engineered for high-intensity athletic performance, the Apex Pro Aero Compression Tee utilizes an ultra-dense polyamide composite that stabilizes micro-muscle groups while maximizing heat dissipation. Advanced flatlock structural stitching eliminates friction completely, and 4-way elastic memory maintains its exact ergonomic shape session after session.',
     material: '82% Aero-Polyamide, 18% Elastane Composite',
     sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Target-zoned moisture-wicking capillary channels',
       'Anti-microbial silver-ion thread technology',
@@ -57,7 +56,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Designed to combat unpredictable weather, the Zenith Stormshell features a triple-layer hydrophobic membrane that repels high-pressure rain while maintaining an incredibly high breathability rating. Includes fully taped inner seams, responsive adjustable cuffs, and dedicated concealed media compartments.',
     material: '100% Recycled Hydrophobic Polyester Ribbon',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       '15,000mm hydrostatic head waterproof rating',
       'Underarm dual-zipper thermal regulators',
@@ -84,7 +82,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'The Chronos Thermal Leggings provide optimal cold-weather performance. Featuring an insulating micro-brushed lining, these compression tights support blood flow, improve recovery times, and shield your muscles from sudden temperature drops during outdoor runs or sub-zero sessions.',
     material: '78% Thermal Polyamide, 22% Lycra Extra Life',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Micro-brushed internal thermal fleece lining',
       'High-waisted compression lumbar stabilizer',
@@ -111,7 +108,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Constructed using a proprietary zero-friction circular knit technique, the Stratum Shorts prevent chafing completely. With an integrated inner supportive liner and multi-directional knit ventilation, they deliver extreme comfort during the most challenging squat and sprint sessions.',
     material: '90% Nylon, 10% Spandex Core',
     sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Advanced 3D seamless structural design',
       'Integrated sweat-absorbent athletic brief liner',
@@ -138,7 +134,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Engineered for relentless gym conditioning and high-cadence athletic training. Spun from advanced performance textiles with ergonomic flatlock stitching and 4-way stretch fabric that moves with your body.',
     material: '88% Technical Microfiber Polyester, 12% Spandex',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Hydrophilic rapid-wicking capillary technology',
       'Ergonomic athletic seam contouring',
@@ -165,7 +160,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Designed for versatility across intense gym sessions, cardio routines, and athletic conditioning. Offers optimal thermal balance and durable shape retention wash after wash.',
     material: '85% Technical Polyamide, 15% Elastane Micro-Knit',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Multi-directional 4-way stretch recovery',
       'Micro-porous airflow ventilation structure',
@@ -192,7 +186,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Developed in collaboration with athletic craftsmen in Sialkot, this technical garment combines high tensile resilience with ultra-lightweight drape for unrestricted workout potential.',
     material: '90% Recycled Poly-Spandex Blend, 10% High-Grade Lycra',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Aerodynamic moisture transfer zones',
       'Chafe-free ergonomic edge binding',
@@ -219,7 +212,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'The AeroStrike garment is built to withstand high repetition workouts and aggressive training cycles. Spun with sweat-resistant fibers that stay dry and comfortable under peak exertion.',
     material: '86% Performance Micro-Poly, 14% Spandex Stretch',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Quick-evaporating vapor release matrix',
       'Reinforced neckline and armhole construction',
@@ -246,7 +238,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Engineered for endurance runners, lifters, and multi-sport athletes. Features heavy-duty stitching, soft skin-contact fabric, and breathable structural zoning.',
     material: '92% Performance Polyester, 8% Elastane Weave',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Endurance-grade high-tensile yarn',
       'Seamless friction-reduction engineering',
@@ -273,7 +264,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Velocity Core activewear delivers lightweight agility and immediate perspiration expulsion. Engineered to keep athletes focused and cool through the hardest sets.',
     material: '87% Hydrophobic Polyester, 13% Spandex Flex',
     sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Rapid-drying hydrophobic microfiber knit',
       'Athletic contoured cut for clean silhouettes',
@@ -300,7 +290,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Manufactured with premium Sialkot athletic textile expertise, this precision garment features reinforced seam lines, high-density stretch recovery, and specialized moisture-wicking yarn to provide uncompromising durability during intense training regimes.',
     material: '88% Technical Poly-Spandex Microfiber, 12% High-Tension Lycra (210 GSM)',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Multi-directional 4-way stretch recovery matrix',
       'Hydrophobic outer moisture barrier with rapid evaporation',
@@ -327,7 +316,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Combining high-durability Sialkot manufacturing heritage with contemporary sports styling. Offers outstanding comfort, flexible drape, and rugged everyday resilience.',
     material: '89% Performance Poly-Knit, 11% Spandex',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Zoned micro-mesh thermal expulsion',
       'Non-restrictive ergonomic silhouette',
@@ -354,7 +342,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Constructed for demanding gym lifters and field athletes requiring high-wear resistance. Features reinforced stress points, anti-microbial treatment, and flexible mobility.',
     material: '91% Technical Poly-Blend, 9% Spandex Core',
     sizes: ['M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Heavy-duty abrasion-resistant fabric surface',
       '4-way dynamic stretch for unrestricted range',
@@ -381,7 +368,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Crafted with fine-gauge athletic micro-fibers that regulate body heat during grueling workouts. Delivers an unyielding balance of flexibility, support, and tactile comfort.',
     material: '88% Recycled Poly-Spandex, 12% High-Tension Lycra',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Sweat-wicking micro-porous capillary weave',
       'Ergonomic motion-ready sleeve and body cut',
@@ -408,7 +394,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'The HyperDrive series emphasizes aerodynamic cooling and unhindered movement. Built from ultra-soft knit fabrics that rapidly dissipate moisture and prevent overheating.',
     material: '90% Featherlight Polyester, 10% Spandex Microfiber',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Rapid-dry hydrophilic vapor transport system',
       'Split side hem vents for increased hip mobility',
@@ -435,7 +420,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'Formulated to handle high-friction contact and heavy barbell movements without tearing or piling. Features reinforced stitch lines and a comfortable breathable fit.',
     material: '93% Combed Cotton-Poly Blend, 7% Elastane',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Reinforced high-load seam construction',
       'Dense breathable fabric that holds structure',
@@ -462,7 +446,6 @@ export const gearwearProducts: Product[] = [
     longDescription: 'A versatile technical athletic piece engineered for all-day athletic performance. Combines weather-resistant outer weave with soft moisture-absorbing inner contact.',
     material: '88% Technical Poly-Spandex, 12% Lycra Flex',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'All-weather thermal balancing weave',
       'Hydrophobic outer moisture barrier',

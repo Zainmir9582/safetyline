@@ -23,7 +23,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Engineered for optimal temperature regulation and active mobility during high-intensity training. Features multi-density poly-spandex knit construction with micro-ventilation zones across the chest and back that disperse moisture rapidly while maintaining structural form.',
     material: '84% Micro-Poly Performance Filament, 16% Spandex 4-Way Stretch (185 GSM)',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Engineered open-capillary moisture transfer weave',
       'Ergonomic athletic cut with zero-bind armholes',
@@ -50,7 +49,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Crafted using high-density circular knitting technology, this technical activewear piece delivers graduated compression support to core muscle groups. The dual-surface knit draws moisture away from the skin to the exterior face for rapid evaporation during peak exertion.',
     material: '80% High-Tenacity Micro-Polyester, 20% Elastane Lycra Power Knit (225 GSM)',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Graduated targeted athletic compression profile',
       'Reinforced bar-tack stress point construction',
@@ -77,7 +75,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Engineered for intensive conditioning and daily activewear, this performance training shirt combines ultra-fine combed poly-cotton filaments with targeted elastane flexibility. The specialized micro-pique knit creates micro-capillary air channels across the torso that accelerate moisture evaporation while maintaining a structured, crisp silhouette.',
     material: '65% Combed Micro-Polyester, 30% Long-Staple Ringspun Cotton, 5% Lycra Spandex (190 GSM)',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Micro-pique dual-face airflow knitting technology',
       'Ergonomic raglan shoulder articulation preventing seam friction',
@@ -104,7 +101,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Constructed on high-gauge Italian circular knitting machines, this technical athletic accessory layer delivers graduated muscle support and friction-free skin contact. The ultra-fine polyamide yarn is blended with high-tension elastane to resist deformation across thousands of stretch cycles while keeping the athlete cool and dry.',
     material: '82% High-Tenacity Micro-Polyamide, 18% Elastane Power-Spandex (220 GSM)',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Graduated athletic compression for targeted muscle group recovery',
       'Zero-chafe ultra-flat interlock seam construction',
@@ -131,7 +127,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Tailored for transitional weather training and active recovery. Features an engineered double-knit jacquard architecture with a brushed thermal micro-fleece interior that gently traps body heat while the smooth, abrasion-resistant outer shell shields against wind drafts and friction.',
     material: '78% Technical Micro-Poly Jacquard, 16% Modal Fiber, 6% Spandex (240 GSM)',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Dual-faced thermal jacquard weave for balanced microclimate control',
       'Ultra-soft modal blend delivering a buttery, skin-safe hand feel',
@@ -158,7 +153,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Designed for studio conditioning, high-mobility yoga, and athletic conditioning. Woven with micro-denier poly-modal filaments that provide an ultra-lightweight, cool-to-touch sensation on the skin with zero cling during high-sweat exertion.',
     material: '70% Micro-Denier Polyester, 22% Micro-Modal, 8% Lycra Elastane (175 GSM)',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Featherweight 175 GSM open-knit breathable structure',
       'Silky tactile skin glide with zero-friction draping',
@@ -185,7 +179,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Engineered with seamless circular knitting technology for zero-rub comfort and compression support. Features an elasticized underband and high-rise sculpting waist with graduated pressure distribution.',
     material: '78% Recycled Poly-Spandex Microfiber, 22% High-Tension Lycra',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Targeted core & glute compression support',
       'Sweat-wicking micro-porous capillary weave',
@@ -212,7 +205,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Crafted from soft brushed nylon-elastane fabric with ergonomic princess seamlines. Includes extended cuffs with reinforced thumbholes and full-length zip.',
     material: '75% Tactel Micro-Nylon, 25% Spandex Feather-Soft Knit',
     sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Ergonomic princess seam sculpting architecture',
       'Extended sleeve cuffs with integrated thumbholes',
@@ -239,7 +231,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Spun from micro-open knit slub jersey for generous airflow and quick evaporation during intensive workouts or warm-weather training.',
     material: '85% Micro-Modal, 15% Performance Polyester Slub',
     sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Open-pore micro-knit fiber structure',
       'Deep cut armholes for full mobility',
@@ -266,7 +257,6 @@ export const hosieryProducts: Product[] = [
     longDescription: 'Minimalist athletic elegance meets raw performance. Tailored with a clean crew collar, contrast black edge binding around the neckline and deep armholes, and subtle Safety Line monogram on the upper chest. Pairs seamlessly with compression shorts or high-rise tights.',
     material: '92% Combed Athletic Cotton, 8% Lycra Soft-Flex',
     sizes: ['XS', 'S', 'M', 'L'],
-    colors: ['Yellow', 'Red', 'Blue', 'Light Brown', 'White'],
     features: [
       'Contrast black reinforced rib-knit edge binding',
       'Soft-brushed combed cotton hand with dynamic 4-way stretch',

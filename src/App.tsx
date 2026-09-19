@@ -10,7 +10,7 @@ import { Product, Settings } from './types';
 import { products as defaultProducts, settings as defaultSettings } from './data';
 import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v16';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v17';
 
 export default function App() {
   const currentPath = usePath();
@@ -19,6 +19,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v16');
       localStorage.removeItem('safetyline_catalogue_v15');
       localStorage.removeItem('safetyline_catalogue_v14');
       localStorage.removeItem('safetyline_catalogue_v13');

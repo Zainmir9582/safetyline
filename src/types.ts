@@ -15,7 +15,7 @@ export interface Product {
   longDescription: string;
   material: string;
   sizes: string[];
-  colors: string[];
+  colors?: string[];
   features: string[];
   productCode: string;
   status: 'Active' | 'Draft';

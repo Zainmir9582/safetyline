@@ -17,7 +17,18 @@ export const defaultCategories: Category[] = [
   }
 ];
 
-export const defaultProducts: Product[] = [...gearwearProducts, ...hosieryProducts];
+// Helper to interleave products so gearwear and hosiery images appear in parallel
+export function interleaveProducts(a: Product[], b: Product[]): Product[] {
+  const result: Product[] = [];
+  const max = Math.max(a.length, b.length);
+  for (let i = 0; i < max; i++) {
+    if (i < a.length) result.push(a[i]);
+    if (i < b.length) result.push(b[i]);
+  }
+  return result;
+}
+
+export const defaultProducts: Product[] = interleaveProducts(gearwearProducts, hosieryProducts);
 
 export const defaultSettings: Settings = {
   companyName: 'Safety Line',

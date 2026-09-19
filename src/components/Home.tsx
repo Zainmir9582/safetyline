@@ -16,11 +16,18 @@ interface HomeProps {
 }
 
 export default function Home({ products, settings }: HomeProps) {
-  // Show 8 top/recent products with newly added products featured prominently
-  const latestProducts = [...products]
-    .filter(p => p.status === 'Active')
-    .reverse()
-    .slice(0, 8);
+  // Parallel product showcase: interleave Gearwear and Hosiery active products side-by-side
+  const gearwearActive = products.filter(p => p.status === 'Active' && p.categoryId === 'cat-gearwear');
+  const hosieryActive = products.filter(p => p.status === 'Active' && (p.categoryId === 'cat-hosiery' || p.categoryId === 'cat-accessories'));
+  
+  const parallelProducts: Product[] = [];
+  const maxLen = Math.max(gearwearActive.length, hosieryActive.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (i < gearwearActive.length) parallelProducts.push(gearwearActive[i]);
+    if (i < hosieryActive.length) parallelProducts.push(hosieryActive[i]);
+  }
+
+  const latestProducts = parallelProducts.slice(0, 8);
 
   const featuredArticles = articles.slice(0, 3);
 
@@ -342,7 +349,7 @@ export default function Home({ products, settings }: HomeProps) {
                 Latest Performance Releases
               </h2>
               <p className="text-slate-600 font-normal text-sm sm:text-base max-w-xl">
-                Browse our latest additions. Each product profile includes comprehensive technical yarn specs, sizing options, colorways, and instant inquiry channels.
+                Browse our latest additions. Each product profile includes comprehensive technical yarn specs, sizing options, and instant inquiry channels.
               </p>
             </div>
             

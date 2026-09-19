@@ -1,4 +1,4 @@
-import { Settings, Category } from '../types';
+import { Settings, Category, Product } from '../types';
 import { gearwearProducts } from './gearwearProducts';
 import { hosieryProducts } from './hosieryProducts';
 import { articles } from './articles';
@@ -18,7 +18,18 @@ export const categories: Category[] = [
   }
 ];
 
-export const allProducts = [...gearwearProducts, ...hosieryProducts];
+// Helper to interleave products so gearwear and hosiery images appear in parallel side-by-side
+export function interleaveProducts(a: Product[], b: Product[]): Product[] {
+  const result: Product[] = [];
+  const max = Math.max(a.length, b.length);
+  for (let i = 0; i < max; i++) {
+    if (i < a.length) result.push(a[i]);
+    if (i < b.length) result.push(b[i]);
+  }
+  return result;
+}
+
+export const allProducts = interleaveProducts(gearwearProducts, hosieryProducts);
 export const products = allProducts;
 
 export const settings: Settings = {
