@@ -128,15 +128,23 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'instant' as any });
   }, [currentPath]);
 
-  // Routing render block
+  // Routing render block with path normalization and direct alias routing
   const renderView = () => {
-    // 1. Root Gateway Portal (Landing page showing only logo, name, and 2 options: Hosiery & Gearwear)
-    if (currentPath === '/') {
+    const cleanPath = currentPath.replace(/\/+$/, '').toLowerCase() || '/';
+
+    // 1. Root Gateway Portal (Landing page showing official emblem and division selector)
+    if (cleanPath === '/' || cleanPath === '') {
       return <PortalLanding />;
     }
 
-    // 2. Dedicated Gearwear Hub (Items, About, Features, Blogs, Testimonials, Inquiry Desk)
-    if (currentPath === '/gearwear') {
+    // 2. Dedicated Gearwear Division Page (Athletic Knits, Technical Outerwear, Specs)
+    if (
+      cleanPath === '/gearwear' || 
+      cleanPath === '/products/gearwear' || 
+      cleanPath === '/catalog/gearwear' || 
+      cleanPath === '/sportswear' || 
+      cleanPath === '/apparel'
+    ) {
       return (
         <CategoryHub 
           categorySlug="gearwear" 
@@ -149,8 +157,15 @@ export default function App() {
       );
     }
 
-    // 3. Dedicated Accessories Hub (Items, About, Features, Blogs, Testimonials, Inquiry Desk)
-    if (currentPath === '/accessories' || currentPath === '/hosiery') {
+    // 3. Dedicated Accessories Division Page (Technical Accessories, Compression Sleeves, Legwear)
+    if (
+      cleanPath === '/accessories' || 
+      cleanPath === '/hosiery' || 
+      cleanPath === '/products/accessories' || 
+      cleanPath === '/products/hosiery' || 
+      cleanPath === '/catalog/accessories' ||
+      cleanPath === '/catalog/hosiery'
+    ) {
       return (
         <CategoryHub 
           categorySlug="accessories" 
@@ -164,8 +179,8 @@ export default function App() {
     }
 
     // 4. Product details dynamic page
-    if (currentPath.startsWith('/product/')) {
-      const slug = currentPath.substring('/product/'.length);
+    if (cleanPath.startsWith('/product/')) {
+      const slug = cleanPath.substring('/product/'.length);
       return (
         <ProductDetails 
           slug={slug} 
@@ -176,23 +191,23 @@ export default function App() {
     }
 
     // 5. Individual Blog Post
-    if (currentPath.startsWith('/blog/')) {
-      const slug = currentPath.substring('/blog/'.length);
+    if (cleanPath.startsWith('/blog/')) {
+      const slug = cleanPath.substring('/blog/'.length);
       return <BlogDetails slug={slug} />;
     }
 
     // 6. Corporate About Us Page
-    if (currentPath === '/about') {
+    if (cleanPath === '/about' || cleanPath === '/about-us') {
       return <AboutUs settings={settings} />;
     }
 
     // 7. Contact & Wholesale Inquiry Desk
-    if (currentPath === '/contact') {
+    if (cleanPath === '/contact' || cleanPath === '/contact-us' || cleanPath === '/inquiry') {
       return <ContactUs settings={settings} />;
     }
 
     // 8. Convenience redirect for blog root
-    if (currentPath === '/blog') {
+    if (cleanPath === '/blog') {
       return <PortalLanding />;
     }
 

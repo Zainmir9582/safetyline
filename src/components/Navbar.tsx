@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { navigate, usePath } from '../lib/router';
+import { navigate, usePath, Link } from '../lib/router';
 import brandLogo from '../assets/images/safetyline_landing.png';
 
 export default function Navbar() {
@@ -15,11 +15,6 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleNav = (path: string) => {
-    setIsOpen(false);
-    navigate(path);
-  };
 
   const navItems = [
     { label: 'Home', path: '/' },
@@ -46,9 +41,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           
           {/* Brand Logo */}
-          <div 
+          <Link 
             id="nav-logo"
-            onClick={() => handleNav('/')}
+            to="/"
             className="flex items-center space-x-3 cursor-pointer group"
           >
             <img
@@ -64,15 +59,15 @@ export default function Navbar() {
                 Textile & Hosiery Atelier
               </span>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Nav Links */}
           <div id="desktop-nav-links" className="hidden md:flex items-center space-x-8 uppercase tracking-wider text-xs font-semibold">
             {navItems.map((item) => (
-              <button
+              <Link
                 key={item.path}
                 id={`nav-link-${item.label.toLowerCase().replace(/[\s&]+/g, '-')}`}
-                onClick={() => handleNav(item.path)}
+                to={item.path}
                 className={`transition-colors duration-200 relative py-1.5 cursor-pointer ${
                   isActive(item.path)
                     ? 'text-white font-bold'
@@ -83,20 +78,20 @@ export default function Navbar() {
                 {isActive(item.path) && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF5A36] rounded-full"></span>
                 )}
-              </button>
+              </Link>
             ))}
           </div>
 
           {/* Right Action Menu */}
           <div className="hidden md:flex items-center space-x-3">
-            <button
+            <Link
               id="nav-inquire-cta"
-              onClick={() => handleNav('/contact')}
+              to="/contact"
               className="bg-[#FF5A36] hover:bg-[#e44e2b] active:scale-95 text-white px-5 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-md shadow-[#FF5A36]/25 cursor-pointer inline-flex items-center gap-1.5 group"
             >
               <span>Inquire Now</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -117,9 +112,10 @@ export default function Navbar() {
       {isOpen && (
         <div id="mobile-drawer" className="md:hidden bg-[#0B3D3B] border-t border-white/10 py-4 px-4 space-y-2 shadow-2xl animate-in slide-in-from-top duration-200">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.path}
-              onClick={() => handleNav(item.path)}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
               className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
                 isActive(item.path)
                   ? 'bg-white/15 text-white border-l-4 border-[#FF5A36]'
@@ -127,16 +123,17 @@ export default function Navbar() {
               }`}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
           <div className="border-t border-white/10 pt-4 mt-2 space-y-2">
-            <button
-              onClick={() => handleNav('/contact')}
+            <Link
+              to="/contact"
+              onClick={() => setIsOpen(false)}
               className="w-full text-center bg-[#FF5A36] text-white py-3 rounded-lg text-xs font-bold tracking-wider uppercase hover:bg-[#e44e2b] cursor-pointer shadow-md inline-flex items-center justify-center gap-2"
             >
               <span>Inquire / Contact Desk</span>
               <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </div>
       )}

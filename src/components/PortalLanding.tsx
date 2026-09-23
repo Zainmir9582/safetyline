@@ -1,6 +1,6 @@
 import { ArrowRight, Sparkles, ShieldCheck, Cpu, Layers, Phone, Mail, Instagram, Facebook, MessageCircle, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
-import { navigate } from '../lib/router';
+import { navigate, Link } from '../lib/router';
 import { settings } from '../data';
 import SEO from './SEO';
 import safetylineLandingLogo from '../assets/images/safetyline_landing.png';
@@ -156,17 +156,14 @@ export default function PortalLanding() {
               </div>
 
               {/* Big CTA Button */}
-              <button
+              <Link
                 id="enter-gearwear-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate('/gearwear');
-                }}
+                to="/gearwear"
                 className="w-full mt-2 bg-[#FF5A36] hover:bg-[#e44e2b] text-white font-bold text-xs sm:text-sm tracking-wider uppercase py-3.5 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md shadow-[#FF5A36]/30 cursor-pointer group-hover:translate-y-[-2px]"
               >
                 <span>Enter Gearwear Showcase</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
             </div>
           </motion.div>
 
@@ -221,17 +218,14 @@ export default function PortalLanding() {
               </div>
 
               {/* Big CTA Button */}
-              <button
+              <Link
                 id="enter-accessories-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate('/accessories');
-                }}
+                to="/accessories"
                 className="w-full mt-2 bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs sm:text-sm tracking-wider uppercase py-3.5 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md shadow-[#0B3D3B]/20 cursor-pointer group-hover:translate-y-[-2px]"
               >
                 <span>Enter Accessories Showcase</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
             </div>
           </motion.div>
 

@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   Search, ShieldCheck, Cpu, ArrowRight, MessageCircle, Star, PhoneCall, 
   Mail, Sparkles, Activity, Layers, Award, FileCheck2, 
   CheckCircle2, Compass, Send, ArrowUpRight, Filter, ChevronRight, Menu, X,
-  Instagram, Facebook, ExternalLink, MapPin, Image as ImageIcon
+  Instagram, Facebook, ExternalLink, MapPin, Image as ImageIcon, Shirt, RefreshCw, ArrowLeftRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { navigate } from '../lib/router';
+import { navigate, useRoute, Link } from '../lib/router';
 import { Product, Settings } from '../types';
 import { certifications, testimonials } from '../data';
 import SEO from './SEO';
@@ -36,6 +36,7 @@ export default function CategoryHub({
   onDeleteProduct
 }: CategoryHubProps) {
   const isGearwear = categorySlug === 'gearwear';
+  const { searchParams, setQuery } = useRoute();
 
   // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,10 +58,26 @@ export default function CategoryHub({
     }
   };
 
-  // Search and filter state for product items
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSubcat, setSelectedSubcat] = useState<string>('All');
-  const [selectedSize, setSelectedSize] = useState<string>('All');
+  // Search and filter state for product items initialized from URL params
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') || '');
+  const [selectedSubcat, setSelectedSubcat] = useState<string>(() => searchParams.get('subcat') || 'All');
+  const [selectedSize, setSelectedSize] = useState<string>(() => searchParams.get('size') || 'All');
+
+  // Synchronize state changes to URL query parameters for deep linking
+  const handleSubcatChange = (subcat: string) => {
+    setSelectedSubcat(subcat);
+    setQuery({ subcat: subcat === 'All' ? null : subcat });
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setQuery({ q: query.trim() === '' ? null : query.trim() });
+  };
+
+  const handleSizeChange = (size: string) => {
+    setSelectedSize(size);
+    setQuery({ size: size === 'All' ? null : size });
+  };
 
   // Filter products by category
   const categoryProducts = useMemo(() => {
@@ -226,7 +243,7 @@ export default function CategoryHub({
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Logo & Category Identification Badge */}
-          <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <Link to="/" className="flex items-center space-x-3 cursor-pointer group">
             <img
               src={brandLogo}
               alt="Safety Line Logo"
@@ -245,10 +262,37 @@ export default function CategoryHub({
                 {isGearwear ? 'Athletic Performance Division' : 'Technical Accessories Division'}
               </span>
             </div>
+          </Link>
+
+          {/* Direct Division Switcher Tabs in Nav Bar */}
+          <div className="hidden md:flex items-center bg-black/25 p-1 rounded-xl border border-white/10 text-xs font-mono">
+            <Link
+              to="/gearwear"
+              className={`px-3 py-1.5 rounded-lg font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
+                isGearwear
+                  ? 'bg-[#FF5A36] text-white shadow-sm'
+                  : 'text-white/70 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              <span>🏃 Gearwear</span>
+              {isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
+            </Link>
+
+            <Link
+              to="/accessories"
+              className={`px-3 py-1.5 rounded-lg font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
+                !isGearwear
+                  ? 'bg-[#D9F0EC] text-[#0B3D3B] font-extrabold shadow-sm'
+                  : 'text-white/70 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              <span>🧦 Accessories</span>
+              {!isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-[#0B3D3B] animate-pulse" />}
+            </Link>
           </div>
 
           {/* Desktop Navigation Links (Strictly for this category) */}
-          <div className="hidden lg:flex items-center space-x-5 xl:space-x-7 text-xs font-semibold uppercase tracking-wider">
+          <div className="hidden lg:flex items-center space-x-5 xl:space-x-6 text-xs font-semibold uppercase tracking-wider">
             <button 
               onClick={() => navScroll('items-section')}
               className="text-white/80 hover:text-white transition-colors cursor-pointer py-1"
@@ -261,54 +305,55 @@ export default function CategoryHub({
             >
               Standards
             </button>
-            <button 
-              onClick={() => navigate('/about')}
+            <Link 
+              to="/about"
               className="text-[#D9F0EC] hover:text-white transition-colors cursor-pointer py-1 font-bold"
             >
-              About Us & Profile
-            </button>
-            <button 
-              onClick={() => navigate('/contact')}
+              About Us
+            </Link>
+            <Link 
+              to="/contact"
               className="text-white/80 hover:text-[#FF5A36] transition-colors cursor-pointer py-1 font-bold"
             >
               Contact Us
-            </button>
+            </Link>
           </div>
 
           {/* Right Action: Return to Main Portal button & Contact Us CTA */}
           <div className="hidden sm:flex items-center space-x-3">
-            <button
-              onClick={() => navigate('/')}
+            <Link
+              to="/"
               className="px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer inline-flex items-center gap-1.5"
               title="Return to Division Selector"
             >
               <span>← Portal</span>
-            </button>
+            </Link>
 
-            <button
-              onClick={() => navigate('/contact')}
+            <Link
+              to="/contact"
               className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer inline-flex items-center gap-1.5 ${
                 isGearwear 
                   ? 'bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-[#FF5A36]/30' 
                   : 'bg-[#D9F0EC] hover:bg-white text-[#0B3D3B]'
               }`}
             >
-              <span>Contact Us</span>
+              <span>Inquire</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
           <div className="flex lg:hidden items-center space-x-2">
-            <button
-              onClick={() => navigate('/')}
-              className="px-2.5 py-1.5 rounded-lg bg-white/10 text-white text-[10px] font-mono uppercase tracking-wider"
+            <Link
+              to={isGearwear ? '/accessories' : '/gearwear'}
+              className="px-2.5 py-1.5 rounded-lg bg-white/10 text-white text-[10px] font-mono uppercase tracking-wider inline-flex items-center gap-1"
             >
-              Portal
-            </button>
+              <ArrowLeftRight className="w-3 h-3" />
+              <span>{isGearwear ? 'Accessories' : 'Gearwear'}</span>
+            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20"
+              className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 cursor-pointer"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -320,49 +365,111 @@ export default function CategoryHub({
         {/* Mobile Menu Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-3 pt-3 border-t border-white/10 space-y-2 text-xs font-semibold uppercase tracking-wider animate-in slide-in-from-top">
+            <div className="grid grid-cols-2 gap-2 pb-2 mb-2 border-b border-white/10">
+              <Link
+                to="/gearwear"
+                className={`py-2 px-3 rounded-lg text-center font-mono text-[11px] font-bold uppercase ${
+                  isGearwear ? 'bg-[#FF5A36] text-white' : 'bg-white/10 text-slate-300'
+                }`}
+              >
+                🏃 Gearwear Page
+              </Link>
+              <Link
+                to="/accessories"
+                className={`py-2 px-3 rounded-lg text-center font-mono text-[11px] font-bold uppercase ${
+                  !isGearwear ? 'bg-[#D9F0EC] text-[#0B3D3B]' : 'bg-white/10 text-slate-300'
+                }`}
+              >
+                🧦 Accessories Page
+              </Link>
+            </div>
+
             <button 
               onClick={() => navScroll('items-section')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white"
+              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white cursor-pointer"
             >
               Collection ({categoryProducts.length} Items)
             </button>
             <button 
               onClick={() => navScroll('features-section')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white"
+              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white cursor-pointer"
             >
               Standards & Tech
             </button>
-            <button 
-              onClick={() => navigate('/about')}
+            <Link 
+              to="/about"
               className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-[#D9F0EC] font-bold"
             >
               About Safety Line
-            </button>
-            <button 
-              onClick={() => navigate('/contact')}
+            </Link>
+            <Link 
+              to="/contact"
               className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-[#FF5A36] font-bold"
             >
               Contact Us Desk
-            </button>
+            </Link>
             <div className="pt-2 border-t border-white/10 flex gap-2">
-              <button
-                onClick={() => navigate('/')}
+              <Link
+                to="/"
                 className="w-1/2 py-2.5 text-center bg-white/10 text-white rounded-lg text-xs font-mono uppercase"
               >
                 ← Main Portal
-              </button>
-              <button
-                onClick={() => navigate('/contact')}
+              </Link>
+              <Link
+                to="/contact"
                 className={`w-1/2 py-2.5 text-center rounded-lg text-xs font-bold uppercase ${
                   isGearwear ? 'bg-[#FF5A36] text-white' : 'bg-[#D9F0EC] text-[#0B3D3B]'
                 }`}
               >
                 Contact Us
-              </button>
+              </Link>
             </div>
           </div>
         )}
       </nav>
+
+      {/* =========================================================================
+          PAGE ROUTING HEADER & BREADCRUMB STRIP (Direct Page Indicator)
+         ========================================================================= */}
+      <div className="mt-[68px] sm:mt-[72px] bg-[#072725] border-b border-white/10 text-white py-2.5 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+          {/* Breadcrumbs */}
+          <div className="flex items-center space-x-2 text-slate-300 font-mono text-[11px]">
+            <Link to="/" className="hover:text-white transition-colors">Safety Line</Link>
+            <span className="text-slate-500">/</span>
+            <span className="text-[#D9F0EC] font-bold">
+              {isGearwear ? 'Gearwear Division Page' : 'Accessories Division Page'}
+            </span>
+          </div>
+
+          {/* Quick Direct Page Navigation Switches */}
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-mono uppercase text-slate-400 font-semibold hidden sm:inline">Direct Switch:</span>
+            <Link
+              to="/gearwear"
+              className={`px-3 py-1 rounded-md text-[11px] font-mono font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
+                isGearwear 
+                  ? 'bg-[#FF5A36] text-white shadow-xs' 
+                  : 'bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white'
+              }`}
+            >
+              <span>🏃 Gearwear</span>
+              {isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
+            </Link>
+            <Link
+              to="/accessories"
+              className={`px-3 py-1 rounded-md text-[11px] font-mono font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
+                !isGearwear 
+                  ? 'bg-[#D9F0EC] text-[#0B3D3B] font-extrabold shadow-xs' 
+                  : 'bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white'
+              }`}
+            >
+              <span>🧦 Accessories</span>
+              {!isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-[#0B3D3B] animate-pulse" />}
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* =========================================================================
           HERO SECTION (Category Specific)
@@ -517,7 +624,7 @@ export default function CategoryHub({
                 type="text"
                 placeholder={`Search ${isGearwear ? 'gearwear' : 'accessories'} items, materials, codes...`}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-[#1A1A1A] placeholder:text-slate-400 outline-none transition-colors"
               />
             </div>
@@ -528,7 +635,7 @@ export default function CategoryHub({
                 <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Size:</span>
                 <select
                   value={selectedSize}
-                  onChange={(e) => setSelectedSize(e.target.value)}
+                  onChange={(e) => handleSizeChange(e.target.value)}
                   className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
                 >
                   {allSizes.map(s => (
@@ -540,22 +647,37 @@ export default function CategoryHub({
 
           </div>
 
-          {/* Subcategory Pills */}
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
-            <span className="text-[11px] font-mono text-slate-400 uppercase font-semibold mr-1">Filter:</span>
-            {subcategories.map(sub => (
+          {/* Subcategory Pills & Active Filter Tags */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-mono text-slate-400 uppercase font-semibold mr-1">Filter:</span>
+              {subcategories.map(sub => (
+                <button
+                  key={sub}
+                  onClick={() => handleSubcatChange(sub)}
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wider transition-all cursor-pointer ${
+                    selectedSubcat === sub
+                      ? 'bg-[#0B3D3B] text-white shadow-xs'
+                      : 'bg-[#FAFCFB] text-slate-600 hover:bg-slate-100 hover:text-[#0B3D3B] border border-slate-200'
+                  }`}
+                >
+                  {sub}
+                </button>
+              ))}
+            </div>
+
+            {(selectedSubcat !== 'All' || searchQuery !== '' || selectedSize !== 'All') && (
               <button
-                key={sub}
-                onClick={() => setSelectedSubcat(sub)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wider transition-all cursor-pointer ${
-                  selectedSubcat === sub
-                    ? 'bg-[#0B3D3B] text-white shadow-xs'
-                    : 'bg-[#FAFCFB] text-slate-600 hover:bg-slate-100 hover:text-[#0B3D3B] border border-slate-200'
-                }`}
+                onClick={() => {
+                  handleSearchChange('');
+                  handleSubcatChange('All');
+                  handleSizeChange('All');
+                }}
+                className="text-[11px] font-mono text-[#FF5A36] hover:underline font-bold uppercase transition-colors cursor-pointer"
               >
-                {sub}
+                Clear Filters ×
               </button>
-            ))}
+            )}
           </div>
         </div>
 
