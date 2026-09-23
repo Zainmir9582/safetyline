@@ -264,35 +264,8 @@ export default function CategoryHub({
             </div>
           </Link>
 
-          {/* Direct Division Switcher Tabs in Nav Bar */}
-          <div className="hidden md:flex items-center bg-black/25 p-1 rounded-xl border border-white/10 text-xs font-mono">
-            <Link
-              to="/gearwear"
-              className={`px-3 py-1.5 rounded-lg font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
-                isGearwear
-                  ? 'bg-[#FF5A36] text-white shadow-sm'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              <span>🏃 Gearwear</span>
-              {isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
-            </Link>
-
-            <Link
-              to="/accessories"
-              className={`px-3 py-1.5 rounded-lg font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
-                !isGearwear
-                  ? 'bg-[#D9F0EC] text-[#0B3D3B] font-extrabold shadow-sm'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              <span>🧦 Accessories</span>
-              {!isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-[#0B3D3B] animate-pulse" />}
-            </Link>
-          </div>
-
           {/* Desktop Navigation Links (Strictly for this category) */}
-          <div className="hidden lg:flex items-center space-x-5 xl:space-x-6 text-xs font-semibold uppercase tracking-wider">
+          <div className="hidden lg:flex items-center space-x-6 text-xs font-semibold uppercase tracking-wider">
             <button 
               onClick={() => navScroll('items-section')}
               className="text-white/80 hover:text-white transition-colors cursor-pointer py-1"
@@ -344,13 +317,6 @@ export default function CategoryHub({
 
           {/* Mobile Menu Toggle */}
           <div className="flex lg:hidden items-center space-x-2">
-            <Link
-              to={isGearwear ? '/accessories' : '/gearwear'}
-              className="px-2.5 py-1.5 rounded-lg bg-white/10 text-white text-[10px] font-mono uppercase tracking-wider inline-flex items-center gap-1"
-            >
-              <ArrowLeftRight className="w-3 h-3" />
-              <span>{isGearwear ? 'Accessories' : 'Gearwear'}</span>
-            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 cursor-pointer"
@@ -365,25 +331,6 @@ export default function CategoryHub({
         {/* Mobile Menu Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-3 pt-3 border-t border-white/10 space-y-2 text-xs font-semibold uppercase tracking-wider animate-in slide-in-from-top">
-            <div className="grid grid-cols-2 gap-2 pb-2 mb-2 border-b border-white/10">
-              <Link
-                to="/gearwear"
-                className={`py-2 px-3 rounded-lg text-center font-mono text-[11px] font-bold uppercase ${
-                  isGearwear ? 'bg-[#FF5A36] text-white' : 'bg-white/10 text-slate-300'
-                }`}
-              >
-                🏃 Gearwear Page
-              </Link>
-              <Link
-                to="/accessories"
-                className={`py-2 px-3 rounded-lg text-center font-mono text-[11px] font-bold uppercase ${
-                  !isGearwear ? 'bg-[#D9F0EC] text-[#0B3D3B]' : 'bg-white/10 text-slate-300'
-                }`}
-              >
-                🧦 Accessories Page
-              </Link>
-            </div>
-
             <button 
               onClick={() => navScroll('items-section')}
               className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white cursor-pointer"
@@ -429,54 +376,11 @@ export default function CategoryHub({
       </nav>
 
       {/* =========================================================================
-          PAGE ROUTING HEADER & BREADCRUMB STRIP (Direct Page Indicator)
-         ========================================================================= */}
-      <div className="mt-[68px] sm:mt-[72px] bg-[#072725] border-b border-white/10 text-white py-2.5 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-          {/* Breadcrumbs */}
-          <div className="flex items-center space-x-2 text-slate-300 font-mono text-[11px]">
-            <Link to="/" className="hover:text-white transition-colors">Safety Line</Link>
-            <span className="text-slate-500">/</span>
-            <span className="text-[#D9F0EC] font-bold">
-              {isGearwear ? 'Gearwear Division Page' : 'Accessories Division Page'}
-            </span>
-          </div>
-
-          {/* Quick Direct Page Navigation Switches */}
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono uppercase text-slate-400 font-semibold hidden sm:inline">Direct Switch:</span>
-            <Link
-              to="/gearwear"
-              className={`px-3 py-1 rounded-md text-[11px] font-mono font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
-                isGearwear 
-                  ? 'bg-[#FF5A36] text-white shadow-xs' 
-                  : 'bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white'
-              }`}
-            >
-              <span>🏃 Gearwear</span>
-              {isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
-            </Link>
-            <Link
-              to="/accessories"
-              className={`px-3 py-1 rounded-md text-[11px] font-mono font-bold uppercase transition-all inline-flex items-center gap-1.5 ${
-                !isGearwear 
-                  ? 'bg-[#D9F0EC] text-[#0B3D3B] font-extrabold shadow-xs' 
-                  : 'bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white'
-              }`}
-            >
-              <span>🧦 Accessories</span>
-              {!isGearwear && <span className="w-1.5 h-1.5 rounded-full bg-[#0B3D3B] animate-pulse" />}
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* =========================================================================
           HERO SECTION (Category Specific)
          ========================================================================= */}
       <section 
         id="hero-section"
-        className="relative pt-32 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-[#0B3D3B] text-white overflow-hidden"
+        className="relative pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-[#0B3D3B] text-white overflow-hidden"
       >
         <div className="absolute inset-0 athletic-grid-pattern-dark opacity-35 pointer-events-none" />
         <div className={`absolute top-1/4 -right-20 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none ${

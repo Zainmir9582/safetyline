@@ -2,16 +2,21 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
-import type { Category, Product, Settings, CustomerReview, ProductFeedback } from './src/types';
+import type { Category, Product, Settings, CustomerReview, ProductFeedback } from './src/types.ts';
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 const DB_PATH = path.join(process.cwd(), 'db.json');
 const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
 const JWT_SECRET = process.env.JWT_SECRET || 'vanguard-luxury-secret-key-987';
 
 // Disable X-Powered-By to prevent technology fingerprinting
 app.disable('x-powered-by');
+
+// Health check endpoints for Cloud Run / load balancers
+app.get(['/healthz', '/api/health', '/_health'], (req, res) => {
+  res.status(200).json({ status: 'ok', uptime: process.uptime(), timestamp: new Date().toISOString() });
+});
 
 // Security headers middleware
 app.use((req, res, next) => {
@@ -82,7 +87,7 @@ const fallbackSettings: Settings = {
   companyName: 'Safety Line Ind',
   slogan: 'Textile Engineering & Fine Hosiery Atelier',
   aboutText: 'Specialized manufacturing facility in Sialkot, Pakistan delivering precision athletic gearwear and technical hosiery.',
-  contactEmail: 'safetylineind@gmail.com',
+  contactEmail: 'info@safetyline-ind.com',
   contactPhone: '+923007130987',
   whatsappNumber: '+923007130987',
   officeAddress: 'Small Industrial Estate, Sialkot 51310, Punjab, Pakistan',
