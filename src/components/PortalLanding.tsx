@@ -203,20 +203,26 @@ export default function PortalLanding() {
                   Accessories
                 </h2>
                 <p className="text-slate-600 font-normal text-xs sm:text-sm leading-relaxed">
-                  High-density compression socks, merino wool thermal accessories, ergonomic calf sleeves, and engineered performance essentials.
+                  High-performance gymwear, technical t-shirts, all-weather jackets, warm-up fleece hoodies, and dual-season tracksuits.
                 </p>
               </div>
 
-              {/* Technical Features Tag */}
+              {/* Technical Windows Tag */}
               <div className="flex flex-wrap gap-2 pt-1">
-                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                  Technical Compression Socks
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  GymWear
                 </span>
-                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                  Ergonomic Joint Sleeves
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  T-shirts
                 </span>
-                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                  OEKO-TEX Standard 100
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Jackets
+                </span>
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Hoodies
+                </span>
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Tracksuits
                 </span>
               </div>
 

@@ -327,11 +327,11 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
             >
               {parentCategoryLabel}
             </button>
-            {product.subcategory && isGearwear && (
+            {product.subcategory && (
               <>
                 <span>/</span>
                 <button
-                  onClick={() => navigate(`/gearwear/${product.subcategory}`)}
+                  onClick={() => navigate(`/${parentCategorySlug}/${product.subcategory}`)}
                   className="hover:text-[#0B3D3B] transition-colors cursor-pointer font-bold capitalize"
                 >
                   {product.subcategory.replace(/-/g, ' ')}
@@ -344,11 +344,11 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
 
             <button
               id="back-to-products-btn"
-              onClick={() => navigate(product.subcategory && isGearwear ? `/gearwear/${product.subcategory}` : `/${parentCategorySlug}`)}
+              onClick={() => navigate(product.subcategory ? `/${parentCategorySlug}/${product.subcategory}` : `/${parentCategorySlug}`)}
               className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-[#0B3D3B] transition-colors cursor-pointer"
             >
               <CornerDownLeft className="w-4 h-4 text-[#FF5A36]" />
-              <span>Back to {product.subcategory && isGearwear ? product.subcategory.replace(/-/g, ' ') : parentCategoryLabel}</span>
+              <span>Back to {product.subcategory ? product.subcategory.replace(/-/g, ' ') : parentCategoryLabel}</span>
             </button>
         </div>
 

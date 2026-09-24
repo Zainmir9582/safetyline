@@ -18,6 +18,7 @@ import gearwearHeroImg from '../assets/images/regenerated_image_1788778657693.jp
 import gearwearHeroBg from '../assets/images/regenerated_image_1788778660220.jpg';
 import hosieryHeroImg from '../assets/images/regenerated_image_1788779200971.jpg';
 import GearwearWindowsSection from './GearwearWindowsSection';
+import AccessoriesWindowsSection from './AccessoriesWindowsSection';
 
 interface CategoryHubProps {
   categorySlug: 'gearwear' | 'accessories' | 'hosiery';
@@ -508,130 +509,12 @@ export default function CategoryHub({
       )}
 
       {/* =========================================================================
-          ITEMS / PRODUCTS CATALOGUE SECTION (Only for Accessories)
+          ACCESSORIES PRODUCTION WINDOWS SECTION
          ========================================================================= */}
       {!isGearwear && (
-        <section id="items-section" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-[#D9F0EC] text-[#0B3D3B] text-xs font-mono font-bold tracking-wider uppercase">
-            <span>Catalogue Archive</span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#0B3D3B] tracking-tight">
-            {isGearwear ? 'Gearwear Listed Products' : 'Technical Accessories & Performance Collection'}
-          </h2>
-          <p className="text-slate-600 font-normal text-sm sm:text-base leading-relaxed">
-            {isGearwear 
-              ? "Custom product list images and specifications added to Safety Line's Gearwear division."
-              : "Discover precision engineered athletic tanks, compression layers, technical performance shirts, and athletic activewear."
-            }
-          </p>
-        </div>
-
-        {/* Filter & Search Toolbar */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            
-            {/* Search input */}
-            <div className="relative flex-grow max-w-md">
-              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-400" />
-              <input
-                type="text"
-                placeholder={`Search ${isGearwear ? 'gearwear' : 'accessories'} items, materials, codes...`}
-                value={searchQuery}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm text-[#1A1A1A] placeholder:text-slate-400 outline-none transition-colors"
-              />
-            </div>
-
-            {/* Size Dropdown filter (only for accessories, hidden for gearwear) */}
-            {!isGearwear && (
-              <div className="flex items-center space-x-2">
-                <span className="text-xs font-mono text-slate-500 uppercase font-semibold">Size:</span>
-                <select
-                  value={selectedSize}
-                  onChange={(e) => handleSizeChange(e.target.value)}
-                  className="bg-[#FAFCFB] border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-[#0B3D3B] outline-none cursor-pointer"
-                >
-                  {allSizes.map(s => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-          </div>
-
-          {/* Subcategory Pills & Active Filter Tags */}
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[11px] font-mono text-slate-400 uppercase font-semibold mr-1">Filter:</span>
-              {subcategories.map(sub => (
-                <button
-                  key={sub}
-                  onClick={() => handleSubcatChange(sub)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wider transition-all cursor-pointer ${
-                    selectedSubcat === sub
-                      ? 'bg-[#0B3D3B] text-white shadow-xs'
-                      : 'bg-[#FAFCFB] text-slate-600 hover:bg-slate-100 hover:text-[#0B3D3B] border border-slate-200'
-                  }`}
-                >
-                  {sub}
-                </button>
-              ))}
-            </div>
-
-            {(selectedSubcat !== 'All' || searchQuery !== '' || selectedSize !== 'All') && (
-              <button
-                onClick={() => {
-                  handleSearchChange('');
-                  handleSubcatChange('All');
-                  handleSizeChange('All');
-                }}
-                className="text-[11px] font-mono text-[#FF5A36] hover:underline font-bold uppercase transition-colors cursor-pointer"
-              >
-                Clear Filters ×
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Product Cards Grid with Smooth Framer Motion Reflow & Preloaded Shimmer */}
-        {filteredProducts.length > 0 ? (
-          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <AnimatePresence mode="popLayout">
-              {filteredProducts.map((p, idx) => (
-                <ProductCard
-                  key={p.id}
-                  product={p}
-                  priority={idx < 4}
-                  onClick={() => navigate(`/product/${p.slug}`)}
-                />
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        ) : (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16 bg-white rounded-2xl border border-slate-200 space-y-3"
-          >
-            <Filter className="w-10 h-10 text-slate-300 mx-auto" />
-            <h3 className="font-display text-base font-bold text-[#0B3D3B]">No {isGearwear ? 'Gearwear' : 'Accessories'} items match your filter</h3>
-            <p className="text-xs text-slate-500 max-w-xs mx-auto">Try resetting your search query or selecting "All" subcategories.</p>
-            <div className="flex items-center justify-center gap-3 pt-2">
-              <button
-                onClick={() => { setSearchQuery(''); setSelectedSubcat('All'); setSelectedSize('All'); }}
-                className="bg-[#0B3D3B] text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer shadow-xs hover:bg-[#072725] transition-colors"
-              >
-                Reset Filters
-              </button>
-            </div>
-          </motion.div>
-        )}
-
-      </section>
+        <AccessoriesWindowsSection 
+          products={products}
+        />
       )}
 
       {/* =========================================================================

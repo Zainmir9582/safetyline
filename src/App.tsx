@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import PortalLanding from './components/PortalLanding';
 import CategoryHub from './components/CategoryHub';
 import GearwearWindowPage from './components/GearwearWindowPage';
+import AccessoriesWindowPage from './components/AccessoriesWindowPage';
 import ProductDetails from './components/ProductDetails';
 import BlogDetails from './components/BlogDetails';
 import AboutUs from './components/AboutUs';
@@ -11,9 +12,10 @@ import { usePath, navigate } from './lib/router';
 import { Product, Settings } from './types';
 import { products as defaultProducts, settings as defaultSettings } from './data';
 import { getGearwearWindowBySlug } from './data/gearwearWindows';
+import { getAccessoriesWindowBySlug } from './data/accessoriesWindows';
 import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v19';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v20';
 
 export default function App() {
   const currentPath = usePath();
@@ -22,6 +24,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v19');
       localStorage.removeItem('safetyline_catalogue_v18');
       localStorage.removeItem('safetyline_catalogue_v17');
       localStorage.removeItem('safetyline_catalogue_v16');
@@ -49,6 +52,7 @@ export default function App() {
             !p.coverImage?.includes('unsplash') &&
             !p.coverImage?.includes('LISTING WINDOW') &&
             !p.id.startsWith('prod-gw-d1211') &&
+            !p.id.startsWith('prod-hs-') &&
             !['prod-apx-01', 'prod-znt-02', 'prod-chr-03', 'prod-str-04', 'prod-vng-05', 'prod-ttn-06', 'prod-end-07', 'prod-hys-08', 'prod-vel-05', 'prod-mer-06'].includes(p.id)
           );
           if (cleaned.length > 0) return cleaned;
@@ -213,6 +217,35 @@ export default function App() {
           onDeleteProduct={handleDeleteProduct}
         />
       );
+    }
+
+    // 3b. Dedicated Accessories Production Windows: GymWear, T-shirts, Jackets, Hoodies, Tracksuit
+    let accWindowSlugMatch: string | null = null;
+    if (cleanPath.startsWith('/accessories/')) {
+      accWindowSlugMatch = cleanPath.substring('/accessories/'.length);
+    } else if (cleanPath === '/gymwear' || cleanPath === '/gym-wear') {
+      accWindowSlugMatch = 'gymwear';
+    } else if (cleanPath === '/t-shirts' || cleanPath === '/tshirts' || cleanPath === '/t-shirt') {
+      accWindowSlugMatch = 't-shirts';
+    } else if (cleanPath === '/jackets' || cleanPath === '/jacket') {
+      accWindowSlugMatch = 'jackets';
+    } else if (cleanPath === '/hoodies' || cleanPath === '/hoodie') {
+      accWindowSlugMatch = 'hoodies';
+    } else if (cleanPath === '/tracksuits' || cleanPath === '/tracksuit' || cleanPath === '/track-suit' || cleanPath === '/track-suits') {
+      accWindowSlugMatch = 'tracksuits';
+    }
+
+    if (accWindowSlugMatch) {
+      const targetWindow = getAccessoriesWindowBySlug(accWindowSlugMatch);
+      if (targetWindow) {
+        return (
+          <AccessoriesWindowPage 
+            window={targetWindow}
+            products={products}
+            settings={settings}
+          />
+        );
+      }
     }
 
     // 4. Product details dynamic page
