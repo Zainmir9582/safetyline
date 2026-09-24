@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import PortalLanding from './components/PortalLanding';
 import CategoryHub from './components/CategoryHub';
+import GearwearWindowPage from './components/GearwearWindowPage';
 import ProductDetails from './components/ProductDetails';
 import BlogDetails from './components/BlogDetails';
 import AboutUs from './components/AboutUs';
@@ -9,9 +10,10 @@ import ContactUs from './components/ContactUs';
 import { usePath, navigate } from './lib/router';
 import { Product, Settings } from './types';
 import { products as defaultProducts, settings as defaultSettings } from './data';
+import { getGearwearWindowBySlug } from './data/gearwearWindows';
 import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v17';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v18';
 
 export default function App() {
   const currentPath = usePath();
@@ -20,6 +22,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v17');
       localStorage.removeItem('safetyline_catalogue_v16');
       localStorage.removeItem('safetyline_catalogue_v15');
       localStorage.removeItem('safetyline_catalogue_v14');
@@ -44,7 +47,8 @@ export default function App() {
             !p.isListingSlot &&
             !p.coverImage?.includes('unsplash') &&
             !p.coverImage?.includes('LISTING WINDOW') &&
-            !['prod-vng-05', 'prod-ttn-06', 'prod-end-07', 'prod-hys-08', 'prod-vel-05', 'prod-mer-06'].includes(p.id)
+            !p.id.startsWith('prod-gw-d1211') &&
+            !['prod-apx-01', 'prod-znt-02', 'prod-chr-03', 'prod-str-04', 'prod-vng-05', 'prod-ttn-06', 'prod-end-07', 'prod-hys-08', 'prod-vel-05', 'prod-mer-06'].includes(p.id)
           );
           if (cleaned.length > 0) return cleaned;
         }
@@ -155,6 +159,41 @@ export default function App() {
           onDeleteProduct={handleDeleteProduct}
         />
       );
+    }
+
+    // 2b. Dedicated Gearwear Production Windows: Tactical Gloves, Road & Cycling Apparel, Car Racing, Weight Lifting
+    let windowSlugMatch: string | null = null;
+    if (cleanPath.startsWith('/gearwear/')) {
+      windowSlugMatch = cleanPath.substring('/gearwear/'.length);
+    } else if (cleanPath === '/tactical-gloves' || cleanPath === '/products/tactical-gloves') {
+      windowSlugMatch = 'tactical-gloves';
+    } else if (
+      cleanPath === '/road-cycling-apparel' || 
+      cleanPath === '/road-cycling' || 
+      cleanPath === '/cycling' || 
+      cleanPath === '/cycling-apparel'
+    ) {
+      windowSlugMatch = 'road-cycling-apparel';
+    } else if (cleanPath === '/car-racing' || cleanPath === '/motorsport' || cleanPath === '/racing') {
+      windowSlugMatch = 'car-racing';
+    } else if (cleanPath === '/weight-lifting' || cleanPath === '/weightlifting' || cleanPath === '/lifting') {
+      windowSlugMatch = 'weight-lifting';
+    }
+
+    if (windowSlugMatch) {
+      const targetWindow = getGearwearWindowBySlug(windowSlugMatch);
+      if (targetWindow) {
+        return (
+          <GearwearWindowPage 
+            window={targetWindow}
+            products={products}
+            settings={settings}
+            onAddProduct={handleAddProduct}
+            onUpdateProduct={handleUpdateProduct}
+            onDeleteProduct={handleDeleteProduct}
+          />
+        );
+      }
     }
 
     // 3. Dedicated Accessories Division Page (Technical Accessories, Compression Sleeves, Legwear)

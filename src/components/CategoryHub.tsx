@@ -17,6 +17,7 @@ import brandLogo from '../assets/images/safetyline_landing.png';
 import gearwearHeroImg from '../assets/images/regenerated_image_1788778657693.jpg';
 import gearwearHeroBg from '../assets/images/regenerated_image_1788778660220.jpg';
 import hosieryHeroImg from '../assets/images/regenerated_image_1788779200971.jpg';
+import GearwearWindowsSection from './GearwearWindowsSection';
 
 interface CategoryHubProps {
   categorySlug: 'gearwear' | 'accessories' | 'hosiery';
@@ -44,6 +45,7 @@ export default function CategoryHub({
   // Listing Window Modal state
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState<Product | null>(null);
+  const [selectedWindowForModal, setSelectedWindowForModal] = useState<string>('tactical-gloves');
 
   const openNewListingModal = () => {
     setProductToEdit(null);
@@ -497,9 +499,24 @@ export default function CategoryHub({
       </section>
 
       {/* =========================================================================
+          GEARWEAR PRODUCTION WINDOWS SECTION
+         ========================================================================= */}
+      {isGearwear && (
+        <GearwearWindowsSection 
+          products={products}
+          onOpenListingModalForWindow={(windowSlug) => {
+            setSelectedWindowForModal(windowSlug);
+            setProductToEdit(null);
+            setIsListingModalOpen(true);
+          }}
+        />
+      )}
+
+      {/* =========================================================================
           ITEMS / PRODUCTS CATALOGUE SECTION
          ========================================================================= */}
-      <section id="items-section" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      {(!isGearwear || categoryProducts.length > 0) && (
+        <section id="items-section" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -507,11 +524,11 @@ export default function CategoryHub({
             <span>Catalogue Archive</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#0B3D3B] tracking-tight">
-            {isGearwear ? 'Gearwear Performance Items' : 'Technical Accessories & Performance Collection'}
+            {isGearwear ? 'Gearwear Listed Products' : 'Technical Accessories & Performance Collection'}
           </h2>
           <p className="text-slate-600 font-normal text-sm sm:text-base leading-relaxed">
             {isGearwear 
-              ? "Explore engineered compression tees, hydrophobic shells, and athletic training shorts with full technical specifications."
+              ? "Custom product list images and specifications added to Safety Line's Gearwear division."
               : "Discover precision engineered athletic tanks, compression layers, technical performance shirts, and athletic activewear."
             }
           </p>
@@ -620,6 +637,7 @@ export default function CategoryHub({
         )}
 
       </section>
+      )}
 
       {/* =========================================================================
           TECHNICAL FEATURES & QUALITY STANDARDS SECTION
@@ -852,6 +870,7 @@ export default function CategoryHub({
         onClose={() => setIsListingModalOpen(false)}
         productToEdit={productToEdit}
         defaultCategory={isGearwear ? 'gearwear' : 'accessories'}
+        defaultSubcategory={selectedWindowForModal}
         onSave={handleSaveListing}
         onDelete={onDeleteProduct}
       />

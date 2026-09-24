@@ -327,17 +327,28 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
             >
               {parentCategoryLabel}
             </button>
+            {product.subcategory && isGearwear && (
+              <>
+                <span>/</span>
+                <button
+                  onClick={() => navigate(`/gearwear/${product.subcategory}`)}
+                  className="hover:text-[#0B3D3B] transition-colors cursor-pointer font-bold capitalize"
+                >
+                  {product.subcategory.replace(/-/g, ' ')}
+                </button>
+              </>
+            )}
             <span>/</span>
             <span className="text-[#0B3D3B] font-bold truncate max-w-xs">{product.name}</span>
           </div>
 
             <button
               id="back-to-products-btn"
-              onClick={() => navigate(`/${parentCategorySlug}`)}
+              onClick={() => navigate(product.subcategory && isGearwear ? `/gearwear/${product.subcategory}` : `/${parentCategorySlug}`)}
               className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-[#0B3D3B] transition-colors cursor-pointer"
             >
               <CornerDownLeft className="w-4 h-4 text-[#FF5A36]" />
-              <span>Back to {parentCategoryLabel} Collection</span>
+              <span>Back to {product.subcategory && isGearwear ? product.subcategory.replace(/-/g, ' ') : parentCategoryLabel}</span>
             </button>
         </div>
 

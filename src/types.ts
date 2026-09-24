@@ -22,6 +22,7 @@ export interface Product {
   displayOrder: number;
   coverImage: string; // URL or base64
   galleryImages: string[]; // URLs or base64
+  subcategory?: string; // e.g. 'tactical-gloves' | 'road-cycling-apparel' | 'car-racing' | 'weight-lifting'
   isListingSlot?: boolean; // Whether this is an open listing window ready for user images/details
   seoTitle?: string;
   seoDescription?: string;

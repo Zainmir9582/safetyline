@@ -11,6 +11,7 @@ interface ListingModalProps {
   onClose: () => void;
   productToEdit?: Product | null;
   defaultCategory?: 'gearwear' | 'accessories' | 'hosiery';
+  defaultSubcategory?: string;
   onSave: (product: Product) => void;
   onDelete?: (productId: string) => void;
 }
@@ -20,6 +21,7 @@ export default function ListingModal({
   onClose,
   productToEdit,
   defaultCategory = 'gearwear',
+  defaultSubcategory = 'tactical-gloves',
   onSave,
   onDelete,
 }: ListingModalProps) {
@@ -32,6 +34,7 @@ export default function ListingModal({
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
   const [categoryId, setCategoryId] = useState(resolvedCategoryId);
+  const [subcategory, setSubcategory] = useState<string>(productToEdit?.subcategory || defaultSubcategory);
   const [productCode, setProductCode] = useState('');
   const [material, setMaterial] = useState('');
   const [shortDescription, setShortDescription] = useState('');
@@ -55,6 +58,7 @@ export default function ListingModal({
       setName(productToEdit.name || '');
       setSlug(productToEdit.slug || '');
       setCategoryId(productToEdit.categoryId || 'cat-gearwear');
+      setSubcategory(productToEdit.subcategory || defaultSubcategory || 'tactical-gloves');
       setProductCode(productToEdit.productCode || '');
       setMaterial(productToEdit.material || '');
       setShortDescription(productToEdit.shortDescription || '');
@@ -67,10 +71,22 @@ export default function ListingModal({
       setError(null);
     } else {
       // New listing window presets
-      const generatedCode = (defaultCategory === 'gearwear' ? 'GW-' : 'AC-') + Math.floor(1000 + Math.random() * 9000);
+      const resolvedSub = defaultSubcategory || 'tactical-gloves';
+      let codePrefix = 'GW-';
+      if (defaultCategory === 'gearwear') {
+        if (resolvedSub === 'tactical-gloves') codePrefix = 'GW-TG-';
+        else if (resolvedSub === 'road-cycling-apparel') codePrefix = 'GW-RC-';
+        else if (resolvedSub === 'car-racing') codePrefix = 'GW-CR-';
+        else if (resolvedSub === 'weight-lifting') codePrefix = 'GW-WL-';
+      } else {
+        codePrefix = 'AC-';
+      }
+
+      const generatedCode = codePrefix + Math.floor(100 + Math.random() * 900);
       setName('');
       setSlug('');
       setCategoryId(defaultCategory === 'gearwear' ? 'cat-gearwear' : 'cat-hosiery');
+      setSubcategory(resolvedSub);
       setProductCode(generatedCode);
       setMaterial('85% Technical Polyamide, 15% Lycra');
       setShortDescription('');
@@ -86,7 +102,7 @@ export default function ListingModal({
       setGalleryImages([]);
       setError(null);
     }
-  }, [productToEdit, defaultCategory, isOpen]);
+  }, [productToEdit, defaultCategory, defaultSubcategory, isOpen]);
 
   // Handle auto-generating slug from name if creating
   const handleNameChange = (val: string) => {
@@ -170,6 +186,7 @@ export default function ListingModal({
       slug: finalSlug,
       categoryId,
       categoryName,
+      subcategory: isGw ? (subcategory || 'tactical-gloves') : undefined,
       shortDescription: shortDescription.trim() || `${name.trim()} by Safety Line technical atelier.`,
       longDescription: longDescription.trim() || shortDescription.trim(),
       material: material.trim() || 'Technical Knit Composite',
@@ -275,28 +292,54 @@ export default function ListingModal({
                 </select>
               </div>
 
+              {categoryId === 'cat-gearwear' ? (
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-[#FF5A36]">Production Window *</label>
+                  <select
+                    value={subcategory}
+                    onChange={(e) => {
+                      const newSub = e.target.value;
+                      setSubcategory(newSub);
+                      if (!productToEdit) {
+                        let prefix = 'GW-TG-';
+                        if (newSub === 'road-cycling-apparel') prefix = 'GW-RC-';
+                        else if (newSub === 'car-racing') prefix = 'GW-CR-';
+                        else if (newSub === 'weight-lifting') prefix = 'GW-WL-';
+                        setProductCode(prefix + Math.floor(100 + Math.random() * 900));
+                      }
+                    }}
+                    className="w-full bg-[#FFF0ED] border border-[#FF5A36]/40 focus:border-[#FF5A36] rounded-lg px-3 py-2 text-xs font-bold text-[#0B3D3B] outline-none"
+                  >
+                    <option value="tactical-gloves">🛡️ Tactical Gloves</option>
+                    <option value="road-cycling-apparel">🚴 Road & Cycling Apparel</option>
+                    <option value="car-racing">🏎️ Car Racing</option>
+                    <option value="weight-lifting">🏋️ Weight Lifting</option>
+                  </select>
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-slate-700">Display Status</label>
+                  <select
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value as 'Active' | 'Draft')}
+                    className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none"
+                  >
+                    <option value="Active">Active in Catalogue</option>
+                    <option value="Draft">Draft / Hidden</option>
+                  </select>
+                </div>
+              )}
+
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-slate-700">URL Slug *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. apex-pro-aero-tee"
+                  placeholder="e.g. tactical-operator-gloves"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
                   className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs font-mono text-[#1A1A1A] outline-none"
                 />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Display Status</label>
-                <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value as 'Active' | 'Draft')}
-                  className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none"
-                >
-                  <option value="Active">Active in Catalogue</option>
-                  <option value="Draft">Draft / Hidden</option>
-                </select>
               </div>
             </div>
 

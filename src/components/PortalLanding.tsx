@@ -138,20 +138,23 @@ export default function PortalLanding() {
                   Gearwear
                 </h2>
                 <p className="text-slate-600 font-normal text-xs sm:text-sm leading-relaxed">
-                  High-compression aerodynamic tees, thermal baselayers, weather stormshells, and seamless athletic shorts.
+                  Tactical gloves, road & cycling apparel, car racing suits & gear, and weight lifting technical equipment.
                 </p>
               </div>
 
-              {/* Technical Features Tag */}
+              {/* Technical Windows Tag */}
               <div className="flex flex-wrap gap-2 pt-1">
-                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                  3D Seamless Knits
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Tactical Gloves
                 </span>
-                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                  AeroStrand™ Zoned Weave
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Road & Cycling
                 </span>
-                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                  Zero-Chafe Flatlock
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Car Racing
+                </span>
+                <span className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200 font-medium">
+                  Weight Lifting
                 </span>
               </div>
 
