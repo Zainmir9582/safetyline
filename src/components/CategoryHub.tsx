@@ -504,18 +504,13 @@ export default function CategoryHub({
       {isGearwear && (
         <GearwearWindowsSection 
           products={products}
-          onOpenListingModalForWindow={(windowSlug) => {
-            setSelectedWindowForModal(windowSlug);
-            setProductToEdit(null);
-            setIsListingModalOpen(true);
-          }}
         />
       )}
 
       {/* =========================================================================
-          ITEMS / PRODUCTS CATALOGUE SECTION
+          ITEMS / PRODUCTS CATALOGUE SECTION (Only for Accessories)
          ========================================================================= */}
-      {(!isGearwear || categoryProducts.length > 0) && (
+      {!isGearwear && (
         <section id="items-section" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}

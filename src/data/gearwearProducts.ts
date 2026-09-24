@@ -1,12 +1,354 @@
 import { Product } from '../types';
+import tacticalGlovesImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
+import roadCyclingImg from '../assets/images/road_cycling_cat_1790287328917.jpg';
+import carRacingImg from '../assets/images/car_racing_cat_1790287345103.jpg';
+import weightLiftingImg from '../assets/images/weight_lifting_cat_1790287360273.jpg';
 
-/**
- * Gearwear Products
- * All previous sample/dummy listed images have been removed per update requirement:
- * "1. remove all listed images from the gearwear"
- * "2. add the portion of windows and their be like (Tactical gloves, Road &cycling apparel, car racing, weight lifting) these are the pages in which i add the product list images"
- *
- * New product list images added by the user in any of the 4 windows (Tactical Gloves,
- * Road & Cycling Apparel, Car Racing, Weight Lifting) are stored and persisted here.
- */
-export const gearwearProducts: Product[] = [];
+export const gearwearProducts: Product[] = [
+  // 1. Tactical Gloves Category
+  {
+    id: 'prod-tg-01',
+    name: 'Operator Tactical Hard-Knuckle Gloves',
+    slug: 'operator-tactical-hard-knuckle-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'tactical-gloves',
+    shortDescription: 'Combat-grade tactical gloves with molded composite knuckle guards, anti-abrasion goat leather palms, and touchscreen conductivity.',
+    longDescription: 'Engineered for military operators, tactical units, and law enforcement personnel. Spun with cut-resistant Kevlar® inner lining and heavy-duty double-stitched goat leather palms. Meets EN 388 Level 4 abrasion resistance.',
+    material: 'Goat Leather, Kevlar® Lining & Thermal TPR Knuckles',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    features: [
+      'Molded thermal TPR impact knuckle guards',
+      'EN 388 Level 4 abrasion-resistant goat leather palm',
+      'Touchscreen conductive thumb and index fingertips',
+      'Hook-and-loop adjustable neoprene wrist closure'
+    ],
+    productCode: 'GW-TG-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: tacticalGlovesImg,
+    galleryImages: [tacticalGlovesImg],
+    seoTitle: 'Operator Tactical Hard-Knuckle Gloves | Safety Line',
+    seoDescription: 'Combat-ready tactical gloves with molded knuckle guards and Kevlar palm reinforcement.',
+    createdAt: '2026-03-01T08:00:00.000Z'
+  },
+  {
+    id: 'prod-tg-02',
+    name: 'Combat Recon High-Dexterity Tactical Gloves',
+    slug: 'combat-recon-high-dexterity-tactical-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'tactical-gloves',
+    shortDescription: 'Ultra-lightweight tactical gloves designed for extreme trigger dexterity, weapon manipulation, and rapid ventilation.',
+    longDescription: 'Designed for precision marksmanship and patrol duties. Features a 0.5mm synthetic micro-suede palm for barehand trigger sensitivity combined with 4-way stretch breathable Cordura® backing.',
+    material: 'Synthetic Micro-Suede & 4-Way Stretch Cordura®',
+    sizes: ['S', 'M', 'L', 'XL'],
+    features: [
+      '0.5mm ultra-thin high-dexterity trigger sensitivity palm',
+      'Breathable moisture-wicking backhand ventilation mesh',
+      'Reinforced thumb saddle for rapid weapon cycling',
+      'Integrated nylon pull loop for fast deployment'
+    ],
+    productCode: 'GW-TG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: tacticalGlovesImg,
+    galleryImages: [tacticalGlovesImg],
+    seoTitle: 'Combat Recon High-Dexterity Tactical Gloves | Safety Line',
+    seoDescription: 'High-dexterity patrol and combat gloves with micro-suede palm and Cordura back.',
+    createdAt: '2026-03-02T08:00:00.000Z'
+  },
+  {
+    id: 'prod-tg-03',
+    name: 'Desert Storm Heavy Duty Combat Gloves',
+    slug: 'desert-storm-heavy-duty-combat-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'tactical-gloves',
+    shortDescription: 'Heavy-duty arid operational tactical handwear with reinforced palm padding and thermal knuckle shielding.',
+    longDescription: 'Built to withstand high-friction arid terrain, fast-roping, and extreme operational maneuvers. Double reinforced palm overlays prevent friction burns while ergonomic finger articulation prevents fatigue.',
+    material: 'Full-Grain Goat Leather & Reinforced Kevlar® Stitching',
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    features: [
+      'Double-layer leather palm reinforced for fast-roping operations',
+      'Split-knuckle design for maximum natural hand curvature',
+      'High-tensile Kevlar® thread stitching across all high-wear points',
+      'Breathable air-mesh finger sidewalls'
+    ],
+    productCode: 'GW-TG-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: tacticalGlovesImg,
+    galleryImages: [tacticalGlovesImg],
+    seoTitle: 'Desert Storm Heavy Duty Combat Gloves | Safety Line',
+    seoDescription: 'Rugged combat operational handwear with double-layer leather palms and Kevlar stitching.',
+    createdAt: '2026-03-03T08:00:00.000Z'
+  },
+
+  // 2. Road & Cycling Apparel Category
+  {
+    id: 'prod-rc-01',
+    name: 'AeroSpeed Pro Road Cycling Jersey',
+    slug: 'aerospeed-pro-road-cycling-jersey',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'road-cycling-apparel',
+    shortDescription: 'Ultra-lightweight aerodynamic road cycling jersey with textured drag-reducing sleeves and micro-mesh ventilation.',
+    longDescription: 'Engineered for high-cadence road racing and gravel riding. Incorporates wind-tunnel tested textured shoulder fabric that trips the boundary layer of air, dramatically decreasing aerodynamic drag at high speeds.',
+    material: '80% Performance Poly-Microfiber, 20% Elastane',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    features: [
+      'Aerodynamic textured boundary-layer sleeve fabric',
+      'Full-length YKK semi-autolock front ventilation zipper',
+      'Triple reinforced rear cargo pockets with hidden zip security pocket',
+      'Laser-cut silicone elastic gripper hem preventing jersey ride-up',
+      'UPF 50+ UV solar protection'
+    ],
+    productCode: 'GW-RC-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: roadCyclingImg,
+    galleryImages: [roadCyclingImg],
+    seoTitle: 'AeroSpeed Pro Road Cycling Jersey | Safety Line Cycling',
+    seoDescription: 'Aerodynamic road cycling jersey with textured sleeves, YKK zipper, and UV 50+ protection.',
+    createdAt: '2026-03-04T08:00:00.000Z'
+  },
+  {
+    id: 'prod-rc-02',
+    name: 'Velocity Carbon 3D Gel Chamois Bib Shorts',
+    slug: 'velocity-carbon-3d-gel-chamois-bib-shorts',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'road-cycling-apparel',
+    shortDescription: 'Premium endurance road cycling bib shorts featuring a multi-density 3D gel chamois and Italian Lycra compression.',
+    longDescription: 'Crafted for 6+ hour epic road endurance rides. Features anatomical multi-density foam and gel chamois inserts treated with anti-bacterial silver ions to alleviate perineal pressure points.',
+    material: 'Italian Warp Knit Lycra (220 GSM) & High-Density Gel Chamois',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    features: [
+      'Multi-density 120kg/m³ perforated anatomical 3D gel chamois',
+      'Graduated vascular compression Lycra stabilizing thigh muscles',
+      'Seamless flat-stitched breathable mesh shoulder braces',
+      '7cm wide laser-cut silicone printed leg bands for secure lock'
+    ],
+    productCode: 'GW-RC-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: roadCyclingImg,
+    galleryImages: [roadCyclingImg],
+    seoTitle: 'Velocity Carbon 3D Gel Chamois Bib Shorts | Safety Line Cycling',
+    seoDescription: 'Endurance cycling bib shorts with multi-density 3D gel chamois and Italian compression Lycra.',
+    createdAt: '2026-03-05T08:00:00.000Z'
+  },
+  {
+    id: 'prod-rc-03',
+    name: 'WindBarrier Lightweight Packable Cycling Gilet',
+    slug: 'windbarrier-lightweight-packable-cycling-gilet',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'road-cycling-apparel',
+    shortDescription: 'Ultra-compact windproof and water-resistant cycling vest designed for mountain descents and brisk mornings.',
+    longDescription: 'Weighing only 85 grams, this cycling vest packs down into its own jersey pocket pouch. Features a dual-slider front zipper for easy mid-ride ventilation and rear reach-through jersey pocket slits.',
+    material: '100% Ultralight Ripstop Hydrophobic Polyamide',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    features: [
+      'Total wind-blocking chest and shoulder barrier',
+      'High-stretch breathable mesh rear panel for heat dumping',
+      'Dual-slider two-way YKK front zipper for quick jersey access',
+      'High-visibility 3M Scotchlite™ reflective rear safety strips'
+    ],
+    productCode: 'GW-RC-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: roadCyclingImg,
+    galleryImages: [roadCyclingImg],
+    seoTitle: 'WindBarrier Packable Cycling Gilet | Safety Line Cycling',
+    seoDescription: 'Featherlight 85g windproof packable cycling vest for road racing and descents.',
+    createdAt: '2026-03-06T08:00:00.000Z'
+  },
+
+  // 3. Car Racing Category
+  {
+    id: 'prod-cr-01',
+    name: 'Grand Prix Pro FIA Flame-Resistant Racing Gloves',
+    slug: 'grand-prix-pro-fia-flame-resistant-racing-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'FIA standard fire-retardant racing gloves with external seams for zero steering friction and high-tack silicone palms.',
+    longDescription: 'Engineered to meet FIA 8856-2018 and SFI 3.3/5 motorsport benchmarks. Constructed with dual-layer Nomex® knit, external ergonomic seams to eliminate steering wheel pressure points, and high-traction silicone printed palms.',
+    material: '100% Double-Layer Nomex® Aramid with Silicone Printed Palms',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    features: [
+      'FIA 8856-2018 & SFI 3.3/5 benchmark flame resistance',
+      'External seam finger construction preventing blisters and pressure points',
+      'High-grip flame-resistant silicone pattern for maximum wheel tactile feedback',
+      'Extended gauntlet with elasticated wrist retention system'
+    ],
+    productCode: 'GW-CR-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: carRacingImg,
+    galleryImages: [carRacingImg],
+    seoTitle: 'Grand Prix Pro FIA Racing Gloves | Safety Line Motorsport',
+    seoDescription: 'FIA benchmark flame-resistant motorsport racing gloves with external seams and high-tack silicone grip.',
+    createdAt: '2026-03-07T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cr-02',
+    name: 'Apex Trackmaster Nomex Motorsport Suit',
+    slug: 'apex-trackmaster-nomex-motorsport-suit',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'Triple-layer ultra-lightweight fire-retardant racing overall with full floating arms and breathable lumbar inserts.',
+    longDescription: 'Manufactured for circuit competition, rally stages, and sprint racing. Spun with lightweight Nomex® outer layer and soft aramid knit lining. Features 360-degree floating sleeve gussets for unrestricted steering rotation.',
+    material: 'Triple-Layer Nomex® Aramid Matrix (295 GSM)',
+    sizes: ['48', '50', '52', '54', '56', '58'],
+    features: [
+      'FIA 8856-2018 certified fire retardant protection',
+      'Full 360-degree floating arm gussets with flexible stretch bellows',
+      'Breathable lumbar and groin stretch panels for cockpit cooling',
+      'Concealed extraction shoulder handles complying with safety protocols'
+    ],
+    productCode: 'GW-CR-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: carRacingImg,
+    galleryImages: [carRacingImg],
+    seoTitle: 'Apex Trackmaster Nomex Motorsport Suit | Safety Line',
+    seoDescription: 'Triple-layer lightweight fire-retardant racing suit with full floating arms and FIA compliance.',
+    createdAt: '2026-03-08T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cr-03',
+    name: 'Veloce High-Traction Karting Gloves',
+    slug: 'veloce-high-traction-karting-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'High-sensitivity karting and track-day gloves with pre-curved fingers, breathable mesh back, and synthetic chamois palm.',
+    longDescription: 'Crafted for competitive kart drivers demanding direct steering feel and unyielding grip. Features pre-curved fingers with silicone texturing across the palms and high-wear abrasion panels.',
+    material: 'Poly-Spandex Stretch & Synthetic Chamois with Silicone Grid',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    features: [
+      'Pre-curved anatomical finger construction reducing steering fatigue',
+      'Ultra-tack silicone palm grip designed for high-vibration steering wheels',
+      'Breathable 4-way stretch backhand preventing palm sweating',
+      'Slash-cut elastic cuff for quick entry and slip-on fit'
+    ],
+    productCode: 'GW-CR-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: carRacingImg,
+    galleryImages: [carRacingImg],
+    seoTitle: 'Veloce High-Traction Karting Gloves | Safety Line Motorsport',
+    seoDescription: 'Competitive karting gloves with high-sensitivity silicone grip and pre-curved fingers.',
+    createdAt: '2026-03-09T08:00:00.000Z'
+  },
+
+  // 4. Weight Lifting Category
+  {
+    id: 'prod-wl-01',
+    name: 'Titan Buffalo Leather Powerlifting Lever Belt (10mm)',
+    slug: 'titan-buffalo-leather-powerlifting-lever-belt-10mm',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'weight-lifting',
+    shortDescription: 'Heavy-duty 10mm genuine buffalo leather powerlifting belt equipped with a precision matte black stainless steel quick-release lever.',
+    longDescription: 'Crafted for heavy barbell squats, deadlifts, and overhead presses. Spun from top-grain buffalo leather with uniform 10mm thickness, non-stretch suede interior, and heavy industrial bonded nylon four-row perimeter stitching.',
+    material: '100% Genuine Top-Grain Buffalo Leather & Matte Stainless Steel Lever',
+    sizes: ['S (26-32")', 'M (30-36")', 'L (34-40")', 'XL (38-44")', 'XXL (42-48")'],
+    features: [
+      'Uniform 10mm competition-grade thickness (4-inch width)',
+      'Heavy-duty quick-release zinc-alloy lever buckle tested to 500kg+',
+      'Non-slip genuine suede inner lining preventing belt shifting',
+      'Four-row high-density bonded nylon structural stitching'
+    ],
+    productCode: 'GW-WL-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: weightLiftingImg,
+    galleryImages: [weightLiftingImg],
+    seoTitle: 'Titan 10mm Buffalo Leather Lever Belt | Safety Line Strength',
+    seoDescription: 'Competition 10mm genuine buffalo leather powerlifting lever belt tested to 500kg barbell loads.',
+    createdAt: '2026-03-10T08:00:00.000Z'
+  },
+  {
+    id: 'prod-wl-02',
+    name: 'IronGrip Padded Barbell Weightlifting Gloves',
+    slug: 'irongrip-padded-barbell-weightlifting-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'weight-lifting',
+    shortDescription: 'Heavy-duty gym training gloves featuring silicone honeycomb padded palms, integrated wrist wrap support, and quick-pull finger tabs.',
+    longDescription: 'Engineered for bodybuilding, high-rep pull-ups, kettlebell swings, and dumbbell complexes. Features high-density silicone micro-cushioning that prevents calluses while the integrated 16-inch wrist wrap stabilizes joints.',
+    material: 'Breathable Mesh, Microfiber Suede & Silicone Honeycomb Cushioning',
+    sizes: ['S', 'M', 'L', 'XL'],
+    features: [
+      'Honeycomb silicone palm cushioning absorbing knurling barbell friction',
+      'Integrated 16-inch elastic wrist wrap with hook-and-loop stabilization',
+      'Breathable lycra mesh back preventing hand overheating',
+      'Dual quick-release finger tabs for effortless glove removal post-workout'
+    ],
+    productCode: 'GW-WL-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: weightLiftingImg,
+    galleryImages: [weightLiftingImg],
+    seoTitle: 'IronGrip Padded Weightlifting Gloves | Safety Line Strength',
+    seoDescription: 'Gym lifting gloves with honeycomb silicone palm padding and integrated 16-inch wrist wrap.',
+    createdAt: '2026-03-11T08:00:00.000Z'
+  },
+  {
+    id: 'prod-wl-03',
+    name: 'Heavy-Duty Elastic Thumb-Loop Wrist Wraps (18-Inch)',
+    slug: 'heavy-duty-elastic-thumb-loop-wrist-wraps-18-inch',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'weight-lifting',
+    shortDescription: 'Industrial-strength powerlifting wrist wraps with reinforced thumb loops and military-grade Velcro closure.',
+    longDescription: 'Provides cast-like immobilization for heavy bench presses, overhead squats, and Olympic clean & jerks. Woven with heavy-gauge elastodiene and premium cotton blend that maintains stiffness under maximal loads.',
+    material: '60% Heavy-Gauge Cotton, 40% Rubberized Elastodiene',
+    sizes: ['18-Inch Standard', '24-Inch Heavy Competition'],
+    features: [
+      'Heavy-gauge woven elastic providing maximum wrist joint casting',
+      'Reinforced thumb loop with flatlock seam to eliminate thumb pinch',
+      'Extra-wide 2-inch industrial hook-and-loop fastening',
+      'Left and right anatomical wrist orientation labeling'
+    ],
+    productCode: 'GW-WL-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: weightLiftingImg,
+    galleryImages: [weightLiftingImg],
+    seoTitle: 'Heavy-Duty 18-Inch Powerlifting Wrist Wraps | Safety Line',
+    seoDescription: 'Maximum stiffness 18-inch powerlifting wrist wraps for heavy bench press and overhead lifts.',
+    createdAt: '2026-03-12T08:00:00.000Z'
+  },
+  {
+    id: 'prod-wl-04',
+    name: '7mm Neoprene Competition Knee Sleeves',
+    slug: '7mm-neoprene-competition-knee-sleeves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'weight-lifting',
+    shortDescription: 'High-density 7mm neoprene compression knee sleeves providing joint warmth, rebound assistance, and lateral knee stabilization.',
+    longDescription: 'Spun from competition-grade 7mm SCR neoprene with ergonomic contoured cut that stays locked in place through deep squat sets. Promotes blood flow, joint warmth, and explosive rebound power out of the squat hole.',
+    material: '7mm High-Density SCR Neoprene with Bonded Nylon Seams',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    features: [
+      '7mm competition-grade high-density SCR neoprene core',
+      'Anatomical 3D contour preventing slippage and bunching behind the knee',
+      'Reinforced zig-zag double flatlock stitching resisting tensile rupture',
+      'Graduated compression boosting patellar tracking and joint lubrication'
+    ],
+    productCode: 'GW-WL-04',
+    status: 'Active',
+    displayOrder: 4,
+    coverImage: weightLiftingImg,
+    galleryImages: [weightLiftingImg],
+    seoTitle: '7mm Neoprene Competition Knee Sleeves | Safety Line Strength',
+    seoDescription: 'High-density 7mm neoprene compression knee sleeves for heavy squats and powerlifting.',
+    createdAt: '2026-03-13T08:00:00.000Z'
+  }
+];

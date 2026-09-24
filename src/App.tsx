@@ -13,7 +13,7 @@ import { products as defaultProducts, settings as defaultSettings } from './data
 import { getGearwearWindowBySlug } from './data/gearwearWindows';
 import { Award, ArrowRight } from 'lucide-react';
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v18';
+const LOCAL_STORAGE_PRODUCTS_KEY = 'safetyline_catalogue_v19';
 
 export default function App() {
   const currentPath = usePath();
@@ -22,6 +22,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       // Clear legacy storage keys that may have cached previous products
+      localStorage.removeItem('safetyline_catalogue_v18');
       localStorage.removeItem('safetyline_catalogue_v17');
       localStorage.removeItem('safetyline_catalogue_v16');
       localStorage.removeItem('safetyline_catalogue_v15');
@@ -188,9 +189,6 @@ export default function App() {
             window={targetWindow}
             products={products}
             settings={settings}
-            onAddProduct={handleAddProduct}
-            onUpdateProduct={handleUpdateProduct}
-            onDeleteProduct={handleDeleteProduct}
           />
         );
       }
