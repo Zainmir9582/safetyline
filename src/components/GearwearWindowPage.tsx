@@ -47,12 +47,22 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       const isSubMatch = sub === slug;
       let isKeywordMatch = false;
 
-      if (slug === 'tactical-gloves') {
-        isKeywordMatch = pName.includes('tactical') || pName.includes('glove') || pCode.includes('tg');
+      if (slug === 'golf-gloves') {
+        isKeywordMatch = pName.includes('golf') || pCode.includes('gg');
+      } else if (slug === 'fish-gloves') {
+        isKeywordMatch = pName.includes('fish') || pName.includes('marine') || pName.includes('angling') || pCode.includes('fg');
+      } else if (slug === 'work-gloves') {
+        isKeywordMatch = pName.includes('work') || pName.includes('rigg') || pName.includes('construct') || pCode.includes('wg');
+      } else if (slug === 'mechanics-gloves') {
+        isKeywordMatch = pName.includes('mechanic') || pName.includes('workshop') || pName.includes('tpr') || pCode.includes('mg');
+      } else if (slug === 'tactical-police-gloves' || slug === 'tactical-gloves') {
+        isKeywordMatch = pName.includes('tactical') || pName.includes('police') || pName.includes('swat') || pCode.includes('tp') || pCode.includes('tg');
+      } else if (slug === 'motorcars-gloves' || slug === 'car-racing') {
+        isKeywordMatch = pName.includes('motorcar') || pName.includes('racing') || pName.includes('nomex') || pName.includes('rally') || pCode.includes('mc') || pCode.includes('cr');
+      } else if (slug === 'cycling-gloves') {
+        isKeywordMatch = (pName.includes('cycl') && pName.includes('glove')) || pCode.includes('cg');
       } else if (slug === 'road-cycling-apparel') {
-        isKeywordMatch = pName.includes('cycl') || pName.includes('road') || pName.includes('aero') || pCode.includes('rc');
-      } else if (slug === 'car-racing') {
-        isKeywordMatch = pName.includes('racing') || pName.includes('motor') || pName.includes('kart') || pCode.includes('cr');
+        isKeywordMatch = (pName.includes('cycl') && !pName.includes('glove')) || pName.includes('road') || pName.includes('aero') || pCode.includes('rc');
       } else if (slug === 'weight-lifting') {
         isKeywordMatch = pName.includes('lift') || pName.includes('weight') || pName.includes('belt') || pCode.includes('wl');
       }
@@ -148,10 +158,10 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         </div>
 
         {/* Quick Category Bar */}
-        <div className="bg-[#072725] border-t border-white/10 px-4 sm:px-8 py-2 overflow-x-auto">
+        <div className="bg-[#072725] border-t border-white/10 px-4 sm:px-8 py-2 overflow-x-auto scrollbar-none">
           <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs">
-            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-2 hidden sm:inline">
-              Categories:
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">
+              Windows:
             </span>
             {GEARWEAR_WINDOWS.map((win) => {
               const isActive = win.slug === currentWindow.slug;
@@ -159,13 +169,14 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                 <button
                   key={win.id}
                   onClick={() => navigate(win.routePath)}
-                  className={`px-3 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                     isActive
                       ? 'bg-[#FF5A36] text-white font-bold shadow-xs'
                       : 'text-slate-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  {win.title}
+                  <span>{win.shortTitle}</span>
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
                 </button>
               );
             })}
@@ -182,6 +193,8 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
             <Link to="/" className="hover:text-white transition-colors">Portal</Link>
             <span>/</span>
             <Link to="/gearwear" className="hover:text-white transition-colors">Gearwear</Link>
+            <span>/</span>
+            <span className="text-[#D9F0EC]/80">{currentWindow.groupLabel}</span>
             <span>/</span>
             <span className="text-white font-bold">{currentWindow.title}</span>
           </div>

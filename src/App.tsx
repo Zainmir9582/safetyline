@@ -166,12 +166,35 @@ export default function App() {
       );
     }
 
-    // 2b. Dedicated Gearwear Production Windows: Tactical Gloves, Road & Cycling Apparel, Car Racing, Weight Lifting
+    // 2b. Dedicated Gearwear Production Windows
     let windowSlugMatch: string | null = null;
     if (cleanPath.startsWith('/gearwear/')) {
       windowSlugMatch = cleanPath.substring('/gearwear/'.length);
-    } else if (cleanPath === '/tactical-gloves' || cleanPath === '/products/tactical-gloves') {
-      windowSlugMatch = 'tactical-gloves';
+    } else if (cleanPath === '/golf-gloves' || cleanPath === '/products/golf-gloves') {
+      windowSlugMatch = 'golf-gloves';
+    } else if (cleanPath === '/fish-gloves' || cleanPath === '/fishing-gloves' || cleanPath === '/products/fish-gloves') {
+      windowSlugMatch = 'fish-gloves';
+    } else if (cleanPath === '/work-gloves' || cleanPath === '/products/work-gloves') {
+      windowSlugMatch = 'work-gloves';
+    } else if (cleanPath === '/mechanics-gloves' || cleanPath === '/mechanic-gloves' || cleanPath === '/products/mechanics-gloves') {
+      windowSlugMatch = 'mechanics-gloves';
+    } else if (
+      cleanPath === '/tactical-police-gloves' || 
+      cleanPath === '/police-gloves' || 
+      cleanPath === '/tactical-gloves' || 
+      cleanPath === '/products/tactical-gloves'
+    ) {
+      windowSlugMatch = 'tactical-police-gloves';
+    } else if (
+      cleanPath === '/motorcars-gloves' || 
+      cleanPath === '/car-racing' || 
+      cleanPath === '/motorsport' || 
+      cleanPath === '/racing' ||
+      cleanPath === '/products/motorcars-gloves'
+    ) {
+      windowSlugMatch = 'motorcars-gloves';
+    } else if (cleanPath === '/cycling-gloves' || cleanPath === '/products/cycling-gloves') {
+      windowSlugMatch = 'cycling-gloves';
     } else if (
       cleanPath === '/road-cycling-apparel' || 
       cleanPath === '/road-cycling' || 
@@ -179,8 +202,6 @@ export default function App() {
       cleanPath === '/cycling-apparel'
     ) {
       windowSlugMatch = 'road-cycling-apparel';
-    } else if (cleanPath === '/car-racing' || cleanPath === '/motorsport' || cleanPath === '/racing') {
-      windowSlugMatch = 'car-racing';
     } else if (cleanPath === '/weight-lifting' || cleanPath === '/weightlifting' || cleanPath === '/lifting') {
       windowSlugMatch = 'weight-lifting';
     }

@@ -71,13 +71,19 @@ export default function ListingModal({
       setError(null);
     } else {
       // New listing window presets
-      const resolvedSub = defaultSubcategory || 'tactical-gloves';
+      const resolvedSub = defaultSubcategory || 'golf-gloves';
       let codePrefix = 'GW-';
       if (defaultCategory === 'gearwear') {
-        if (resolvedSub === 'tactical-gloves') codePrefix = 'GW-TG-';
+        if (resolvedSub === 'golf-gloves') codePrefix = 'GW-GG-';
+        else if (resolvedSub === 'fish-gloves') codePrefix = 'GW-FG-';
+        else if (resolvedSub === 'work-gloves') codePrefix = 'GW-WG-';
+        else if (resolvedSub === 'mechanics-gloves') codePrefix = 'GW-MG-';
+        else if (resolvedSub === 'tactical-police-gloves' || resolvedSub === 'tactical-gloves') codePrefix = 'GW-TP-';
+        else if (resolvedSub === 'motorcars-gloves' || resolvedSub === 'car-racing') codePrefix = 'GW-MC-';
+        else if (resolvedSub === 'cycling-gloves') codePrefix = 'GW-CG-';
         else if (resolvedSub === 'road-cycling-apparel') codePrefix = 'GW-RC-';
-        else if (resolvedSub === 'car-racing') codePrefix = 'GW-CR-';
         else if (resolvedSub === 'weight-lifting') codePrefix = 'GW-WL-';
+        else codePrefix = 'GW-';
       } else {
         codePrefix = 'AC-';
       }
@@ -301,19 +307,36 @@ export default function ListingModal({
                       const newSub = e.target.value;
                       setSubcategory(newSub);
                       if (!productToEdit) {
-                        let prefix = 'GW-TG-';
-                        if (newSub === 'road-cycling-apparel') prefix = 'GW-RC-';
-                        else if (newSub === 'car-racing') prefix = 'GW-CR-';
+                        let prefix = 'GW-TP-';
+                        if (newSub === 'golf-gloves') prefix = 'GW-GG-';
+                        else if (newSub === 'fish-gloves') prefix = 'GW-FG-';
+                        else if (newSub === 'work-gloves') prefix = 'GW-WG-';
+                        else if (newSub === 'mechanics-gloves') prefix = 'GW-MG-';
+                        else if (newSub === 'tactical-police-gloves' || newSub === 'tactical-gloves') prefix = 'GW-TP-';
+                        else if (newSub === 'motorcars-gloves' || newSub === 'car-racing') prefix = 'GW-MC-';
+                        else if (newSub === 'cycling-gloves') prefix = 'GW-CG-';
+                        else if (newSub === 'road-cycling-apparel') prefix = 'GW-RC-';
                         else if (newSub === 'weight-lifting') prefix = 'GW-WL-';
                         setProductCode(prefix + Math.floor(100 + Math.random() * 900));
                       }
                     }}
                     className="w-full bg-[#FFF0ED] border border-[#FF5A36]/40 focus:border-[#FF5A36] rounded-lg px-3 py-2 text-xs font-bold text-[#0B3D3B] outline-none"
                   >
-                    <option value="tactical-gloves">🛡️ Tactical Gloves</option>
-                    <option value="road-cycling-apparel">🚴 Road & Cycling Apparel</option>
-                    <option value="car-racing">🏎️ Car Racing</option>
-                    <option value="weight-lifting">🏋️ Weight Lifting</option>
+                    <optgroup label="Tacticals Categories">
+                      <option value="golf-gloves">⛳ Golf Gloves</option>
+                      <option value="fish-gloves">🐟 Fish Gloves</option>
+                      <option value="work-gloves">🔨 Work Gloves</option>
+                      <option value="mechanics-gloves">🔧 Mechanics Gloves</option>
+                      <option value="tactical-police-gloves">🛡️ Tactical Police Gloves</option>
+                    </optgroup>
+                    <optgroup label="Car Categories">
+                      <option value="motorcars-gloves">🏎️ Motorcars Gloves</option>
+                      <option value="cycling-gloves">🚴 Cycling Gloves</option>
+                    </optgroup>
+                    <optgroup label="Athletic & Power">
+                      <option value="road-cycling-apparel">⚡ Road & Cycling Apparel</option>
+                      <option value="weight-lifting">🏋️ Weight Lifting</option>
+                    </optgroup>
                   </select>
                 </div>
               ) : (
