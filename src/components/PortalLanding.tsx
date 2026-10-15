@@ -23,8 +23,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { navigate, Link } from '../lib/router';
 import { settings } from '../data';
 import SEO from './SEO';
-import { RotatingText, ShimmerHeading } from './TransitionText';
+import { RotatingText, ShimmerHeading, ShiningLWord } from './TransitionText';
 import SmoothImage from './SmoothImage';
+import InquiryLoadingModal from './InquiryLoadingModal';
 
 // Visual Assets
 import safetylineLandingLogo from '../assets/images/safetyline_landing.png';
@@ -40,6 +41,7 @@ import tracksuitsImg from '../assets/images/tracksuits_cat_1790288520625.jpg';
 
 export default function PortalLanding() {
   const [activeWindowTab, setActiveWindowTab] = useState<'all' | 'gearwear' | 'accessories'>('all');
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   const rotatingHeadlines = [
     'PRECISION ATHLETIC GEARWEAR & ACTIVE KNITS',
@@ -148,9 +150,12 @@ export default function PortalLanding() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#041615]/95 via-[#041615]/80 to-[#041615]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_20%,rgba(11,61,59,0.35),transparent)]" />
         
+        {/* Extra Radiant Light Beams for Maximum Shine */}
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[800px] h-[550px] bg-[radial-gradient(ellipse_at_top,rgba(94,234,212,0.22)_0%,rgba(255,90,54,0.12)_45%,transparent_70%)] blur-2xl pointer-events-none animate-light-beam" />
+        
         {/* Animated Radiant Glow Orbs */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF5A36]/15 rounded-full blur-3xl animate-float-glow pointer-events-none" />
-        <div className="absolute top-1/3 -right-32 w-96 h-96 bg-[#0B3D3B]/40 rounded-full blur-3xl animate-float-glow pointer-events-none" style={{ animationDelay: '-4s' }} />
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF5A36]/25 rounded-full blur-3xl animate-float-glow pointer-events-none" />
+        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-[#2DD4BF]/25 rounded-full blur-3xl animate-float-glow pointer-events-none" style={{ animationDelay: '-4s' }} />
         
         {/* Precision Athletic Grid Overlay */}
         <div className="absolute inset-0 athletic-grid-pattern-dark opacity-40 pointer-events-none" />
@@ -175,11 +180,11 @@ export default function PortalLanding() {
           transition={{ duration: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-emerald-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span className="tracking-widest uppercase font-semibold text-[11px]">Direct Manufacturing Complex • Sialkot, Pakistan</span>
           </div>
-          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-slate-300 text-[11px] font-semibold uppercase tracking-wider">
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-slate-200 text-[11px] font-semibold uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5 text-[#FF5A36]" />
             <span>ISO 9001:2015 Certified</span>
           </div>
@@ -192,46 +197,46 @@ export default function PortalLanding() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="flex flex-col items-center space-y-4"
         >
-          {/* Logo with Glow Effect */}
-          <div className="relative group p-2">
-            <div className="absolute inset-0 bg-[#FF5A36]/20 rounded-full blur-xl group-hover:bg-[#FF5A36]/35 transition-all duration-500 scale-90" />
+          {/* Logo with Multi-Layer Radiant Glow Shine */}
+          <div className="relative group p-3">
+            {/* Ambient radiant disk shine */}
+            <div className="absolute -inset-6 bg-gradient-to-r from-emerald-400/35 via-white/40 via-[#FF5A36]/35 to-emerald-400/35 rounded-full blur-2xl group-hover:scale-115 transition-all duration-700 pointer-events-none animate-pulse" />
+            <div className="absolute -inset-2 bg-white/10 rounded-full blur-md" />
             <img
               src={safetylineLandingLogo}
               alt="Safety Line Official Insignia"
-              className="relative h-28 sm:h-36 md:h-40 w-auto object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-105"
+              className="relative h-28 sm:h-36 md:h-44 w-auto object-contain filter drop-shadow-[0_12px_28px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-105"
               loading="eager"
               decoding="async"
               fetchPriority="high"
             />
           </div>
 
-          {/* Brand Heading with Continuous Shimmer & Transition */}
+          {/* Brand Heading with Radiant Shining 'L' Word (LINE) */}
           <div className="space-y-2 text-center max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-black tracking-[0.2em] uppercase leading-tight">
-              <span className="text-[#FF5A36] drop-shadow-md">SAFETY</span>{' '}
-              <ShimmerHeading accent="silver" className="text-white drop-shadow-md">
-                LINE
-              </ShimmerHeading>{' '}
-              <span className="text-slate-300 text-xl sm:text-2xl font-black tracking-[0.16em]">IND</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-[0.2em] uppercase leading-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+              <span className="text-[#FF5A36] drop-shadow-[0_2px_15px_rgba(255,90,54,0.6)]">SAFETY</span>
+              <ShiningLWord word="LINE" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl" />
+              <span className="text-slate-300 text-xl sm:text-2xl font-black tracking-[0.16em] drop-shadow-sm">IND</span>
             </h1>
 
-            <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[#A7F3D0] uppercase font-bold drop-shadow-sm">
+            <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[#5EEAD4] uppercase font-bold drop-shadow-[0_0_10px_rgba(94,234,212,0.4)]">
               Textile Engineering & Technical Handwear Atelier
             </p>
           </div>
         </motion.div>
 
-        {/* Eye-Catching Dynamic Text Transition Box */}
+        {/* Dynamic Text Transition Box with Crisp Motion */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="pt-1 max-w-2xl mx-auto"
+          className="pt-1 max-w-2xl mx-auto space-y-3"
         >
-          <div className="relative p-0.5 rounded-2xl bg-gradient-to-r from-white/10 via-[#FF5A36]/30 to-white/10 shadow-xl shadow-black/40">
-            <div className="bg-[#072422]/90 backdrop-blur-md px-5 py-3 rounded-2xl flex items-center justify-center gap-2.5 text-center">
+          <div className="relative p-0.5 rounded-2xl bg-gradient-to-r from-emerald-400/40 via-white/40 via-[#FF5A36]/50 to-emerald-400/40 shadow-2xl shadow-emerald-950/50">
+            <div className="bg-[#072422]/95 backdrop-blur-md px-5 py-3 rounded-2xl flex items-center justify-center gap-2.5 text-center">
               <Sparkles className="w-4 h-4 text-[#FF5A36] shrink-0" />
-              <div className="text-xs sm:text-sm font-mono font-bold tracking-wider text-slate-200">
+              <div className="text-xs sm:text-sm font-mono font-bold tracking-wider text-slate-100">
                 <RotatingText 
                   phrases={rotatingHeadlines} 
                   interval={3600}
@@ -240,9 +245,21 @@ export default function PortalLanding() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2 font-sans tracking-wide">
-            Select a specialized production division below to explore certified technical specifications and live product catalogues.
-          </p>
+
+          {/* Quick Interactive Button with Shine Sweep */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+            <button
+              onClick={() => setIsInquiryModalOpen(true)}
+              className="btn-glow-shine inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-lg shadow-[#FF5A36]/30 hover:shadow-[#FF5A36]/50 active:scale-95 transition-all cursor-pointer border border-[#FF7A59]/50"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Direct OEM & Spec Inquiry</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-xs text-slate-400 font-sans tracking-wide">
+              Certified technical specifications & live production lines
+            </span>
+          </div>
         </motion.div>
       </header>
 
@@ -350,11 +367,11 @@ export default function PortalLanding() {
                 </div>
               </div>
 
-              {/* Enter Button CTA */}
+              {/* Enter Button CTA with Radiant Shine Sweep */}
               <Link
                 id="enter-gearwear-btn"
                 to="/gearwear"
-                className="w-full mt-3 bg-[#FF5A36] hover:bg-[#e44e2b] text-white font-bold text-xs sm:text-sm tracking-widest uppercase py-4 px-6 rounded-2xl inline-flex items-center justify-center space-x-2 transition-all shadow-xl shadow-[#FF5A36]/30 cursor-pointer group-hover:translate-y-[-2px] border border-[#FF7A59]/40"
+                className="btn-glow-shine w-full mt-3 bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white font-bold text-xs sm:text-sm tracking-widest uppercase py-4 px-6 rounded-2xl inline-flex items-center justify-center space-x-2 transition-all shadow-xl shadow-[#FF5A36]/30 hover:shadow-[#FF5A36]/50 cursor-pointer active:scale-[0.98] border border-[#FF7A59]/50"
               >
                 <span>Enter Gearwear Showcase</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
@@ -454,11 +471,11 @@ export default function PortalLanding() {
                 </div>
               </div>
 
-              {/* Enter Button CTA */}
+              {/* Enter Button CTA with Radiant Shine Sweep */}
               <Link
                 id="enter-accessories-btn"
                 to="/accessories"
-                className="w-full mt-3 bg-[#0E4D48] hover:bg-[#115E58] text-emerald-100 font-bold text-xs sm:text-sm tracking-widest uppercase py-4 px-6 rounded-2xl inline-flex items-center justify-center space-x-2 transition-all shadow-xl shadow-black/40 cursor-pointer group-hover:translate-y-[-2px] border border-[#2DD4BF]/40"
+                className="btn-glow-shine w-full mt-3 bg-gradient-to-r from-[#0E4D48] to-[#146B64] hover:from-[#115E58] hover:to-[#0E4D48] text-emerald-100 font-bold text-xs sm:text-sm tracking-widest uppercase py-4 px-6 rounded-2xl inline-flex items-center justify-center space-x-2 transition-all shadow-xl shadow-black/40 hover:shadow-emerald-900/50 cursor-pointer active:scale-[0.98] border border-[#2DD4BF]/50"
               >
                 <span>Enter Accessories Showcase</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 text-[#5EEAD4]" />
@@ -704,7 +721,7 @@ export default function PortalLanding() {
               </a>
               <button
                 onClick={() => navigate('/contact')}
-                className="ml-2 text-xs font-mono font-bold uppercase tracking-wider px-4 py-2 rounded-xl bg-[#FF5A36] hover:bg-[#e44e2b] text-white transition-colors cursor-pointer shadow-md shadow-[#FF5A36]/30"
+                className="btn-glow-shine ml-2 text-xs font-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white transition-all cursor-pointer shadow-md shadow-[#FF5A36]/30 active:scale-95 border border-[#FF7A59]/40"
               >
                 Contact Us
               </button>
@@ -725,6 +742,13 @@ export default function PortalLanding() {
           </div>
         </div>
       </footer>
+
+      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
+      <InquiryLoadingModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        settings={settings}
+      />
 
     </div>
   );

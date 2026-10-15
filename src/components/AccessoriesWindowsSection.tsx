@@ -102,9 +102,9 @@ export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps>
 
               {/* Action Footer */}
               <div className="px-3.5 pb-3.5 pt-1">
-                <div className="w-full py-1.5 px-2.5 rounded-lg font-bold text-[10px] uppercase tracking-wider inline-flex items-center justify-between transition-all bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white">
+                <div className="btn-glow-shine w-full py-2 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider inline-flex items-center justify-between transition-all bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white shadow-xs group-hover:shadow-md">
                   <span>Explore {window.shortTitle}</span>
-                  <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
                 </div>
               </div>
 

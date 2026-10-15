@@ -18,6 +18,7 @@ import SmoothImage from './SmoothImage';
 import SEO from './SEO';
 import brandLogo from '../assets/images/safetyline_landing.png';
 import { ShimmerHeading } from './TransitionText';
+import InquiryLoadingModal from './InquiryLoadingModal';
 
 interface GearwearWindowPageProps {
   window: GearwearWindow;
@@ -33,6 +34,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   // Search and size filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState('All');
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   // Filter products belonging to this specific category window
   const windowProducts = useMemo(() => {
@@ -219,6 +221,16 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               <p className="text-sm sm:text-base text-slate-200 font-normal leading-relaxed">
                 {currentWindow.minorDetail}
               </p>
+
+              <div className="pt-2">
+                <button
+                  onClick={() => setIsInquiryModalOpen(true)}
+                  className="btn-glow-shine inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md shadow-[#FF5A36]/30 active:scale-95 transition-all cursor-pointer border border-[#FF7A59]/40"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Request Window OEM Spec Pack</span>
+                </button>
+              </div>
             </div>
 
             {/* Right Thumbnail Visual */}
@@ -442,8 +454,17 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
 
       </main>
 
+      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
+      <InquiryLoadingModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        settings={settings}
+        defaultCategory={`Gearwear: ${currentWindow.title}`}
+        defaultProductTitle={`${currentWindow.title} Category Window`}
+      />
+
     </motion.div>
   );
-};
+}
 
 export default GearwearWindowPage;

@@ -76,31 +76,112 @@ body {
 }
 
 .animate-shimmer {
-  animation: shimmer 6s ease-in-out infinite;
+  animation: shimmer 5s ease-in-out infinite;
 }
 
 @keyframes floatGlow {
   0%, 100% {
     transform: translateY(0px) scale(1);
-    opacity: 0.15;
+    opacity: 0.25;
   }
   50% {
-    transform: translateY(-8px) scale(1.05);
-    opacity: 0.25;
+    transform: translateY(-10px) scale(1.08);
+    opacity: 0.45;
   }
 }
 
 .animate-float-glow {
-  animation: floatGlow 8s ease-in-out infinite;
+  animation: floatGlow 6s ease-in-out infinite;
 }
 
-/* Text hover transition utilities */
+/* Radiant Shining Glow for the "L" Word (LINE) and Brand Insignia */
+@keyframes radiantLuminance {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 24px rgba(94, 234, 212, 0.6));
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(45, 212, 191, 0.6);
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(255, 255, 255, 1)) drop-shadow(0 0 40px rgba(94, 234, 212, 0.95));
+    text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 50px rgba(94, 234, 212, 0.9);
+  }
+}
+
+.animate-radiant-l-word {
+  animation: radiantLuminance 3.5s ease-in-out infinite;
+}
+
+/* Ambient Radial Light Sweeps */
+@keyframes ambientLightBeam {
+  0%, 100% {
+    opacity: 0.35;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: rotate(4deg) scale(1.05);
+  }
+}
+
+.animate-light-beam {
+  animation: ambientLightBeam 8s ease-in-out infinite;
+}
+
+/* Button & Card Shine Sweep Transition */
+.btn-glow-shine {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-glow-shine::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -70%;
+  width: 45%;
+  height: 220%;
+  background: linear-gradient(
+    65deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn-glow-shine:hover::after {
+  transform: translateX(450%) rotate(25deg);
+}
+
+/* Clean, Crisp Text Hover Motion (No Creepy Blur) */
 .text-hover-lift {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 0.25s ease;
+  transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), color 0.2s ease, letter-spacing 0.22s ease;
 }
 
 .text-hover-lift:hover {
-  transform: translateY(-1px);
-  letter-spacing: 0.02em;
+  transform: translateY(-1.5px);
+  letter-spacing: 0.015em;
+}
+
+/* Animated Form Loading Spinner & Shimmer Bar */
+@keyframes formProgressPulse {
+  0% {
+    width: 0%;
+  }
+  30% {
+    width: 38%;
+  }
+  60% {
+    width: 72%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-form-progress {
+  animation: formProgressPulse 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 

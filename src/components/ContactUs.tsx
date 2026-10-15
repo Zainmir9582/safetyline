@@ -1,14 +1,17 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Clock, CheckCircle2, Sparkles, MessageCircle, ShieldCheck, Instagram, Facebook, ExternalLink, Building2, Globe2, Truck, FileCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Clock, CheckCircle2, Sparkles, MessageCircle, ShieldCheck, Instagram, Facebook, ExternalLink, Building2, Globe2, Truck, FileCheck, ArrowRight } from 'lucide-react';
 import { Settings } from '../types';
 import { navigate } from '../lib/router';
 import SEO from './SEO';
+import InquiryLoadingModal from './InquiryLoadingModal';
 
 interface ContactUsProps {
   settings: Settings;
 }
 
 export default function ContactUs({ settings }: ContactUsProps) {
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
+
   const whatsappUrl = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
     `Hello Safety Line Advisory Desk, I am inquiring regarding wholesale orders and technical specifications.`
   )}`;
@@ -24,7 +27,8 @@ export default function ContactUs({ settings }: ContactUsProps) {
           >
             <div className="flex items-baseline space-x-1.5">
               <span className="font-serif font-black text-sm uppercase tracking-wider transition-colors">
-                <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
+                <span className="text-[#EA2227]">SAFETY</span>{' '}
+                <span className="text-white font-black tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">LINE</span>
               </span>
               <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/10 text-[#FF5A36] font-bold ml-1">
                 Advisory Desk
@@ -88,6 +92,32 @@ export default function ContactUs({ settings }: ContactUsProps) {
           <p className="text-slate-600 font-normal text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             Direct channels for wholesale stockists, team kit specifications, custom OEM/ODM manufacturing, and product sample requests.
           </p>
+
+          {/* Interactive Animated Spec & OEM Loading Form Trigger Card */}
+          <div className="pt-2">
+            <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0B3D3B] via-[#0E4D48] to-[#0B3D3B] text-white border border-[#5EEAD4]/30 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#5EEAD4] uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-[#FF5A36] animate-spin" style={{ animationDuration: '6s' }} />
+                  <span>Instant Technical Dispatch System</span>
+                </div>
+                <h3 className="font-display font-extrabold text-base sm:text-lg text-white">
+                  Official OEM & Sample Specification Request Desk
+                </h3>
+                <p className="text-xs text-white/80 max-w-xl">
+                  Launch our digital spec configurator to generate certified laboratory tolerances, CAD patterns, and sample swatch dispatch records in real time.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setIsInquiryModalOpen(true)}
+                className="btn-glow-shine shrink-0 bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white font-bold text-xs uppercase tracking-widest py-3.5 px-6 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-[#FF5A36]/30 active:scale-95 transition-all cursor-pointer border border-[#FF7A59]/40"
+              >
+                <span>Launch Interactive Spec Desk</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* 2-Column Portal Layout */}
@@ -186,7 +216,7 @@ export default function ContactUs({ settings }: ContactUsProps) {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs tracking-wider uppercase py-3.5 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md cursor-pointer"
+                  className="btn-glow-shine w-full bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs tracking-wider uppercase py-3.5 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md active:scale-95 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>Direct WhatsApp Advisory Desk</span>
@@ -381,6 +411,14 @@ export default function ContactUs({ settings }: ContactUsProps) {
           </div>
         </div>
       </footer>
+
+      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
+      <InquiryLoadingModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        settings={settings}
+      />
+
     </div>
   );
 }

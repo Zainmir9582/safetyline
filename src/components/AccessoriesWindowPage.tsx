@@ -15,6 +15,7 @@ import SmoothImage from './SmoothImage';
 import SEO from './SEO';
 import brandLogo from '../assets/images/safetyline_landing.png';
 import { ShimmerHeading } from './TransitionText';
+import InquiryLoadingModal from './InquiryLoadingModal';
 
 interface AccessoriesWindowPageProps {
   window: AccessoriesWindow;
@@ -30,6 +31,7 @@ export const AccessoriesWindowPage: React.FC<AccessoriesWindowPageProps> = ({
   // Search and size filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState('All');
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   // Filter products belonging to this specific category window
   const windowProducts = useMemo(() => {
@@ -206,6 +208,16 @@ export const AccessoriesWindowPage: React.FC<AccessoriesWindowPageProps> = ({
               <p className="text-sm sm:text-base text-slate-200 font-normal leading-relaxed">
                 {currentWindow.minorDetail}
               </p>
+
+              <div className="pt-2">
+                <button
+                  onClick={() => setIsInquiryModalOpen(true)}
+                  className="btn-glow-shine inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0E4D48] to-[#146B64] text-emerald-100 text-xs font-mono font-bold uppercase tracking-wider shadow-md shadow-black/40 active:scale-95 transition-all cursor-pointer border border-[#2DD4BF]/40"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#5EEAD4]" />
+                  <span>Request Window OEM Spec Pack</span>
+                </button>
+              </div>
             </div>
 
             {/* Right Thumbnail Visual */}
@@ -429,8 +441,17 @@ export const AccessoriesWindowPage: React.FC<AccessoriesWindowPageProps> = ({
 
       </main>
 
+      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
+      <InquiryLoadingModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        settings={settings}
+        defaultCategory={`Accessories: ${currentWindow.title}`}
+        defaultProductTitle={`${currentWindow.title} Category Window`}
+      />
+
     </motion.div>
   );
-};
+}
 
 export default AccessoriesWindowPage;

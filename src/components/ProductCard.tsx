@@ -60,7 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {product.material ? product.material.split(',')[0] : 'Technical Activewear'}
           </span>
 
-          <h3 className="font-display font-bold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug line-clamp-1">
+          <h3 className="font-display font-bold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug line-clamp-1 text-hover-lift">
             {product.name}
           </h3>
 
@@ -82,9 +82,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       {/* Card Action Footer */}
       <div className="p-5 pt-0">
-        <div className="w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-between transition-all bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white">
+        <div className="btn-glow-shine w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-between transition-all bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white shadow-xs group-hover:shadow-md">
           <span>View Specifications</span>
-          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
         </div>
       </div>
     </motion.div>

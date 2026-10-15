@@ -469,10 +469,10 @@ export default function CategoryHub({
             >
               <button
                 onClick={() => navScroll('items-section')}
-                className={`px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 transition-all shadow-lg cursor-pointer ${
+                className={`btn-glow-shine px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 transition-all shadow-lg active:scale-95 cursor-pointer ${
                   isGearwear 
-                    ? 'bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-[#FF5A36]/30' 
-                    : 'bg-[#D9F0EC] hover:bg-white text-[#0B3D3B] shadow-[#D9F0EC]/20'
+                    ? 'bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-[#FF5A36]/30 border border-[#FF7A59]/40' 
+                    : 'bg-[#D9F0EC] hover:bg-white text-[#0B3D3B] shadow-[#D9F0EC]/20 border border-white/40'
                 }`}
               >
                 <span>Browse {isGearwear ? 'Gearwear' : 'Accessories'} Items</span>
@@ -481,7 +481,7 @@ export default function CategoryHub({
 
               <button
                 onClick={() => navigate('/contact')}
-                className="px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer"
+                className="btn-glow-shine px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all active:scale-95 cursor-pointer"
               >
                 <span>Contact & Wholesale Desk</span>
                 <ArrowUpRight className="w-4 h-4 text-[#D9F0EC]" />

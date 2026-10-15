@@ -609,7 +609,7 @@ export default function ListingModal({
               </button>
               <button
                 type="submit"
-                className="bg-[#0B3D3B] hover:bg-[#072725] text-white px-6 py-2.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all shadow-md shadow-[#0B3D3B]/20 inline-flex items-center gap-2 cursor-pointer"
+                className="btn-glow-shine bg-gradient-to-r from-[#0B3D3B] to-[#125350] hover:from-[#072725] hover:to-[#0B3D3B] text-white px-6 py-2.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all shadow-md shadow-[#0B3D3B]/20 inline-flex items-center gap-2 cursor-pointer active:scale-95 border border-emerald-500/20"
               >
                 <Check className="w-4 h-4 text-[#FF5A36]" />
                 <span>{isEditing ? 'Save Product Changes' : 'Publish Product'}</span>

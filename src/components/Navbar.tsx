@@ -53,7 +53,8 @@ export default function Navbar() {
             />
             <div>
               <span className="font-display font-black text-sm uppercase tracking-wider block leading-none">
-                <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
+                <span className="text-[#EA2227] drop-shadow-sm">SAFETY</span>{' '}
+                <span className="text-white font-black tracking-widest drop-shadow-[0_0_12px_rgba(255,255,255,0.9)] inline-block">LINE</span>
               </span>
               <span className="block text-[9px] text-[#D9F0EC]/90 font-mono tracking-[0.22em] uppercase font-bold mt-1">
                 Textile & Hosiery Atelier
@@ -76,7 +77,7 @@ export default function Navbar() {
               >
                 <span>{item.label}</span>
                 {isActive(item.path) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF5A36] rounded-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF5A36] rounded-full shadow-[0_0_8px_#FF5A36]"></span>
                 )}
               </Link>
             ))}
@@ -87,7 +88,7 @@ export default function Navbar() {
             <Link
               id="nav-inquire-cta"
               to="/contact"
-              className="bg-[#FF5A36] hover:bg-[#e44e2b] active:scale-95 text-white px-5 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-md shadow-[#FF5A36]/25 cursor-pointer inline-flex items-center gap-1.5 group"
+              className="btn-glow-shine bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] active:scale-95 text-white px-5 py-2.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-md shadow-[#FF5A36]/25 cursor-pointer inline-flex items-center gap-1.5 group border border-[#FF7A59]/40"
             >
               <span>Inquire Now</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

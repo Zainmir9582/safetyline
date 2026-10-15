@@ -10,6 +10,7 @@ import { Product, ProductFeedback } from '../types';
 import { settings } from '../data';
 import SEO from './SEO';
 import SmoothImage from './SmoothImage';
+import InquiryLoadingModal from './InquiryLoadingModal';
 
 interface ProductDetailsProps {
   slug: string;
@@ -41,6 +42,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   const [fullscreenScale, setFullscreenScale] = useState<number>(2.8);
   const [fullscreenZoomPos, setFullscreenZoomPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
   const [isFullscreenHovering, setIsFullscreenHovering] = useState(false);
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
 
   // Feedback states
@@ -683,21 +685,29 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               </div>
             </div>
 
-            {/* Action Buttons (Strictly NO Cart / NO Buy Now) */}
+            {/* Action Buttons with Radiant Button Transitions & Loading Form Trigger */}
             <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
               <a
                 href={whatsappInquiryUrl}
                 target="_blank"
                 referrerPolicy="no-referrer"
-                className="flex-grow bg-[#FF5A36] hover:bg-[#e44e2b] text-white font-bold text-xs tracking-wider uppercase py-4 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md shadow-[#FF5A36]/25 cursor-pointer"
+                className="btn-glow-shine flex-grow bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white font-bold text-xs tracking-wider uppercase py-4 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md shadow-[#FF5A36]/25 active:scale-95 cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 text-white" />
                 <span>Inquire via WhatsApp</span>
               </a>
 
+              <button
+                onClick={() => setIsInquiryModalOpen(true)}
+                className="btn-glow-shine bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs tracking-wider uppercase py-4 px-5 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95 cursor-pointer border border-emerald-500/30"
+              >
+                <Sparkles className="w-4 h-4 text-emerald-300" />
+                <span>Request OEM Spec Pack</span>
+              </button>
+
               <a
                 href={`mailto:${settings.contactEmail}?subject=${encodeURIComponent(`Catalogue Inquiry: ${product.name} (SL-${product.productCode})`)}&body=${encodeURIComponent(`Hello Safety Line Advisory Desk,\n\nI am inquiring regarding the ${product.name} (Code: SL-${product.productCode}). Please send the complete specification sheet and sample details.\n\nThank you.`)}`}
-                className="bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs tracking-wider uppercase py-4 px-5 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm cursor-pointer"
+                className="btn-glow-shine bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs tracking-wider uppercase py-4 px-5 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95 cursor-pointer"
                 title={`Email directly to ${settings.contactEmail}`}
               >
                 <Mail className="w-4 h-4 text-[#D9F0EC]" />
@@ -706,7 +716,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
 
               <button
                 onClick={() => navigate(`/${parentCategorySlug}`)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs tracking-wider uppercase py-4 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all cursor-pointer"
+                className="btn-glow-shine bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs tracking-wider uppercase py-4 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all active:scale-95 cursor-pointer"
               >
                 <span>{parentCategoryLabel}</span>
               </button>
@@ -1125,6 +1135,18 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
           )}
         </div>
       )}
+
+      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
+      {product && (
+        <InquiryLoadingModal
+          isOpen={isInquiryModalOpen}
+          onClose={() => setIsInquiryModalOpen(false)}
+          settings={settings}
+          defaultCategory={product.categoryName}
+          defaultProductTitle={`${product.name} (Code: SL-${product.productCode})`}
+        />
+      )}
+
     </div>
   );
 }
