@@ -164,7 +164,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         <div className="bg-[#072725] border-t border-white/10 px-4 sm:px-8 py-2 overflow-x-auto scrollbar-none">
           <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">
-              Windows:
+              Categories:
             </span>
             {GEARWEAR_WINDOWS.map((win) => {
               const isActive = win.slug === currentWindow.slug;

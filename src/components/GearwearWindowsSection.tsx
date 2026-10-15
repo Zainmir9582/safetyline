@@ -73,10 +73,10 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
             <span>Manufacturing Divisions</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0B3D3B] tracking-tight">
-            Gearwear <ShimmerHeading accent="ember" className="text-[#0B3D3B]">Category Windows</ShimmerHeading>
+            Gearwear <ShimmerHeading accent="ember" className="text-[#0B3D3B]">Categories</ShimmerHeading>
           </h2>
           <p className="text-slate-600 font-normal text-sm leading-relaxed">
-            Browse our specialized production lines engineered for military, industrial, motorsport, and athletic applications. Select any window to explore specifications and product image catalogues.
+            Browse our specialized production lines engineered for military, industrial, motorsport, and athletic applications. Select any category to explore specifications and product image catalogues.
           </p>
         </div>
 

@@ -23,7 +23,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { navigate, Link } from '../lib/router';
 import { settings } from '../data';
 import SEO from './SEO';
-import { RotatingText, ShimmerHeading, ShiningLWord } from './TransitionText';
+import { RotatingText, ShimmerHeading } from './TransitionText';
 import SmoothImage from './SmoothImage';
 import InquiryLoadingModal from './InquiryLoadingModal';
 
@@ -47,7 +47,7 @@ export default function PortalLanding() {
     'PRECISION ATHLETIC GEARWEAR & ACTIVE KNITS',
     'TACTICAL HAND PROTECTION & MOTORSPORT GLOVES',
     'HIGH-PERFORMANCE GYMWEAR & APPAREL SERIES',
-    'DIRECT FROM SIALKOT INDUSTRIAL MANUFACTURING COMPLEX',
+    'DIRECT FROM SIALKOT INDUSTRIAL MANUFACTURING ATELIER',
     'CUSTOM OEM & PRIVATE LABEL TECHNICAL SPECIFICATIONS'
   ];
 
@@ -182,7 +182,7 @@ export default function PortalLanding() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span className="tracking-widest uppercase font-semibold text-[11px]">Direct Manufacturing Complex • Sialkot, Pakistan</span>
+            <span className="tracking-widest uppercase font-semibold text-[11px]">Direct Manufacturing • Sialkot, Pakistan</span>
           </div>
           <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-slate-200 text-[11px] font-semibold uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5 text-[#FF5A36]" />
@@ -212,11 +212,11 @@ export default function PortalLanding() {
             />
           </div>
 
-          {/* Brand Heading with Radiant Shining 'L' Word (LINE) */}
+          {/* Brand Heading without shine on LINE */}
           <div className="space-y-2 text-center max-w-3xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-[0.2em] uppercase leading-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
               <span className="text-[#FF5A36] drop-shadow-[0_2px_15px_rgba(255,90,54,0.6)]">SAFETY</span>
-              <ShiningLWord word="LINE" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl" />
+              <span className="text-white drop-shadow-sm font-black">LINE</span>
               <span className="text-slate-300 text-xl sm:text-2xl font-black tracking-[0.16em] drop-shadow-sm">IND</span>
             </h1>
 
@@ -491,12 +491,8 @@ export default function PortalLanding() {
         <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#FF5A36] uppercase tracking-widest">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Instant Explorer</span>
-              </div>
               <h3 className="text-xl sm:text-2xl font-display font-black text-white tracking-tight">
-                Direct Production Windows Catalogue
+                Direct Production Catalogue
               </h3>
               <p className="text-xs sm:text-sm text-slate-300">
                 Jump directly into any certified category page to view detailed technical specifications and active product lines.
@@ -568,7 +564,7 @@ export default function PortalLanding() {
                 </div>
 
                 <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400 group-hover/item:text-white">
-                  <span>Explore</span>
+                  <span>View Category</span>
                   <ChevronRight className="w-3 h-3 group-hover/item:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -732,7 +728,7 @@ export default function PortalLanding() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 font-mono">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#FF5A36]" />
-              <span>Safety Line Manufacturing Complex • Sialkot, Pakistan • ISO 9001:2015</span>
+              <span>Safety Line • Sialkot, Pakistan • ISO 9001:2015</span>
             </div>
 
             <div className="flex items-center gap-2 text-[11px] text-[#A7F3D0]">

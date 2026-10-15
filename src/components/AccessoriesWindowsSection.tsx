@@ -37,10 +37,10 @@ export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps>
             <span>Product Categories</span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0B3D3B] tracking-tight">
-            Accessories & <ShimmerHeading accent="emerald" className="text-[#0B3D3B]">Activewear Categories</ShimmerHeading>
+            <ShimmerHeading accent="emerald" className="text-[#0B3D3B]">Accessories</ShimmerHeading>
           </h2>
           <p className="text-slate-500 font-normal text-xs sm:text-sm">
-            Select a specialized category window below to explore technical specifications and product lines.
+            Select a specialized category below to explore technical specifications and product lines.
           </p>
         </div>
 
