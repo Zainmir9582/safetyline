@@ -23,7 +23,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { navigate, Link } from '../lib/router';
 import { settings } from '../data';
 import SEO from './SEO';
-import { RotatingText, ShimmerHeading } from './TransitionText';
+import { RotatingText } from './TransitionText';
 import SmoothImage from './SmoothImage';
 import InquiryLoadingModal from './InquiryLoadingModal';
 
@@ -32,15 +32,8 @@ import safetylineLandingLogo from '../assets/images/safetyline_landing.png';
 import factoryBg from '../assets/images/factorypic.jpeg';
 import tacticalGlovesImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
 import jacketsCatImg from '../assets/images/jackets_cat_1790288483254.jpg';
-import golfGlovesImg from '../assets/images/golf_gloves_cat_1792089120900.jpg';
-import mechanicsGlovesImg from '../assets/images/mechanics_gloves_cat_1792089169596.jpg';
-import motorcarsGlovesImg from '../assets/images/motorcars_gloves_cat_1792089200772.jpg';
-import gymwearImg from '../assets/images/gymwear_cat_1790288454662.jpg';
-import hoodiesImg from '../assets/images/hoodies_cat_1790288502434.jpg';
-import tracksuitsImg from '../assets/images/tracksuits_cat_1790288520625.jpg';
 
 export default function PortalLanding() {
-  const [activeWindowTab, setActiveWindowTab] = useState<'all' | 'gearwear' | 'accessories'>('all');
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   const rotatingHeadlines = [
@@ -51,69 +44,6 @@ export default function PortalLanding() {
     'CUSTOM OEM & PRIVATE LABEL TECHNICAL SPECIFICATIONS'
   ];
 
-  // Quick Production Windows Data for the interactive explorer strip
-  const featuredWindows = [
-    {
-      title: 'Golf Gloves',
-      category: 'Gearwear',
-      division: 'Tacticals',
-      tag: 'Cabretta Leather',
-      path: '/gearwear/golf-gloves',
-      image: golfGlovesImg
-    },
-    {
-      title: 'Mechanics Gloves',
-      category: 'Gearwear',
-      division: 'Tacticals',
-      tag: 'TPR Knuckle Armor',
-      path: '/gearwear/mechanics-gloves',
-      image: mechanicsGlovesImg
-    },
-    {
-      title: 'Motorcars Gloves',
-      category: 'Gearwear',
-      division: 'Car Categories',
-      tag: 'Silicone Grip Palm',
-      path: '/gearwear/motorcars-gloves',
-      image: motorcarsGlovesImg
-    },
-    {
-      title: 'Technical Jackets',
-      category: 'Accessories',
-      division: 'Apparel',
-      tag: 'Weatherproof Shell',
-      path: '/accessories/jackets',
-      image: jacketsCatImg
-    },
-    {
-      title: 'Performance Hoodies',
-      category: 'Accessories',
-      division: 'Apparel',
-      tag: 'Brushed Thermal Fleece',
-      path: '/accessories/hoodies',
-      image: hoodiesImg
-    },
-    {
-      title: 'High-Gauge GymWear',
-      category: 'Accessories',
-      division: 'Apparel',
-      tag: 'Capillary Moisture-Wick',
-      path: '/accessories/gymwear',
-      image: gymwearImg
-    },
-    {
-      title: 'Dual-Season Tracksuits',
-      category: 'Accessories',
-      division: 'Apparel',
-      tag: 'Summer & Winter Sets',
-      path: '/accessories/tracksuits',
-      image: tracksuitsImg
-    }
-  ];
-
-  const filteredFeaturedWindows = activeWindowTab === 'all'
-    ? featuredWindows
-    : featuredWindows.filter(w => w.category.toLowerCase() === activeWindowTab);
 
   const portalSchema = {
     '@context': 'https://schema.org',
@@ -423,7 +353,7 @@ export default function PortalLanding() {
                   <span className="text-xs font-mono text-slate-300">5 Active Production Windows</span>
                 </div>
 
-                <h2 className="font-display text-3xl sm:text-4xl font-black text-white group-hover:text-[#5EEAD4] transition-colors tracking-tight text-hover-lift">
+                <h2 className="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
                   Accessories Division
                 </h2>
                 
@@ -485,92 +415,7 @@ export default function PortalLanding() {
 
         </div>
 
-        {/* ========================================================
-            CREATIVE INTERACTIVE SECTION: Quick Production Windows Explorer
-           ======================================================== */}
-        <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <h3 className="text-xl sm:text-2xl font-display font-black text-white tracking-tight">
-                Direct Production Catalogue
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300">
-                Jump directly into any certified category page to view detailed technical specifications and active product lines.
-              </p>
-            </div>
 
-            {/* Filter Tabs */}
-            <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 text-xs font-mono self-start sm:self-auto">
-              <button
-                onClick={() => setActiveWindowTab('all')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-colors cursor-pointer ${
-                  activeWindowTab === 'all'
-                    ? 'bg-white/20 text-white shadow-xs'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                All Windows ({featuredWindows.length})
-              </button>
-              <button
-                onClick={() => setActiveWindowTab('gearwear')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-colors cursor-pointer ${
-                  activeWindowTab === 'gearwear'
-                    ? 'bg-[#FF5A36] text-white shadow-xs'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Gearwear
-              </button>
-              <button
-                onClick={() => setActiveWindowTab('accessories')}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-colors cursor-pointer ${
-                  activeWindowTab === 'accessories'
-                    ? 'bg-[#0E4D48] text-emerald-200 shadow-xs'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Accessories
-              </button>
-            </div>
-          </div>
-
-          {/* Quick Windows Carousel Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
-            {filteredFeaturedWindows.map((item) => (
-              <div
-                key={item.title}
-                onClick={() => navigate(item.path)}
-                className="group/item cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FF5A36]/60 rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 hover:scale-[1.03] hover:shadow-lg"
-              >
-                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-black/40 mb-2.5 relative">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover/item:scale-110"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-1.5 right-1.5 text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/70 text-white font-bold backdrop-blur-xs">
-                    {item.category}
-                  </span>
-                </div>
-
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-white group-hover/item:text-[#FF7A59] transition-colors line-clamp-1">
-                    {item.title}
-                  </h4>
-                  <p className="text-[10px] font-mono text-emerald-300 line-clamp-1">
-                    {item.tag}
-                  </p>
-                </div>
-
-                <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400 group-hover/item:text-white">
-                  <span>View Category</span>
-                  <ChevronRight className="w-3 h-3 group-hover/item:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* ========================================================
             FACILITY TRUST METRICS STRIP: High-Tech Manufacturing Proof

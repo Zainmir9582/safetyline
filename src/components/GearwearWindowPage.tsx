@@ -148,7 +148,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>All Categories</span>
+              <span>All Gearwear</span>
             </button>
             <button
               onClick={() => navigate('/contact')}
@@ -164,7 +164,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         <div className="bg-[#072725] border-t border-white/10 px-4 sm:px-8 py-2 overflow-x-auto scrollbar-none">
           <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">
-              Categories:
+              Gearwear:
             </span>
             {GEARWEAR_WINDOWS.map((win) => {
               const isActive = win.slug === currentWindow.slug;
@@ -413,13 +413,13 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         <section className="pt-12 border-t border-slate-200/80 space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-display font-bold text-lg text-[#0B3D3B]">
-              Explore Other Categories
+              Explore Other Gearwear
             </h3>
             <Link
               to="/gearwear"
               className="text-xs font-mono font-bold text-[#FF5A36] hover:underline uppercase inline-flex items-center gap-1"
             >
-              <span>View All 4 Categories</span>
+              <span>View All Gearwear</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -460,7 +460,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         onClose={() => setIsInquiryModalOpen(false)}
         settings={settings}
         defaultCategory={`Gearwear: ${currentWindow.title}`}
-        defaultProductTitle={`${currentWindow.title} Category Window`}
+        defaultProductTitle={`${currentWindow.title} Line`}
       />
 
     </motion.div>

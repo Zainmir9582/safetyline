@@ -8,7 +8,6 @@ import { navigate } from '../lib/router';
 import { ACCESSORIES_WINDOWS } from '../data/accessoriesWindows';
 import { Product } from '../types';
 import SmoothImage from './SmoothImage';
-import { ShimmerHeading } from './TransitionText';
 
 interface AccessoriesWindowsSectionProps {
   products: Product[];
@@ -37,7 +36,7 @@ export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps>
             <span>Product Categories</span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0B3D3B] tracking-tight">
-            <ShimmerHeading accent="emerald" className="text-[#0B3D3B]">Accessories</ShimmerHeading>
+            Accessories
           </h2>
           <p className="text-slate-500 font-normal text-xs sm:text-sm">
             Select a specialized category below to explore technical specifications and product lines.

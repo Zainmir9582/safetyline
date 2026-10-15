@@ -73,10 +73,10 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
             <span>Manufacturing Divisions</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0B3D3B] tracking-tight">
-            Gearwear <ShimmerHeading accent="ember" className="text-[#0B3D3B]">Categories</ShimmerHeading>
+            <ShimmerHeading accent="ember" className="text-[#0B3D3B]">Gearwear</ShimmerHeading>
           </h2>
           <p className="text-slate-600 font-normal text-sm leading-relaxed">
-            Browse our specialized production lines engineered for military, industrial, motorsport, and athletic applications. Select any category to explore specifications and product image catalogues.
+            Browse our specialized production lines engineered for military, industrial, motorsport, and athletic applications. Select any line below to explore specifications and product image catalogues.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
                 : 'text-slate-600 hover:text-[#0B3D3B] hover:bg-white/60'
             }`}
           >
-            All Categories ({GEARWEAR_WINDOWS.length})
+            All Lines ({GEARWEAR_WINDOWS.length})
           </button>
           <button
             onClick={() => setActiveTab('tactical')}
@@ -112,7 +112,7 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
             }`}
           >
             <Car className="w-3.5 h-3.5 text-[#FF5A36]" />
-            <span>Car Categories ({carWindows.length})</span>
+            <span>Car & Motorsport ({carWindows.length})</span>
           </button>
           <button
             onClick={() => setActiveTab('athletic')}
@@ -141,7 +141,7 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
                 </div>
                 <div>
                   <h3 className="font-display font-extrabold text-xl text-[#0B3D3B] flex items-center gap-2">
-                    <span>Tacticals Glove Categories</span>
+                    <span>Tactical Gloves</span>
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-[#D9F0EC] text-[#0B3D3B]">
                       5 Specialized Lines
                     </span>
@@ -167,7 +167,7 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
             </div>
           </div>
 
-          {/* SECTION 2: CAR CATEGORIES */}
+          {/* SECTION 2: CAR & MOTORSPORT */}
           <div className="space-y-5 pt-4 border-t border-slate-200/80">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
@@ -176,7 +176,7 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
                 </div>
                 <div>
                   <h3 className="font-display font-extrabold text-xl text-[#0B3D3B] flex items-center gap-2">
-                    <span>Car Categories</span>
+                    <span>Car & Motorsport Gloves</span>
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-[#D9F0EC] text-[#0B3D3B]">
                       2 Speed Disciplines
                     </span>
