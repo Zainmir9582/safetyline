@@ -14,6 +14,7 @@ import { Product, Settings } from '../types';
 import SmoothImage from './SmoothImage';
 import SEO from './SEO';
 import brandLogo from '../assets/images/safetyline_landing.png';
+import { ShimmerHeading } from './TransitionText';
 
 interface AccessoriesWindowPageProps {
   window: AccessoriesWindow;
@@ -197,7 +198,9 @@ export const AccessoriesWindowPage: React.FC<AccessoriesWindowPageProps> = ({
               </div>
 
               <h1 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
-                {currentWindow.title}
+                <ShimmerHeading accent="emerald" className="text-white">
+                  {currentWindow.title}
+                </ShimmerHeading>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-200 font-normal leading-relaxed">

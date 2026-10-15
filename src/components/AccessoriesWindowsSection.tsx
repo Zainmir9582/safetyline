@@ -8,6 +8,7 @@ import { navigate } from '../lib/router';
 import { ACCESSORIES_WINDOWS } from '../data/accessoriesWindows';
 import { Product } from '../types';
 import SmoothImage from './SmoothImage';
+import { ShimmerHeading } from './TransitionText';
 
 interface AccessoriesWindowsSectionProps {
   products: Product[];
@@ -36,7 +37,7 @@ export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps>
             <span>Product Categories</span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0B3D3B] tracking-tight">
-            Accessories & Activewear Categories
+            Accessories & <ShimmerHeading accent="emerald" className="text-[#0B3D3B]">Activewear Categories</ShimmerHeading>
           </h2>
           <p className="text-slate-500 font-normal text-xs sm:text-sm">
             Select a specialized category window below to explore technical specifications and product lines.
@@ -88,7 +89,7 @@ export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps>
                 {/* Card Content: Topic & Miner Detail */}
                 <div className="p-3.5 sm:p-4 space-y-1">
                   {/* Topic */}
-                  <h3 className="font-display font-extrabold text-sm sm:text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug truncate">
+                  <h3 className="font-display font-extrabold text-sm sm:text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug truncate text-hover-lift">
                     {window.title}
                   </h3>
 

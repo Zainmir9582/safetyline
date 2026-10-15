@@ -19,6 +19,7 @@ import gearwearHeroBg from '../assets/images/regenerated_image_1788778660220.jpg
 import hosieryHeroImg from '../assets/images/regenerated_image_1788779200971.jpg';
 import GearwearWindowsSection from './GearwearWindowsSection';
 import AccessoriesWindowsSection from './AccessoriesWindowsSection';
+import { RotatingText, ShimmerHeading } from './TransitionText';
 
 interface CategoryHubProps {
   categorySlug: 'gearwear' | 'accessories' | 'hosiery';
@@ -409,11 +410,43 @@ export default function CategoryHub({
               className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08]"
             >
               {isGearwear ? (
-                <>High-Performance <span className="text-[#FF5A36]">Gearwear</span> & Active Knits</>
+                <>
+                  High-Performance{' '}
+                  <ShimmerHeading accent="ember" className="text-[#FF5A36]">
+                    Gearwear
+                  </ShimmerHeading>{' '}
+                  & Tactical Handwear
+                </>
               ) : (
-                <>Precision Engineered <span className="text-[#D9F0EC]">Technical Accessories</span> & Performance Wear</>
+                <>
+                  Precision Engineered{' '}
+                  <ShimmerHeading accent="emerald" className="text-[#D9F0EC]">
+                    Technical Accessories
+                  </ShimmerHeading>{' '}
+                  & Performance Wear
+                </>
               )}
             </motion.h1>
+
+            {/* Eye-catching Dynamic Transition Tagline */}
+            <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono text-[#D9F0EC] bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md border border-white/15 w-fit">
+              <Sparkles className="w-4 h-4 text-[#FF5A36] shrink-0" />
+              <RotatingText
+                phrases={isGearwear ? [
+                  'Cabretta Golf & Kevlar® Police Handwear Series',
+                  'Mechanics TPR Knuckle Protection Lines',
+                  'Motorcars & Road Cycling Technical Apparel',
+                  'Direct Sialkot Industrial OEM Production'
+                ] : [
+                  'High-Gauge Activewear & Moisture-Wick Knits',
+                  'All-Weather Technical Shell Jackets',
+                  'Thermal Fleece Warm-Up Hoodies',
+                  'Dual-Season Summer & Winter Tracksuit Sets'
+                ]}
+                interval={3500}
+                className="font-bold text-white"
+              />
+            </div>
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}

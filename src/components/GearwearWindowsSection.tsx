@@ -17,6 +17,7 @@ import { navigate } from '../lib/router';
 import { GEARWEAR_WINDOWS, GearwearWindow, GearwearGroup } from '../data/gearwearWindows';
 import { Product } from '../types';
 import SmoothImage from './SmoothImage';
+import { ShimmerHeading } from './TransitionText';
 
 interface GearwearWindowsSectionProps {
   products: Product[];
@@ -72,7 +73,7 @@ export const GearwearWindowsSection: React.FC<GearwearWindowsSectionProps> = ({
             <span>Manufacturing Divisions</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0B3D3B] tracking-tight">
-            Gearwear Category Windows
+            Gearwear <ShimmerHeading accent="ember" className="text-[#0B3D3B]">Category Windows</ShimmerHeading>
           </h2>
           <p className="text-slate-600 font-normal text-sm leading-relaxed">
             Browse our specialized production lines engineered for military, industrial, motorsport, and athletic applications. Select any window to explore specifications and product image catalogues.
@@ -321,7 +322,7 @@ const WindowCard: React.FC<WindowCardProps> = ({
         <div className="p-4 space-y-2">
           {/* Topic */}
           <div className="flex items-center justify-between gap-2">
-            <h4 className="font-display font-extrabold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug">
+            <h4 className="font-display font-extrabold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug text-hover-lift">
               {window.title}
             </h4>
             <span className="text-[10px] font-mono font-semibold text-slate-400">

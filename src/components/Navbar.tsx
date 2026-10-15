@@ -68,7 +68,7 @@ export default function Navbar() {
                 key={item.path}
                 id={`nav-link-${item.label.toLowerCase().replace(/[\s&]+/g, '-')}`}
                 to={item.path}
-                className={`transition-colors duration-200 relative py-1.5 cursor-pointer ${
+                className={`transition-all duration-200 relative py-1.5 cursor-pointer text-hover-lift ${
                   isActive(item.path)
                     ? 'text-white font-bold'
                     : 'text-white/80 hover:text-white'
