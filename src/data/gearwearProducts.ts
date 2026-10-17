@@ -1,8 +1,15 @@
 import { Product } from '../types';
 import tacticalGlovesImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
+import tacticalPoliceGlovesImg from '../assets/images/tactical_police_gloves_cat_1792089185249.jpg';
+import workGlovesImg from '../assets/images/work_gloves_cat_1792089154022.jpg';
 import roadCyclingImg from '../assets/images/road_cycling_cat_1790287328917.jpg';
+import cyclingGlovesImg from '../assets/images/cycling_gloves_cat_1792089248571.jpg';
+import motorcarsGlovesImg from '../assets/images/motorcars_gloves_cat_1792089200772.jpg';
 import carRacingImg from '../assets/images/car_racing_cat_1790287345103.jpg';
+import mechanicsGlovesImg from '../assets/images/mechanics_gloves_cat_1792089169596.jpg';
 import weightLiftingImg from '../assets/images/weight_lifting_cat_1790287360273.jpg';
+import fishGlovesImg from '../assets/images/fish_gloves_cat_1792089137163.jpg';
+import golfGlovesImg from '../assets/images/golf_gloves_cat_1792089120900.jpg';
 
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
@@ -52,8 +59,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-TG-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: tacticalGlovesImg,
-    galleryImages: [tacticalGlovesImg],
+    coverImage: tacticalPoliceGlovesImg,
+    galleryImages: [tacticalPoliceGlovesImg],
     seoTitle: 'Combat Recon High-Dexterity Tactical Gloves | Safety Line',
     seoDescription: 'High-dexterity patrol and combat gloves with micro-suede palm and Cordura back.',
     createdAt: '2026-03-02T08:00:00.000Z'
@@ -78,8 +85,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-TG-03',
     status: 'Active',
     displayOrder: 3,
-    coverImage: tacticalGlovesImg,
-    galleryImages: [tacticalGlovesImg],
+    coverImage: workGlovesImg,
+    galleryImages: [workGlovesImg],
     seoTitle: 'Desert Storm Heavy Duty Combat Gloves | Safety Line',
     seoDescription: 'Rugged combat operational handwear with double-layer leather palms and Kevlar stitching.',
     createdAt: '2026-03-03T08:00:00.000Z'
@@ -133,8 +140,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-RC-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: roadCyclingImg,
-    galleryImages: [roadCyclingImg],
+    coverImage: cyclingGlovesImg,
+    galleryImages: [cyclingGlovesImg],
     seoTitle: 'Velocity Carbon 3D Gel Chamois Bib Shorts | Safety Line Cycling',
     seoDescription: 'Endurance cycling bib shorts with multi-density 3D gel chamois and Italian compression Lycra.',
     createdAt: '2026-03-05T08:00:00.000Z'
@@ -187,8 +194,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-CR-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: carRacingImg,
-    galleryImages: [carRacingImg],
+    coverImage: motorcarsGlovesImg,
+    galleryImages: [motorcarsGlovesImg],
     seoTitle: 'Grand Prix Pro FIA Racing Gloves | Safety Line Motorsport',
     seoDescription: 'FIA benchmark flame-resistant motorsport racing gloves with external seams and high-tack silicone grip.',
     createdAt: '2026-03-07T08:00:00.000Z'
@@ -239,8 +246,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-CR-03',
     status: 'Active',
     displayOrder: 3,
-    coverImage: carRacingImg,
-    galleryImages: [carRacingImg],
+    coverImage: mechanicsGlovesImg,
+    galleryImages: [mechanicsGlovesImg],
     seoTitle: 'Veloce High-Traction Karting Gloves | Safety Line Motorsport',
     seoDescription: 'Competitive karting gloves with high-sensitivity silicone grip and pre-curved fingers.',
     createdAt: '2026-03-09T08:00:00.000Z'
@@ -293,8 +300,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-WL-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: weightLiftingImg,
-    galleryImages: [weightLiftingImg],
+    coverImage: fishGlovesImg,
+    galleryImages: [fishGlovesImg],
     seoTitle: 'IronGrip Padded Weightlifting Gloves | Safety Line Strength',
     seoDescription: 'Gym lifting gloves with honeycomb silicone palm padding and integrated 16-inch wrist wrap.',
     createdAt: '2026-03-11T08:00:00.000Z'
@@ -345,8 +352,8 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-WL-04',
     status: 'Active',
     displayOrder: 4,
-    coverImage: weightLiftingImg,
-    galleryImages: [weightLiftingImg],
+    coverImage: golfGlovesImg,
+    galleryImages: [golfGlovesImg],
     seoTitle: '7mm Neoprene Competition Knee Sleeves | Safety Line Strength',
     seoDescription: 'High-density 7mm neoprene compression knee sleeves for heavy squats and powerlifting.',
     createdAt: '2026-03-13T08:00:00.000Z'

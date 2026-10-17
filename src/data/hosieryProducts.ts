@@ -1,9 +1,14 @@
 import { Product } from '../types';
-import gymwearImg from '../assets/images/gymwear_cat_1790288454662.jpg';
-import tshirtsImg from '../assets/images/tshirts_cat_1790288470836.jpg';
-import jacketsImg from '../assets/images/jackets_cat_1790288483254.jpg';
-import hoodiesImg from '../assets/images/hoodies_cat_1790288502434.jpg';
-import tracksuitsImg from '../assets/images/tracksuits_cat_1790288520625.jpg';
+import womenSportsSetImg from '../assets/images/women_sports_set_1788984867763.jpg';
+import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
+import whiteLongSleeveImg from '../assets/images/white_long_sleeve_1788984915227.jpg';
+import whiteGraphicTankImg from '../assets/images/white_graphic_tank_1788985040768.jpg';
+import greenPufferJacketImg from '../assets/images/green_puffer_jacket_1788984892378.jpg';
+import alpineSkiJacketImg from '../assets/images/alpine_ski_jacket_1788984968075.jpg';
+import mauveZipJacketImg from '../assets/images/mauve_zip_jacket_1788984951352.jpg';
+import greyHalfzipShirtImg from '../assets/images/grey_halfzip_shirt_1788984931150.jpg';
+import terracottaRunTankImg from '../assets/images/terracotta_run_tank_1788984988331.jpg';
+import blackGymStringerImg from '../assets/images/black_gym_stringer_1788985021668.jpg';
 
 export const hosieryProducts: Product[] = [
   // 1. GymWear Category
@@ -27,8 +32,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-GW-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: gymwearImg,
-    galleryImages: [gymwearImg],
+    coverImage: womenSportsSetImg,
+    galleryImages: [womenSportsSetImg],
     seoTitle: 'Pro-Fit Seamless GymWear Training Set | Safety Line',
     seoDescription: 'High-stretch performance gymwear set with seamless compression knits and moisture-wicking technology.',
     createdAt: '2026-03-15T08:00:00.000Z'
@@ -53,8 +58,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-GW-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: gymwearImg,
-    galleryImages: [gymwearImg],
+    coverImage: blueMuscleTankImg,
+    galleryImages: [blueMuscleTankImg],
     seoTitle: 'FlexCore Athletic Gym Performance Top | Safety Line',
     seoDescription: 'Breathable lightweight gym training top with flatlock seaming and active moisture management.',
     createdAt: '2026-03-16T08:00:00.000Z'
@@ -81,8 +86,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-TS-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: tshirtsImg,
-    galleryImages: [tshirtsImg],
+    coverImage: whiteLongSleeveImg,
+    galleryImages: [whiteLongSleeveImg],
     seoTitle: 'Apex Classic Combed Cotton Performance T-Shirt | Safety Line',
     seoDescription: 'Ultra-soft combed cotton athletic performance crewneck t-shirt with reinforced shape retention.',
     createdAt: '2026-03-17T08:00:00.000Z'
@@ -107,8 +112,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-TS-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: tshirtsImg,
-    galleryImages: [tshirtsImg],
+    coverImage: whiteGraphicTankImg,
+    galleryImages: [whiteGraphicTankImg],
     seoTitle: 'VaporDry High-Cadence Athletic T-Shirt | Safety Line',
     seoDescription: 'Quick-drying active technical t-shirt with micro-waffle vapor evaporation fabric.',
     createdAt: '2026-03-18T08:00:00.000Z'
@@ -135,8 +140,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-JK-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: jacketsImg,
-    galleryImages: [jacketsImg],
+    coverImage: greenPufferJacketImg,
+    galleryImages: [greenPufferJacketImg],
     seoTitle: 'ShieldPro Technical Athletic Windbreaker Jacket | Safety Line',
     seoDescription: 'Lightweight water-repellent athletic windbreaker jacket with breathable mesh lining and YKK zippers.',
     createdAt: '2026-03-19T08:00:00.000Z'
@@ -161,8 +166,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-JK-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: jacketsImg,
-    galleryImages: [jacketsImg],
+    coverImage: alpineSkiJacketImg,
+    galleryImages: [alpineSkiJacketImg],
     seoTitle: 'ThermalStorm Hybrid Athletic Zip Jacket | Safety Line',
     seoDescription: 'Cold-weather athletic softshell zip jacket with bonded thermal fleece interior.',
     createdAt: '2026-03-20T08:00:00.000Z'
@@ -189,8 +194,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-HD-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: hoodiesImg,
-    galleryImages: [hoodiesImg],
+    coverImage: mauveZipJacketImg,
+    galleryImages: [mauveZipJacketImg],
     seoTitle: 'Heavyweight Pro Athletic Pullover Hoodie | Safety Line',
     seoDescription: '320 GSM brushed fleece athletic pullover hoodie with double-ply hood and kangaroo pocket.',
     createdAt: '2026-03-21T08:00:00.000Z'
@@ -215,8 +220,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-HD-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: hoodiesImg,
-    galleryImages: [hoodiesImg],
+    coverImage: greyHalfzipShirtImg,
+    galleryImages: [greyHalfzipShirtImg],
     seoTitle: 'FlexWarm Technical Full-Zip Training Hoodie | Safety Line',
     seoDescription: 'Full-zip athletic training hoodie with flex-fleece construction and zippered pockets.',
     createdAt: '2026-03-22T08:00:00.000Z'
@@ -243,8 +248,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-TR-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: tracksuitsImg,
-    galleryImages: [tracksuitsImg],
+    coverImage: terracottaRunTankImg,
+    galleryImages: [terracottaRunTankImg],
     seoTitle: 'DualSeason Summer Performance Tracksuit | Safety Line',
     seoDescription: 'Lightweight summer athletic tracksuit set with breathable poly tricot and ankle zippers.',
     createdAt: '2026-03-23T08:00:00.000Z'
@@ -269,8 +274,8 @@ export const hosieryProducts: Product[] = [
     productCode: 'ACC-TR-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: tracksuitsImg,
-    galleryImages: [tracksuitsImg],
+    coverImage: blackGymStringerImg,
+    galleryImages: [blackGymStringerImg],
     seoTitle: 'DualSeason Winter Insulated Tracksuit | Safety Line',
     seoDescription: 'Heavyweight winter thermal fleece athletic tracksuit set with zippered pockets and wind-blocking ribbing.',
     createdAt: '2026-03-24T08:00:00.000Z'

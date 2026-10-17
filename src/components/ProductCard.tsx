@@ -60,7 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {product.material ? product.material.split(',')[0] : 'Technical Activewear'}
           </span>
 
-          <h3 className="font-display font-bold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug line-clamp-1 text-hover-lift">
+          <h3 className="font-display font-bold text-base text-[#0B3D3B] group-hover:text-[#FF5A36] leading-snug line-clamp-1">
             {product.name}
           </h3>
 

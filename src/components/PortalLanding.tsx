@@ -29,7 +29,7 @@ import InquiryLoadingModal from './InquiryLoadingModal';
 
 // Visual Assets
 import safetylineLandingLogo from '../assets/images/safetyline_landing.png';
-import factoryBg from '../assets/images/factorypic.jpeg';
+import factoryBg from '../assets/images/factory.jpeg';
 import tacticalGlovesImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
 import jacketsCatImg from '../assets/images/jackets_cat_1790288483254.jpg';
 
@@ -65,30 +65,31 @@ export default function PortalLanding() {
     <div id="portal-landing-root" className="min-h-screen bg-[#041615] text-white flex flex-col justify-between font-sans relative selection:bg-[#FF5A36] selection:text-white overflow-x-hidden">
       
       {/* Dynamic Ambient Background & Factory Architectural Canvas */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Real Factory Complex with Cinematic Deep Gradients */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Real Factory Facility with Atmospheric Architectural Scrims */}
         <img
           src={factoryBg}
           alt="Safety Line Industrial Manufacturing Facility Sialkot"
-          className="w-full h-full object-cover object-center scale-105 opacity-20 filter contrast-125 saturate-50 transition-transform duration-1000"
+          className="w-full h-full object-cover object-[center_25%] scale-100 opacity-60 sm:opacity-65 filter contrast-105 brightness-90 saturate-95 transition-all duration-700"
           loading="eager"
           decoding="async"
           fetchPriority="high"
+          referrerPolicy="no-referrer"
         />
         
-        {/* Gradient Scrims for Atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#041615]/95 via-[#041615]/80 to-[#041615]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_20%,rgba(11,61,59,0.35),transparent)]" />
+        {/* Cinematic Multi-Stop Dark Teal Scrims for Flawless Readability & Industrial Mood */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#041615]/85 via-[#041615]/55 via-[#041615]/65 to-[#041615]/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_110%_85%_at_50%_30%,transparent_15%,rgba(4,22,21,0.60)_55%,rgba(4,22,21,0.95)_100%)]" />
         
-        {/* Extra Radiant Light Beams for Maximum Shine */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[800px] h-[550px] bg-[radial-gradient(ellipse_at_top,rgba(94,234,212,0.22)_0%,rgba(255,90,54,0.12)_45%,transparent_70%)] blur-2xl pointer-events-none animate-light-beam" />
+        {/* Ambient Subtle Luster Glow */}
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-[radial-gradient(ellipse_at_top,rgba(94,234,212,0.18)_0%,rgba(255,90,54,0.10)_45%,transparent_70%)] blur-2xl pointer-events-none animate-light-beam" />
         
-        {/* Animated Radiant Glow Orbs */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF5A36]/25 rounded-full blur-3xl animate-float-glow pointer-events-none" />
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-[#2DD4BF]/25 rounded-full blur-3xl animate-float-glow pointer-events-none" style={{ animationDelay: '-4s' }} />
+        {/* Soft Background Radial Accents */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF5A36]/15 rounded-full blur-3xl animate-float-glow pointer-events-none" />
+        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-[#2DD4BF]/15 rounded-full blur-3xl animate-float-glow pointer-events-none" style={{ animationDelay: '-4s' }} />
         
-        {/* Precision Athletic Grid Overlay */}
-        <div className="absolute inset-0 athletic-grid-pattern-dark opacity-40 pointer-events-none" />
+        {/* Precision Fine Grid Overlay */}
+        <div className="absolute inset-0 athletic-grid-pattern-dark opacity-15 pointer-events-none" />
       </div>
 
       <SEO
@@ -245,7 +246,7 @@ export default function PortalLanding() {
                   <span className="text-xs font-mono text-slate-300">9 Active Production Windows</span>
                 </div>
 
-                <h2 className="font-display text-3xl sm:text-4xl font-black text-white group-hover:text-[#FF7A59] transition-colors tracking-tight text-hover-lift">
+                <h2 className="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
                   Gearwear Division
                 </h2>
                 

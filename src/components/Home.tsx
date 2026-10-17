@@ -8,7 +8,7 @@ import SEO from './SEO';
 import ProductCard from './ProductCard';
 import SmoothImage from './SmoothImage';
 import factoryImg from '../assets/images/safetyline_exact_user_pic_1788337630939.jpg';
-import gearwearHeroImg from '../assets/images/D1211178.jpg';
+import gearwearHeroImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
 
 interface HomeProps {
   products: Product[];

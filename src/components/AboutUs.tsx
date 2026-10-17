@@ -20,7 +20,7 @@ import {
 import { Settings } from '../types';
 import { navigate } from '../lib/router';
 import SEO from './SEO';
-import factoryImg from '../assets/images/safetyline_exact_user_pic_1788337630939.jpg';
+import factoryImg from '../assets/images/factory.jpeg';
 
 interface AboutUsProps {
   settings: Settings;

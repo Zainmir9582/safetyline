@@ -14,12 +14,11 @@ import ListingModal from './ListingModal';
 import ProductCard from './ProductCard';
 import SmoothImage from './SmoothImage';
 import brandLogo from '../assets/images/safetyline_landing.png';
-import gearwearHeroImg from '../assets/images/regenerated_image_1788778657693.jpg';
-import gearwearHeroBg from '../assets/images/regenerated_image_1788778660220.jpg';
-import hosieryHeroImg from '../assets/images/regenerated_image_1788779200971.jpg';
+import gearwearHeroBg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
+import hosieryHeroImg from '../assets/images/jackets_cat_1790288483254.jpg';
 import GearwearWindowsSection from './GearwearWindowsSection';
 import AccessoriesWindowsSection from './AccessoriesWindowsSection';
-import { RotatingText, ShimmerHeading } from './TransitionText';
+import { RotatingText } from './TransitionText';
 
 interface CategoryHubProps {
   categorySlug: 'gearwear' | 'accessories' | 'hosiery';
@@ -411,19 +410,11 @@ export default function CategoryHub({
             >
               {isGearwear ? (
                 <>
-                  High-Performance{' '}
-                  <ShimmerHeading accent="ember" className="text-[#FF5A36]">
-                    Gearwear
-                  </ShimmerHeading>{' '}
-                  & Tactical Handwear
+                  High-Performance <span className="text-[#FF5A36]">Gearwear</span> & Tactical Handwear
                 </>
               ) : (
                 <>
-                  Precision Engineered{' '}
-                  <ShimmerHeading accent="emerald" className="text-[#D9F0EC]">
-                    Technical Accessories
-                  </ShimmerHeading>{' '}
-                  & Performance Wear
+                  Precision Engineered <span className="text-[#D9F0EC]">Technical Accessories</span> & Performance Wear
                 </>
               )}
             </motion.h1>
