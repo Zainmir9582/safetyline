@@ -30,8 +30,8 @@ import InquiryLoadingModal from './InquiryLoadingModal';
 // Visual Assets
 import safetylineLandingLogo from '../assets/images/safetyline_landing.png';
 import factoryBg from '../assets/images/factory.jpeg';
-import tacticalGlovesImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
-import jacketsCatImg from '../assets/images/jackets_cat_1790288483254.jpg';
+import tacticalGlovesImg from '../assets/images/blank_tactical_glove_1792247540904.jpg';
+import jacketsCatImg from '../assets/images/blank_tech_jacket_1792247565413.jpg';
 
 export default function PortalLanding() {
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);

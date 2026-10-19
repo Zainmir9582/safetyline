@@ -1,8 +1,8 @@
-import gymwearImg from '../assets/images/gymwear_cat_1790288454662.jpg';
-import tshirtsImg from '../assets/images/tshirts_cat_1790288470836.jpg';
-import jacketsImg from '../assets/images/jackets_cat_1790288483254.jpg';
-import hoodiesImg from '../assets/images/hoodies_cat_1790288502434.jpg';
-import tracksuitsImg from '../assets/images/tracksuits_cat_1790288520625.jpg';
+import gymwearImg from '../assets/images/blank_gymwear_set_1792247564534.jpg';
+import tshirtsImg from '../assets/images/blank_tshirts_rack_1792247565391.jpg';
+import jacketsImg from '../assets/images/blank_tech_jacket_1792247565413.jpg';
+import hoodiesImg from '../assets/images/blank_hoodies_rack_1792247566505.jpg';
+import tracksuitsImg from '../assets/images/blank_tracksuit_set_1792247567002.jpg';
 
 export interface AccessoriesWindow {
   id: string;

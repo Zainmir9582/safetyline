@@ -7,8 +7,8 @@ import { articles } from '../data/articles';
 import SEO from './SEO';
 import ProductCard from './ProductCard';
 import SmoothImage from './SmoothImage';
-import factoryImg from '../assets/images/safetyline_exact_user_pic_1788337630939.jpg';
-import gearwearHeroImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
+import factoryImg from '../assets/images/factory.jpeg';
+import gearwearHeroImg from '../assets/images/blank_tactical_glove_1792247540904.jpg';
 
 interface HomeProps {
   products: Product[];

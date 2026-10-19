@@ -4,7 +4,7 @@ import {
 } from 'lucide-react';
 import { Product } from '../types';
 
-import defaultFallbackImg from '../assets/images/white_long_sleeve_1788984915227.jpg';
+import defaultFallbackImg from '../assets/images/blank_tshirts_rack_1792247565391.jpg';
 
 interface ListingModalProps {
   isOpen: boolean;

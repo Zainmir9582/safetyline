@@ -1,14 +1,14 @@
 import { Product } from '../types';
-import womenSportsSetImg from '../assets/images/women_sports_set_1788984867763.jpg';
-import blueMuscleTankImg from '../assets/images/blue_muscle_tank_1788985004892.jpg';
-import whiteLongSleeveImg from '../assets/images/white_long_sleeve_1788984915227.jpg';
-import whiteGraphicTankImg from '../assets/images/white_graphic_tank_1788985040768.jpg';
-import greenPufferJacketImg from '../assets/images/green_puffer_jacket_1788984892378.jpg';
-import alpineSkiJacketImg from '../assets/images/alpine_ski_jacket_1788984968075.jpg';
-import mauveZipJacketImg from '../assets/images/mauve_zip_jacket_1788984951352.jpg';
-import greyHalfzipShirtImg from '../assets/images/grey_halfzip_shirt_1788984931150.jpg';
-import terracottaRunTankImg from '../assets/images/terracotta_run_tank_1788984988331.jpg';
-import blackGymStringerImg from '../assets/images/black_gym_stringer_1788985021668.jpg';
+import womenSportsSetImg from '../assets/images/blank_gymwear_set_1792247564534.jpg';
+import blueMuscleTankImg from '../assets/images/blank_gymwear_set_1792247564534.jpg';
+import whiteLongSleeveImg from '../assets/images/blank_tshirts_rack_1792247565391.jpg';
+import whiteGraphicTankImg from '../assets/images/blank_tshirts_rack_1792247565391.jpg';
+import greenPufferJacketImg from '../assets/images/blank_tech_jacket_1792247565413.jpg';
+import alpineSkiJacketImg from '../assets/images/blank_tech_jacket_1792247565413.jpg';
+import mauveZipJacketImg from '../assets/images/blank_hoodies_rack_1792247566505.jpg';
+import greyHalfzipShirtImg from '../assets/images/blank_hoodies_rack_1792247566505.jpg';
+import terracottaRunTankImg from '../assets/images/blank_tracksuit_set_1792247567002.jpg';
+import blackGymStringerImg from '../assets/images/blank_tracksuit_set_1792247567002.jpg';
 
 export const hosieryProducts: Product[] = [
   // 1. GymWear Category

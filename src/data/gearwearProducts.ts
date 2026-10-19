@@ -1,15 +1,15 @@
 import { Product } from '../types';
-import tacticalGlovesImg from '../assets/images/tactical_gloves_cat_1790287132299.jpg';
-import tacticalPoliceGlovesImg from '../assets/images/tactical_police_gloves_cat_1792089185249.jpg';
-import workGlovesImg from '../assets/images/work_gloves_cat_1792089154022.jpg';
-import roadCyclingImg from '../assets/images/road_cycling_cat_1790287328917.jpg';
-import cyclingGlovesImg from '../assets/images/cycling_gloves_cat_1792089248571.jpg';
-import motorcarsGlovesImg from '../assets/images/motorcars_gloves_cat_1792089200772.jpg';
-import carRacingImg from '../assets/images/car_racing_cat_1790287345103.jpg';
-import mechanicsGlovesImg from '../assets/images/mechanics_gloves_cat_1792089169596.jpg';
-import weightLiftingImg from '../assets/images/weight_lifting_cat_1790287360273.jpg';
-import fishGlovesImg from '../assets/images/fish_gloves_cat_1792089137163.jpg';
-import golfGlovesImg from '../assets/images/golf_gloves_cat_1792089120900.jpg';
+import tacticalGlovesImg from '../assets/images/blank_tactical_glove_1792247540904.jpg';
+import tacticalPoliceGlovesImg from '../assets/images/blank_police_glove_1792247591145.jpg';
+import workGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';
+import roadCyclingImg from '../assets/images/blank_road_cycling_1792247567857.jpg';
+import cyclingGlovesImg from '../assets/images/blank_cycling_glove_1792247541304.jpg';
+import motorcarsGlovesImg from '../assets/images/blank_racing_glove_1792247541163.jpg';
+import carRacingImg from '../assets/images/blank_racing_glove_1792247541163.jpg';
+import mechanicsGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';
+import weightLiftingImg from '../assets/images/blank_weight_lifting_1792247542179.jpg';
+import fishGlovesImg from '../assets/images/blank_fish_glove_1792247591287.jpg';
+import golfGlovesImg from '../assets/images/blank_golf_glove_1792247520769.jpg';
 
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
