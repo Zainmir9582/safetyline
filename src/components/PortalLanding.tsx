@@ -562,6 +562,12 @@ export default function PortalLanding() {
                 <MessageCircle className="w-4 h-4 fill-white" />
               </a>
               <button
+                onClick={() => navigate('/about')}
+                className="text-xs font-mono font-bold uppercase tracking-wider px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-[#D9F0EC] transition-all cursor-pointer border border-white/15"
+              >
+                Company &amp; Owner
+              </button>
+              <button
                 onClick={() => navigate('/contact')}
                 className="btn-glow-shine ml-2 text-xs font-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white transition-all cursor-pointer shadow-md shadow-[#FF5A36]/30 active:scale-95 border border-[#FF7A59]/40"
               >

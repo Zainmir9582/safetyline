@@ -33,6 +33,8 @@ export interface Settings {
   companyName: string;
   slogan: string;
   aboutText: string;
+  ownerName?: string;
+  ownerRole?: string;
   contactEmail: string;
   salesEmail?: string;
   contactPhone: string;
