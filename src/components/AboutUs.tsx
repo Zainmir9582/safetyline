@@ -389,205 +389,93 @@ Thanks for taking your time in reviewing the above content. We hope this letter 
         </main>
 
         {/* =========================================================================
-            EXECUTIVE LEADERSHIP & OWNER PROFILE
+            COMPANY OWNER & EXECUTIVE LEADERSHIP: Unified Centered Frame
            ========================================================================= */}
-        <section id="owner-leadership" className="relative rounded-3xl bg-gradient-to-br from-[#0B3D3B] via-[#082D2B] to-[#041615] text-white shadow-2xl border border-white/10 overflow-hidden">
-          {/* Subtle architectural lighting aura & background embellishments */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5A36]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#D9F0EC]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
-
-          <div className="relative p-6 sm:p-10 lg:p-12">
+        <section id="owner-leadership" className="max-w-3xl mx-auto w-full px-2 sm:px-0">
+          <div className="relative rounded-3xl bg-gradient-to-b from-[#0B3D3B] via-[#082E2C] to-[#041615] text-white p-7 sm:p-10 shadow-2xl border-2 border-white/15 overflow-hidden text-center flex flex-col items-center space-y-6">
             
-            {/* Top Section Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
-              <div className="space-y-1.5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D9F0EC]/15 border border-[#D9F0EC]/30 text-[#D9F0EC] text-xs font-mono font-bold tracking-wider uppercase">
-                  <BadgeCheck className="w-4 h-4 text-[#FF5A36]" />
-                  <span>Executive Leadership &amp; Company Ownership</span>
-                </div>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-                  Message from the Owner
-                </h2>
-              </div>
+            {/* Ambient Lighting Aura */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#D9F0EC]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#FF5A36]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
 
-              <div className="hidden sm:flex items-center gap-3">
-                <div className="text-right">
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#D9F0EC]/80 block font-bold">Heritage &amp; Continuity</span>
-                  <span className="text-sm font-semibold text-white">Family Enterprise Founded 2008</span>
-                </div>
-                <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
-                  <Award className="w-5 h-5 text-[#FF5A36]" />
+            {/* Top Status & Verification Badges */}
+            <div className="relative z-10 flex flex-wrap items-center justify-center gap-2.5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D9F0EC]/15 border border-[#D9F0EC]/30 text-[11px] font-mono uppercase tracking-widest text-[#D9F0EC] font-bold">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FF5A36]" />
+                <span>Company Owner &amp; Leadership</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[11px] font-mono text-emerald-300 font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Direct Ownership</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-mono text-slate-300">
+                <Award className="w-3.5 h-3.5 text-[#FF5A36]" />
+                <span>Est. 2008</span>
+              </span>
+            </div>
+
+            {/* Owner Image (Zoomed Face) */}
+            <div className="relative z-10">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-1.5 bg-gradient-to-tr from-[#FF5A36] via-[#D9F0EC]/90 to-emerald-400 shadow-2xl shadow-black/80 ring-4 ring-white/15 group">
+                <div className="w-full h-full rounded-full overflow-hidden bg-[#072422] border-2 border-white/20 flex items-center justify-center">
+                  <img
+                    src={ownerImg}
+                    alt="Muhammad Mujassam Maqsood — Owner of Safety Line"
+                    className="w-full h-full object-cover object-center transform transition-transform duration-500 hover:scale-105"
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
               </div>
             </div>
 
-            {/* Grid Layout: Left Portrait Card, Right Formal Owner Statement */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              
-              {/* Left Column: Formal Portrait Showcase (5 cols on lg) */}
-              <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="w-full max-w-sm relative group">
-                  
-                  {/* Decorative Frame with Spotlight */}
-                  <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#134e4a] via-[#0d3634] to-[#06201e] border-2 border-white/15 shadow-2xl p-6 sm:p-8 flex flex-col items-center justify-center">
-                    
-                    {/* Lighting spotlight behind portrait */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#D9F0EC]/20 blur-3xl pointer-events-none" />
-                    
-                    {/* Top Status Badges */}
-                    <div className="w-full flex items-center justify-between mb-6 z-10">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#041615]/80 backdrop-blur-md border border-white/15 text-[10px] font-mono uppercase tracking-widest text-[#D9F0EC] font-bold shadow-lg">
-                        <ShieldCheck className="w-3 h-3 text-[#FF5A36]" />
-                        <span>Company Owner</span>
-                      </div>
-
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-[10px] font-mono text-emerald-300 font-bold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>Active Leadership</span>
-                      </div>
-                    </div>
-
-                    {/* Zoomed Face Portrait Medallion */}
-                    <div className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 rounded-full p-1.5 bg-gradient-to-tr from-[#FF5A36] via-[#D9F0EC]/80 to-emerald-400 shadow-2xl shadow-black/60 group-hover:shadow-[0_0_35px_rgba(255,90,54,0.3)] transition-all duration-500">
-                      <div className="w-full h-full rounded-full overflow-hidden bg-[#072422] border-2 border-white/20 flex items-center justify-center">
-                        <img
-                          src={ownerImg}
-                          alt="Muhammad Mujassam Maqsood — Owner of Safety Line"
-                          className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-108"
-                          loading="eager"
-                          decoding="async"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-4 z-10 text-center">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#D9F0EC]/70">
-                        Executive Portrait
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Formal Executive Nameplate Card */}
-                  <div className="mt-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 text-center space-y-1.5 shadow-lg">
-                    <h3 className="font-display text-xl sm:text-2xl font-black text-white tracking-tight">
-                      Muhammad Mujassam Maqsood
-                    </h3>
-                    <p className="text-xs font-mono uppercase tracking-wider text-[#FF5A36] font-bold">
-                      Owner &amp; Managing Director
-                    </p>
-                    <p className="text-[11px] text-[#D9F0EC]/80 font-mono">
-                      Safety Line Industries • Sialkot, Pakistan
-                    </p>
-
-                    <div className="pt-2 flex items-center justify-center gap-2">
-                      <a
-                        href={`https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=Hello%20Mr.%20Muhammad%20Mujassam%20Maqsood,%20I%20am%20reaching%20out%20regarding%20Safety%20Line%20manufacturing%20and%20orders.`}
-                        target="_blank"
-                        referrerPolicy="no-referrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[11px] font-mono font-bold transition-all shadow-sm cursor-pointer"
-                      >
-                        <PhoneCall className="w-3 h-3" />
-                        <span>Direct WhatsApp</span>
-                      </a>
-                      <button
-                        onClick={() => navigate('/contact')}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white text-[11px] font-mono font-bold transition-all border border-white/20 cursor-pointer"
-                      >
-                        <Mail className="w-3 h-3 text-[#D9F0EC]" />
-                        <span>Executive RFQ</span>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
+            {/* Owner Name, Designation & Enterprise Credentials (inside the same frame) */}
+            <div className="relative z-10 space-y-2 max-w-xl">
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+                Muhammad Mujassam Maqsood
+              </h2>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 border border-white/15 text-xs sm:text-sm font-mono text-[#FF5A36] font-bold tracking-wider uppercase shadow-xs">
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>Owner &amp; Managing Director</span>
               </div>
+              <p className="text-xs sm:text-sm font-mono text-[#D9F0EC]/80 pt-1">
+                Safety Line Industries • Sialkot, Punjab, Pakistan
+              </p>
+            </div>
 
-              {/* Right Column: Owner's Formal Statement & Core Pillars (7 cols on lg) */}
-              <div className="lg:col-span-7 space-y-6">
-                
-                {/* Executive Quote Intro */}
-                <div className="relative pl-6 sm:pl-8 border-l-2 border-[#FF5A36] space-y-3">
-                  <Quote className="w-8 h-8 text-[#FF5A36]/40 absolute -left-4 -top-3" />
-                  <p className="text-lg sm:text-xl font-medium text-[#D9F0EC] leading-relaxed italic">
-                    &ldquo;At Safety Line, manufacturing is more than an industrial enterprise—it is a covenant of trust, generational leathercraft mastery, and unyielding quality for every client who places their name on our work.&rdquo;
-                  </p>
-                </div>
-
-                {/* Formal Message Body */}
-                <div className="space-y-4 text-slate-200 text-sm sm:text-base leading-relaxed font-normal">
-                  <p>
-                    Since our establishment as a family-owned business in 2008, our mission has been straightforward: to bridge precision Pakistani artisan craftsmanship with the demanding international standards of modern safety protective wear, athletic gear, and technical garments.
-                  </p>
-                  <p>
-                    From our dedicated manufacturing complex in Sialkot, we personally oversee every critical milestone—from premium leather selection and computerized press cutting to ergonomic stitching across our 70 operational machines. Our 90 full-time craftsmen take immense pride in delivering products that protect workers, empower athletes, and strengthen global brands.
-                  </p>
-                  <p>
-                    I personally guarantee that every international order entrusted to Safety Line receives our absolute commitment to structural integrity, competitive OEM pricing, and dependable shipping schedules.
-                  </p>
-                </div>
-
-                {/* 4 Core Ownership Commitments */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-                    <div className="flex items-center space-x-2 text-[#FF5A36]">
-                      <ShieldCheck className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-white">Direct Accountability</span>
-                    </div>
-                    <p className="text-[11px] text-slate-300 leading-normal">
-                      Personal executive oversight on quality control, leather tanning, and cut accuracy.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-                    <div className="flex items-center space-x-2 text-[#25D366]">
-                      <Users className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-white">90 Full-Time Artisans</span>
-                    </div>
-                    <p className="text-[11px] text-slate-300 leading-normal">
-                      Experienced craftsmen excelling in leathercraft, heavy stitching, and technical knits.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-                    <div className="flex items-center space-x-2 text-[#D9F0EC]">
-                      <Briefcase className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-white">Confidential OEM &amp; Private Label</span>
-                    </div>
-                    <p className="text-[11px] text-slate-300 leading-normal">
-                      Full IP protection for custom client molds, logos, header cards, and brand hangtags.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-1">
-                    <div className="flex items-center space-x-2 text-[#FF5A36]">
-                      <Truck className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-white">Verified Timely Logistics</span>
-                    </div>
-                    <p className="text-[11px] text-slate-300 leading-normal">
-                      On-schedule international dispatches, sample approvals, and competitive worldwide export rates.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Sign-off badge */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <span className="block font-display text-lg font-bold text-white tracking-wide">
-                      Muhammad Mujassam Maqsood
-                    </span>
-                    <span className="text-xs font-mono text-[#D9F0EC]/80">
-                      Owner &amp; Managing Director • Safety Line
-                    </span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/10 border border-white/15 text-xs font-mono text-slate-300">
-                    <Building2 className="w-3.5 h-3.5 text-[#FF5A36]" />
-                    <span>Sialkot, Punjab, Pakistan</span>
-                  </div>
-                </div>
-
+            {/* Owner's Statement & Personal Commitment (inside the same frame) */}
+            <div className="relative z-10 max-w-2xl px-2 sm:px-6 pt-3 border-t border-white/10 space-y-3">
+              <div className="flex items-center justify-center gap-2 text-[#FF5A36]">
+                <Quote className="w-5 h-5 text-[#FF5A36]/60 rotate-180" />
+                <span className="text-[11px] font-mono uppercase tracking-widest text-[#D9F0EC] font-bold">
+                  Message from the Owner
+                </span>
+                <Quote className="w-5 h-5 text-[#FF5A36]/60" />
               </div>
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-normal italic">
+                &ldquo;Since 2008, our heritage has been built on an uncompromising dedication to master leathercraft, ethical manufacturing, and direct client trust. From our facility in Sialkot, I personally oversee our 90 experienced craftsmen and every production milestone to ensure world-class quality for buyers across the globe.&rdquo;
+              </p>
+            </div>
 
+            {/* Direct Executive Contact Links inside the frame */}
+            <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 pt-2">
+              <a
+                href={`https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=Hello%20Mr.%20Muhammad%20Mujassam%20Maqsood,%20I%20am%20reaching%20out%20regarding%20Safety%20Line%20manufacturing%20and%20orders.`}
+                target="_blank"
+                referrerPolicy="no-referrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-mono font-bold transition-all shadow-md cursor-pointer active:scale-95"
+              >
+                <PhoneCall className="w-3.5 h-3.5" />
+                <span>WhatsApp Owner Direct (+92 3040000445)</span>
+              </a>
+              <button
+                onClick={() => navigate('/contact')}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-mono font-bold transition-all border border-white/20 cursor-pointer shadow-md active:scale-95"
+              >
+                <Mail className="w-3.5 h-3.5 text-[#D9F0EC]" />
+                <span>Executive Inquiry Form</span>
+              </button>
             </div>
 
           </div>
