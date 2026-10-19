@@ -24,7 +24,7 @@ import {
 import { Settings } from '../types';
 import { navigate } from '../lib/router';
 import SEO from './SEO';
-import ownerImg from '../assets/images/mujassam_025.JPG-removebg-preview.png';
+import ownerImg from '../assets/images/mujassam_face.png';
 import factoryImg from '../assets/images/factory.jpeg';
 
 interface AboutUsProps {
@@ -430,35 +430,42 @@ Thanks for taking your time in reviewing the above content. We hope this letter 
                 <div className="w-full max-w-sm relative group">
                   
                   {/* Decorative Frame with Spotlight */}
-                  <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#134e4a] via-[#0d3634] to-[#06201e] border-2 border-white/15 shadow-2xl p-4 pt-6 pb-0">
+                  <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#134e4a] via-[#0d3634] to-[#06201e] border-2 border-white/15 shadow-2xl p-6 sm:p-8 flex flex-col items-center justify-center">
                     
                     {/* Lighting spotlight behind portrait */}
-                    <div className="absolute top-12 left-1/2 -translate-x-1/2 w-52 h-52 rounded-full bg-[#D9F0EC]/20 blur-2xl pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#D9F0EC]/20 blur-3xl pointer-events-none" />
                     
-                    {/* Corner Badges */}
-                    <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#041615]/80 backdrop-blur-md border border-white/15 text-[10px] font-mono uppercase tracking-widest text-[#D9F0EC] font-bold shadow-lg">
-                      <ShieldCheck className="w-3 h-3 text-[#FF5A36]" />
-                      <span>Company Owner</span>
+                    {/* Top Status Badges */}
+                    <div className="w-full flex items-center justify-between mb-6 z-10">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#041615]/80 backdrop-blur-md border border-white/15 text-[10px] font-mono uppercase tracking-widest text-[#D9F0EC] font-bold shadow-lg">
+                        <ShieldCheck className="w-3 h-3 text-[#FF5A36]" />
+                        <span>Company Owner</span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-[10px] font-mono text-emerald-300 font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Active Leadership</span>
+                      </div>
                     </div>
 
-                    <div className="absolute top-4 right-4 z-10 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-[10px] font-mono text-emerald-300 font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Active Leadership</span>
+                    {/* Zoomed Face Portrait Medallion */}
+                    <div className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 rounded-full p-1.5 bg-gradient-to-tr from-[#FF5A36] via-[#D9F0EC]/80 to-emerald-400 shadow-2xl shadow-black/60 group-hover:shadow-[0_0_35px_rgba(255,90,54,0.3)] transition-all duration-500">
+                      <div className="w-full h-full rounded-full overflow-hidden bg-[#072422] border-2 border-white/20 flex items-center justify-center">
+                        <img
+                          src={ownerImg}
+                          alt="Muhammad Mujassam Maqsood — Owner of Safety Line"
+                          className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-108"
+                          loading="eager"
+                          decoding="async"
+                        />
+                      </div>
                     </div>
 
-                    {/* Portrait Image */}
-                    <div className="relative z-0 flex justify-center items-end pt-6">
-                      <img
-                        src={ownerImg}
-                        alt="Muhammad Mujassam Maqsood — Owner of Safety Line"
-                        className="w-auto max-h-[390px] sm:max-h-[430px] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] transform transition-transform duration-500 group-hover:scale-[1.02]"
-                        loading="eager"
-                        decoding="async"
-                      />
+                    <div className="mt-4 z-10 text-center">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#D9F0EC]/70">
+                        Executive Portrait
+                      </span>
                     </div>
-
-                    {/* Subtle gradient scrim at bottom edge */}
-                    <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#06201e] to-transparent pointer-events-none" />
                   </div>
 
                   {/* Formal Executive Nameplate Card */}
