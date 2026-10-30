@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ArrowLeft as ArrowLeftIcon, 
   Search as SearchIcon, 
@@ -11,15 +10,11 @@ import {
   Sparkles as SparklesIcon,
   Flame as FlameIcon,
   Zap as ZapIcon,
-  Award as AwardIcon,
   Eye as EyeIcon,
   LayoutGrid as LayoutGridIcon,
   List as ListIcon,
   X as XIcon,
-  Gauge as GaugeIcon,
-  SlidersHorizontal as SlidersHorizontalIcon,
-  Play as PlayIcon,
-  Pause as PauseIcon
+  Gauge as GaugeIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { navigate, Link } from '../lib/router';
@@ -30,9 +25,8 @@ import SEO from './SEO';
 import brandLogo from '../assets/images/safetyline_landing.png';
 import InquiryLoadingModal from './InquiryLoadingModal';
 
-// Five Official Motorsport Car Racing Gloves Assets
+// Four Official Motorsport Car Racing Gloves Assets (excluding removed cg2)
 import cg1Img from '../assets/images/cg1.png';
-import cg2Img from '../assets/images/cg2.png';
 import cg3Img from '../assets/images/cg3.png';
 import cg4Img from '../assets/images/cg4.png';
 import cg5Img from '../assets/images/cg5.png';
@@ -43,7 +37,7 @@ interface GearwearWindowPageProps {
   settings: Settings;
 }
 
-// Dedicated metadata for the 5 car racing glove models
+// Dedicated metadata for the 4 car racing glove models
 export interface CarRacingGloveSpec {
   code: string;
   name: string;
@@ -71,19 +65,6 @@ export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     knuckleArmor: 'Metacarpal Impact Dampener & Suede Upper Shield',
     targetDiscipline: 'Circuit Racing, Touring & Sprint Track Days',
     summary: 'Official Safety Line FIA-compliant fireproof racing gloves featuring iconic purple tiger flame Nomex® backing, suede reinforced grip, and embroidered SL insignia on the safety gauntlet.'
-  },
-  {
-    code: 'GW-CR-02',
-    name: 'Safety Line Apex Tech Biomechanical Racing Gloves',
-    livery: 'Electric Blue / Black',
-    image: cg2Img,
-    badge: 'Biomechanical Carbon',
-    flameRating: 'FIA 8856-2018 & SFI 3.3/5 Homologated',
-    palmMatrix: '3D Pressure-Mapped High-Tack Silicone',
-    seamType: 'Seamless Palm Base with External Fingers',
-    knuckleArmor: 'Articulated Carbon Fiber Kinetic Deflector',
-    targetDiscipline: 'GT3, GT4, Touring Cars & Track Days',
-    summary: 'Biomechanical articulated carbon knuckle shield allows natural hand flexing while dispersing violent steering kickbacks. Touchscreen conductive aramid index finger for telemetry screens.'
   },
   {
     code: 'GW-CR-03',
@@ -142,40 +123,33 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
     isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`
   );
 
-  // Billboard 3-second automated slideshow state
-  const [activeBillboardIdx, setActiveBillboardIdx] = useState<number>(0);
-  const [isBillboardPaused, setIsBillboardPaused] = useState<boolean>(false);
+  // Auto slide animation index
+  const [activeSlideIdx, setActiveSlideIdx] = useState<number>(0);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
 
   // Quick Inspection Modal State
   const [inspectGlove, setInspectGlove] = useState<CarRacingGloveSpec | null>(null);
 
-  // 3-Second Automatic Billboard Slide Timer
+  // Automatic continuous slideshow cycling every 3 seconds
   useEffect(() => {
-    if (!isCarRacing || isBillboardPaused) return;
+    if (!isCarRacing) return;
 
     const timer = setInterval(() => {
       setSlideDirection('next');
-      setActiveBillboardIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
+      setActiveSlideIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
     }, 3000);
 
     return () => clearInterval(timer);
-  }, [isCarRacing, isBillboardPaused]);
+  }, [isCarRacing]);
 
-  // Navigate slides manually
   const goToNextSlide = () => {
     setSlideDirection('next');
-    setActiveBillboardIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
+    setActiveSlideIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
   };
 
   const goToPrevSlide = () => {
     setSlideDirection('prev');
-    setActiveBillboardIdx((prev) => (prev - 1 + CAR_RACING_GLOVE_MODELS.length) % CAR_RACING_GLOVE_MODELS.length);
-  };
-
-  const goToSlide = (idx: number) => {
-    setSlideDirection(idx > activeBillboardIdx ? 'next' : 'prev');
-    setActiveBillboardIdx(idx);
+    setActiveSlideIdx((prev) => (prev - 1 + CAR_RACING_GLOVE_MODELS.length) % CAR_RACING_GLOVE_MODELS.length);
   };
 
   // Filter products belonging to this specific category window
@@ -246,7 +220,13 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
     return GEARWEAR_WINDOWS.filter(w => w.slug !== currentWindow.slug);
   }, [currentWindow.slug]);
 
-  const activeBillboardGlove = CAR_RACING_GLOVE_MODELS[activeBillboardIdx] || CAR_RACING_GLOVE_MODELS[0];
+  const activeGlove = CAR_RACING_GLOVE_MODELS[activeSlideIdx] || CAR_RACING_GLOVE_MODELS[0];
+
+  // Calculate previous and next glove indexes for the visual 3D carousel effect
+  const prevGloveIdx = (activeSlideIdx - 1 + CAR_RACING_GLOVE_MODELS.length) % CAR_RACING_GLOVE_MODELS.length;
+  const nextGloveIdx = (activeSlideIdx + 1) % CAR_RACING_GLOVE_MODELS.length;
+  const prevGlove = CAR_RACING_GLOVE_MODELS[prevGloveIdx];
+  const nextGlove = CAR_RACING_GLOVE_MODELS[nextGloveIdx];
 
   return (
     <motion.div 
@@ -264,7 +244,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         image={currentWindow.image}
       />
 
-      {/* Top Header Bar */}
+      {/* Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#0B151E] text-white border-b border-slate-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           
@@ -336,366 +316,144 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       </header>
 
       {/* =========================================================================
-          HERO BILLBOARD SECTION (SPECIAL 3-SECOND AUTOMATED SLIDESHOW FOR CAR RACING)
+          FULL HEADER BANNER (PURE VISUAL SHOWCASE WITH AUTOMATED SLIDING ANIMATION & NO TEXT)
           ========================================================================= */}
       {isCarRacing ? (
-        <section 
-          className="bg-[#090E17] text-white border-b border-slate-800 relative overflow-hidden"
-          onMouseEnter={() => setIsBillboardPaused(true)}
-          onMouseLeave={() => setIsBillboardPaused(false)}
-        >
-          {/* Subtle Ambient Racing Glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
-          <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#EA2227]/15 blur-[120px] pointer-events-none" />
-          <div className="absolute -bottom-20 left-10 w-96 h-96 rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
+        <section className="relative w-full h-[340px] sm:h-[420px] lg:h-[480px] bg-gradient-to-b from-[#05080E] via-[#09101A] to-[#0D1624] border-b border-slate-800 overflow-hidden flex items-center justify-center">
+          
+          {/* Subtle Dynamic Racetrack & Circuit Light Ambience */}
+          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:36px_36px] opacity-15 pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#EA2227]/10 blur-[130px] pointer-events-none" />
+          <div className="absolute top-0 right-10 w-80 h-80 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-10 w-80 h-80 rounded-full bg-amber-500/10 blur-[100px] pointer-events-none" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10 space-y-6">
+          {/* Racetrack Center Reflection Stage / Pedestal */}
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-12 bg-black/60 rounded-[100%] blur-xl pointer-events-none" />
+
+          {/* Full Header Carousel Stage: Displays the Glove Slide Animation in Auto */}
+          <div className="relative w-full max-w-6xl h-full flex items-center justify-center px-4 sm:px-12">
             
-            {/* Breadcrumb Trail */}
-            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400">
-              <Link to="/" className="hover:text-white transition-colors">Home</Link>
-              <span>/</span>
-              <Link to="/gearwear" className="hover:text-white transition-colors">Gearwear</Link>
-              <span>/</span>
-              <span className="text-[#EA2227] font-semibold">Motorsport Handwear</span>
-              <span>/</span>
-              <span className="text-white font-bold">Car Racing Gloves</span>
+            {/* Left Background Adjacent Glove (Visual Depth Preview - No Text) */}
+            <div 
+              onClick={goToPrevSlide}
+              className="hidden md:flex absolute left-8 lg:left-16 z-10 w-44 lg:w-56 aspect-square items-center justify-center opacity-30 hover:opacity-50 transition-opacity cursor-pointer transform -translate-x-6 scale-80"
+              title="Previous"
+            >
+              <img
+                src={prevGlove.image}
+                alt=""
+                className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
+              />
             </div>
 
-            {/* ===============================================================
-                THE GRAND MOTORSPORT SLIDING BILLBOARD
-                =============================================================== */}
-            <div className="relative rounded-3xl bg-gradient-to-b from-slate-900 via-[#0D1520] to-[#080D14] border border-slate-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden">
+            {/* Center Active Glove: Animated Floating & Sliding Presentation */}
+            <div className="relative z-20 w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] aspect-square flex items-center justify-center">
               
-              {/* Billboard Top Marquee Header Bar */}
-              <div className="flex flex-wrap items-center justify-between gap-3 px-5 sm:px-8 py-3.5 bg-black/50 border-b border-slate-800">
-                
-                {/* Prominent Illuminated Safety Line Logo */}
-                <div className="flex items-center space-x-3.5">
-                  <div className="relative flex items-center justify-center p-2 rounded-xl bg-slate-950 border border-[#EA2227]/60 shadow-[0_0_20px_rgba(234,34,39,0.4)]">
-                    <img
-                      src={brandLogo}
-                      alt="Safety Line Official Logo"
-                      className="h-9 sm:h-10 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(234,34,39,0.6)]"
-                    />
-                    <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EA2227] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#EA2227]" />
-                    </span>
-                  </div>
+              {/* Backlight Halo */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.12, 1],
+                  opacity: [0.35, 0.65, 0.35]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute inset-4 rounded-full bg-gradient-to-tr from-[#EA2227]/30 via-slate-600/20 to-cyan-400/25 blur-3xl pointer-events-none"
+              />
 
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-display font-black text-lg sm:text-xl tracking-tight text-white">
-                        <span className="text-[#EA2227]">SAFETY</span> LINE
-                      </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#EA2227]/20 text-[#FFA494] font-bold border border-[#EA2227]/30 uppercase">
-                        MOTORSPORT BILLBOARD
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      FIA 8856-2018 HOMOLOGATED RACING LINEUP
-                    </span>
-                  </div>
-                </div>
-
-                {/* Slideshow 3-Second Status & Navigation Controls */}
-                <div className="flex items-center space-x-3">
-                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-950/80 border border-slate-700/60 text-xs font-mono">
-                    <span className={`w-2 h-2 rounded-full ${isBillboardPaused ? 'bg-amber-400' : 'bg-emerald-400 animate-pulse'}`} />
-                    <span className="text-slate-300">
-                      {isBillboardPaused ? 'Slide Paused (Hovered)' : '3s Auto-Slide'}
-                    </span>
-                    <span className="text-slate-500 font-bold">•</span>
-                    <span className="text-[#FFA494] font-bold">
-                      {activeBillboardIdx + 1} / {CAR_RACING_GLOVE_MODELS.length}
-                    </span>
-                  </div>
-
-                  {/* Play / Pause Toggle Button */}
-                  <button
-                    onClick={() => setIsBillboardPaused(!isBillboardPaused)}
-                    title={isBillboardPaused ? 'Resume auto-slideshow' : 'Pause slideshow'}
-                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer border border-slate-700"
-                  >
-                    {isBillboardPaused ? <PlayIcon className="w-4 h-4" /> : <PauseIcon className="w-4 h-4" />}
-                  </button>
-
-                  {/* Manual Prev / Next Buttons */}
-                  <div className="flex items-center space-x-1">
-                    <button
-                      onClick={goToPrevSlide}
-                      title="Previous Product"
-                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer border border-slate-700 active:scale-95"
-                    >
-                      <ChevronLeftIcon className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={goToNextSlide}
-                      title="Next Product"
-                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer border border-slate-700 active:scale-95"
-                    >
-                      <ChevronRightIcon className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* 3-Second Slideshow Visual Progress Bar */}
-              <div className="w-full bg-slate-800/80 h-1 overflow-hidden">
-                {!isBillboardPaused && (
-                  <motion.div
-                    key={`bar-${activeBillboardIdx}`}
-                    initial={{ width: '0%' }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 3, ease: 'linear' }}
-                    className="h-full bg-gradient-to-r from-[#EA2227] via-[#FF5A36] to-[#EA2227]"
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`hero-glove-${activeSlideIdx}`}
+                  initial={{ 
+                    opacity: 0, 
+                    x: slideDirection === 'next' ? 60 : -60,
+                    scale: 0.92 
+                  }}
+                  animate={{ 
+                    opacity: 1, 
+                    x: 0,
+                    scale: 1,
+                    y: [0, -12, 0]
+                  }}
+                  exit={{ 
+                    opacity: 0, 
+                    x: slideDirection === 'next' ? -60 : 60,
+                    scale: 0.92 
+                  }}
+                  transition={{
+                    opacity: { duration: 0.4 },
+                    x: { duration: 0.45 },
+                    scale: { duration: 0.45 },
+                    y: {
+                      duration: 3.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
+                  onClick={() => setInspectGlove(activeGlove)}
+                  className="relative z-10 w-full h-full flex items-center justify-center p-4 cursor-pointer"
+                >
+                  <img
+                    src={activeGlove.image}
+                    alt=""
+                    className="w-full h-full object-contain filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.85)] transition-transform duration-500 hover:scale-105"
                   />
-                )}
-              </div>
+                </motion.div>
+              </AnimatePresence>
 
-              {/* Main Billboard Interior Display */}
-              <div className="p-6 sm:p-10 lg:p-12">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  
-                  {/* Left Column: Product Info & Specifications */}
-                  <div className="lg:col-span-7 space-y-6">
-                    
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={`info-${activeBillboardIdx}`}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -15 }}
-                        transition={{ duration: 0.35 }}
-                        className="space-y-4"
-                      >
-                        {/* Badges */}
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="px-3 py-1 rounded-full bg-[#EA2227] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
-                            {activeBillboardGlove.code}
-                          </span>
-                          <span className="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-[#FFA494] text-xs font-mono font-semibold">
-                            {activeBillboardGlove.badge}
-                          </span>
-                          <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold">
-                            Livery: {activeBillboardGlove.livery}
-                          </span>
-                        </div>
+            </div>
 
-                        {/* Title */}
-                        <h1 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
-                          {activeBillboardGlove.name}
-                        </h1>
+            {/* Right Background Adjacent Glove (Visual Depth Preview - No Text) */}
+            <div 
+              onClick={goToNextSlide}
+              className="hidden md:flex absolute right-8 lg:right-16 z-10 w-44 lg:w-56 aspect-square items-center justify-center opacity-30 hover:opacity-50 transition-opacity cursor-pointer transform translate-x-6 scale-80"
+              title="Next"
+            >
+              <img
+                src={nextGlove.image}
+                alt=""
+                className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
+              />
+            </div>
 
-                        {/* Summary description */}
-                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-                          {activeBillboardGlove.summary}
-                        </p>
+            {/* Left Chevron Navigation Arrow (Minimalist - No Text) */}
+            <button
+              onClick={goToPrevSlide}
+              className="absolute left-4 sm:left-8 z-30 p-2.5 rounded-full bg-slate-900/60 hover:bg-slate-800 text-white/80 hover:text-white transition-all backdrop-blur-xs border border-white/10 active:scale-95 cursor-pointer"
+            >
+              <ChevronLeftIcon className="w-5 h-5" />
+            </button>
 
-                        {/* Spec Pills Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
-                              Fire Protection
-                            </span>
-                            <span className="font-semibold text-xs text-[#FFA494] flex items-center gap-1.5">
-                              <FlameIcon className="w-3.5 h-3.5 text-[#EA2227] shrink-0" />
-                              <span className="truncate">{activeBillboardGlove.flameRating}</span>
-                            </span>
-                          </div>
+            {/* Right Chevron Navigation Arrow (Minimalist - No Text) */}
+            <button
+              onClick={goToNextSlide}
+              className="absolute right-4 sm:right-8 z-30 p-2.5 rounded-full bg-slate-900/60 hover:bg-slate-800 text-white/80 hover:text-white transition-all backdrop-blur-xs border border-white/10 active:scale-95 cursor-pointer"
+            >
+              <ChevronRightIcon className="w-5 h-5" />
+            </button>
 
-                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
-                              Steering Grip Matrix
-                            </span>
-                            <span className="font-semibold text-xs text-cyan-300 flex items-center gap-1.5">
-                              <ZapIcon className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                              <span className="truncate">{activeBillboardGlove.palmMatrix}</span>
-                            </span>
-                          </div>
-
-                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
-                              Seam Construction
-                            </span>
-                            <span className="font-semibold text-xs text-slate-200 flex items-center gap-1.5">
-                              <ShieldCheckIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                              <span className="truncate">{activeBillboardGlove.seamType}</span>
-                            </span>
-                          </div>
-
-                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
-                              Primary Series
-                            </span>
-                            <span className="font-semibold text-xs text-slate-200 flex items-center gap-1.5">
-                              <GaugeIcon className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                              <span className="truncate">{activeBillboardGlove.targetDiscipline}</span>
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-
-                    {/* Billboard Action Buttons */}
-                    <div className="pt-2 flex flex-wrap items-center gap-3">
-                      <button
-                        onClick={() => {
-                          setInquiryProductTitle(`${activeBillboardGlove.code} - ${activeBillboardGlove.name}`);
-                          setIsInquiryModalOpen(true);
-                        }}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#EA2227] hover:bg-[#d0171c] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-lg shadow-[#EA2227]/30 active:scale-95 transition-all cursor-pointer border border-[#FF5A36]/40"
-                      >
-                        <SparklesIcon className="w-4 h-4" />
-                        <span>Request OEM Quote & Team Specs</span>
-                      </button>
-
-                      <button
-                        onClick={() => setInspectGlove(activeBillboardGlove)}
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white text-xs font-mono uppercase tracking-wider border border-slate-700 transition-all cursor-pointer"
-                      >
-                        <EyeIcon className="w-4 h-4 text-cyan-400" />
-                        <span>Quick Spec Overlay</span>
-                      </button>
-                    </div>
-
-                  </div>
-
-                  {/* Right Column: Animated Glove Showcase Carousel Frame */}
-                  <div className="lg:col-span-5 flex flex-col items-center justify-center">
-                    
-                    <div className="relative w-full max-w-[380px] aspect-square flex items-center justify-center">
-                      
-                      {/* Subtle Background Radial Glow */}
-                      <motion.div
-                        animate={{ 
-                          scale: [1, 1.1, 1],
-                          opacity: [0.35, 0.6, 0.35]
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#EA2227]/30 via-slate-700/20 to-cyan-500/20 blur-3xl pointer-events-none"
-                      />
-
-                      {/* Studio Pedestal Base */}
-                      <div className="absolute -bottom-6 w-3/4 h-8 bg-black/60 rounded-[100%] blur-md pointer-events-none" />
-
-                      {/* Smooth Sliding Glove Display */}
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={`slide-img-${activeBillboardIdx}`}
-                          initial={{ 
-                            opacity: 0, 
-                            x: slideDirection === 'next' ? 40 : -40,
-                            scale: 0.94 
-                          }}
-                          animate={{ 
-                            opacity: 1, 
-                            x: 0,
-                            scale: 1,
-                            y: [0, -10, 0]
-                          }}
-                          exit={{ 
-                            opacity: 0, 
-                            x: slideDirection === 'next' ? -40 : 40,
-                            scale: 0.94 
-                          }}
-                          transition={{
-                            opacity: { duration: 0.3 },
-                            x: { duration: 0.35 },
-                            scale: { duration: 0.35 },
-                            y: {
-                              duration: 4,
-                              repeat: Infinity,
-                              ease: "easeInOut"
-                            }
-                          }}
-                          className="relative z-10 w-full h-full flex items-center justify-center p-3 cursor-pointer"
-                          onClick={() => setInspectGlove(activeBillboardGlove)}
-                          title="Click to view full technical data sheet"
-                        >
-                          <img
-                            src={activeBillboardGlove.image}
-                            alt={activeBillboardGlove.name}
-                            className="w-full h-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] transition-transform duration-500 hover:scale-105"
-                          />
-                        </motion.div>
-                      </AnimatePresence>
-
-                    </div>
-
-                    {/* Active Slide Indicator Pill */}
-                    <div className="mt-2 text-center">
-                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300">
-                        <span className="w-2 h-2 rounded-full bg-[#EA2227] animate-pulse" />
-                        <span className="font-bold text-white">{activeBillboardGlove.code}</span>
-                        <span>•</span>
-                        <span className="text-slate-400">{activeBillboardGlove.livery}</span>
-                      </span>
-                    </div>
-
-                  </div>
-
-                </div>
-
-                {/* Bottom Carousel Selector Strip: 5 Clickable Thumbnail Cards */}
-                <div className="mt-8 pt-6 border-t border-slate-800/80">
-                  <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                    <span className="text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <SlidersHorizontalIcon className="w-3.5 h-3.5 text-[#EA2227]" />
-                      <span>Jump To Any Model (3s Slideshow):</span>
-                    </span>
-                    <span className="text-slate-500 hidden sm:inline">
-                      Hover to pause • Click to inspect
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-5 gap-2 sm:gap-3">
-                    {CAR_RACING_GLOVE_MODELS.map((glove, idx) => {
-                      const isActive = activeBillboardIdx === idx;
-                      return (
-                        <button
-                          key={glove.code}
-                          onClick={() => goToSlide(idx)}
-                          className={`relative rounded-xl p-2 text-left transition-all border cursor-pointer ${
-                            isActive
-                              ? 'bg-[#EA2227]/20 border-[#EA2227] shadow-[0_0_15px_rgba(234,34,39,0.35)] ring-1 ring-[#EA2227]'
-                              : 'bg-slate-950/60 border-slate-800 hover:bg-slate-800/60 hover:border-slate-700'
-                          }`}
-                        >
-                          <div className="aspect-square rounded-lg bg-black/40 overflow-hidden flex items-center justify-center p-1 mb-1.5">
-                            <img
-                              src={glove.image}
-                              alt={glove.code}
-                              className="w-full h-full object-contain transition-transform group-hover:scale-110"
-                            />
-                          </div>
-                          <div className="text-[10px] sm:text-xs font-mono font-bold text-center text-white truncate">
-                            {glove.code}
-                          </div>
-                          <div className="text-[9px] text-slate-400 text-center truncate hidden sm:block">
-                            {glove.livery.split('/')[0]}
-                          </div>
-
-                          {isActive && (
-                            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#EA2227] rounded-full ring-2 ring-slate-900" />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-              </div>
-
+            {/* Minimalist Carousel Slide Indicators at Bottom (Pure Visual Dots - No Text) */}
+            <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2">
+              {CAR_RACING_GLOVE_MODELS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setSlideDirection(idx > activeSlideIdx ? 'next' : 'prev');
+                    setActiveSlideIdx(idx);
+                  }}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${
+                    activeSlideIdx === idx 
+                      ? 'w-7 h-2 bg-[#EA2227] shadow-[0_0_10px_#EA2227]' 
+                      : 'w-2 h-2 bg-white/30 hover:bg-white/60'
+                  }`}
+                />
+              ))}
             </div>
 
           </div>
+
         </section>
       ) : (
         /* Standard Header Banner for other non-car categories */
@@ -760,17 +518,34 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       )}
 
       {/* =========================================================================
-          PRODUCT CATALOGUE PORTION (CLEAN, SUITABLE MODERN E-COMMERCE DESIGN)
+          PRODUCT CATALOGUE & FILTERS PORTION (CLEAN, SUITABLE MODERN E-COMMERCE DESIGN)
           ========================================================================= */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 space-y-8">
         
+        {/* Breadcrumb Trail */}
+        <div className="flex items-center space-x-2 text-xs font-mono text-slate-500">
+          <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
+          <span>/</span>
+          <Link to="/gearwear" className="hover:text-slate-900 transition-colors">Gearwear</Link>
+          <span>/</span>
+          {isCarRacing ? (
+            <>
+              <span className="text-[#EA2227] font-semibold">Motorsport Handwear</span>
+              <span>/</span>
+              <span className="text-slate-900 font-bold">Car Racing Gloves</span>
+            </>
+          ) : (
+            <span className="text-slate-900 font-bold">{currentWindow.title}</span>
+          )}
+        </div>
+
         {/* Filter, View Switcher & Search Bar */}
         <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
           
           {/* Item count & active label */}
           <div className="flex items-center space-x-3">
             <span className="font-display font-black text-lg text-slate-900">
-              {isCarRacing ? 'Official Car Racing Glove Models' : 'Products'}
+              {isCarRacing ? 'Official Safety Line Racing Gloves' : 'Products'}
             </span>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#EA2227]/10 text-[#EA2227] border border-[#EA2227]/20">
               {filteredProducts.length} {filteredProducts.length === 1 ? 'Model' : 'Models'}
@@ -899,7 +674,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                         {/* Homologation / Safety Badge */}
                         {isCarProduct && (
                           <div className="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                            FIA 8856-2018
+                            FIA 8856
                           </div>
                         )}
 

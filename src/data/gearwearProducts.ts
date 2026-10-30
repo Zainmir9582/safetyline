@@ -11,7 +11,6 @@ import weightLiftingImg from '../assets/images/blank_weight_lifting_179224754217
 import fishGlovesImg from '../assets/images/blank_fish_glove_1792247591287.jpg';
 import golfGlovesImg from '../assets/images/blank_golf_glove_1792247520769.jpg';
 import cg1Img from '../assets/images/cg1.png';
-import cg2Img from '../assets/images/cg2.png';
 import cg3Img from '../assets/images/cg3.png';
 import cg4Img from '../assets/images/cg4.png';
 import cg5Img from '../assets/images/cg5.png';
@@ -209,35 +208,6 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-03-07T08:00:00.000Z'
   },
   {
-    id: 'prod-cr-02',
-    name: 'Safety Line Apex Tech Biomechanical Racing Gloves (Electric Blue / Black)',
-    slug: 'safety-line-apex-tech-biomechanical-racing-gloves-blue',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    subcategory: 'car-racing',
-    shortDescription: 'Advanced FIA homologated racing gloves featuring biomechanical carbon knuckle protection, 3D silicone grip mapping, and elasticated gauntlet.',
-    longDescription: 'Crafted for competitive endurance racers, touring car champions, and track day pilots. Incorporates a biomechanical articulated carbon fiber knuckle shield that allows natural hand flexing while dispersing steering kickbacks. The palm features dual-color high-tack silicone pressure mapping with zero interior bunching seams. Fitted with fire-resistant aramid lining and capacitive index fingertip patches for telemetry tablets.',
-    material: 'Flame-Retardant Nomex® Knit, Articulated Carbon Fiber & Touchscreen Conductive Aramid',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Electric Blue / Black', 'Cobalt Blue', 'Midnight Black'],
-    features: [
-      'Biomechanical articulated carbon fiber impact knuckle shields with ventilation channels',
-      'Custom mapped dual-color silicone palm grid ensuring zero slip under high-G lateral forces',
-      'Pre-formed thumb and index fingers with touchscreen compatibility for timing dashboards',
-      'Double-layer Nomex aramid yarn resisting extreme cockpit temperatures',
-      'Seamless palm base preventing material bunching during micro-steering corrections',
-      'Elasticated wrist gathering with 180-degree ergonomic closure tab'
-    ],
-    productCode: 'GW-CR-02',
-    status: 'Active',
-    displayOrder: 2,
-    coverImage: cg2Img,
-    galleryImages: [cg2Img],
-    seoTitle: 'Safety Line Apex Tech Biomechanical Racing Gloves | Electric Blue',
-    seoDescription: 'FIA compliant electric blue racing gloves with carbon knuckle shields and dual-color silicone grip.',
-    createdAt: '2026-03-08T08:00:00.000Z'
-  },
-  {
     id: 'prod-cr-03',
     name: 'Safety Line Veloce High-Visibility Endurance Racing Gloves (Signal Yellow / Black)',
     slug: 'safety-line-veloce-high-visibility-endurance-racing-gloves-yellow',
@@ -259,7 +229,7 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-CR-03',
     status: 'Active',
-    displayOrder: 3,
+    displayOrder: 2,
     coverImage: cg3Img,
     galleryImages: [cg3Img],
     seoTitle: 'Safety Line Veloce High-Visibility Racing Gloves | Signal Yellow',
@@ -288,7 +258,7 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-CR-04',
     status: 'Active',
-    displayOrder: 4,
+    displayOrder: 3,
     coverImage: cg4Img,
     galleryImages: [cg4Img],
     seoTitle: 'Safety Line Pro-Circuit Two-Tone Racing Gloves | Black & White',
@@ -317,7 +287,7 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-CR-05',
     status: 'Active',
-    displayOrder: 5,
+    displayOrder: 4,
     coverImage: cg5Img,
     galleryImages: [cg5Img],
     seoTitle: 'Safety Line Grand Prix Monza Racing Gloves | Championship Red',
