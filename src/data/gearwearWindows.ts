@@ -4,6 +4,8 @@ import workGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.j
 import mechanicsGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';
 import tacticalPoliceGlovesImg from '../assets/images/blank_police_glove_1792247591145.jpg';
 import motorcarsGlovesImg from '../assets/images/blank_racing_glove_1792247541163.jpg';
+import cg1Img from '../assets/images/cg1.png';
+import cgHeroImg from '../assets/images/cg_hero.png';
 import cyclingGlovesImg from '../assets/images/blank_cycling_glove_1792247541304.jpg';
 import roadCyclingImg from '../assets/images/blank_road_cycling_1792247567857.jpg';
 import weightLiftingImg from '../assets/images/blank_weight_lifting_1792247542179.jpg';
@@ -24,6 +26,7 @@ export interface GearwearWindow {
   tagline: string;
   description: string;
   image: string;
+  heroImage?: string;
   features: string[];
   specs: { label: string; value: string }[];
   routePath: string;
@@ -185,26 +188,28 @@ export const GEARWEAR_WINDOWS: GearwearWindow[] = [
     slug: 'motorcars-gloves',
     group: 'car',
     groupLabel: 'Car Categories',
-    title: 'Motorcars Gloves',
-    shortTitle: 'Motorcars Gloves',
-    badge: 'FIA Motorsport',
-    minorDetail: 'Fire-retardant Nomex® aramid, external seams & silicone steering wheel grip.',
+    title: 'Car Racing Gloves',
+    shortTitle: 'Car Racing Gloves',
+    badge: 'FIA Motorsport 8856',
+    minorDetail: 'FIA homologated fire-retardant Nomex® aramid, external seams & high-tack silicone steering grip.',
     tagline: 'Track-Tested Circuit, Rally & Formula Motorsport Racing Gloves',
-    description: 'Certified track racing gloves designed for circuit racing, rally, and karting cockpits. Features multi-layer fire-retardant Nomex® construction, external reverse seams for zero pressure points, and high-tack silicone palm grids.',
-    image: motorcarsGlovesImg,
+    description: 'Certified professional car racing gloves designed for Formula cockpits, GT3 endurance, rally stages, and competitive karting. Crafted with multi-layer fire-retardant Nomex® aramid, external reverse seams for zero pressure points, carbon knuckle armor, and high-tack silicone palm grids.',
+    image: cg1Img,
+    heroImage: cgHeroImg,
     features: [
-      'Double-layer flame-retardant aramid and authentic Nomex® fabric',
-      'External seam stitching preventing hand blisters during endurance stints',
-      'High-tack silicone palm and finger print calibrated for suede and leather wheels',
-      'Elasticated extended wrist gauntlet for seamless fire-suit overlap'
+      'Double-layer flame-retardant aramid and authentic Nomex® fabric (15s+ direct flame rating)',
+      '100% external reverse-seam stitching preventing hand blisters during endurance stints',
+      'High-tack silicone palm and finger print calibrated for suede and Alcantara steering wheels',
+      'Elasticated extended wrist gauntlet for seamless fire-suit overlap compliance'
     ],
     specs: [
       { label: 'Safety Standard', value: 'FIA 8856-2018 / SFI 3.3/5' },
       { label: 'Thermal Core', value: 'Dual Nomex® Aramid' },
-      { label: 'Seam Design', value: '100% External Seams' }
+      { label: 'Seam Design', value: '100% External Reverse' },
+      { label: 'Grip Matrix', value: 'High-Tack Silicone Grid' }
     ],
     routePath: '/gearwear/motorcars-gloves',
-    codePrefix: 'GW-MC',
+    codePrefix: 'GW-CR',
     themeColor: '#EA2227',
     iconName: 'Car'
   },

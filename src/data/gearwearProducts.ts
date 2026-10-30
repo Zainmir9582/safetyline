@@ -10,6 +10,11 @@ import mechanicsGlovesImg from '../assets/images/blank_mechanic_glove_1792247541
 import weightLiftingImg from '../assets/images/blank_weight_lifting_1792247542179.jpg';
 import fishGlovesImg from '../assets/images/blank_fish_glove_1792247591287.jpg';
 import golfGlovesImg from '../assets/images/blank_golf_glove_1792247520769.jpg';
+import cg1Img from '../assets/images/cg1.png';
+import cg2Img from '../assets/images/cg2.png';
+import cg3Img from '../assets/images/cg3.png';
+import cg4Img from '../assets/images/cg4.png';
+import cg5Img from '../assets/images/cg5.png';
 
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
@@ -173,36 +178,155 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-03-06T08:00:00.000Z'
   },
 
-  // 3. Car Racing Category
+  // 3. Car Racing Category (Featuring CG1 to CG5 Lineup)
   {
     id: 'prod-cr-01',
-    name: 'Grand Prix Pro FIA Flame-Resistant Racing Gloves',
-    slug: 'grand-prix-pro-fia-flame-resistant-racing-gloves',
+    name: 'FIA-8856 Pro Apex Formula Racing Gloves (Red / Black)',
+    slug: 'fia-8856-pro-apex-formula-racing-gloves-red-black',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
     subcategory: 'car-racing',
-    shortDescription: 'FIA standard fire-retardant racing gloves with external seams for zero steering friction and high-tack silicone palms.',
-    longDescription: 'Engineered to meet FIA 8856-2018 and SFI 3.3/5 motorsport benchmarks. Constructed with dual-layer Nomex® knit, external ergonomic seams to eliminate steering wheel pressure points, and high-traction silicone printed palms.',
-    material: '100% Double-Layer Nomex® Aramid with Silicone Printed Palms',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    shortDescription: 'FIA 8856-2018 homologated fireproof Nomex® racing gloves with dual-layer heat shield, high-tack silicone palm grip, and external seam construction.',
+    longDescription: 'Engineered to meet FIA 8856-2018 and SFI 3.3/5 international motorsport safety benchmarks. Constructed with genuine double-layer Nomex® aramid knit certified to withstand direct flame contact for over 15 seconds. Features 100% external reverse-seam finger construction to eliminate blisters and pressure points against the steering wheel, molded carbon-composite knuckle impact shields, and high-traction silicone palm matrices calibrated specifically for suede, leather, and Alcantara steering wheels.',
+    material: 'Double-Layer Nomex® Aramid Matrix, High-Tack Fireproof Silicone & Molded Carbon Knuckle Armor',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Red / Black', 'Stealth Black', 'Formula Red'],
     features: [
-      'FIA 8856-2018 & SFI 3.3/5 benchmark flame resistance',
-      'External seam finger construction preventing blisters and pressure points',
-      'High-grip flame-resistant silicone pattern for maximum wheel tactile feedback',
-      'Extended gauntlet with elasticated wrist retention system'
+      'FIA 8856-2018 & SFI 3.3/5 benchmark certified fire & thermal flash protection (15s+ rating)',
+      '100% external reverse-seam finger construction eliminating blisters during long stints',
+      'Engineered multi-zone silicone palm lattice for telepathic wheel feedback and anti-fatigue grip',
+      'Molded carbon-composite knuckle protection deflecting cockpit impacts and wheel kickbacks',
+      'Extended slash-cut gauntlet ensuring full fireproof suit sleeve overlap',
+      'Pre-curved anatomical finger curve mirroring natural steering wheel grip ergonomics'
     ],
     productCode: 'GW-CR-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: motorcarsGlovesImg,
-    galleryImages: [motorcarsGlovesImg],
-    seoTitle: 'Grand Prix Pro FIA Racing Gloves | Safety Line Motorsport',
-    seoDescription: 'FIA benchmark flame-resistant motorsport racing gloves with external seams and high-tack silicone grip.',
+    coverImage: cg1Img,
+    galleryImages: [cg1Img],
+    seoTitle: 'FIA-8856 Pro Apex Formula Racing Gloves | Safety Line Motorsport',
+    seoDescription: 'FIA 8856-2018 certified fireproof Nomex racing gloves with external seams and high-tack silicone grip.',
     createdAt: '2026-03-07T08:00:00.000Z'
   },
   {
     id: 'prod-cr-02',
-    name: 'Apex Trackmaster Nomex Motorsport Suit',
+    name: 'Apex Tech 1-ZX Biomechanical Carbon Racing Gloves (Electric Blue / Black)',
+    slug: 'apex-tech-1-zx-biomechanical-carbon-racing-gloves-blue',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'Advanced FIA homologated racing gloves featuring biomechanical carbon knuckle protection, 3D silicone grip mapping, and elasticated gauntlet.',
+    longDescription: 'Crafted for competitive endurance racers, touring car champions, and track day pilots. Incorporates a biomechanical articulated carbon fiber knuckle shield that allows natural hand flexing while dispersing steering kickbacks. The palm features dual-color high-tack silicone pressure mapping with zero interior bunching seams. Fitted with fire-resistant aramid lining and capacitive index fingertip patches for telemetry tablets.',
+    material: 'Flame-Retardant Nomex® Knit, Articulated Carbon Fiber & Touchscreen Conductive Aramid',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Electric Blue / Black', 'Cobalt Blue', 'Midnight Black'],
+    features: [
+      'Biomechanical articulated carbon fiber impact knuckle shields with ventilation channels',
+      'Custom mapped dual-color silicone palm grid ensuring zero slip under high-G lateral forces',
+      'Pre-formed thumb and index fingers with touchscreen compatibility for timing dashboards',
+      'Double-layer Nomex aramid yarn resisting extreme cockpit temperatures',
+      'Seamless palm base preventing material bunching during micro-steering corrections',
+      'Elasticated wrist gathering with 180-degree ergonomic closure tab'
+    ],
+    productCode: 'GW-CR-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: cg2Img,
+    galleryImages: [cg2Img],
+    seoTitle: 'Apex Tech 1-ZX Biomechanical Carbon Racing Gloves | Safety Line Motorsport',
+    seoDescription: 'FIA compliant electric blue racing gloves with carbon knuckle shields and dual-color silicone grip.',
+    createdAt: '2026-03-08T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cr-03',
+    name: 'Veloce ZX-W High-Visibility Endurance Racing Gloves (Hi-Vis Yellow / Grey)',
+    slug: 'veloce-zx-w-high-visibility-endurance-racing-gloves-yellow',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'FIA 8856-2000 certified high-visibility fluorescent racing gloves with carbon knuckle armor, perforated leather accents, and maximum wheel feel.',
+    longDescription: 'Optimized for night stints, 24-hour endurance GT racing, and rally stages where visual signaling in dark cockpits is vital. Spun with fluorescent high-visibility Nomex® aramid that stands out under cockpit ambient lighting. Features rigid carbon knuckle armor, perforated leather reinforcements on high-wear thumb crotches, and a soft fire-retardant interior liner offering superior perspiration absorption.',
+    material: 'Fluorescent Nomex® Flame-Retardant Fabric, Carbon Shielding & Perforated Leather Accents',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Hi-Vis Yellow / Stealth Grey', 'Fluorescent Neon', 'Signal Yellow'],
+    features: [
+      'Ultra-high visibility fluorescent yellow backhand for night cockpit clarity and hand signaling',
+      'FIA 8856-2000 and SFI 3.3/5 dual safety certification',
+      'Rigid carbon-weave knuckle protector absorbing steering wheel kickbacks',
+      'Perforated leather reinforcements at high-stress wear zones',
+      'High-temperature Nomex wrist cuff with micro-velcro safety strap',
+      'Moisture-wicking aramid inner liner preventing slippage during grueling multi-hour stints'
+    ],
+    productCode: 'GW-CR-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: cg3Img,
+    galleryImages: [cg3Img],
+    seoTitle: 'Veloce ZX-W High-Visibility Racing Gloves | Safety Line Motorsport',
+    seoDescription: 'High-visibility fluorescent endurance racing gloves with carbon armor and FIA safety certification.',
+    createdAt: '2026-03-09T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cr-04',
+    name: 'Formula F1 Fastback Ultra-Lightweight Sprint Racing Gloves (Crimson / White)',
+    slug: 'formula-f1-fastback-ultra-lightweight-sprint-racing-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'Ultra-lightweight Formula sprint gloves with graphic silicone contour palm, minimal seams, and maximum steering wheel sensitivity.',
+    longDescription: 'Engineered specifically for single-seater open cockpit formula racing and sprint championships where every gram counts. Features an ultra-lightweight single-layer palm with dual-layer gauntlet compliance, full ergonomic silicone topography print for high wheel feedback, and low-profile slash cuff for lightning-fast cockpit ingress and egress.',
+    material: 'Single/Dual-Layer Hybrid Nomex® Aramid with Direct-Fused Silicone Topography',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: ['Crimson Red / Pure White', 'Speed White', 'Monza Red'],
+    features: [
+      'Featherweight construction optimized for open-wheel formula cars and sim-to-reality racing',
+      'Direct-fused silicone topography palm print for telepathic wheel feedback',
+      'Full external flat-lock stitch construction with zero interior seams',
+      'Slash-cut elastic wrist opening providing snug fire-suit integration',
+      'Rapid moisture vapor transfer keeping driver hands dry under high adrenaline',
+      'FIA 8856-2018 benchmark flame-tested aramid composition'
+    ],
+    productCode: 'GW-CR-04',
+    status: 'Active',
+    displayOrder: 4,
+    coverImage: cg4Img,
+    galleryImages: [cg4Img],
+    seoTitle: 'Formula F1 Fastback Ultra-Lightweight Racing Gloves | Safety Line',
+    seoDescription: 'Ultra-lightweight Formula sprint racing gloves with graphic silicone contour palm and external seams.',
+    createdAt: '2026-03-10T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cr-05',
+    name: 'GT Endurance Suede-Reinforced Touring Racing Gloves (Stealth Black / Titanium)',
+    slug: 'gt-endurance-suede-reinforced-touring-racing-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'car-racing',
+    shortDescription: 'Heavy-duty GT endurance racing gloves with genuine Pittards® suede palm reinforcements, padded knuckle shields, and heat-reflective cuffs.',
+    longDescription: 'Crafted for GT3, GT4, and rally championships where steering kickback and vibration are relentless. Incorporates genuine fire-resistant treated suede leather palm patches over an aramid core, titanium-silver reflective heat panels on gauntlets to deflect radiator and cockpit heat soak, and memory foam dorsal padding.',
+    material: 'Treated Fireproof Suede Leather, Nomex® Interlock Knit & Heat-Reflective Titanium Fabric',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Stealth Black / Titanium', 'Matte Carbon', 'Rally Grey'],
+    features: [
+      'Genuine Pittards® fire-retardant suede palm reinforcements for durability on rough rally stages',
+      'Titanium-reflective outer gauntlet panels deflecting cockpit heat radiation',
+      'Integrated memory foam impact dampeners over dorsal metacarpal joints',
+      'Reinforced index-finger and thumb saddle resisting paddle-shifter wear',
+      'FIA 8856-2018 & SFI safety approved for all international GT and rally series',
+      'Touch-compatible leather index fingertip for in-car race radio and switches'
+    ],
+    productCode: 'GW-CR-05',
+    status: 'Active',
+    displayOrder: 5,
+    coverImage: cg5Img,
+    galleryImages: [cg5Img],
+    seoTitle: 'GT Endurance Suede Racing Gloves | Safety Line Motorsport',
+    seoDescription: 'Heavy-duty GT endurance racing gloves with genuine suede palm reinforcement and heat-reflective gauntlet.',
+    createdAt: '2026-03-11T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cr-06',
+    name: 'Apex Trackmaster Nomex Motorsport Overall Suit',
     slug: 'apex-trackmaster-nomex-motorsport-suit',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
@@ -217,40 +341,14 @@ export const gearwearProducts: Product[] = [
       'Breathable lumbar and groin stretch panels for cockpit cooling',
       'Concealed extraction shoulder handles complying with safety protocols'
     ],
-    productCode: 'GW-CR-02',
+    productCode: 'GW-CR-06',
     status: 'Active',
-    displayOrder: 2,
+    displayOrder: 6,
     coverImage: carRacingImg,
     galleryImages: [carRacingImg],
     seoTitle: 'Apex Trackmaster Nomex Motorsport Suit | Safety Line',
     seoDescription: 'Triple-layer lightweight fire-retardant racing suit with full floating arms and FIA compliance.',
-    createdAt: '2026-03-08T08:00:00.000Z'
-  },
-  {
-    id: 'prod-cr-03',
-    name: 'Veloce High-Traction Karting Gloves',
-    slug: 'veloce-high-traction-karting-gloves',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    subcategory: 'car-racing',
-    shortDescription: 'High-sensitivity karting and track-day gloves with pre-curved fingers, breathable mesh back, and synthetic chamois palm.',
-    longDescription: 'Crafted for competitive kart drivers demanding direct steering feel and unyielding grip. Features pre-curved fingers with silicone texturing across the palms and high-wear abrasion panels.',
-    material: 'Poly-Spandex Stretch & Synthetic Chamois with Silicone Grid',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    features: [
-      'Pre-curved anatomical finger construction reducing steering fatigue',
-      'Ultra-tack silicone palm grip designed for high-vibration steering wheels',
-      'Breathable 4-way stretch backhand preventing palm sweating',
-      'Slash-cut elastic cuff for quick entry and slip-on fit'
-    ],
-    productCode: 'GW-CR-03',
-    status: 'Active',
-    displayOrder: 3,
-    coverImage: mechanicsGlovesImg,
-    galleryImages: [mechanicsGlovesImg],
-    seoTitle: 'Veloce High-Traction Karting Gloves | Safety Line Motorsport',
-    seoDescription: 'Competitive karting gloves with high-sensitivity silicone grip and pre-curved fingers.',
-    createdAt: '2026-03-09T08:00:00.000Z'
+    createdAt: '2026-03-12T08:00:00.000Z'
   },
 
   // 4. Weight Lifting Category
