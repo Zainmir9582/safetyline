@@ -1,26 +1,25 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+
 import { 
-  ArrowLeft, 
-  Search, 
-  ChevronRight,
-  ShieldCheck,
-  CheckCircle2,
-  Filter,
-  Layers,
-  Sparkles,
-  ArrowUpRight,
-  Flame,
-  Zap,
-  Award,
-  Eye,
-  Check,
-  LayoutGrid,
-  List,
-  X,
-  Gauge,
-  SlidersHorizontal,
-  Download,
-  ShieldAlert
+  ArrowLeft as ArrowLeftIcon, 
+  Search as SearchIcon, 
+  ChevronRight as ChevronRightIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ShieldCheck as ShieldCheckIcon,
+  CheckCircle2 as CheckCircle2Icon,
+  Filter as FilterIcon,
+  Sparkles as SparklesIcon,
+  Flame as FlameIcon,
+  Zap as ZapIcon,
+  Award as AwardIcon,
+  Eye as EyeIcon,
+  LayoutGrid as LayoutGridIcon,
+  List as ListIcon,
+  X as XIcon,
+  Gauge as GaugeIcon,
+  SlidersHorizontal as SlidersHorizontalIcon,
+  Play as PlayIcon,
+  Pause as PauseIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { navigate, Link } from '../lib/router';
@@ -31,8 +30,7 @@ import SEO from './SEO';
 import brandLogo from '../assets/images/safetyline_landing.png';
 import InquiryLoadingModal from './InquiryLoadingModal';
 
-// Motorsport Car Racing Gloves Assets
-import cgHeroImg from '../assets/images/cg_hero.png';
+// Five Official Motorsport Car Racing Gloves Assets
 import cg1Img from '../assets/images/cg1.png';
 import cg2Img from '../assets/images/cg2.png';
 import cg3Img from '../assets/images/cg3.png';
@@ -46,7 +44,7 @@ interface GearwearWindowPageProps {
 }
 
 // Dedicated metadata for the 5 car racing glove models
-interface CarRacingGloveSpec {
+export interface CarRacingGloveSpec {
   code: string;
   name: string;
   livery: string;
@@ -60,7 +58,7 @@ interface CarRacingGloveSpec {
   summary: string;
 }
 
-const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
+export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
   {
     code: 'GW-CR-01',
     name: 'Safety Line Signature Flame FIA Racing Gloves',
@@ -138,19 +136,47 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   // Search, size and view filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState('All');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [inquiryProductTitle, setInquiryProductTitle] = useState<string>(
     isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`
   );
 
-  // Car racing hero animated glove switcher state
-  // 0-4 correspond to CG1-CG5, 5 is the Hero render
-  const [activeHeroGloveIdx, setActiveHeroGloveIdx] = useState<number>(0);
-  const [activeHeroGloveMode, setActiveHeroGloveMode] = useState<'model' | 'hero'>('model');
+  // Billboard 3-second automated slideshow state
+  const [activeBillboardIdx, setActiveBillboardIdx] = useState<number>(0);
+  const [isBillboardPaused, setIsBillboardPaused] = useState<boolean>(false);
+  const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
 
   // Quick Inspection Modal State
   const [inspectGlove, setInspectGlove] = useState<CarRacingGloveSpec | null>(null);
+
+  // 3-Second Automatic Billboard Slide Timer
+  useEffect(() => {
+    if (!isCarRacing || isBillboardPaused) return;
+
+    const timer = setInterval(() => {
+      setSlideDirection('next');
+      setActiveBillboardIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [isCarRacing, isBillboardPaused]);
+
+  // Navigate slides manually
+  const goToNextSlide = () => {
+    setSlideDirection('next');
+    setActiveBillboardIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
+  };
+
+  const goToPrevSlide = () => {
+    setSlideDirection('prev');
+    setActiveBillboardIdx((prev) => (prev - 1 + CAR_RACING_GLOVE_MODELS.length) % CAR_RACING_GLOVE_MODELS.length);
+  };
+
+  const goToSlide = (idx: number) => {
+    setSlideDirection(idx > activeBillboardIdx ? 'next' : 'prev');
+    setActiveBillboardIdx(idx);
+  };
 
   // Filter products belonging to this specific category window
   const windowProducts = useMemo(() => {
@@ -220,19 +246,16 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
     return GEARWEAR_WINDOWS.filter(w => w.slug !== currentWindow.slug);
   }, [currentWindow.slug]);
 
-  const activeGloveSpec = CAR_RACING_GLOVE_MODELS[activeHeroGloveIdx] || CAR_RACING_GLOVE_MODELS[0];
-  const activeDisplayedHeroImage = activeHeroGloveMode === 'hero' ? cgHeroImg : activeGloveSpec.image;
+  const activeBillboardGlove = CAR_RACING_GLOVE_MODELS[activeBillboardIdx] || CAR_RACING_GLOVE_MODELS[0];
 
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.25 }}
       id="gearwear-category-page" 
-      className={`min-h-screen font-sans pb-24 transition-colors duration-300 ${
-        isCarRacing ? 'bg-[#030908] text-slate-100' : 'bg-[#FAFCFB] text-[#1A1A1A]'
-      }`}
+      className="min-h-screen font-sans bg-[#F8FAFC] text-[#0F172A] pb-24"
     >
       <SEO
         title={`${isCarRacing ? 'FIA Car Racing Gloves' : currentWindow.title} | Safety Line Motorsport & Protective Handwear`}
@@ -241,12 +264,12 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         image={currentWindow.image}
       />
 
-      {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-[#0B3D3B] text-white border-b border-white/10 shadow-md">
+      {/* Top Header Bar */}
+      <header className="sticky top-0 z-40 bg-[#0B151E] text-white border-b border-slate-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           
           {/* Logo & Category Identification */}
-          <Link to="/" className="flex items-center space-x-3 cursor-pointer group">
+          <Link to="/" className="flex items-center space-x-3.5 cursor-pointer group">
             <img
               src={brandLogo}
               alt="Safety Line"
@@ -256,19 +279,19 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               <span className="font-display font-black text-sm sm:text-base tracking-[0.16em] uppercase leading-none">
                 <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
               </span>
-              <span className="text-[9px] font-mono tracking-widest text-[#D9F0EC] uppercase">
+              <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase mt-0.5">
                 Gearwear • {currentWindow.shortTitle}
               </span>
             </div>
           </Link>
 
-          {/* Navigation link back to all categories */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Top Actions */}
+          <div className="flex items-center space-x-2.5 sm:space-x-4">
             <button
               onClick={() => navigate('/gearwear')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer border border-slate-700"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeftIcon className="w-3.5 h-3.5" />
               <span>All Gearwear</span>
             </button>
             <button
@@ -276,8 +299,9 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                 setInquiryProductTitle(isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`);
                 setIsInquiryModalOpen(true);
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF5A36] hover:bg-[#e44e2b] text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-sm shadow-[#FF5A36]/30"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#EA2227] hover:bg-[#d0171c] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md shadow-[#EA2227]/30 active:scale-95"
             >
+              <SparklesIcon className="w-3.5 h-3.5" />
               <span>Wholesale Inquiry</span>
             </button>
           </div>
@@ -285,10 +309,10 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         </div>
 
         {/* Quick Category Bar */}
-        <div className="bg-[#072725] border-t border-white/10 px-4 sm:px-8 py-2 overflow-x-auto scrollbar-none">
+        <div className="bg-[#070D13] border-t border-slate-800/80 px-4 sm:px-8 py-2 overflow-x-auto scrollbar-none">
           <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">
-              Gearwear:
+              Gearwear Windows:
             </span>
             {GEARWEAR_WINDOWS.map((win) => {
               const isActive = win.slug === currentWindow.slug;
@@ -298,8 +322,8 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   onClick={() => navigate(win.routePath)}
                   className={`px-3 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                     isActive
-                      ? 'bg-[#FF5A36] text-white font-bold shadow-xs'
-                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                      ? 'bg-[#EA2227] text-white font-bold shadow-xs'
+                      : 'text-slate-400 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span>{win.shortTitle}</span>
@@ -312,365 +336,359 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       </header>
 
       {/* =========================================================================
-          MAIN HEAD PORTION (ENHANCED FOR CAR RACING GLOVES WITH ANIMATED GLOVE HERO)
-          ========================================================================= */}
-      {/* =========================================================================
-          GRAND MOTORSPORT BILLBOARD HEADER (ILLUMINATED SAFETY LINE LOGO & ANIMATED GLOVE)
+          HERO BILLBOARD SECTION (SPECIAL 3-SECOND AUTOMATED SLIDESHOW FOR CAR RACING)
           ========================================================================= */}
       {isCarRacing ? (
-        <section className="bg-gradient-to-b from-[#020706] via-[#051715] to-[#040C0B] text-white py-10 sm:py-16 border-b border-white/10 relative overflow-hidden">
-          {/* Night-Circuit Racetrack Ambient Backdrops */}
-          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:28px_28px] opacity-20 pointer-events-none" />
-          <div className="absolute -top-36 left-1/4 w-[500px] h-[500px] rounded-full bg-[#EA2227]/25 blur-[120px] pointer-events-none" />
-          <div className="absolute top-1/2 -right-20 w-[450px] h-[450px] rounded-full bg-[#00F0FF]/15 blur-[120px] pointer-events-none" />
-          <div className="absolute -bottom-20 left-10 w-96 h-96 rounded-full bg-[#FF5A36]/20 blur-[100px] pointer-events-none" />
+        <section 
+          className="bg-[#090E17] text-white border-b border-slate-800 relative overflow-hidden"
+          onMouseEnter={() => setIsBillboardPaused(true)}
+          onMouseLeave={() => setIsBillboardPaused(false)}
+        >
+          {/* Subtle Ambient Racing Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#EA2227]/15 blur-[120px] pointer-events-none" />
+          <div className="absolute -bottom-20 left-10 w-96 h-96 rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10 space-y-6">
             
             {/* Breadcrumb Trail */}
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#D9F0EC]/80">
-              <Link to="/" className="hover:text-white transition-colors">Portal</Link>
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
               <span>/</span>
               <Link to="/gearwear" className="hover:text-white transition-colors">Gearwear</Link>
               <span>/</span>
-              <span className="text-[#EA2227] font-semibold">Motorsport Division</span>
+              <span className="text-[#EA2227] font-semibold">Motorsport Handwear</span>
               <span>/</span>
               <span className="text-white font-bold">Car Racing Gloves</span>
             </div>
 
             {/* ===============================================================
-                THE GRAND MOTORSPORT BILLBOARD STRUCTURE
+                THE GRAND MOTORSPORT SLIDING BILLBOARD
                 =============================================================== */}
-            <div className="relative pt-6">
+            <div className="relative rounded-3xl bg-gradient-to-b from-slate-900 via-[#0D1520] to-[#080D14] border border-slate-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden">
               
-              {/* Overhead Stadium Light Gantries Shining Down on the Billboard */}
-              <div className="hidden sm:flex justify-around px-16 relative z-20 -mb-2.5">
-                {[0, 1, 2].map((lightIdx) => (
-                  <div key={lightIdx} className="flex flex-col items-center">
-                    {/* Metal Gantry Bracket */}
-                    <div className="w-2.5 h-6 bg-gradient-to-b from-slate-600 to-slate-800 rounded-t border-t border-x border-slate-500 shadow-sm" />
-                    {/* Industrial Floodlight Housing */}
-                    <div className="w-12 h-4.5 bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700 rounded-sm border border-slate-400 shadow-md flex items-center justify-center relative">
-                      {/* Intense Floodlight Bulb */}
-                      <div className="w-9 h-2 rounded-xs bg-amber-100 shadow-[0_0_15px_#FFEBA3] animate-pulse" />
-                    </div>
-                    {/* Downward Light Beam Cone */}
-                    <div className="w-36 h-20 bg-gradient-to-b from-amber-200/25 via-amber-100/10 to-transparent clip-path-polygon pointer-events-none -mt-0.5" 
-                      style={{ clipPath: 'polygon(35% 0%, 65% 0%, 100% 100%, 0% 100%)' }}
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* Billboard Outer Heavy Metal Steel / Carbon Chassis */}
-              <div className="relative bg-gradient-to-b from-slate-800 via-slate-900 to-black rounded-3xl p-3 sm:p-5 border-2 border-slate-600/80 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)]">
+              {/* Billboard Top Marquee Header Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 px-5 sm:px-8 py-3.5 bg-black/50 border-b border-slate-800">
                 
-                {/* Industrial Corner Screws / Bolts */}
-                <div className="absolute top-3 left-3 w-3 h-3 rounded-full bg-slate-400 border border-slate-700 shadow-inner flex items-center justify-center">
-                  <div className="w-1.5 h-0.5 bg-slate-700" />
-                </div>
-                <div className="absolute top-3 right-3 w-3 h-3 rounded-full bg-slate-400 border border-slate-700 shadow-inner flex items-center justify-center">
-                  <div className="w-1.5 h-0.5 bg-slate-700" />
-                </div>
-                <div className="absolute bottom-3 left-3 w-3 h-3 rounded-full bg-slate-400 border border-slate-700 shadow-inner flex items-center justify-center">
-                  <div className="w-1.5 h-0.5 bg-slate-700" />
-                </div>
-                <div className="absolute bottom-3 right-3 w-3 h-3 rounded-full bg-slate-400 border border-slate-700 shadow-inner flex items-center justify-center">
-                  <div className="w-1.5 h-0.5 bg-slate-700" />
-                </div>
-
-                {/* Top Billboard Header Bar */}
-                <div className="flex items-center justify-between px-3 py-1.5 mb-2 bg-black/60 rounded-xl border border-white/10 text-[10px] font-mono">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#EA2227] animate-ping" />
-                    <span className="text-[#FFA494] font-bold uppercase tracking-wider">
-                      SAFETY LINE TRACKSIDE ARENA BILLBOARD
+                {/* Prominent Illuminated Safety Line Logo */}
+                <div className="flex items-center space-x-3.5">
+                  <div className="relative flex items-center justify-center p-2 rounded-xl bg-slate-950 border border-[#EA2227]/60 shadow-[0_0_20px_rgba(234,34,39,0.4)]">
+                    <img
+                      src={brandLogo}
+                      alt="Safety Line Official Logo"
+                      className="h-9 sm:h-10 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(234,34,39,0.6)]"
+                    />
+                    <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EA2227] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#EA2227]" />
                     </span>
                   </div>
-                  <div className="hidden sm:flex items-center gap-3 text-slate-400">
-                    <span>CIRCUIT MONZA / SPA / SILVERSTONE</span>
-                    <span>•</span>
-                    <span className="text-emerald-400 font-bold">LIVE TELEMETRY FEED</span>
+
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <span className="font-display font-black text-lg sm:text-xl tracking-tight text-white">
+                        <span className="text-[#EA2227]">SAFETY</span> LINE
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#EA2227]/20 text-[#FFA494] font-bold border border-[#EA2227]/30 uppercase">
+                        MOTORSPORT BILLBOARD
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-mono text-slate-400">
+                      FIA 8856-2018 HOMOLOGATED RACING LINEUP
+                    </span>
                   </div>
                 </div>
 
-                {/* Billboard Main Display Face */}
-                <div className="relative bg-gradient-to-br from-[#030908] via-[#071614] to-[#040C0B] rounded-2xl border border-white/15 p-5 sm:p-8 lg:p-10 overflow-hidden shadow-inner">
-                  
-                  {/* Subtle Digital Screen Scanline & Grid Effect */}
-                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none opacity-40" />
-                  
-                  {/* Animated Light Sheen Beam Gliding Across the Billboard */}
-                  <motion.div
-                    animate={{
-                      x: ['-100%', '250%']
-                    }}
-                    transition={{
-                      duration: 4.5,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      repeatDelay: 2
-                    }}
-                    className="absolute inset-y-0 w-48 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none z-10"
-                  />
+                {/* Slideshow 3-Second Status & Navigation Controls */}
+                <div className="flex items-center space-x-3">
+                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-950/80 border border-slate-700/60 text-xs font-mono">
+                    <span className={`w-2 h-2 rounded-full ${isBillboardPaused ? 'bg-amber-400' : 'bg-emerald-400 animate-pulse'}`} />
+                    <span className="text-slate-300">
+                      {isBillboardPaused ? 'Slide Paused (Hovered)' : '3s Auto-Slide'}
+                    </span>
+                    <span className="text-slate-500 font-bold">•</span>
+                    <span className="text-[#FFA494] font-bold">
+                      {activeBillboardIdx + 1} / {CAR_RACING_GLOVE_MODELS.length}
+                    </span>
+                  </div>
 
-                  {/* Main Billboard Interior Content Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20">
+                  {/* Play / Pause Toggle Button */}
+                  <button
+                    onClick={() => setIsBillboardPaused(!isBillboardPaused)}
+                    title={isBillboardPaused ? 'Resume auto-slideshow' : 'Pause slideshow'}
+                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer border border-slate-700"
+                  >
+                    {isBillboardPaused ? <PlayIcon className="w-4 h-4" /> : <PauseIcon className="w-4 h-4" />}
+                  </button>
+
+                  {/* Manual Prev / Next Buttons */}
+                  <div className="flex items-center space-x-1">
+                    <button
+                      onClick={goToPrevSlide}
+                      title="Previous Product"
+                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer border border-slate-700 active:scale-95"
+                    >
+                      <ChevronLeftIcon className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={goToNextSlide}
+                      title="Next Product"
+                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer border border-slate-700 active:scale-95"
+                    >
+                      <ChevronRightIcon className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* 3-Second Slideshow Visual Progress Bar */}
+              <div className="w-full bg-slate-800/80 h-1 overflow-hidden">
+                {!isBillboardPaused && (
+                  <motion.div
+                    key={`bar-${activeBillboardIdx}`}
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 3, ease: 'linear' }}
+                    className="h-full bg-gradient-to-r from-[#EA2227] via-[#FF5A36] to-[#EA2227]"
+                  />
+                )}
+              </div>
+
+              {/* Main Billboard Interior Display */}
+              <div className="p-6 sm:p-10 lg:p-12">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                  
+                  {/* Left Column: Product Info & Specifications */}
+                  <div className="lg:col-span-7 space-y-6">
                     
-                    {/* Left: Prominent Illuminated Safety Line Branding & Technical Specs */}
-                    <div className="lg:col-span-7 space-y-5">
-                      
-                      {/* Safety Line Official Logo Integrated Billboard Marquee */}
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-4 pb-2 border-b border-white/10">
-                        {/* Illuminated Safety Line Emblem */}
-                        <div className="relative shrink-0 flex items-center justify-center p-3 rounded-2xl bg-black/60 border-2 border-[#EA2227]/70 shadow-[0_0_30px_rgba(234,34,39,0.5)] group">
-                          <img
-                            src={brandLogo}
-                            alt="Safety Line Official Logo"
-                            className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(234,34,39,0.8)]"
-                          />
-                          <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EA2227] opacity-75" />
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#EA2227]" />
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`info-${activeBillboardIdx}`}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -15 }}
+                        transition={{ duration: 0.35 }}
+                        className="space-y-4"
+                      >
+                        {/* Badges */}
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="px-3 py-1 rounded-full bg-[#EA2227] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
+                            {activeBillboardGlove.code}
+                          </span>
+                          <span className="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-[#FFA494] text-xs font-mono font-semibold">
+                            {activeBillboardGlove.badge}
+                          </span>
+                          <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold">
+                            Livery: {activeBillboardGlove.livery}
                           </span>
                         </div>
 
-                        {/* Brand Billboard Typography with Neon Illumination */}
-                        <div>
-                          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#EA2227]/20 border border-[#EA2227]/40 text-[#FFA494] text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
-                            <Flame className="w-3 h-3 text-[#FF5A36]" />
-                            <span>FIA 8856-2018 HOMOLOGATED RACING DIVISION</span>
-                          </div>
-                          
-                          <div className="flex items-baseline space-x-2">
-                            <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-none">
-                              <span className="text-[#EA2227] drop-shadow-[0_0_20px_rgba(234,34,39,0.9)]">SAFETY</span>{' '}
-                              <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.7)]">LINE</span>
-                            </h2>
-                            <span className="text-xs sm:text-sm font-mono font-bold text-cyan-400 tracking-widest uppercase">
-                              MOTORSPORT
+                        {/* Title */}
+                        <h1 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
+                          {activeBillboardGlove.name}
+                        </h1>
+
+                        {/* Summary description */}
+                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+                          {activeBillboardGlove.summary}
+                        </p>
+
+                        {/* Spec Pills Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
+                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
+                              Fire Protection
+                            </span>
+                            <span className="font-semibold text-xs text-[#FFA494] flex items-center gap-1.5">
+                              <FlameIcon className="w-3.5 h-3.5 text-[#EA2227] shrink-0" />
+                              <span className="truncate">{activeBillboardGlove.flameRating}</span>
                             </span>
                           </div>
 
-                          <p className="text-xs font-mono text-slate-300 tracking-wide mt-1">
-                            SIALKOT ADVANCED PROTECTIVE HANDWEAR FACILITY
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Main Billboard Headline */}
-                      <div className="space-y-2">
-                        <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight leading-tight">
-                          Professional Formula & GT3 Racing Gloves
-                        </h1>
-                        <p className="text-xs sm:text-sm text-[#D9F0EC] leading-relaxed">
-                          Championship-grade fire-retardant handwear crafted with dual-layer Nomex® aramid, 100% external reverse-seam finger construction, and ultra-high-friction silicone Alcantara steering matrices.
-                        </p>
-                      </div>
-
-                      {/* Illuminated Telemetry Badges */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                        <div className="bg-black/60 border border-[#EA2227]/40 rounded-xl p-2.5 shadow-sm">
-                          <div className="flex items-center gap-1.5 text-[#FF5A36] text-xs font-mono font-bold">
-                            <Flame className="w-3.5 h-3.5" />
-                            <span>15s+ FLAME</span>
+                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
+                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
+                              Steering Grip Matrix
+                            </span>
+                            <span className="font-semibold text-xs text-cyan-300 flex items-center gap-1.5">
+                              <ZapIcon className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                              <span className="truncate">{activeBillboardGlove.palmMatrix}</span>
+                            </span>
                           </div>
-                          <p className="text-[11px] text-slate-300 mt-0.5">Flash test approved</p>
-                        </div>
-                        <div className="bg-black/60 border border-emerald-500/40 rounded-xl p-2.5 shadow-sm">
-                          <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-mono font-bold">
-                            <ShieldCheck className="w-3.5 h-3.5" />
-                            <span>0% BLISTERS</span>
+
+                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
+                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
+                              Seam Construction
+                            </span>
+                            <span className="font-semibold text-xs text-slate-200 flex items-center gap-1.5">
+                              <ShieldCheckIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                              <span className="truncate">{activeBillboardGlove.seamType}</span>
+                            </span>
                           </div>
-                          <p className="text-[11px] text-slate-300 mt-0.5">External reverse seams</p>
-                        </div>
-                        <div className="bg-black/60 border border-cyan-500/40 rounded-xl p-2.5 shadow-sm col-span-2 sm:col-span-1">
-                          <div className="flex items-center gap-1.5 text-cyan-400 text-xs font-mono font-bold">
-                            <Zap className="w-3.5 h-3.5" />
-                            <span>TACTILE GRIP</span>
+
+                          <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
+                            <span className="text-[10px] font-mono text-slate-400 uppercase block mb-0.5">
+                              Primary Series
+                            </span>
+                            <span className="font-semibold text-xs text-slate-200 flex items-center gap-1.5">
+                              <GaugeIcon className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                              <span className="truncate">{activeBillboardGlove.targetDiscipline}</span>
+                            </span>
                           </div>
-                          <p className="text-[11px] text-slate-300 mt-0.5">High-tack silicone matrix</p>
                         </div>
-                      </div>
+                      </motion.div>
+                    </AnimatePresence>
 
-                      {/* Interactive Billboard Livery Selector Tabs */}
-                      <div className="space-y-2 pt-1">
-                        <div className="flex items-center justify-between text-xs font-mono">
-                          <span className="text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                            <SlidersHorizontal className="w-3.5 h-3.5 text-[#FF5A36]" />
-                            <span>Switch Billboard Showcase Livery:</span>
-                          </span>
-                          <span className="text-[#FFA494] font-bold">{activeGloveSpec.code} • {activeGloveSpec.livery}</span>
-                        </div>
+                    {/* Billboard Action Buttons */}
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                      <button
+                        onClick={() => {
+                          setInquiryProductTitle(`${activeBillboardGlove.code} - ${activeBillboardGlove.name}`);
+                          setIsInquiryModalOpen(true);
+                        }}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#EA2227] hover:bg-[#d0171c] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-lg shadow-[#EA2227]/30 active:scale-95 transition-all cursor-pointer border border-[#FF5A36]/40"
+                      >
+                        <SparklesIcon className="w-4 h-4" />
+                        <span>Request OEM Quote & Team Specs</span>
+                      </button>
 
-                        <div className="grid grid-cols-5 gap-2">
-                          {CAR_RACING_GLOVE_MODELS.map((glove, idx) => {
-                            const isSelected = activeHeroGloveMode === 'model' && activeHeroGloveIdx === idx;
-                            return (
-                              <button
-                                key={glove.code}
-                                onClick={() => {
-                                  setActiveHeroGloveIdx(idx);
-                                  setActiveHeroGloveMode('model');
-                                }}
-                                className={`relative group rounded-xl p-1.5 text-left transition-all border cursor-pointer ${
-                                  isSelected
-                                    ? 'bg-[#EA2227]/30 border-[#EA2227] shadow-[0_0_15px_rgba(234,34,39,0.5)] ring-1 ring-[#EA2227]'
-                                    : 'bg-black/50 border-white/10 hover:bg-white/10 hover:border-white/20'
-                                }`}
-                              >
-                                <div className="aspect-square rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-1 mb-1">
-                                  <img
-                                    src={glove.image}
-                                    alt={glove.code}
-                                    className="w-full h-full object-contain group-hover:scale-110 transition-transform"
-                                  />
-                                </div>
-                                <div className="text-[10px] font-mono font-bold text-center text-white truncate">
-                                  {glove.code.replace('GW-', '')}
-                                </div>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Billboard CTAs */}
-                      <div className="pt-2 flex flex-wrap items-center gap-3">
-                        <button
-                          onClick={() => {
-                            setInquiryProductTitle(`Motorsport Car Racing Gloves (${activeGloveSpec.code})`);
-                            setIsInquiryModalOpen(true);
-                          }}
-                          className="btn-glow-shine inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#EA2227] via-[#FF5A36] to-[#FF7A59] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-lg shadow-[#EA2227]/30 active:scale-95 transition-all cursor-pointer border border-[#FF7A59]/40"
-                        >
-                          <Sparkles className="w-4 h-4" />
-                          <span>Request OEM Spec Pack & Pricing</span>
-                        </button>
-
-                        <button
-                          onClick={() => setInspectGlove(activeGloveSpec)}
-                          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-mono uppercase tracking-wider border border-white/15 transition-all cursor-pointer"
-                        >
-                          <Eye className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>Quick Data Sheet Overlay</span>
-                        </button>
-                      </div>
-
+                      <button
+                        onClick={() => setInspectGlove(activeBillboardGlove)}
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white text-xs font-mono uppercase tracking-wider border border-slate-700 transition-all cursor-pointer"
+                      >
+                        <EyeIcon className="w-4 h-4 text-cyan-400" />
+                        <span>Quick Spec Overlay</span>
+                      </button>
                     </div>
 
-                    {/* Right: ANIMATED RACING GLOVE INTEGRATED DIRECTLY IN THE BILLBOARD */}
-                    <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+                  </div>
+
+                  {/* Right Column: Animated Glove Showcase Carousel Frame */}
+                  <div className="lg:col-span-5 flex flex-col items-center justify-center">
+                    
+                    <div className="relative w-full max-w-[380px] aspect-square flex items-center justify-center">
                       
-                      {/* Billboard Giant Display Showcase Frame */}
-                      <div className="relative w-full max-w-[360px] sm:max-w-[440px] aspect-square flex items-center justify-center">
-                        
-                        {/* Outer Pulsing Neon Radial Aura Glow */}
+                      {/* Subtle Background Radial Glow */}
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.1, 1],
+                          opacity: [0.35, 0.6, 0.35]
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#EA2227]/30 via-slate-700/20 to-cyan-500/20 blur-3xl pointer-events-none"
+                      />
+
+                      {/* Studio Pedestal Base */}
+                      <div className="absolute -bottom-6 w-3/4 h-8 bg-black/60 rounded-[100%] blur-md pointer-events-none" />
+
+                      {/* Smooth Sliding Glove Display */}
+                      <AnimatePresence mode="wait">
                         <motion.div
-                          animate={{ 
-                            scale: [1, 1.15, 1],
-                            opacity: [0.4, 0.75, 0.4]
+                          key={`slide-img-${activeBillboardIdx}`}
+                          initial={{ 
+                            opacity: 0, 
+                            x: slideDirection === 'next' ? 40 : -40,
+                            scale: 0.94 
                           }}
-                          transition={{
-                            duration: 3.5,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                          className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#EA2227]/40 via-[#FF5A36]/30 to-[#00F0FF]/30 blur-3xl pointer-events-none"
-                        />
-
-                        {/* Concentric Telemetry Target Rings */}
-                        <div className="absolute inset-4 rounded-full border border-white/10 pointer-events-none animate-[spin_60s_linear_infinite]" />
-                        <div className="absolute inset-12 rounded-full border border-dashed border-[#EA2227]/40 pointer-events-none animate-[spin_40s_linear_infinite_reverse]" />
-                        <div className="absolute inset-20 rounded-full border border-cyan-500/20 pointer-events-none" />
-
-                        {/* Billboard Neon Emblem Backlight Halo */}
-                        <div className="absolute inset-16 rounded-full bg-[#EA2227]/20 blur-2xl pointer-events-none" />
-
-                        {/* Floating & Breathing 3D Animated Car Racing Glove Showcase */}
-                        <motion.div
-                          key={`${activeHeroGloveMode}-${activeHeroGloveIdx}`}
-                          initial={{ opacity: 0, scale: 0.88, y: 15 }}
                           animate={{ 
                             opacity: 1, 
+                            x: 0,
                             scale: 1,
-                            y: [0, -14, 0],
-                            rotate: [-2, 2.5, -2]
+                            y: [0, -10, 0]
                           }}
-                          exit={{ opacity: 0, scale: 0.88 }}
+                          exit={{ 
+                            opacity: 0, 
+                            x: slideDirection === 'next' ? -40 : 40,
+                            scale: 0.94 
+                          }}
                           transition={{
-                            opacity: { duration: 0.4 },
-                            scale: { duration: 0.4 },
+                            opacity: { duration: 0.3 },
+                            x: { duration: 0.35 },
+                            scale: { duration: 0.35 },
                             y: {
-                              duration: 4.2,
-                              repeat: Infinity,
-                              ease: "easeInOut"
-                            },
-                            rotate: {
-                              duration: 5.5,
+                              duration: 4,
                               repeat: Infinity,
                               ease: "easeInOut"
                             }
                           }}
-                          className="relative z-10 w-full h-full flex items-center justify-center p-4 cursor-pointer"
-                          onClick={() => setInspectGlove(activeGloveSpec)}
-                          title="Click to inspect full technical telemetry"
+                          className="relative z-10 w-full h-full flex items-center justify-center p-3 cursor-pointer"
+                          onClick={() => setInspectGlove(activeBillboardGlove)}
+                          title="Click to view full technical data sheet"
                         >
                           <img
-                            src={activeDisplayedHeroImage}
-                            alt={activeGloveSpec.name}
-                            className="w-full h-full object-contain filter drop-shadow-[0_25px_40px_rgba(234,34,39,0.55)] transition-transform duration-500 hover:scale-108"
+                            src={activeBillboardGlove.image}
+                            alt={activeBillboardGlove.name}
+                            className="w-full h-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] transition-transform duration-500 hover:scale-105"
                           />
                         </motion.div>
+                      </AnimatePresence>
 
-                        {/* Floating Billboard Telemetry Badges */}
-                        <div className="absolute top-2 left-0 bg-black/80 backdrop-blur-md border border-[#EA2227]/60 text-white px-2.5 py-1 rounded-lg text-[10px] font-mono shadow-[0_0_15px_rgba(234,34,39,0.4)] flex items-center gap-1.5 animate-bounce [animation-duration:3.2s]">
-                          <Flame className="w-3 h-3 text-[#EA2227]" />
-                          <span>FIA 8856-2018</span>
-                        </div>
+                    </div>
 
-                        <div className="absolute top-2 right-0 bg-black/80 backdrop-blur-md border border-cyan-500/60 text-cyan-300 px-2.5 py-1 rounded-lg text-[10px] font-mono shadow-[0_0_15px_rgba(0,240,255,0.3)] flex items-center gap-1.5">
-                          <Zap className="w-3 h-3 text-cyan-400" />
-                          <span>Hi-Tack Silicone</span>
-                        </div>
-
-                        <div className="absolute bottom-4 left-2 bg-black/80 backdrop-blur-md border border-emerald-500/60 text-emerald-300 px-2.5 py-1 rounded-lg text-[10px] font-mono shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                          <span>External Seams</span>
-                        </div>
-
-                        <div className="absolute bottom-4 right-2 bg-black/80 backdrop-blur-md border border-white/25 text-white px-2.5 py-1 rounded-lg text-[10px] font-mono shadow-xl flex items-center gap-1.5">
-                          <Gauge className="w-3 h-3 text-[#FF5A36]" />
-                          <span>Nomex® Aramid</span>
-                        </div>
-
-                      </div>
-
-                      {/* Billboard Model Caption Bar */}
-                      <div className="mt-3 text-center">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/70 border border-white/20 text-xs font-mono text-slate-200 shadow-md">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="font-bold text-white">{activeGloveSpec.name}</span>
-                        </div>
-                      </div>
-
+                    {/* Active Slide Indicator Pill */}
+                    <div className="mt-2 text-center">
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300">
+                        <span className="w-2 h-2 rounded-full bg-[#EA2227] animate-pulse" />
+                        <span className="font-bold text-white">{activeBillboardGlove.code}</span>
+                        <span>•</span>
+                        <span className="text-slate-400">{activeBillboardGlove.livery}</span>
+                      </span>
                     </div>
 
                   </div>
 
                 </div>
 
-                {/* Lower Girder with Racetrack Caution Stripes & Official Plaque */}
-                <div className="mt-2.5 flex items-center justify-between px-4 py-2 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-xl border border-slate-700/80 text-[10px] font-mono">
-                  {/* Left Hazard Stripe Box */}
-                  <div className="w-16 h-3 bg-[repeating-linear-gradient(45deg,#EA2227,#EA2227_6px,#000_6px,#000_12px)] rounded-xs opacity-80" />
-                  
-                  <div className="text-center text-slate-300 font-bold uppercase tracking-wider truncate px-2">
-                    SAFETY LINE OFFICIAL MOTORSPORT RACING HANDWEAR • FIA 8856-2018 HOMOLOGATED
+                {/* Bottom Carousel Selector Strip: 5 Clickable Thumbnail Cards */}
+                <div className="mt-8 pt-6 border-t border-slate-800/80">
+                  <div className="flex items-center justify-between mb-3 text-xs font-mono">
+                    <span className="text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <SlidersHorizontalIcon className="w-3.5 h-3.5 text-[#EA2227]" />
+                      <span>Jump To Any Model (3s Slideshow):</span>
+                    </span>
+                    <span className="text-slate-500 hidden sm:inline">
+                      Hover to pause • Click to inspect
+                    </span>
                   </div>
 
-                  {/* Right Hazard Stripe Box */}
-                  <div className="w-16 h-3 bg-[repeating-linear-gradient(45deg,#EA2227,#EA2227_6px,#000_6px,#000_12px)] rounded-xs opacity-80" />
+                  <div className="grid grid-cols-5 gap-2 sm:gap-3">
+                    {CAR_RACING_GLOVE_MODELS.map((glove, idx) => {
+                      const isActive = activeBillboardIdx === idx;
+                      return (
+                        <button
+                          key={glove.code}
+                          onClick={() => goToSlide(idx)}
+                          className={`relative rounded-xl p-2 text-left transition-all border cursor-pointer ${
+                            isActive
+                              ? 'bg-[#EA2227]/20 border-[#EA2227] shadow-[0_0_15px_rgba(234,34,39,0.35)] ring-1 ring-[#EA2227]'
+                              : 'bg-slate-950/60 border-slate-800 hover:bg-slate-800/60 hover:border-slate-700'
+                          }`}
+                        >
+                          <div className="aspect-square rounded-lg bg-black/40 overflow-hidden flex items-center justify-center p-1 mb-1.5">
+                            <img
+                              src={glove.image}
+                              alt={glove.code}
+                              className="w-full h-full object-contain transition-transform group-hover:scale-110"
+                            />
+                          </div>
+                          <div className="text-[10px] sm:text-xs font-mono font-bold text-center text-white truncate">
+                            {glove.code}
+                          </div>
+                          <div className="text-[9px] text-slate-400 text-center truncate hidden sm:block">
+                            {glove.livery.split('/')[0]}
+                          </div>
+
+                          {isActive && (
+                            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#EA2227] rounded-full ring-2 ring-slate-900" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
               </div>
@@ -680,26 +698,24 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           </div>
         </section>
       ) : (
-        /* Standard Header Banner for other categories */
-        <section className="bg-gradient-to-b from-[#0B3D3B] to-[#082D2B] text-white py-10 sm:py-12 border-b border-white/10 relative overflow-hidden">
+        /* Standard Header Banner for other non-car categories */
+        <section className="bg-gradient-to-b from-[#0B151E] to-[#080D14] text-white py-10 sm:py-12 border-b border-slate-800 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
             
-            {/* Breadcrumb Trail */}
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#D9F0EC]">
-              <Link to="/" className="hover:text-white transition-colors">Portal</Link>
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
               <span>/</span>
               <Link to="/gearwear" className="hover:text-white transition-colors">Gearwear</Link>
               <span>/</span>
-              <span className="text-[#D9F0EC]/80">{currentWindow.groupLabel}</span>
+              <span className="text-slate-300">{currentWindow.groupLabel}</span>
               <span>/</span>
               <span className="text-white font-bold">{currentWindow.title}</span>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               
-              {/* Left Content */}
-              <div className="space-y-2 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[#D9F0EC] text-[11px] font-mono font-semibold uppercase tracking-wider">
+              <div className="space-y-3 max-w-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono font-semibold uppercase tracking-wider">
                   <span>{currentWindow.badge}</span>
                   <span>•</span>
                   <span>{currentWindow.codePrefix} Series</span>
@@ -709,7 +725,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   {currentWindow.title}
                 </h1>
 
-                <p className="text-sm sm:text-base text-slate-200 font-normal leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
                   {currentWindow.minorDetail}
                 </p>
 
@@ -719,16 +735,15 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                       setInquiryProductTitle(`${currentWindow.title} Line`);
                       setIsInquiryModalOpen(true);
                     }}
-                    className="btn-glow-shine inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md shadow-[#FF5A36]/30 active:scale-95 transition-all cursor-pointer border border-[#FF7A59]/40"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EA2227] hover:bg-[#d0171c] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md shadow-[#EA2227]/30 active:scale-95 transition-all cursor-pointer border border-[#FF5A36]/40"
                   >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Request Window OEM Spec Pack</span>
+                    <SparklesIcon className="w-3.5 h-3.5" />
+                    <span>Request OEM Spec Pack</span>
                   </button>
                 </div>
               </div>
 
-              {/* Right Thumbnail Visual */}
-              <div className="shrink-0 w-36 sm:w-44 aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-slate-800">
+              <div className="shrink-0 w-36 sm:w-48 aspect-[4/3] rounded-2xl overflow-hidden border-2 border-slate-700 shadow-xl bg-slate-900">
                 <SmoothImage
                   src={currentWindow.image}
                   alt={currentWindow.title}
@@ -745,105 +760,90 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       )}
 
       {/* =========================================================================
-          PRODUCT LISTING & DETAILS PORTION (SUPPORTING DETAILED LIST AND GRID VIEW)
+          PRODUCT CATALOGUE PORTION (CLEAN, SUITABLE MODERN E-COMMERCE DESIGN)
           ========================================================================= */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 space-y-8">
         
         {/* Filter, View Switcher & Search Bar */}
-        <div className={`p-4 sm:p-5 rounded-2xl border shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors ${
-          isCarRacing ? 'bg-[#081816] border-[#153B36] text-white shadow-xl' : 'bg-white border-slate-200 text-[#1A1A1A]'
-        }`}>
+        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
           
           {/* Item count & active label */}
           <div className="flex items-center space-x-3">
-            <span className={`font-display font-extrabold text-lg ${isCarRacing ? 'text-white' : 'text-[#0B3D3B]'}`}>
-              {isCarRacing ? 'Car Racing Gloves & Handwear' : 'Products'}
+            <span className="font-display font-black text-lg text-slate-900">
+              {isCarRacing ? 'Official Car Racing Glove Models' : 'Products'}
             </span>
-            <span className={`px-2.5 py-0.5 rounded-full text-xs font-mono font-bold ${
-              isCarRacing ? 'bg-[#EA2227]/20 border border-[#EA2227]/40 text-[#FFA494]' : 'bg-[#D9F0EC] text-[#0B3D3B]'
-            }`}>
-              {filteredProducts.length} {filteredProducts.length === 1 ? 'Model' : 'Models'} Available
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#EA2227]/10 text-[#EA2227] border border-[#EA2227]/20">
+              {filteredProducts.length} {filteredProducts.length === 1 ? 'Model' : 'Models'}
             </span>
           </div>
 
           {/* Search, Size Filters & View Mode Switcher */}
           <div className="flex flex-wrap items-center gap-3">
             
-            {/* View Mode Switcher (List vs Grid) */}
-            <div className={`inline-flex rounded-xl p-1 border text-xs font-mono ${
-              isCarRacing ? 'bg-[#030908] border-[#153B36]' : 'bg-slate-100 border-slate-200'
-            }`}>
-              <button
-                type="button"
-                onClick={() => setViewMode('list')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                  viewMode === 'list'
-                    ? isCarRacing ? 'bg-[#0B2421] text-white shadow-xs' : 'bg-white text-[#0B3D3B] shadow-xs'
-                    : isCarRacing ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-800'
-                }`}
-                title="Detailed List View with Full Specifications"
-              >
-                <List className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">List & Details</span>
-              </button>
+            {/* View Mode Switcher (Grid vs List) */}
+            <div className="inline-flex rounded-xl p-1 bg-slate-100 border border-slate-200 text-xs font-mono">
               <button
                 type="button"
                 onClick={() => setViewMode('grid')}
                 className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
                   viewMode === 'grid'
-                    ? isCarRacing ? 'bg-[#0B2421] text-white shadow-xs' : 'bg-white text-[#0B3D3B] shadow-xs'
-                    : isCarRacing ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800'
                 }`}
-                title="Compact Grid View"
+                title="Grid View"
               >
-                <LayoutGrid className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Grid</span>
+                <LayoutGridIcon className="w-3.5 h-3.5" />
+                <span>Grid</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('list')}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                  viewMode === 'list'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+                title="Detailed List View"
+              >
+                <ListIcon className="w-3.5 h-3.5" />
+                <span>Detailed List</span>
               </button>
             </div>
 
             {/* Search Input */}
-            <div className="relative flex-grow sm:w-60">
-              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
+            <div className="relative flex-grow sm:w-64">
+              <SearchIcon className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
               <input
                 type="text"
                 placeholder={`Search ${currentWindow.shortTitle}...`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className={`w-full rounded-xl py-1.5 pl-8 pr-3 text-xs outline-none transition-colors ${
-                  isCarRacing 
-                    ? 'bg-[#030908] border border-[#153B36] focus:border-[#EA2227] text-white placeholder:text-slate-500' 
-                    : 'bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] text-[#1A1A1A] placeholder:text-slate-400'
-                }`}
+                className="w-full rounded-xl py-1.5 pl-8 pr-3 text-xs bg-slate-50 border border-slate-200 focus:border-[#EA2227] focus:bg-white text-slate-900 placeholder:text-slate-400 outline-none transition-colors"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <XIcon className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
 
             {/* Size Filter Dropdown */}
-            {availableSizes.length > 2 && (
-              <div className="flex items-center space-x-1.5">
-                <span className="text-[11px] font-mono text-slate-400 uppercase">Size:</span>
+            {availableSizes.length > 1 && (
+              <div className="flex items-center gap-1.5 text-xs font-mono text-slate-600">
+                <span className="hidden lg:inline text-slate-400">Size:</span>
                 <select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
-                  className={`rounded-lg px-2.5 py-1.5 text-xs font-mono outline-none cursor-pointer ${
-                    isCarRacing
-                      ? 'bg-[#030908] border border-[#153B36] text-white'
-                      : 'bg-[#FAFCFB] border border-slate-200 text-[#0B3D3B]'
-                  }`}
+                  className="rounded-xl py-1.5 px-2.5 text-xs bg-slate-50 border border-slate-200 focus:border-[#EA2227] text-slate-800 outline-none cursor-pointer"
                 >
                   {availableSizes.map(s => (
-                    <option key={s} value={s}>{s}</option>
+                    <option key={s} value={s}>{s === 'All' ? 'All Sizes' : `Size ${s}`}</option>
                   ))}
                 </select>
               </div>
-            )}
-
-            {(searchQuery || selectedSize !== 'All') && (
-              <button
-                onClick={() => { setSearchQuery(''); setSelectedSize('All'); }}
-                className="text-[11px] font-mono text-[#FF5A36] hover:underline uppercase font-bold cursor-pointer"
-              >
-                Reset ×
-              </button>
             )}
 
           </div>
@@ -851,7 +851,143 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         </div>
 
         {/* =====================================================================
-            VIEW MODE 1: DETAILED LIST VIEW (EXHAUSTIVE TECHNICAL MOTORSPORT VIEW)
+            VIEW MODE 1: GRID VIEW (CLEAN, MODERN E-COMMERCE CARDS)
+            ===================================================================== */}
+        {viewMode === 'grid' && (
+          <motion.div 
+            layout
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProducts.map((product, idx) => {
+                const isCarProduct = product.productCode?.startsWith('GW-CR');
+                const matchingSpec = CAR_RACING_GLOVE_MODELS.find(m => m.code === product.productCode);
+
+                return (
+                  <motion.div
+                    key={product.id}
+                    layout
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.3, delay: idx * 0.04 }}
+                    className="group bg-white rounded-2xl border border-slate-200 hover:border-[#EA2227]/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                  >
+                    <div>
+                      {/* Product Image Frame */}
+                      <div 
+                        className="aspect-[4/3] bg-gradient-to-b from-slate-50 to-slate-100/60 relative overflow-hidden flex items-center justify-center p-4 border-b border-slate-100 cursor-pointer"
+                        onClick={() => {
+                          if (matchingSpec) setInspectGlove(matchingSpec);
+                          else navigate(`/product/${product.slug}`);
+                        }}
+                      >
+                        <SmoothImage
+                          src={product.coverImage}
+                          alt={product.name}
+                          priority={idx < 4}
+                          fallbackText={product.productCode}
+                          containerClassName="w-full h-full flex items-center justify-center"
+                          className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-108"
+                        />
+
+                        {/* Product Code Badge */}
+                        <div className="absolute top-3 left-3 bg-[#EA2227] text-white px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase shadow-sm">
+                          {product.productCode}
+                        </div>
+
+                        {/* Homologation / Safety Badge */}
+                        {isCarProduct && (
+                          <div className="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
+                            FIA 8856-2018
+                          </div>
+                        )}
+
+                        {/* Quick View Button on Hover */}
+                        <div className="absolute bottom-3 right-3 bg-slate-900/85 text-white px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold flex items-center gap-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
+                          <EyeIcon className="w-3 h-3 text-[#EA2227]" />
+                          <span>Quick View</span>
+                        </div>
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="p-5 space-y-2.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#EA2227] font-bold">
+                            {product.material ? product.material.split(',')[0] : currentWindow.title}
+                          </span>
+                          {product.sizes && product.sizes.length > 0 && (
+                            <span className="text-[10px] font-mono text-slate-400">
+                              {product.sizes.length} Sizes Available
+                            </span>
+                          )}
+                        </div>
+
+                        <h3 
+                          onClick={() => {
+                            if (matchingSpec) setInspectGlove(matchingSpec);
+                            else navigate(`/product/${product.slug}`);
+                          }}
+                          className="font-display font-bold text-base text-slate-900 group-hover:text-[#EA2227] transition-colors leading-snug cursor-pointer line-clamp-1"
+                          title={product.name}
+                        >
+                          {product.name}
+                        </h3>
+
+                        <p className="text-xs text-slate-600 font-normal leading-relaxed line-clamp-2">
+                          {product.shortDescription}
+                        </p>
+
+                        {/* Features Snippet */}
+                        {product.features && product.features.length > 0 && (
+                          <div className="pt-2 border-t border-slate-100 space-y-1">
+                            {product.features.slice(0, 2).map((feat, fIdx) => (
+                              <div key={fIdx} className="flex items-start gap-1.5 text-xs text-slate-600">
+                                <CheckCircle2Icon className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                                <span className="leading-tight truncate">{feat}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Card Action Footer */}
+                    <div className="p-5 pt-0 space-y-2">
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          onClick={() => {
+                            if (matchingSpec) setInspectGlove(matchingSpec);
+                            else navigate(`/product/${product.slug}`);
+                          }}
+                          className="py-2 px-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors cursor-pointer"
+                        >
+                          <EyeIcon className="w-3.5 h-3.5 text-slate-600" />
+                          <span>Specs</span>
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setInquiryProductTitle(`${product.productCode} - ${product.name}`);
+                            setIsInquiryModalOpen(true);
+                          }}
+                          className="py-2 px-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1 bg-[#EA2227] hover:bg-[#d0171c] text-white shadow-xs transition-colors cursor-pointer"
+                        >
+                          <SparklesIcon className="w-3.5 h-3.5" />
+                          <span>Quote</span>
+                        </button>
+                      </div>
+                    </div>
+
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        )}
+
+        {/* =====================================================================
+            VIEW MODE 2: DETAILED LIST VIEW (EXHAUSTIVE MOTORSPORT SPECIFICATION)
             ===================================================================== */}
         {viewMode === 'list' && (
           <div className="space-y-6">
@@ -864,24 +1000,18 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   <motion.div
                     key={product.id}
                     layout
-                    initial={{ opacity: 0, y: 18 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.35, delay: idx * 0.05 }}
-                    className={`rounded-2xl border shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden ${
-                      isCarRacing 
-                        ? 'bg-[#081816] border-[#153B36] hover:border-[#EA2227]/80 text-white' 
-                        : 'bg-white border-slate-200 hover:border-[#EA2227]/60 text-[#1A1A1A]'
-                    }`}
+                    transition={{ duration: 0.3, delay: idx * 0.04 }}
+                    className="bg-white rounded-2xl border border-slate-200 hover:border-[#EA2227]/80 hover:shadow-xl transition-all duration-300 overflow-hidden"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-6">
                       
-                      {/* Left: Product Image & Badges */}
+                      {/* Left: Product Image */}
                       <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
                         <div 
-                          className={`aspect-[4/3] rounded-xl relative overflow-hidden flex items-center justify-center p-3 border cursor-pointer group ${
-                            isCarRacing ? 'bg-[#020706] border-[#122E2A]' : 'bg-slate-900 border-slate-800'
-                          }`}
+                          className="aspect-[4/3] rounded-xl bg-gradient-to-b from-slate-50 to-slate-100 relative overflow-hidden flex items-center justify-center p-3 border border-slate-100 cursor-pointer group"
                           onClick={() => {
                             if (matchingSpec) setInspectGlove(matchingSpec);
                             else navigate(`/product/${product.slug}`);
@@ -893,39 +1023,30 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                             priority={idx < 4}
                             fallbackText={product.productCode}
                             containerClassName="w-full h-full flex items-center justify-center"
-                            className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-out group-hover:scale-108"
+                            className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-108"
                           />
 
-                          {/* Top Badges */}
-                          <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                            <span className="bg-[#EA2227] text-white px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase shadow-sm">
-                              {product.productCode}
-                            </span>
-                            {isCarProduct && (
-                              <span className="bg-black/80 backdrop-blur-xs text-white border border-white/20 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                                FIA 8856
-                              </span>
-                            )}
+                          {/* Code Badge */}
+                          <div className="absolute top-2.5 left-2.5 bg-[#EA2227] text-white px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase shadow-sm">
+                            {product.productCode}
                           </div>
 
-                          {/* Quick Inspect Hover Icon */}
-                          <div className="absolute bottom-2.5 right-2.5 bg-black/80 backdrop-blur-xs text-white border border-white/20 px-2 py-1 rounded text-[10px] font-mono font-bold flex items-center gap-1 shadow-sm opacity-90 group-hover:opacity-100 transition-opacity">
-                            <Eye className="w-3 h-3 text-[#FF5A36]" />
-                            <span>Quick Inspect</span>
-                          </div>
+                          {isCarProduct && (
+                            <div className="absolute top-2.5 right-2.5 bg-slate-900/90 text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
+                              FIA 8856-2018
+                            </div>
+                          )}
                         </div>
 
-                        {/* Colors / Livery preview */}
+                        {/* Livery info */}
                         {product.colors && product.colors.length > 0 && (
-                          <div className={`flex items-center gap-1.5 text-xs font-mono ${isCarRacing ? 'text-slate-400' : 'text-slate-500'}`}>
-                            <span className={`font-semibold ${isCarRacing ? 'text-slate-300' : 'text-slate-700'}`}>Livery:</span>
+                          <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500">
+                            <span className="font-semibold text-slate-700">Livery:</span>
                             <div className="flex flex-wrap gap-1">
                               {product.colors.map(c => (
                                 <span 
                                   key={c} 
-                                  className={`px-2 py-0.5 rounded text-[10px] font-medium ${
-                                    isCarRacing ? 'bg-[#030908] border border-[#153B36] text-slate-300' : 'bg-slate-100 text-slate-700'
-                                  }`}
+                                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-700 border border-slate-200"
                                 >
                                   {c}
                                 </span>
@@ -935,58 +1056,51 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                         )}
                       </div>
 
-                      {/* Middle: Title, Descriptions, Specifications */}
-                      <div className="lg:col-span-5 space-y-3.5 flex flex-col justify-between">
+                      {/* Middle: Title, Description, Technical highlights */}
+                      <div className="lg:col-span-5 space-y-3 flex flex-col justify-between">
                         <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF5A36] font-bold">
-                              {product.material ? product.material.split(',')[0] : currentWindow.title}
-                            </span>
-                          </div>
+                          <span className="text-[11px] font-mono uppercase tracking-wider text-[#EA2227] font-bold block">
+                            {product.material ? product.material.split(',')[0] : currentWindow.title}
+                          </span>
 
                           <h3 
-                            onClick={() => navigate(`/product/${product.slug}`)}
-                            className={`font-display font-bold text-lg sm:text-xl transition-colors leading-snug cursor-pointer ${
-                              isCarRacing ? 'text-white hover:text-[#EA2227]' : 'text-[#0B3D3B] hover:text-[#EA2227]'
-                            }`}
+                            onClick={() => {
+                              if (matchingSpec) setInspectGlove(matchingSpec);
+                              else navigate(`/product/${product.slug}`);
+                            }}
+                            className="font-display font-bold text-lg sm:text-xl text-slate-900 hover:text-[#EA2227] transition-colors leading-snug cursor-pointer"
                           >
                             {product.name}
                           </h3>
 
-                          <p className={`text-xs sm:text-sm font-normal leading-relaxed ${isCarRacing ? 'text-slate-300' : 'text-slate-600'}`}>
+                          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                             {product.shortDescription}
                           </p>
 
                           {/* Technical Highlights Grid */}
                           <div className="pt-2 grid grid-cols-2 gap-2 text-xs">
-                            <div className={`p-2 rounded-lg border ${
-                              isCarRacing ? 'bg-[#030908] border-[#153B36]' : 'bg-slate-50 border-slate-100'
-                            }`}>
+                            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                               <span className="text-[10px] font-mono text-slate-400 uppercase block">Material Core</span>
-                              <span className={`font-semibold text-[11px] truncate block ${isCarRacing ? 'text-white' : 'text-[#0B3D3B]'}`} title={product.material}>
+                              <span className="font-semibold text-[11px] text-slate-900 truncate block" title={product.material}>
                                 {product.material || 'Nomex® Aramid Matrix'}
                               </span>
                             </div>
-                            <div className={`p-2 rounded-lg border ${
-                              isCarRacing ? 'bg-[#030908] border-[#153B36]' : 'bg-slate-50 border-slate-100'
-                            }`}>
-                              <span className="text-[10px] font-mono text-slate-400 uppercase block">Certification</span>
+                            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                              <span className="text-[10px] font-mono text-slate-400 uppercase block">Homologation</span>
                               <span className="font-semibold text-[#EA2227] text-[11px] truncate block">
                                 {isCarProduct ? 'FIA 8856-2018 / SFI 3.3/5' : 'EN ISO Safety Standard'}
                               </span>
                             </div>
                           </div>
 
-                          {/* Sizing tags */}
+                          {/* Available sizes */}
                           {product.sizes && product.sizes.length > 0 && (
                             <div className="pt-1 flex items-center gap-1.5 flex-wrap">
                               <span className="text-[10px] font-mono text-slate-400 uppercase">Available Sizes:</span>
                               {product.sizes.map(s => (
                                 <span 
                                   key={s} 
-                                  className={`w-6 h-6 rounded border font-mono text-[10px] font-bold flex items-center justify-center ${
-                                    isCarRacing ? 'border-[#153B36] text-white bg-[#030908]' : 'border-slate-200 text-[#0B3D3B] bg-white'
-                                  }`}
+                                  className="w-6 h-6 rounded border border-slate-200 bg-slate-50 text-slate-800 font-mono text-[10px] font-bold flex items-center justify-center"
                                 >
                                   {s}
                                 </span>
@@ -995,12 +1109,12 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                           )}
                         </div>
 
-                        {/* Top Features */}
+                        {/* Key Features */}
                         {product.features && product.features.length > 0 && (
-                          <div className={`pt-2 border-t space-y-1 ${isCarRacing ? 'border-[#153B36]' : 'border-slate-100'}`}>
+                          <div className="pt-2 border-t border-slate-100 space-y-1">
                             {product.features.slice(0, 3).map((feat, fIdx) => (
-                              <div key={fIdx} className={`flex items-start gap-1.5 text-xs ${isCarRacing ? 'text-slate-300' : 'text-slate-600'}`}>
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <div key={fIdx} className="flex items-start gap-1.5 text-xs text-slate-600">
+                                <CheckCircle2Icon className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                                 <span className="leading-tight">{feat}</span>
                               </div>
                             ))}
@@ -1008,64 +1122,42 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                         )}
                       </div>
 
-                      {/* Right: Actions, OEM Request, Spec Sheet */}
-                      <div className={`lg:col-span-3 flex flex-col justify-between border-t lg:border-t-0 lg:border-l pt-4 lg:pt-0 lg:pl-6 space-y-3 ${
-                        isCarRacing ? 'border-[#153B36]' : 'border-slate-100'
-                      }`}>
+                      {/* Right: Actions, OEM Request */}
+                      <div className="lg:col-span-3 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6 space-y-3">
                         
-                        <div className="space-y-2">
-                          <div className={`rounded-xl p-3 border ${
-                            isCarRacing ? 'bg-[#030908] border-[#153B36]' : 'bg-[#D9F0EC]/50 border-[#0B3D3B]/10'
-                          }`}>
-                            <span className={`text-[10px] font-mono uppercase tracking-wider font-bold block mb-1 ${
-                              isCarRacing ? 'text-[#FFA494]' : 'text-[#0B3D3B]'
-                            }`}>
-                              Manufacturing Specs
-                            </span>
-                            <ul className={`text-[11px] space-y-1 ${isCarRacing ? 'text-slate-300' : 'text-slate-600'}`}>
-                              <li>• Custom Team Branding Available</li>
-                              <li>• Fireproof Thread & Embroidery</li>
-                              <li>• Export Packaging & Barcoding</li>
-                            </ul>
-                          </div>
+                        <div className="rounded-xl p-3 bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
+                          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-slate-700 block">
+                            OEM Manufacturing
+                          </span>
+                          <ul className="text-[11px] text-slate-600 space-y-1">
+                            <li>• Custom Racing Team Liveries</li>
+                            <li>• Direct Nomex® Embroidery</li>
+                            <li>• Export-Grade Packaging</li>
+                          </ul>
                         </div>
 
                         <div className="space-y-2 pt-2">
-                          <button
-                            onClick={() => navigate(`/product/${product.slug}`)}
-                            className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer ${
-                              isCarRacing 
-                                ? 'bg-[#EA2227] hover:bg-[#c9181d] text-white shadow-[#EA2227]/25' 
-                                : 'bg-[#0B3D3B] hover:bg-[#124f4d] text-white'
-                            }`}
-                          >
-                            <span>View Full Specifications</span>
-                            <ChevronRight className="w-3.5 h-3.5" />
-                          </button>
-
                           <button
                             onClick={() => {
                               setInquiryProductTitle(`${product.productCode} - ${product.name}`);
                               setIsInquiryModalOpen(true);
                             }}
-                            className="w-full py-2 px-3 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 transition-all bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-xs cursor-pointer"
+                            className="w-full py-2.5 px-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 transition-all bg-[#EA2227] hover:bg-[#d0171c] text-white shadow-xs cursor-pointer"
                           >
-                            <Sparkles className="w-3.5 h-3.5" />
+                            <SparklesIcon className="w-3.5 h-3.5" />
                             <span>Request OEM Quote</span>
                           </button>
 
-                          {matchingSpec && (
-                            <button
-                              onClick={() => setInspectGlove(matchingSpec)}
-                              className={`w-full py-1.5 px-3 rounded-lg text-[11px] font-mono text-center transition-colors cursor-pointer ${
-                                isCarRacing 
-                                  ? 'text-slate-400 hover:text-white hover:bg-white/10' 
-                                  : 'text-slate-500 hover:text-[#0B3D3B] hover:bg-slate-100'
-                              }`}
-                            >
-                              Quick Data Sheet Overlay
-                            </button>
-                          )}
+                          <button
+                            onClick={() => {
+                              if (matchingSpec) setInspectGlove(matchingSpec);
+                              else navigate(`/product/${product.slug}`);
+                            }}
+                            className="w-full py-2 px-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 transition-all bg-slate-100 hover:bg-slate-200 text-slate-800 cursor-pointer"
+                          >
+                            <EyeIcon className="w-3.5 h-3.5" />
+                            <span>Full Data Sheet</span>
+                          </button>
                         </div>
 
                       </div>
@@ -1078,117 +1170,14 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           </div>
         )}
 
-        {/* =====================================================================
-            VIEW MODE 2: GRID VIEW (COMPACT MOTORSPORT CATALOGUE CARDS)
-            ===================================================================== */}
-        {viewMode === 'grid' && (
-          <motion.div 
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProducts.map((product, idx) => (
-                <motion.div
-                  key={product.id}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: idx * 0.05 }}
-                  onClick={() => navigate(`/product/${product.slug}`)}
-                  className={`group cursor-pointer rounded-2xl border shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden ${
-                    isCarRacing 
-                      ? 'bg-[#081816] border-[#153B36] hover:border-[#EA2227] text-white' 
-                      : 'bg-white border-slate-200 hover:border-[#EA2227] text-[#1A1A1A]'
-                  }`}
-                >
-                  <div>
-                    {/* Product Image Frame */}
-                    <div className={`aspect-[4/3] relative overflow-hidden flex items-center justify-center p-3 border-b ${
-                      isCarRacing ? 'bg-[#020706] border-[#122E2A]' : 'bg-slate-900 border-slate-800'
-                    }`}>
-                      <SmoothImage
-                        src={product.coverImage}
-                        alt={product.name}
-                        priority={idx < 3}
-                        fallbackText={product.productCode}
-                        containerClassName="w-full h-full flex items-center justify-center"
-                        className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-out group-hover:scale-108"
-                      />
-
-                      {/* Product Code Badge */}
-                      <div className="absolute top-3 left-3 bg-[#EA2227] text-white px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase shadow-xs">
-                        {product.productCode}
-                      </div>
-
-                      {/* Sizing Indicator */}
-                      {product.sizes && product.sizes.length > 0 && (
-                        <div className="absolute bottom-2.5 right-2.5 bg-black/80 backdrop-blur-xs text-white px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase shadow-xs border border-white/20">
-                          {product.sizes.length} Sizes
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Card Content */}
-                    <div className="p-5 space-y-2">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#FF5A36] font-bold block">
-                        {product.material ? product.material.split(',')[0] : currentWindow.title}
-                      </span>
-
-                      <h3 className={`font-display font-bold text-base transition-colors leading-snug ${
-                        isCarRacing ? 'text-white group-hover:text-[#EA2227]' : 'text-[#0B3D3B] group-hover:text-[#EA2227]'
-                      }`}>
-                        {product.name}
-                      </h3>
-
-                      <p className={`text-xs font-normal leading-relaxed line-clamp-2 ${
-                        isCarRacing ? 'text-slate-300' : 'text-slate-600'
-                      }`}>
-                        {product.shortDescription}
-                      </p>
-
-                      {/* Features snippet */}
-                      {product.features && product.features.length > 0 && (
-                        <div className={`pt-2 border-t ${isCarRacing ? 'border-[#153B36]' : 'border-slate-100'}`}>
-                          <span className={`text-[11px] flex items-center gap-1.5 truncate ${
-                            isCarRacing ? 'text-slate-400' : 'text-slate-500'
-                          }`}>
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                            <span className="truncate">{product.features[0]}</span>
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Card Action Footer */}
-                  <div className="p-5 pt-0">
-                    <div className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-between transition-all ${
-                      isCarRacing
-                        ? 'bg-[#030908] text-slate-200 group-hover:bg-[#EA2227] group-hover:text-white border border-[#153B36]'
-                        : 'bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white'
-                    }`}>
-                      <span>View Specifications</span>
-                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        )}
-
         {/* Empty state if search yields no results */}
         {filteredProducts.length === 0 && (
-          <div className={`rounded-2xl border p-12 text-center space-y-3 ${
-            isCarRacing ? 'bg-[#081816] border-[#153B36] text-white' : 'bg-white border-slate-200 text-[#1A1A1A]'
-          }`}>
-            <Filter className="w-8 h-8 text-slate-400 mx-auto" />
-            <h3 className={`font-display font-bold text-base ${isCarRacing ? 'text-white' : 'text-[#0B3D3B]'}`}>
+          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center space-y-3 shadow-sm">
+            <FilterIcon className="w-8 h-8 text-slate-400 mx-auto" />
+            <h3 className="font-display font-bold text-base text-slate-900">
               No products found matching your filter
             </h3>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
+            <p className="text-xs text-slate-500 max-w-xs mx-auto">
               Try adjusting your search terms or clearing active filters.
             </p>
             <button
@@ -1200,93 +1189,18 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           </div>
         )}
 
-        {/* =========================================================================
-            MOTORSPORT COMPARISON MATRIX (DEDICATED SECTION FOR CAR RACING GLOVES)
-            ========================================================================= */}
-        {isCarRacing && (
-          <section className="bg-[#081816] rounded-2xl border border-[#153B36] p-6 sm:p-8 space-y-6 shadow-xl text-white">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#153B36] pb-5">
-              <div>
-                <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#EA2227] uppercase tracking-wider">
-                  <Award className="w-4 h-4" />
-                  <span>Technical Specification Matrix</span>
-                </div>
-                <h3 className="font-display font-bold text-xl text-white mt-1">
-                  Car Racing Gloves Lineup Comparison
-                </h3>
-              </div>
-            </div>
-
-            <div className="overflow-x-auto scrollbar-thin">
-              <table className="w-full text-left text-xs border-collapse min-w-[700px]">
-                <thead>
-                  <tr className="border-b border-[#153B36] bg-[#030908] text-slate-300 font-mono text-[11px] uppercase">
-                    <th className="py-3 px-3">Glove Model</th>
-                    <th className="py-3 px-3">Homologation</th>
-                    <th className="py-3 px-3">Knuckle Protection</th>
-                    <th className="py-3 px-3">Palm Grip Technology</th>
-                    <th className="py-3 px-3">Primary Discipline</th>
-                    <th className="py-3 px-3 text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#153B36]">
-                  {CAR_RACING_GLOVE_MODELS.map((glove) => (
-                    <tr key={glove.code} className="hover:bg-white/5 transition-colors">
-                      <td className="py-3.5 px-3">
-                        <div className="flex items-center gap-2.5">
-                          <img
-                            src={glove.image}
-                            alt={glove.code}
-                            className="w-10 h-10 object-contain rounded bg-[#020706] border border-[#153B36] p-0.5 shrink-0"
-                          />
-                          <div>
-                            <span className="font-mono font-bold text-white block">{glove.code}</span>
-                            <span className="text-[11px] text-slate-300 font-medium">{glove.name}</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="py-3.5 px-3">
-                        <span className="px-2 py-0.5 rounded bg-[#EA2227]/20 border border-[#EA2227]/40 text-[#FFA494] font-mono font-bold text-[10px]">
-                          {glove.badge}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-3 text-slate-200 font-medium">
-                        {glove.knuckleArmor}
-                      </td>
-                      <td className="py-3.5 px-3 text-slate-200 font-medium">
-                        {glove.palmMatrix}
-                      </td>
-                      <td className="py-3.5 px-3 text-slate-300">
-                        {glove.targetDiscipline}
-                      </td>
-                      <td className="py-3.5 px-3 text-right">
-                        <button
-                          onClick={() => setInspectGlove(glove)}
-                          className="px-2.5 py-1 rounded-lg bg-[#030908] hover:bg-[#EA2227] hover:text-white text-slate-200 font-mono text-[10px] uppercase font-bold transition-colors cursor-pointer border border-[#153B36]"
-                        >
-                          Inspect
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        )}
-
-        {/* Switch Category Strip */}
-        <section className={`pt-12 border-t space-y-4 ${isCarRacing ? 'border-[#153B36]' : 'border-slate-200/80'}`}>
+        {/* Other Gearwear Categories Switcher */}
+        <section className="pt-12 border-t border-slate-200/90 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className={`font-display font-bold text-lg ${isCarRacing ? 'text-white' : 'text-[#0B3D3B]'}`}>
-              Explore Other Gearwear
+            <h3 className="font-display font-bold text-lg text-slate-900">
+              Explore Other Gearwear Collections
             </h3>
             <Link
               to="/gearwear"
-              className="text-xs font-mono font-bold text-[#FF5A36] hover:underline uppercase inline-flex items-center gap-1"
+              className="text-xs font-mono font-bold text-[#EA2227] hover:underline uppercase inline-flex items-center gap-1"
             >
-              <span>View All Gearwear</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <span>View All Categories</span>
+              <ChevronRightIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -1295,13 +1209,9 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               <div
                 key={win.id}
                 onClick={() => navigate(win.routePath)}
-                className={`group cursor-pointer p-4 rounded-xl border transition-all hover:shadow-md flex items-center space-x-3.5 ${
-                  isCarRacing 
-                    ? 'bg-[#081816] border-[#153B36] hover:border-[#FF5A36] text-white' 
-                    : 'bg-white border-slate-200 hover:border-[#FF5A36]'
-                }`}
+                className="group cursor-pointer p-4 rounded-xl border border-slate-200 bg-white hover:border-[#EA2227] transition-all hover:shadow-md flex items-center space-x-3.5"
               >
-                <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-800">
+                <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-100">
                   <img
                     src={win.image}
                     alt={win.title}
@@ -1309,16 +1219,14 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   />
                 </div>
                 <div className="flex-grow min-w-0">
-                  <h4 className={`font-display font-bold text-xs sm:text-sm group-hover:text-[#FF5A36] transition-colors truncate ${
-                    isCarRacing ? 'text-white' : 'text-[#0B3D3B]'
-                  }`}>
+                  <h4 className="font-display font-bold text-xs sm:text-sm text-slate-900 group-hover:text-[#EA2227] transition-colors truncate">
                     {win.title}
                   </h4>
-                  <p className={`text-[11px] truncate font-normal ${isCarRacing ? 'text-slate-400' : 'text-slate-500'}`}>
+                  <p className="text-[11px] text-slate-500 truncate font-normal">
                     {win.minorDetail}
                   </p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#FF5A36] group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ChevronRightIcon className="w-4 h-4 text-slate-400 group-hover:text-[#EA2227] group-hover:translate-x-0.5 transition-all shrink-0" />
               </div>
             ))}
           </div>
@@ -1331,37 +1239,37 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           ========================================================================= */}
       <AnimatePresence>
         {inspectGlove && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="bg-[#081816] rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#153B36] shadow-2xl relative text-white"
+              className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative text-slate-900"
             >
               {/* Modal Header */}
-              <div className="sticky top-0 z-10 bg-[#030908] text-white p-5 flex items-center justify-between border-b border-[#153B36]">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded bg-[#EA2227] text-white text-[10px] font-mono font-bold">
+              <div className="sticky top-0 z-10 bg-[#0B151E] text-white p-5 flex items-center justify-between border-b border-slate-800">
+                <div className="flex items-center gap-2.5">
+                  <span className="px-2.5 py-0.5 rounded bg-[#EA2227] text-white text-[10px] font-mono font-bold">
                     {inspectGlove.code}
                   </span>
-                  <span className="text-xs font-mono text-[#D9F0EC]">Motorsport Telemetry Data Sheet</span>
+                  <span className="text-xs font-mono text-slate-300">Motorsport Specification Sheet</span>
                 </div>
                 <button
                   onClick={() => setInspectGlove(null)}
                   className="p-1 rounded-full hover:bg-white/10 text-white transition-colors cursor-pointer"
                 >
-                  <X className="w-5 h-5" />
+                  <XIcon className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Modal Body */}
               <div className="p-6 space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                  <div className="aspect-square bg-[#020706] rounded-2xl flex items-center justify-center p-4 border border-[#122E2A]">
+                  <div className="aspect-square bg-slate-50 rounded-2xl flex items-center justify-center p-4 border border-slate-200">
                     <img
                       src={inspectGlove.image}
                       alt={inspectGlove.name}
-                      className="w-full h-full object-contain filter drop-shadow-[0_15px_30px_rgba(234,34,39,0.4)]"
+                      className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.18)]"
                     />
                   </div>
 
@@ -1369,50 +1277,50 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                     <span className="text-xs font-mono font-bold text-[#EA2227] uppercase">
                       Livery: {inspectGlove.livery}
                     </span>
-                    <h4 className="font-display font-black text-xl text-white leading-tight">
+                    <h4 className="font-display font-black text-xl text-slate-900 leading-tight">
                       {inspectGlove.name}
                     </h4>
-                    <p className="text-slate-300 text-xs leading-relaxed">
+                    <p className="text-slate-600 text-xs leading-relaxed">
                       {inspectGlove.summary}
                     </p>
-                    <div className="p-3 rounded-xl bg-[#030908] border border-[#153B36] space-y-1.5 text-xs">
+                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Flame Rating:</span>
+                        <span className="text-slate-500">Flame Rating:</span>
                         <span className="font-mono font-bold text-[#EA2227]">{inspectGlove.flameRating}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Seam Type:</span>
-                        <span className="font-semibold text-slate-200">{inspectGlove.seamType}</span>
+                        <span className="text-slate-500">Seam Type:</span>
+                        <span className="font-semibold text-slate-800">{inspectGlove.seamType}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Knuckle Armor:</span>
-                        <span className="font-semibold text-slate-200">{inspectGlove.knuckleArmor}</span>
+                        <span className="text-slate-500">Knuckle Armor:</span>
+                        <span className="font-semibold text-slate-800">{inspectGlove.knuckleArmor}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Target Series:</span>
-                        <span className="font-semibold text-slate-200">{inspectGlove.targetDiscipline}</span>
+                        <span className="text-slate-500">Primary Discipline:</span>
+                        <span className="font-semibold text-slate-800">{inspectGlove.targetDiscipline}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Modal Footer Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-[#153B36]">
+                <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-slate-200">
                   <button
                     onClick={() => {
                       setInquiryProductTitle(`${inspectGlove.code} - ${inspectGlove.name}`);
                       setInspectGlove(null);
                       setIsInquiryModalOpen(true);
                     }}
-                    className="flex-1 py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 bg-[#EA2227] hover:bg-[#c9181d] text-white shadow-md shadow-[#EA2227]/25 cursor-pointer"
+                    className="flex-1 py-3 px-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 bg-[#EA2227] hover:bg-[#d0171c] text-white shadow-md shadow-[#EA2227]/25 cursor-pointer"
                   >
-                    <Sparkles className="w-4 h-4" />
+                    <SparklesIcon className="w-4 h-4" />
                     <span>Request Quotation & OEM Customization</span>
                   </button>
 
                   <button
                     onClick={() => setInspectGlove(null)}
-                    className="py-3 px-5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider bg-[#030908] hover:bg-white/10 text-slate-300 border border-[#153B36] cursor-pointer"
+                    className="py-3 px-5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer"
                   >
                     Close
                   </button>
@@ -1435,6 +1343,6 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
 
     </motion.div>
   );
-}
+};
 
 export default GearwearWindowPage;
