@@ -37,13 +37,19 @@ import cg3SlideImg from '../assets/images/cg3_slide.png';
 import cg4SlideImg from '../assets/images/cg4_slide.png';
 import cg5SlideImg from '../assets/images/cg5_slide.png';
 
+// Cycling Gloves Assets (cycling_glove_safetyline_1, 4, 6, 9)
+import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
+import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
+import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
+import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
+
 interface GearwearWindowPageProps {
   window: GearwearWindow;
   products: Product[];
   settings: Settings;
 }
 
-// Dedicated metadata for the 4 car racing glove models
+// Dedicated metadata for glove models
 export interface CarRacingGloveSpec {
   code: string;
   name: string;
@@ -118,12 +124,74 @@ export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
   }
 ];
 
+export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
+  {
+    code: 'GW-CG-01',
+    name: 'Safety Line Pro-Aero Carbon Cycling Gloves',
+    livery: 'Carbon Black / Neon Yellow Aero',
+    image: cy1Img,
+    slideImage: cy1Img,
+    badge: 'UCI Pro Aero',
+    flameRating: 'UV Solar Block UPF 50+ Certified',
+    palmMatrix: 'Gel-Padded Non-Slip Microfiber Grip with Ulnar Nerve Protection',
+    seamType: 'Ergonomic 4-Way Stretch Breathable Mesh with Low-Profile Seams',
+    knuckleArmor: 'Ventilated Air-Mesh Dorsal Shield with Pull Tabs',
+    targetDiscipline: 'Road Cycling, Criterium & Time Trial',
+    summary: 'Professional aerodynamic road cycling gloves featuring multi-density 5mm shock-absorbing gel palm pads, moisture-wicking micro-mesh, and Safety Line pull-tab release.'
+  },
+  {
+    code: 'GW-CG-04',
+    name: 'Safety Line Endurance Gel Road Cycling Gloves',
+    livery: 'Endurance White / Stealth Black',
+    image: cy4Img,
+    slideImage: cy4Img,
+    badge: 'Endurance Ultra',
+    flameRating: 'High-Vapor Breathable Mesh Rating',
+    palmMatrix: 'High-Damping Silicon Grip Palm with Vibration Isolation',
+    seamType: 'Seamless Flex-Zone Finger Framing with Terry Sweat Wipe',
+    knuckleArmor: 'Breathable Stretch Vent Backing',
+    targetDiscipline: 'Century Rides, Gran Fondo & Ultra Endurance',
+    summary: 'Engineered for long-distance century rides and Gran Fondo racing. Features advanced gel vibration damping, absorbent micro-fleece thumb wipe, and secure velcro closure.'
+  },
+  {
+    code: 'GW-CG-06',
+    name: 'Safety Line Chrono Speed Track Cycling Gloves',
+    livery: 'Chrono Racer Red / Black',
+    image: cy6Img,
+    slideImage: cy6Img,
+    badge: 'Chrono Speed Track',
+    flameRating: 'Track Sprint Aerodynamic Tested',
+    palmMatrix: 'Tacky Synthetic Leather Palm with Direct Bar Feedback',
+    seamType: 'Ultra-Low Profile Aero Stitching',
+    knuckleArmor: 'Flexible Knuckle Articulation Panels',
+    targetDiscipline: 'Track Sprint, Velodrome & Road Racing',
+    summary: 'Ultra-lightweight track and road racing gloves designed for maximum tactile handlebar connection and aerodynamic efficiency with embroidered Safety Line SL emblem.'
+  },
+  {
+    code: 'GW-CG-09',
+    name: 'Safety Line All-Weather Gravel & MTB Cycling Gloves',
+    livery: 'Gravel Explorer Slate / Orange',
+    image: cy9Img,
+    slideImage: cy9Img,
+    badge: 'Gravel & MTB Pro',
+    flameRating: 'All-Weather Abrasion Resistant',
+    palmMatrix: 'All-Weather Silicon Traction Palm with Double Stitching',
+    seamType: 'Reinforced Durability Seams with Neoprene Cuff',
+    knuckleArmor: 'TPR Impact Guards & Flexible Mesh',
+    targetDiscipline: 'Gravel Grinding, Cyclocross & Mountain Biking',
+    summary: 'Rugged all-weather gravel and cross-country cycling gloves built with abrasion-resistant palm reinforcement, touchscreen compatibility, and Safety Line wrist security.'
+  }
+];
+
 export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   window: currentWindow,
   products,
   settings
 }) => {
   const isCarRacing = currentWindow.slug === 'motorcars-gloves' || currentWindow.slug === 'car-racing';
+  const isCycling = currentWindow.slug === 'cycling-gloves';
+  const isHasHeroSlide = isCarRacing || isCycling;
+  const activeSlideModels = isCarRacing ? CAR_RACING_GLOVE_MODELS : CYCLING_GLOVE_MODELS;
 
   // Search, size and view filter states
   const [searchQuery, setSearchQuery] = useState('');
@@ -131,7 +199,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [inquiryProductTitle, setInquiryProductTitle] = useState<string>(
-    isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`
+    isCarRacing ? 'Car Racing Gloves Series' : isCycling ? 'Cycling Gloves Series' : `${currentWindow.title} Line`
   );
 
   // Auto slide animation index
@@ -143,24 +211,24 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
 
   // Automatic continuous slideshow cycling every 3 seconds
   useEffect(() => {
-    if (!isCarRacing) return;
+    if (!isHasHeroSlide) return;
 
     const timer = setInterval(() => {
       setSlideDirection('next');
-      setActiveSlideIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
+      setActiveSlideIdx((prev) => (prev + 1) % activeSlideModels.length);
     }, 3000);
 
     return () => clearInterval(timer);
-  }, [isCarRacing]);
+  }, [isHasHeroSlide, activeSlideModels.length]);
 
   const goToNextSlide = () => {
     setSlideDirection('next');
-    setActiveSlideIdx((prev) => (prev + 1) % CAR_RACING_GLOVE_MODELS.length);
+    setActiveSlideIdx((prev) => (prev + 1) % activeSlideModels.length);
   };
 
   const goToPrevSlide = () => {
     setSlideDirection('prev');
-    setActiveSlideIdx((prev) => (prev - 1 + CAR_RACING_GLOVE_MODELS.length) % CAR_RACING_GLOVE_MODELS.length);
+    setActiveSlideIdx((prev) => (prev - 1 + activeSlideModels.length) % activeSlideModels.length);
   };
 
   // Filter products belonging to this specific category window
@@ -231,13 +299,13 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
     return GEARWEAR_WINDOWS.filter(w => w.slug !== currentWindow.slug);
   }, [currentWindow.slug]);
 
-  const activeGlove = CAR_RACING_GLOVE_MODELS[activeSlideIdx] || CAR_RACING_GLOVE_MODELS[0];
+  const activeGlove = activeSlideModels[activeSlideIdx] || activeSlideModels[0];
 
   // Calculate previous and next glove indexes for the visual 3D carousel effect
-  const prevGloveIdx = (activeSlideIdx - 1 + CAR_RACING_GLOVE_MODELS.length) % CAR_RACING_GLOVE_MODELS.length;
-  const nextGloveIdx = (activeSlideIdx + 1) % CAR_RACING_GLOVE_MODELS.length;
-  const prevGlove = CAR_RACING_GLOVE_MODELS[prevGloveIdx];
-  const nextGlove = CAR_RACING_GLOVE_MODELS[nextGloveIdx];
+  const prevGloveIdx = (activeSlideIdx - 1 + activeSlideModels.length) % activeSlideModels.length;
+  const nextGloveIdx = (activeSlideIdx + 1) % activeSlideModels.length;
+  const prevGlove = activeSlideModels[prevGloveIdx];
+  const nextGlove = activeSlideModels[nextGloveIdx];
 
   return (
     <motion.div 
@@ -334,7 +402,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       {/* =========================================================================
           FULL HEADER BANNER (NORMAL BALANCED HEIGHT WHITE STUDIO SHOWCASE & SIDE LOGO)
           ========================================================================= */}
-      {isCarRacing ? (
+      {isHasHeroSlide ? (
         <section className="relative w-full h-[340px] sm:h-[400px] lg:h-[450px] bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EEF2F6] border-b border-slate-200 overflow-hidden flex items-center justify-center select-none">
           
           {/* Subtle Dynamic Light Grid Ambience */}
@@ -483,7 +551,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
 
             {/* Carousel Slide Indicators at Bottom (Telemetry Light Theme - No Text) */}
             <div className="absolute bottom-3.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200 shadow-sm">
-              {CAR_RACING_GLOVE_MODELS.map((_, idx) => (
+              {activeSlideModels.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => {
@@ -684,7 +752,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, idx) => {
                 const isCarProduct = product.productCode?.startsWith('GW-CR');
-                const matchingSpec = CAR_RACING_GLOVE_MODELS.find(m => m.code === product.productCode);
+                const matchingSpec = activeSlideModels.find(m => m.code === product.productCode);
 
                 return (
                   <motion.div
@@ -817,7 +885,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, idx) => {
                 const isCarProduct = product.productCode?.startsWith('GW-CR');
-                const matchingSpec = CAR_RACING_GLOVE_MODELS.find(m => m.code === product.productCode);
+                const matchingSpec = activeSlideModels.find(m => m.code === product.productCode);
 
                 return (
                   <motion.div
