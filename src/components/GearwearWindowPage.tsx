@@ -156,20 +156,7 @@ export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     targetDiscipline: 'Road Racing, Criterium & Night Training',
     summary: 'High-visibility aerodynamic cycling gloves engineered with fluorescent signal accents, shock-absorbing gel palm pads, and breathable stretch airflow mesh.'
   },
-  {
-    code: 'GW-CG-03',
-    name: 'Safety Line Stealth Pro Road Cycling Gloves',
-    livery: 'Stealth Black / Reflex White',
-    image: cy3Img,
-    slideImage: cy3Img,
-    badge: 'Pro Circuit',
-    flameRating: 'All-Season Breathable Aero Matrix',
-    palmMatrix: 'Anatomical Silicon Hex Grip Palm with Foam Protection',
-    seamType: 'Low-Profile Flatlock Aero Seams with Terry Sweat Wipe',
-    knuckleArmor: 'Padded Metacarpal Cushion & Air Vents',
-    targetDiscipline: 'Road Cycling & Gravel Endurance',
-    summary: 'Sleek stealth black cycling gloves featuring high-traction silicone hex palm grip, ergonomic ulnar pressure relief, and absorbent thumb sweat wipe.'
-  },
+
   {
     code: 'GW-CG-04',
     name: 'Safety Line Endurance Gel Road Cycling Gloves',
