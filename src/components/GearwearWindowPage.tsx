@@ -403,7 +403,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           FULL HEADER BANNER (NORMAL BALANCED HEIGHT WHITE STUDIO SHOWCASE & SIDE LOGO)
           ========================================================================= */}
       {isHasHeroSlide ? (
-        <section className="relative w-full h-[340px] sm:h-[400px] lg:h-[450px] bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EEF2F6] border-b border-slate-200 overflow-hidden flex items-center justify-center select-none">
+        <section className="relative w-full h-[340px] sm:h-[400px] lg:h-[450px] bg-white border-b border-slate-200 overflow-hidden flex items-center justify-center select-none">
           
           {/* Subtle Dynamic Light Grid Ambience */}
           <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.05] pointer-events-none" />
