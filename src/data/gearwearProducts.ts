@@ -15,12 +15,9 @@ import cg3Img from '../assets/images/cg3.png';
 import cg4Img from '../assets/images/cg4.png';
 import cg5Img from '../assets/images/cg5.png';
 
-// Cycling Gloves Assets (all 7 requested images)
+// Cycling Gloves Assets
 import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
-import cy2Img from '../assets/images/cg2.png';
-import cy3Img from '../assets/images/cg3.png';
 import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
-import cy5Img from '../assets/images/cg5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
 import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
 
@@ -213,87 +210,6 @@ export const gearwearProducts: Product[] = [
     seoTitle: 'Safety Line Pro-Aero Carbon Cycling Gloves | UCI Pro',
     seoDescription: 'Professional aerodynamic road cycling gloves with shock-absorbing gel palm and aero mesh.',
     createdAt: '2026-03-14T08:00:00.000Z'
-  },
-  {
-    id: 'prod-cg-02',
-    name: 'Safety Line Elite Speed Pro Cycling Gloves',
-    slug: 'safety-line-elite-speed-pro-cycling-gloves',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    subcategory: 'cycling-gloves',
-    shortDescription: 'High-performance elite cycling gloves engineered with reinforced traction palm and breathable stretch mesh for maximal comfort on long training rides.',
-    longDescription: 'High-performance elite cycling gloves engineered with reinforced traction palm and breathable stretch mesh for maximal comfort on long training rides and road events.',
-    material: 'Microfiber Synthetic Leather & Breathable Stretch Mesh',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Elite Stealth Black / Red Accent'],
-    features: [
-      'Reinforced traction palm with shock dispersion',
-      'Ergonomic stretch framing with zero friction',
-      'Flexible knuckle protection panel',
-      'Embroidered Safety Line SL insignia'
-    ],
-    productCode: 'GW-CG-02',
-    status: 'Active',
-    displayOrder: 2,
-    coverImage: cy2Img,
-    galleryImages: [cy2Img],
-    seoTitle: 'Safety Line Elite Speed Pro Cycling Gloves | Black',
-    seoDescription: 'High-performance elite cycling gloves with reinforced traction palm.',
-    createdAt: '2026-03-15T08:00:00.000Z'
-  },
-  {
-    id: 'prod-cg-03',
-    name: 'Safety Line Performance Grip Cycling Gloves',
-    slug: 'safety-line-performance-grip-cycling-gloves',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    subcategory: 'cycling-gloves',
-    shortDescription: 'Balanced performance cycling gloves offering secure handlebar grip, breathable ventilation, and ergonomic palm cushioning for daily training.',
-    longDescription: 'Balanced performance cycling gloves offering secure handlebar grip, breathable ventilation, and ergonomic palm cushioning for daily training and fitness touring.',
-    material: 'Anti-Slip Synthetic Leather & Gel Cushioning',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Performance Cyan / Black'],
-    features: [
-      'Anti-slip synthetic palm with gel cushioning',
-      'Pre-curved finger seams for natural grip',
-      'Dorsal flex shield backing',
-      'Moisture-wicking thumb wipe'
-    ],
-    productCode: 'GW-CG-03',
-    status: 'Active',
-    displayOrder: 3,
-    coverImage: cy3Img,
-    galleryImages: [cy3Img],
-    seoTitle: 'Safety Line Performance Grip Cycling Gloves | Cyan',
-    seoDescription: 'Balanced performance cycling gloves with gel cushioning and secure grip.',
-    createdAt: '2026-03-16T08:00:00.000Z'
-  },
-  {
-    id: 'prod-cg-05',
-    name: 'Safety Line Chrono Road Pro Cycling Gloves',
-    slug: 'safety-line-chrono-road-pro-cycling-gloves',
-    categoryId: 'cat-gearwear',
-    categoryName: 'Gearwear',
-    subcategory: 'cycling-gloves',
-    shortDescription: 'Chrono-grade road racing gloves crafted for maximum aerodynamic efficiency and direct handlebar tactile feedback with Safety Line branding.',
-    longDescription: 'Chrono-grade road racing gloves crafted for maximum aerodynamic efficiency and direct handlebar tactile feedback with Safety Line branding.',
-    material: 'Ergonomic Microfiber & Low-Profile Aero Fabric',
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Chrono Racer Red / White'],
-    features: [
-      'Ergonomic microfiber palm with direct bar feedback',
-      'Low-profile aero seams resisting wind drag',
-      'Flexible articulated dorsal backing',
-      'Safety Line embroidered wrist emblem'
-    ],
-    productCode: 'GW-CG-05',
-    status: 'Active',
-    displayOrder: 5,
-    coverImage: cy5Img,
-    galleryImages: [cy5Img],
-    seoTitle: 'Safety Line Chrono Road Pro Cycling Gloves | Red',
-    seoDescription: 'Chrono-grade road racing gloves with aerodynamic efficiency and direct tactile feedback.',
-    createdAt: '2026-03-17T08:00:00.000Z'
   },
   {
     id: 'prod-cg-04',

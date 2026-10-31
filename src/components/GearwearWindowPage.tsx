@@ -37,12 +37,9 @@ import cg3SlideImg from '../assets/images/cg3_slide.png';
 import cg4SlideImg from '../assets/images/cg4_slide.png';
 import cg5SlideImg from '../assets/images/cg5_slide.png';
 
-// Cycling Gloves Assets (all 7 requested images)
+// Cycling Gloves Assets (cycling_glove_safetyline_1, 4, 6, 9)
 import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
-import cy2Img from '../assets/images/cg2.png';
-import cy3Img from '../assets/images/cg3.png';
 import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
-import cy5Img from '../assets/images/cg5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
 import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
 
@@ -143,34 +140,6 @@ export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     summary: 'Professional aerodynamic road cycling gloves featuring multi-density 5mm shock-absorbing gel palm pads, moisture-wicking micro-mesh, and Safety Line pull-tab release.'
   },
   {
-    code: 'GW-CG-02',
-    name: 'Safety Line Elite Speed Pro Cycling Gloves',
-    livery: 'Elite Stealth Black / Red Accent',
-    image: cy2Img,
-    slideImage: cy2Img,
-    badge: 'Elite Pro Speed',
-    flameRating: 'High-Cadence Airflow Certified',
-    palmMatrix: 'Reinforced Traction Palm with Shock Dispersion',
-    seamType: 'Ergonomic Stretch Framing with Zero Friction',
-    knuckleArmor: 'Flexible Knuckle Protection Panel',
-    targetDiscipline: 'Road Racing & Criterium',
-    summary: 'High-performance elite cycling gloves engineered with reinforced traction palm and breathable stretch mesh for maximal comfort on long training rides.'
-  },
-  {
-    code: 'GW-CG-03',
-    name: 'Safety Line Performance Grip Cycling Gloves',
-    livery: 'Performance Cyan / Black',
-    image: cy3Img,
-    slideImage: cy3Img,
-    badge: 'Performance Series',
-    flameRating: 'All-Weather Breathable Mesh',
-    palmMatrix: 'Anti-Slip Synthetic Palm with Gel Cushioning',
-    seamType: 'Pre-Curved Finger Seams for Natural Grip',
-    knuckleArmor: 'Dorsal Flex Shield',
-    targetDiscipline: 'Training, Touring & Fitness Cycling',
-    summary: 'Balanced performance cycling gloves offering secure handlebar grip, breathable ventilation, and ergonomic palm cushioning for daily training.'
-  },
-  {
     code: 'GW-CG-04',
     name: 'Safety Line Endurance Gel Road Cycling Gloves',
     livery: 'Endurance White / Stealth Black',
@@ -183,20 +152,6 @@ export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     knuckleArmor: 'Breathable Stretch Vent Backing',
     targetDiscipline: 'Century Rides, Gran Fondo & Ultra Endurance',
     summary: 'Engineered for long-distance century rides and Gran Fondo racing. Features advanced gel vibration damping, absorbent micro-fleece thumb wipe, and secure velcro closure.'
-  },
-  {
-    code: 'GW-CG-05',
-    name: 'Safety Line Chrono Road Pro Cycling Gloves',
-    livery: 'Chrono Racer Red / White',
-    image: cy5Img,
-    slideImage: cy5Img,
-    badge: 'Chrono Pro Road',
-    flameRating: 'Aero Wind-Tunnel Tested',
-    palmMatrix: 'Ergonomic Microfiber Palm with Direct Feedback',
-    seamType: 'Low-Profile Aero Seams',
-    knuckleArmor: 'Flexible Articulated Backing',
-    targetDiscipline: 'Road Racing & Time Trial',
-    summary: 'Chrono-grade road racing gloves crafted for maximum aerodynamic efficiency and direct handlebar tactile feedback with Safety Line branding.'
   },
   {
     code: 'GW-CG-06',
