@@ -256,25 +256,25 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       />
 
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[#070D14]/95 backdrop-blur-md text-white border-b border-slate-800 shadow-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-[#070D14]/95 backdrop-blur-md text-white border-b border-slate-800 shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
           {/* Logo & Category Identification with Premium Presentation Badge */}
-          <Link to="/" className="flex items-center space-x-3.5 sm:space-x-4 cursor-pointer group">
+          <Link to="/" className="flex items-center space-x-3 sm:space-x-3.5 cursor-pointer group">
             {/* High-contrast Emblem Badge ensuring the red 'S' and black 'L' stand out brilliantly */}
-            <div className="relative shrink-0 flex items-center justify-center p-2 rounded-2xl bg-gradient-to-b from-white via-white to-slate-100 shadow-lg shadow-black/50 border border-white/80 group-hover:border-[#EA2227] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(234,34,39,0.4)]">
+            <div className="relative shrink-0 flex items-center justify-center p-1.5 rounded-xl bg-gradient-to-b from-white via-white to-slate-100 shadow-md shadow-black/40 border border-white/80 group-hover:border-[#EA2227] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(234,34,39,0.35)]">
               <img
                 src={brandLogo}
                 alt="Safety Line"
-                className="h-9 sm:h-10 w-auto object-contain filter drop-shadow-xs"
+                className="h-8 sm:h-8.5 w-auto object-contain filter drop-shadow-xs"
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-black text-base sm:text-lg tracking-[0.18em] uppercase leading-none">
-                <span className="text-[#EA2227] drop-shadow-[0_0_12px_rgba(234,34,39,0.4)]">SAFETY</span>{' '}
-                <span className="text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.7)]">LINE</span>
+              <span className="font-display font-black text-sm sm:text-base tracking-[0.16em] uppercase leading-none">
+                <span className="text-[#EA2227] drop-shadow-[0_0_10px_rgba(234,34,39,0.35)]">SAFETY</span>{' '}
+                <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]">LINE</span>
               </span>
-              <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase mt-1 flex items-center gap-1.5 font-semibold">
+              <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase mt-0.5 flex items-center gap-1.5 font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#EA2227] animate-pulse" />
                 <span>Gearwear • {currentWindow.shortTitle}</span>
               </span>
@@ -282,10 +282,10 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           </Link>
 
           {/* Top Actions */}
-          <div className="flex items-center space-x-2.5 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <button
               onClick={() => navigate('/gearwear')}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer border border-slate-700 hover:border-slate-500 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer border border-slate-700 hover:border-slate-500 shadow-sm"
             >
               <ArrowLeftIcon className="w-3.5 h-3.5" />
               <span>All Gearwear</span>
@@ -295,7 +295,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                 setInquiryProductTitle(isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`);
                 setIsInquiryModalOpen(true);
               }}
-              className="inline-flex items-center gap-2 px-4.5 py-2 rounded-xl bg-gradient-to-r from-[#EA2227] to-[#C91A1E] hover:from-[#f52d32] hover:to-[#EA2227] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-[#EA2227]/30 hover:shadow-[#EA2227]/50 active:scale-95"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#EA2227] to-[#C91A1E] hover:from-[#f52d32] hover:to-[#EA2227] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md shadow-[#EA2227]/30 hover:shadow-[#EA2227]/50 active:scale-95"
             >
               <SparklesIcon className="w-3.5 h-3.5" />
               <span>Wholesale Inquiry</span>
@@ -305,8 +305,8 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         </div>
 
         {/* Quick Category Bar */}
-        <div className="bg-[#05090F] border-t border-slate-800/80 px-4 sm:px-8 py-2 overflow-x-auto scrollbar-none">
-          <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs">
+        <div className="bg-[#05090F] border-t border-slate-800/80 px-4 sm:px-8 py-1.5 overflow-x-auto scrollbar-none">
+          <div className="max-w-7xl mx-auto flex items-center gap-1.5 text-xs">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">
               Gearwear Windows:
             </span>
@@ -316,7 +316,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                 <button
                   key={win.id}
                   onClick={() => navigate(win.routePath)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                     isActive
                       ? 'bg-[#EA2227] text-white font-bold shadow-sm shadow-[#EA2227]/30'
                       : 'text-slate-400 hover:text-white hover:bg-white/10'
@@ -332,25 +332,25 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
       </header>
 
       {/* =========================================================================
-          FULL HEADER BANNER (WHITE STUDIO SHOWCASE WITH AUTOMATED SLIDING ANIMATION & SIDE LOGO)
+          FULL HEADER BANNER (NORMAL BALANCED HEIGHT WHITE STUDIO SHOWCASE & SIDE LOGO)
           ========================================================================= */}
       {isCarRacing ? (
-        <section className="relative w-full h-[480px] sm:h-[560px] lg:h-[640px] xl:h-[680px] bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EEF2F6] border-b border-slate-200 overflow-hidden flex items-center justify-center select-none">
+        <section className="relative w-full h-[340px] sm:h-[400px] lg:h-[450px] bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EEF2F6] border-b border-slate-200 overflow-hidden flex items-center justify-center select-none">
           
           {/* Subtle Dynamic Light Grid Ambience */}
-          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.05] pointer-events-none" />
           
           {/* Safety Line Brand Logo Badge on the Side */}
-          <div className="absolute top-4 left-4 sm:top-7 sm:left-8 z-30 flex items-center space-x-3 bg-white/95 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-slate-200/90 shadow-md hover:shadow-lg transition-all duration-300 group">
-            <div className="relative shrink-0 flex items-center justify-center p-1 rounded-xl bg-slate-50 border border-slate-100">
+          <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-6 z-30 flex items-center space-x-2.5 bg-white/95 backdrop-blur-md px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div className="relative shrink-0 flex items-center justify-center p-1 rounded-lg bg-slate-50 border border-slate-100">
               <img
                 src={brandLogo}
                 alt="Safety Line"
-                className="h-8 sm:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-7 sm:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-black text-xs sm:text-sm tracking-[0.16em] uppercase leading-none">
+              <span className="font-display font-black text-xs sm:text-sm tracking-[0.15em] uppercase leading-none">
                 <span className="text-[#EA2227]">SAFETY</span> <span className="text-slate-900">LINE</span>
               </span>
               <span className="text-[9px] font-mono tracking-wider text-slate-500 uppercase mt-0.5 font-bold">
@@ -360,7 +360,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           </div>
 
           {/* Subtle Safety Line Crest Watermark on the Side Background */}
-          <div className="hidden lg:block absolute left-8 xl:left-14 top-1/2 -translate-y-1/2 w-72 xl:w-88 aspect-square opacity-[0.035] pointer-events-none">
+          <div className="hidden lg:block absolute left-8 xl:left-12 top-1/2 -translate-y-1/2 w-64 xl:w-72 aspect-square opacity-[0.035] pointer-events-none">
             <img
               src={brandLogo}
               alt=""
@@ -369,11 +369,11 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           </div>
 
           {/* Studio Ambient Backlight behind Center Glove */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-gradient-to-tr from-[#EA2227]/8 via-slate-100 to-cyan-400/8 blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[380px] rounded-full bg-gradient-to-tr from-[#EA2227]/8 via-slate-100 to-cyan-400/8 blur-[100px] pointer-events-none" />
 
           {/* Studio Center Floor Shadow & Racing Red Accent Pedestal */}
-          <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 w-[75%] max-w-2xl h-14 bg-slate-900/10 rounded-[100%] blur-xl pointer-events-none" />
-          <div className="absolute bottom-5 sm:bottom-9 left-1/2 -translate-x-1/2 w-[45%] max-w-md h-[2px] bg-gradient-to-r from-transparent via-[#EA2227]/50 to-transparent pointer-events-none" />
+          <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 w-[70%] max-w-xl h-10 bg-slate-900/10 rounded-[100%] blur-lg pointer-events-none" />
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 w-[40%] max-w-sm h-[2px] bg-gradient-to-r from-transparent via-[#EA2227]/50 to-transparent pointer-events-none" />
 
           {/* Full Header Carousel Stage: Displays the Glove Slide Animation in Auto */}
           <div className="relative w-full max-w-7xl h-full flex items-center justify-center px-4 sm:px-12">
@@ -381,31 +381,31 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
             {/* Left Background Adjacent Glove (Visual Depth Preview - No Text) */}
             <div 
               onClick={goToPrevSlide}
-              className="hidden md:flex absolute left-4 lg:left-12 xl:left-16 z-10 w-56 sm:w-64 lg:w-80 aspect-square items-center justify-center opacity-35 hover:opacity-70 transition-all duration-300 cursor-pointer transform -translate-x-8 sm:-translate-x-12 scale-85 hover:scale-90"
+              className="hidden md:flex absolute left-4 lg:left-12 xl:left-16 z-10 w-44 sm:w-52 lg:w-64 aspect-square items-center justify-center opacity-30 hover:opacity-65 transition-all duration-300 cursor-pointer transform -translate-x-6 sm:-translate-x-10 scale-85 hover:scale-90"
               title="Previous Model"
             >
               <img
                 src={prevGlove.slideImage}
                 alt=""
-                className="w-full h-full object-contain filter drop-shadow-[0_12px_24px_rgba(15,23,42,0.12)]"
+                className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.12)]"
               />
             </div>
 
             {/* Center Active Glove: Animated Floating & Sliding Presentation on Crisp White Stage */}
-            <div className="relative z-20 w-full max-w-[460px] sm:max-w-[560px] lg:max-w-[640px] xl:max-w-[700px] aspect-square flex items-center justify-center">
+            <div className="relative z-20 w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[390px] aspect-square flex items-center justify-center">
               
               {/* Soft Ambient Halo behind active glove */}
               <motion.div
                 animate={{
-                  scale: [1, 1.12, 1],
-                  opacity: [0.35, 0.65, 0.35]
+                  scale: [1, 1.1, 1],
+                  opacity: [0.3, 0.55, 0.3]
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute inset-4 sm:inset-8 rounded-full bg-gradient-to-tr from-[#EA2227]/12 via-slate-200/40 to-cyan-400/10 blur-3xl pointer-events-none"
+                className="absolute inset-4 sm:inset-6 rounded-full bg-gradient-to-tr from-[#EA2227]/10 via-slate-200/35 to-cyan-400/10 blur-2xl pointer-events-none"
               />
 
               <AnimatePresence mode="wait">
@@ -413,24 +413,24 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   key={`hero-glove-${activeSlideIdx}`}
                   initial={{ 
                     opacity: 0, 
-                    x: slideDirection === 'next' ? 80 : -80,
-                    scale: 0.9 
+                    x: slideDirection === 'next' ? 60 : -60,
+                    scale: 0.92 
                   }}
                   animate={{ 
                     opacity: 1, 
                     x: 0,
                     scale: 1,
-                    y: [0, -14, 0]
+                    y: [0, -10, 0]
                   }}
                   exit={{ 
                     opacity: 0, 
-                    x: slideDirection === 'next' ? -80 : 80,
-                    scale: 0.9 
+                    x: slideDirection === 'next' ? -60 : 60,
+                    scale: 0.92 
                   }}
                   transition={{
-                    opacity: { duration: 0.4 },
-                    x: { duration: 0.45 },
-                    scale: { duration: 0.45 },
+                    opacity: { duration: 0.35 },
+                    x: { duration: 0.4 },
+                    scale: { duration: 0.4 },
                     y: {
                       duration: 3.5,
                       repeat: Infinity,
@@ -443,7 +443,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   <img
                     src={activeGlove.slideImage}
                     alt=""
-                    className="w-full h-full object-contain filter drop-shadow-[0_22px_38px_rgba(15,23,42,0.18)] drop-shadow-[0_6px_14px_rgba(15,23,42,0.1)] transition-transform duration-500 hover:scale-[1.04]"
+                    className="w-full h-full object-contain filter drop-shadow-[0_18px_30px_rgba(15,23,42,0.16)] drop-shadow-[0_5px_10px_rgba(15,23,42,0.08)] transition-transform duration-500 hover:scale-[1.04]"
                   />
                 </motion.div>
               </AnimatePresence>
@@ -453,36 +453,36 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
             {/* Right Background Adjacent Glove (Visual Depth Preview - No Text) */}
             <div 
               onClick={goToNextSlide}
-              className="hidden md:flex absolute right-4 lg:right-12 xl:right-16 z-10 w-56 sm:w-64 lg:w-80 aspect-square items-center justify-center opacity-35 hover:opacity-70 transition-all duration-300 cursor-pointer transform translate-x-8 sm:translate-x-12 scale-85 hover:scale-90"
+              className="hidden md:flex absolute right-4 lg:right-12 xl:right-16 z-10 w-44 sm:w-52 lg:w-64 aspect-square items-center justify-center opacity-30 hover:opacity-65 transition-all duration-300 cursor-pointer transform translate-x-6 sm:translate-x-10 scale-85 hover:scale-90"
               title="Next Model"
             >
               <img
                 src={nextGlove.slideImage}
                 alt=""
-                className="w-full h-full object-contain filter drop-shadow-[0_12px_24px_rgba(15,23,42,0.12)]"
+                className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.12)]"
               />
             </div>
 
             {/* Left Chevron Navigation Arrow (Glassmorphism Light Theme) */}
             <button
               onClick={goToPrevSlide}
-              className="absolute left-3 sm:left-8 lg:left-12 z-30 p-3 sm:p-3.5 rounded-2xl bg-white/90 hover:bg-[#EA2227] text-slate-700 hover:text-white transition-all duration-300 backdrop-blur-md border border-slate-200/90 hover:border-[#EA2227] shadow-md hover:shadow-[0_0_20px_rgba(234,34,39,0.35)] active:scale-90 cursor-pointer"
+              className="absolute left-2.5 sm:left-6 lg:left-10 z-30 p-2.5 sm:p-3 rounded-xl bg-white/90 hover:bg-[#EA2227] text-slate-700 hover:text-white transition-all duration-300 backdrop-blur-md border border-slate-200/90 hover:border-[#EA2227] shadow-sm hover:shadow-md active:scale-90 cursor-pointer"
               title="Previous Glove"
             >
-              <ChevronLeftIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronLeftIcon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
             </button>
 
             {/* Right Chevron Navigation Arrow (Glassmorphism Light Theme) */}
             <button
               onClick={goToNextSlide}
-              className="absolute right-3 sm:right-8 lg:right-12 z-30 p-3 sm:p-3.5 rounded-2xl bg-white/90 hover:bg-[#EA2227] text-slate-700 hover:text-white transition-all duration-300 backdrop-blur-md border border-slate-200/90 hover:border-[#EA2227] shadow-md hover:shadow-[0_0_20px_rgba(234,34,39,0.35)] active:scale-90 cursor-pointer"
+              className="absolute right-2.5 sm:right-6 lg:right-10 z-30 p-2.5 sm:p-3 rounded-xl bg-white/90 hover:bg-[#EA2227] text-slate-700 hover:text-white transition-all duration-300 backdrop-blur-md border border-slate-200/90 hover:border-[#EA2227] shadow-sm hover:shadow-md active:scale-90 cursor-pointer"
               title="Next Glove"
             >
-              <ChevronRightIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronRightIcon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
             </button>
 
             {/* Carousel Slide Indicators at Bottom (Telemetry Light Theme - No Text) */}
-            <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 sm:space-x-3 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-200 shadow-md">
+            <div className="absolute bottom-3.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200 shadow-sm">
               {CAR_RACING_GLOVE_MODELS.map((_, idx) => (
                 <button
                   key={idx}
@@ -492,8 +492,8 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   }}
                   className={`transition-all duration-300 rounded-full cursor-pointer ${
                     activeSlideIdx === idx 
-                      ? 'w-8 sm:w-10 h-2 sm:h-2.5 bg-[#EA2227] shadow-[0_0_10px_rgba(234,34,39,0.4)]' 
-                      : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-200 hover:bg-slate-300'
+                      ? 'w-6 sm:w-8 h-1.5 sm:h-2 bg-[#EA2227] shadow-[0_0_8px_rgba(234,34,39,0.4)]' 
+                      : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-slate-200 hover:bg-slate-300'
                   }`}
                   title={`Slide ${idx + 1}`}
                 />
