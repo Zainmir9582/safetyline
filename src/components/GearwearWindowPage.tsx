@@ -31,6 +31,12 @@ import cg3Img from '../assets/images/cg3.png';
 import cg4Img from '../assets/images/cg4.png';
 import cg5Img from '../assets/images/cg5.png';
 
+// Isolated Transparent Slide Animation Images (background removed exclusively for the slide animation)
+import cg1SlideImg from '../assets/images/cg1_slide.png';
+import cg3SlideImg from '../assets/images/cg3_slide.png';
+import cg4SlideImg from '../assets/images/cg4_slide.png';
+import cg5SlideImg from '../assets/images/cg5_slide.png';
+
 interface GearwearWindowPageProps {
   window: GearwearWindow;
   products: Product[];
@@ -43,6 +49,7 @@ export interface CarRacingGloveSpec {
   name: string;
   livery: string;
   image: string;
+  slideImage: string;
   badge: string;
   flameRating: string;
   palmMatrix: string;
@@ -58,6 +65,7 @@ export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     name: 'Safety Line Signature Flame FIA Racing Gloves',
     livery: 'Purple / Black Tiger Flame',
     image: cg1Img,
+    slideImage: cg1SlideImg,
     badge: 'FIA 8856-2018',
     flameRating: '15s+ Direct Contact Flame Resistance',
     palmMatrix: 'Reinforced Suede Steering Grip with Knuckle Padding',
@@ -71,6 +79,7 @@ export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     name: 'Safety Line Veloce High-Visibility Endurance Gloves',
     livery: 'Signal Neon Yellow / Black',
     image: cg3Img,
+    slideImage: cg3SlideImg,
     badge: 'Night Stint Hi-Vis',
     flameRating: 'FIA 8856-2000 & SFI 3.3/5 Certified',
     palmMatrix: 'Full Palm Traction Grips with Thumb Saddle Reinforcement',
@@ -84,6 +93,7 @@ export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     name: 'Safety Line Pro-Circuit Two-Tone Racing Gloves',
     livery: 'Monochrome Stealth Black / Pure White',
     image: cg4Img,
+    slideImage: cg4SlideImg,
     badge: 'FIA 8856 Pro-Circuit',
     flameRating: 'FIA 8856-2018 Benchmark Tested',
     palmMatrix: 'Reinforced White Leather Palmar Cushioning',
@@ -97,6 +107,7 @@ export const CAR_RACING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     name: 'Safety Line Grand Prix Monza Flame-Retardant Racing Gloves',
     livery: 'Championship Monza Red / White',
     image: cg5Img,
+    slideImage: cg5SlideImg,
     badge: 'FIA 8856 Grand Prix',
     flameRating: 'FIA 8856-2018 & SFI Approved',
     palmMatrix: 'Soft White Leather Ergonomic Palm Grip',
@@ -340,7 +351,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               title="Previous"
             >
               <img
-                src={prevGlove.image}
+                src={prevGlove.slideImage}
                 alt=""
                 className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
               />
@@ -396,7 +407,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   className="relative z-10 w-full h-full flex items-center justify-center p-4 cursor-pointer"
                 >
                   <img
-                    src={activeGlove.image}
+                    src={activeGlove.slideImage}
                     alt=""
                     className="w-full h-full object-contain filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.85)] transition-transform duration-500 hover:scale-105"
                   />
@@ -412,7 +423,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               title="Next"
             >
               <img
-                src={nextGlove.image}
+                src={nextGlove.slideImage}
                 alt=""
                 className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
               />
