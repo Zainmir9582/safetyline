@@ -455,6 +455,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               <img
                 src={prevGlove.slideImage}
                 alt=""
+                style={{ mixBlendMode: 'multiply' }}
                 className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.12)]"
               />
             </div>
@@ -511,6 +512,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   <img
                     src={activeGlove.slideImage}
                     alt=""
+                    style={{ mixBlendMode: 'multiply' }}
                     className="w-full h-full object-contain filter drop-shadow-[0_18px_30px_rgba(15,23,42,0.16)] drop-shadow-[0_5px_10px_rgba(15,23,42,0.08)] transition-transform duration-500 hover:scale-[1.04]"
                   />
                 </motion.div>
@@ -527,6 +529,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               <img
                 src={nextGlove.slideImage}
                 alt=""
+                style={{ mixBlendMode: 'multiply' }}
                 className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.12)]"
               />
             </div>

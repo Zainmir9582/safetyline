@@ -15,6 +15,12 @@ import cg3Img from '../assets/images/cg3.png';
 import cg4Img from '../assets/images/cg4.png';
 import cg5Img from '../assets/images/cg5.png';
 
+// Cycling Gloves Assets
+import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
+import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
+import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
+import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
+
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
   {
@@ -175,6 +181,116 @@ export const gearwearProducts: Product[] = [
     seoTitle: 'WindBarrier Packable Cycling Gilet | Safety Line Cycling',
     seoDescription: 'Featherlight 85g windproof packable cycling vest for road racing and descents.',
     createdAt: '2026-03-06T08:00:00.000Z'
+  },
+
+  // Cycling Gloves Category (GW-CG)
+  {
+    id: 'prod-cg-01',
+    name: 'Safety Line Pro-Aero Carbon Cycling Gloves',
+    slug: 'safety-line-pro-aero-carbon-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'Professional aerodynamic road cycling gloves featuring multi-density 5mm shock-absorbing gel palm pads, moisture-wicking micro-mesh, and Safety Line pull-tab release.',
+    longDescription: 'Professional aerodynamic road cycling gloves engineered for high-cadence road racing, time trials, and criteriums. Built with multi-density 5mm shock-absorbing gel palm pads to eliminate ulnar nerve pressure, 4-way stretch breathable micro-mesh backhand, and embroidered Safety Line SL emblem.',
+    material: 'Microfiber Synthetic Leather, Gel Padding & Breathable Aero Mesh',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: ['Carbon Black / Neon Yellow Aero', 'Team Edition'],
+    features: [
+      'Multi-zone anatomical silicone gel pads shielding the ulnar nerve',
+      '4-way stretch aerodynamic micro-mesh back for continuous cooling',
+      'Finger pull-loops and wrist tab for effortless removal',
+      'Absorbent micro-fleece thumb panel for sweat clearance'
+    ],
+    productCode: 'GW-CG-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: cy1Img,
+    galleryImages: [cy1Img],
+    seoTitle: 'Safety Line Pro-Aero Carbon Cycling Gloves | UCI Pro',
+    seoDescription: 'Professional aerodynamic road cycling gloves with shock-absorbing gel palm and aero mesh.',
+    createdAt: '2026-03-14T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cg-04',
+    name: 'Safety Line Endurance Gel Road Cycling Gloves',
+    slug: 'safety-line-endurance-gel-road-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'Endurance road cycling gloves engineered for long-distance century rides with advanced gel vibration damping and breathable stretch backing.',
+    longDescription: 'Engineered for long-distance century rides and Gran Fondo racing. Features advanced gel vibration damping to prevent hand fatigue, absorbent micro-fleece thumb wipe, and secure velcro closure with embroidered Safety Line emblem.',
+    material: 'Hydrophobic Microfiber Palm & High-Damping Gel Inserts',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Endurance White / Stealth Black'],
+    features: [
+      'High-damping silicon grip palm with vibration isolation',
+      'Seamless flex-zone finger framing with terry sweat wipe',
+      'Breathable stretch vent backing for optimal airflow',
+      'Secure adjustable velcro wrist closure'
+    ],
+    productCode: 'GW-CG-04',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: cy4Img,
+    galleryImages: [cy4Img],
+    seoTitle: 'Safety Line Endurance Gel Road Cycling Gloves | White',
+    seoDescription: 'Endurance road cycling gloves with vibration isolation and gel padding.',
+    createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cg-06',
+    name: 'Safety Line Chrono Speed Track Cycling Gloves',
+    slug: 'safety-line-chrono-speed-track-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'Ultra-lightweight track and road racing gloves designed for maximum tactile handlebar connection and aerodynamic efficiency.',
+    longDescription: 'Ultra-lightweight track and road racing gloves designed for maximum tactile handlebar connection and aerodynamic efficiency with embroidered Safety Line SL emblem.',
+    material: 'Tacky Synthetic Leather & Ultra-Low Profile Aero Fabric',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: ['Chrono Racer Red / Black'],
+    features: [
+      'Tacky synthetic leather palm with direct handlebar feedback',
+      'Ultra-low profile aero stitching for zero drag',
+      'Flexible knuckle articulation panels',
+      'Embroidered Safety Line SL insignia'
+    ],
+    productCode: 'GW-CG-06',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: cy6Img,
+    galleryImages: [cy6Img],
+    seoTitle: 'Safety Line Chrono Speed Track Cycling Gloves | Red',
+    seoDescription: 'Ultra-lightweight track cycling gloves with tacky synthetic leather palm.',
+    createdAt: '2026-03-16T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cg-09',
+    name: 'Safety Line All-Weather Gravel & MTB Cycling Gloves',
+    slug: 'safety-line-all-weather-gravel-mtb-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'Rugged all-weather gravel and cross-country cycling gloves built with abrasion-resistant palm reinforcement and touchscreen compatibility.',
+    longDescription: 'Rugged all-weather gravel and cross-country cycling gloves built with abrasion-resistant palm reinforcement, touchscreen compatibility, and Safety Line wrist security.',
+    material: 'Abrasion-Resistant Synthetic Leather & TPR Impact Guards',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Gravel Explorer Slate / Orange'],
+    features: [
+      'All-weather silicon traction palm with double stitching',
+      'Reinforced durability seams with neoprene cuff',
+      'TPR impact guards and flexible mesh',
+      'Touchscreen compatible finger tips'
+    ],
+    productCode: 'GW-CG-09',
+    status: 'Active',
+    displayOrder: 4,
+    coverImage: cy9Img,
+    galleryImages: [cy9Img],
+    seoTitle: 'Safety Line All-Weather Gravel & MTB Cycling Gloves | Slate',
+    seoDescription: 'Rugged all-weather gravel and mountain biking gloves with TPR impact guards.',
+    createdAt: '2026-03-17T08:00:00.000Z'
   },
 
   // 3. Car Racing Category (Featuring Official Safety Line CG1 to CG5 Lineup)
