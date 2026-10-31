@@ -388,6 +388,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   alt={`${product.name} showcase view`}
                   className="w-full h-full object-contain pointer-events-none will-change-transform"
                   style={{
+                    mixBlendMode: 'multiply',
                     transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
                     transform: isZoomed 
                       ? `scale(${zoomScale})` 
@@ -529,7 +530,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   <button
                     key={idx}
                     onClick={() => handleThumbnailClick(idx)}
-                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer bg-slate-50 flex items-center justify-center p-1.5 ${
+                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer bg-white flex items-center justify-center p-1.5 ${
                       idx === activeIndex
                         ? 'border-[#FF5A36] ring-2 ring-[#FF5A36]/20 scale-95 shadow-xs'
                         : 'border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400'
@@ -538,6 +539,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                     <SmoothImage 
                       src={img} 
                       alt={`Thumbnail view ${idx + 1}`} 
+                      style={{ mixBlendMode: 'multiply' }}
                       containerClassName="w-full h-full flex items-center justify-center"
                       className="w-full h-full object-contain" 
                       priority={idx < 2}

@@ -815,7 +815,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                     <div>
                       {/* Product Image Frame */}
                       <div 
-                        className="aspect-[4/3] bg-gradient-to-b from-slate-50 to-slate-100/60 relative overflow-hidden flex items-center justify-center p-4 border-b border-slate-100 cursor-pointer"
+                        className="aspect-[4/3] bg-white relative overflow-hidden flex items-center justify-center p-4 border-b border-slate-100 cursor-pointer"
                         onClick={() => {
                           if (matchingSpec) setInspectGlove(matchingSpec);
                           else navigate(`/product/${product.slug}`);
@@ -826,6 +826,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                           alt={product.name}
                           priority={idx < 4}
                           fallbackText={product.productCode}
+                          style={{ mixBlendMode: 'multiply' }}
                           containerClassName="w-full h-full flex items-center justify-center"
                           className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-108"
                         />
@@ -950,7 +951,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                       {/* Left: Product Image */}
                       <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
                         <div 
-                          className="aspect-[4/3] rounded-xl bg-gradient-to-b from-slate-50 to-slate-100 relative overflow-hidden flex items-center justify-center p-3 border border-slate-100 cursor-pointer group"
+                          className="aspect-[4/3] rounded-xl bg-white relative overflow-hidden flex items-center justify-center p-3 border border-slate-100 cursor-pointer group"
                           onClick={() => {
                             if (matchingSpec) setInspectGlove(matchingSpec);
                             else navigate(`/product/${product.slug}`);
@@ -961,6 +962,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                             alt={product.name}
                             priority={idx < 4}
                             fallbackText={product.productCode}
+                            style={{ mixBlendMode: 'multiply' }}
                             containerClassName="w-full h-full flex items-center justify-center"
                             className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-108"
                           />

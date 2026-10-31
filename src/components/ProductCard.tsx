@@ -33,12 +33,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       <div>
         {/* Full Shape Product Image Container with Smooth Preload & Shimmer */}
-        <div className="aspect-square bg-[#F8FAFB] relative overflow-hidden flex items-center justify-center p-3.5 border-b border-slate-100">
+        <div className="aspect-square bg-white relative overflow-hidden flex items-center justify-center p-3.5 border-b border-slate-100">
           <SmoothImage
             src={product.coverImage}
             alt={product.name}
             priority={priority}
             fallbackText={product.productCode}
+            style={{ mixBlendMode: 'multiply' }}
             containerClassName="w-full h-full flex items-center justify-center"
             className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
           />
