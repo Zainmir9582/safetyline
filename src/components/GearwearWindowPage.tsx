@@ -37,9 +37,12 @@ import cg3SlideImg from '../assets/images/cg3_slide.png';
 import cg4SlideImg from '../assets/images/cg4_slide.png';
 import cg5SlideImg from '../assets/images/cg5_slide.png';
 
-// Cycling Gloves Assets (cycling_glove_safetyline_1, 4, 6, 9)
+// Cycling Gloves Assets
 import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
+import cy2Img from '../assets/images/cycling_glove_safetyline_2.png';
+import cy3Img from '../assets/images/cycling_glove_safetyline_3.jpeg';
 import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
+import cy5Img from '../assets/images/cycling_glove_safetyline_5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
 import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
 
@@ -140,6 +143,34 @@ export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     summary: 'Professional aerodynamic road cycling gloves featuring multi-density 5mm shock-absorbing gel palm pads, moisture-wicking micro-mesh, and Safety Line pull-tab release.'
   },
   {
+    code: 'GW-CG-02',
+    name: 'Safety Line Veloce Signal Aero Cycling Gloves',
+    livery: 'Signal Neon Yellow / Carbon Black',
+    image: cy2Img,
+    slideImage: cy2Img,
+    badge: 'Veloce Hi-Vis',
+    flameRating: 'High-Visibility UV Solar Shield UPF 50+',
+    palmMatrix: 'Reinforced Suede Microfiber with Anti-Shock Gel Cushioning',
+    seamType: 'Breathable Air-Mesh Finger Framing with Quick Release Tabs',
+    knuckleArmor: 'High-Density Flex Mesh Backhand',
+    targetDiscipline: 'Road Racing, Criterium & Night Training',
+    summary: 'High-visibility aerodynamic cycling gloves engineered with fluorescent signal accents, shock-absorbing gel palm pads, and breathable stretch airflow mesh.'
+  },
+  {
+    code: 'GW-CG-03',
+    name: 'Safety Line Stealth Pro Road Cycling Gloves',
+    livery: 'Stealth Black / Reflex White',
+    image: cy3Img,
+    slideImage: cy3Img,
+    badge: 'Pro Circuit',
+    flameRating: 'All-Season Breathable Aero Matrix',
+    palmMatrix: 'Anatomical Silicon Hex Grip Palm with Foam Protection',
+    seamType: 'Low-Profile Flatlock Aero Seams with Terry Sweat Wipe',
+    knuckleArmor: 'Padded Metacarpal Cushion & Air Vents',
+    targetDiscipline: 'Road Cycling & Gravel Endurance',
+    summary: 'Sleek stealth black cycling gloves featuring high-traction silicone hex palm grip, ergonomic ulnar pressure relief, and absorbent thumb sweat wipe.'
+  },
+  {
     code: 'GW-CG-04',
     name: 'Safety Line Endurance Gel Road Cycling Gloves',
     livery: 'Endurance White / Stealth Black',
@@ -152,6 +183,20 @@ export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
     knuckleArmor: 'Breathable Stretch Vent Backing',
     targetDiscipline: 'Century Rides, Gran Fondo & Ultra Endurance',
     summary: 'Engineered for long-distance century rides and Gran Fondo racing. Features advanced gel vibration damping, absorbent micro-fleece thumb wipe, and secure velcro closure.'
+  },
+  {
+    code: 'GW-CG-05',
+    name: 'Safety Line Grand Prix Monza Aero Cycling Gloves',
+    livery: 'Championship Monza Red / Black',
+    image: cy5Img,
+    slideImage: cy5Img,
+    badge: 'Grand Prix Edition',
+    flameRating: 'UPF 50+ Sun & Wind Barrier',
+    palmMatrix: 'Dual-Density Ergonomic Gel Palm with Kevlar® Thumb Saddle',
+    seamType: 'Pre-Curved Articulated Finger Sidewalls',
+    knuckleArmor: 'Breathable Aero Fabric with Pull Tab Gauntlet',
+    targetDiscipline: 'Sprint Circuit, Road & Track Racing',
+    summary: 'Championship-tier cycling gloves designed with radiant Monza Red aero backing, dual-density gel cushioning, and official Safety Line branding.'
   },
   {
     code: 'GW-CG-06',
@@ -1163,6 +1208,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                     <img
                       src={inspectGlove.image}
                       alt={inspectGlove.name}
+                      style={{ mixBlendMode: 'multiply' }}
                       className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.18)]"
                     />
                   </div>

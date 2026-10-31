@@ -17,7 +17,10 @@ import cg5Img from '../assets/images/cg5.png';
 
 // Cycling Gloves Assets
 import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
+import cy2Img from '../assets/images/cycling_glove_safetyline_2.png';
+import cy3Img from '../assets/images/cycling_glove_safetyline_3.jpeg';
 import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
+import cy5Img from '../assets/images/cycling_glove_safetyline_5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
 import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
 
@@ -212,6 +215,60 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-03-14T08:00:00.000Z'
   },
   {
+    id: 'prod-cg-02',
+    name: 'Safety Line Veloce Signal Aero Cycling Gloves',
+    slug: 'safety-line-veloce-signal-aero-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'High-visibility aerodynamic cycling gloves engineered with fluorescent signal accents, shock-absorbing gel palm pads, and breathable stretch airflow mesh.',
+    longDescription: 'High-performance aerodynamic cycling gloves engineered with anti-shock gel palm pads, high-breathability mesh backing, quick-release finger loops, and embroidered Safety Line insignia.',
+    material: 'Reinforced Microfiber Suede, Gel Cushioning & Airflow Mesh',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Signal Neon Yellow / Carbon Black'],
+    features: [
+      'Reinforced microfiber suede with anti-shock gel cushioning',
+      'High-visibility fluorescent signal accents for road visibility',
+      'Breathable air-mesh finger framing with quick release tabs',
+      'Adjustable wrist velcro strap with embroidered Safety Line logo'
+    ],
+    productCode: 'GW-CG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: cy2Img,
+    galleryImages: [cy2Img],
+    seoTitle: 'Safety Line Veloce Signal Aero Cycling Gloves | Neon Yellow',
+    seoDescription: 'High-visibility aerodynamic cycling gloves with gel palm pads and air-mesh backing.',
+    createdAt: '2026-03-14T10:00:00.000Z'
+  },
+  {
+    id: 'prod-cg-03',
+    name: 'Safety Line Stealth Pro Road Cycling Gloves',
+    slug: 'safety-line-stealth-pro-road-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'Sleek stealth black cycling gloves featuring high-traction silicone hex palm grip, ergonomic ulnar pressure relief, and absorbent thumb sweat wipe.',
+    longDescription: 'Sleek stealth black cycling gloves featuring high-traction silicone hex palm grip, ergonomic ulnar pressure relief, padded metacarpal cushions, and Terry thumb sweat wipe.',
+    material: 'Synthetic Suede, Silicone Hex Traction & Flex Vent Mesh',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Stealth Black / Reflex White'],
+    features: [
+      'Anatomical silicon hex grip palm with foam protection',
+      'Low-profile flatlock aero seams with terry sweat wipe',
+      'Padded metacarpal cushion & air vents for zero fatigue',
+      'Ergonomic ulnar nerve relief structure'
+    ],
+    productCode: 'GW-CG-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: cy3Img,
+    galleryImages: [cy3Img],
+    seoTitle: 'Safety Line Stealth Pro Road Cycling Gloves | Black',
+    seoDescription: 'Stealth black road cycling gloves with silicone hex grip palm and ulnar protection.',
+    createdAt: '2026-03-14T12:00:00.000Z'
+  },
+  {
     id: 'prod-cg-04',
     name: 'Safety Line Endurance Gel Road Cycling Gloves',
     slug: 'safety-line-endurance-gel-road-cycling-gloves',
@@ -231,12 +288,39 @@ export const gearwearProducts: Product[] = [
     ],
     productCode: 'GW-CG-04',
     status: 'Active',
-    displayOrder: 2,
+    displayOrder: 4,
     coverImage: cy4Img,
     galleryImages: [cy4Img],
     seoTitle: 'Safety Line Endurance Gel Road Cycling Gloves | White',
     seoDescription: 'Endurance road cycling gloves with vibration isolation and gel padding.',
     createdAt: '2026-03-15T08:00:00.000Z'
+  },
+  {
+    id: 'prod-cg-05',
+    name: 'Safety Line Grand Prix Monza Aero Cycling Gloves',
+    slug: 'safety-line-grand-prix-monza-aero-cycling-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'cycling-gloves',
+    shortDescription: 'Championship-tier cycling gloves designed with radiant Monza Red aero backing, dual-density gel cushioning, and official Safety Line branding.',
+    longDescription: 'Championship-tier cycling gloves designed with radiant Monza Red aero backing, dual-density gel cushioning, Kevlar® reinforced thumb saddle, and official Safety Line branding.',
+    material: 'Dual-Density Gel, Kevlar® Thumb Saddle & Monza Red Aero Knit',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: ['Championship Monza Red / Black'],
+    features: [
+      'Dual-density ergonomic gel palm with Kevlar® thumb saddle',
+      'Pre-curved articulated finger sidewalls for racing grip',
+      'Breathable aero fabric with pull tab gauntlet',
+      'UPF 50+ solar barrier protection'
+    ],
+    productCode: 'GW-CG-05',
+    status: 'Active',
+    displayOrder: 5,
+    coverImage: cy5Img,
+    galleryImages: [cy5Img],
+    seoTitle: 'Safety Line Grand Prix Monza Aero Cycling Gloves | Red',
+    seoDescription: 'Championship Monza Red cycling gloves with dual-density gel palm and Kevlar saddle.',
+    createdAt: '2026-03-15T12:00:00.000Z'
   },
   {
     id: 'prod-cg-06',
