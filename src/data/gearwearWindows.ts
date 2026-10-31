@@ -1,4 +1,4 @@
-import golfGlovesImg from '../assets/images/blank_golf_glove_1792247520769.jpg';
+import golfGlovesImg from '../assets/images/golf_glove_1.jpeg';
 import fishGlovesImg from '../assets/images/blank_fish_glove_1792247591287.jpg';
 import workGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';
 import mechanicsGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';

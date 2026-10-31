@@ -46,6 +46,16 @@ import cy5Img from '../assets/images/cycling_glove_safetyline_5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
 import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
 
+// Golf Gloves Assets
+import gg1Img from '../assets/images/golf_glove_1.jpeg';
+import gg2Img from '../assets/images/golf_glove_2.jpeg';
+import gg3Img from '../assets/images/golf_glove_3.jpeg';
+import gg4Img from '../assets/images/golf_glove_4.jpeg';
+import gg5Img from '../assets/images/golf_glove_5.jpeg';
+import gg6Img from '../assets/images/golf_glove_6.jpeg';
+import gg7Img from '../assets/images/golf_glove_7.jpeg';
+import gg8Img from '../assets/images/golf_glove_8.jpeg';
+
 interface GearwearWindowPageProps {
   window: GearwearWindow;
   products: Product[];
@@ -215,6 +225,121 @@ export const CYCLING_GLOVE_MODELS: CarRacingGloveSpec[] = [
   }
 ];
 
+export const GOLF_GLOVE_MODELS: CarRacingGloveSpec[] = [
+  {
+    code: 'GW-GG-01',
+    name: 'Safety Line Tour Precision Cabretta Golf Gloves',
+    livery: 'Tour Pearl White / Stealth Black Tab',
+    image: gg1Img,
+    slideImage: gg1Img,
+    badge: 'Tour Grade AAA',
+    flameRating: '0.45mm AAA Cabretta Leather',
+    palmMatrix: 'Micro-Perforated Ethiopian Cabretta Leather Palm',
+    seamType: 'Ergonomic Angled Tab Closure with Elastic Wrist',
+    knuckleArmor: 'Micro-Perforation Array & Breathable Spandex',
+    targetDiscipline: 'PGA Tour, Tournament Play & Low Handicap',
+    summary: 'Precision-tailored golf gloves crafted from Grade-AAA Indonesian Cabretta leather for velvet-soft tactile feedback, all-weather moisture control, and zero-slip club head stability in competitive play.'
+  },
+  {
+    code: 'GW-GG-02',
+    name: 'Safety Line Pure Grip All-Weather Golf Gloves',
+    livery: 'Optic White / Signal Red Accent',
+    image: gg2Img,
+    slideImage: gg2Img,
+    badge: 'All-Weather Pro',
+    flameRating: 'Hydrophobic All-Weather Treated',
+    palmMatrix: 'Tacky Synthetic Microfiber Suede Palm',
+    seamType: '4-Way Stretch Flex Mesh Finger Framing',
+    knuckleArmor: 'PowerMesh Flex Knuckle Inserts',
+    targetDiscipline: 'Wet Conditions, High Humidity & Summer Rounds',
+    summary: 'All-weather golf gloves engineered with tacky synthetic leather palm matrix and 4-way stretch flex mesh for ultimate control in damp or humid climates.'
+  },
+  {
+    code: 'GW-GG-03',
+    name: 'Safety Line Master Tour Soft Cabretta Golf Gloves',
+    livery: 'Classic White / Midnight Black',
+    image: gg3Img,
+    slideImage: gg3Img,
+    badge: 'Master Tour Spec',
+    flameRating: '0.40mm Ultra-Thin Cabretta',
+    palmMatrix: 'Seamless Grade-AAA Leather Palm Overlay',
+    seamType: 'Precision Hand-Tailored Elastic Wrist Binding',
+    knuckleArmor: 'Targeted Finger Airflow Perforations',
+    targetDiscipline: 'Competitive Championship & Tour Play',
+    summary: 'Ultra-thin 0.40mm AAA Cabretta leather golf gloves featuring a seamless palm overlay and precision elastic wrist band for supreme feel and distance control.'
+  },
+  {
+    code: 'GW-GG-04',
+    name: 'Safety Line Pro-Feel Perforated Tour Golf Gloves',
+    livery: 'Pearl White / Carbon Grey Accent',
+    image: gg4Img,
+    slideImage: gg4Img,
+    badge: 'Airflow Perforated',
+    flameRating: 'Laser-Drilled Thermal Release',
+    palmMatrix: 'Anatomically Contoured Cabretta Palm Patch',
+    seamType: 'Ergonomic Angled Velcro Tab with Soft Wrist Lining',
+    knuckleArmor: 'Full Laser-Perforated Dorsal Airflow Panel',
+    targetDiscipline: 'Hot Climate Golf, Practice Range & Tournaments',
+    summary: 'High-ventilation tour golf gloves featuring full-back laser micro-perforations and anatomical palm padding for maximum cooling in hot summer conditions.'
+  },
+  {
+    code: 'GW-GG-05',
+    name: 'Safety Line Elite Comfort Stretch Hybrid Golf Gloves',
+    livery: 'Pure White / Slate Grey Elastic',
+    image: gg5Img,
+    slideImage: gg5Img,
+    badge: 'Hybrid Stretch Pro',
+    flameRating: '3D Stretch Lycra & Cabretta Hybrid',
+    palmMatrix: 'High-Tack Cabretta Leather Palm & Thumb Saddle',
+    seamType: '3D Conformable Elastic Stretch Backhand',
+    knuckleArmor: 'Flexible Lycra Knuckle Articulation Zone',
+    targetDiscipline: 'All-Day Rounds, Practice Ranges & Club Play',
+    summary: 'Hybrid golf gloves combining premium Cabretta leather palm grip with 3D stretch Lycra backhand flexibility for effortless mobility across 18 holes.'
+  },
+  {
+    code: 'GW-GG-06',
+    name: 'Safety Line Tour Select Hydrophobic Cabretta Golf Gloves',
+    livery: 'Optic White / Royal Blue Trim',
+    image: gg6Img,
+    slideImage: gg6Img,
+    badge: 'Nano Hydrophobic',
+    flameRating: 'Dew & Sweat Repellent Nano Shield',
+    palmMatrix: 'Nano-Treated Hydrophobic Cabretta Leather',
+    seamType: 'Micro-Porous Finger Sidewalls with Embroidered Tab',
+    knuckleArmor: 'Abrasion-Resistant Dorsal Shielding',
+    targetDiscipline: 'Morning Dew Rounds, Rainy Matches & Tour Play',
+    summary: 'Hydrophobic nano-treated Cabretta leather golf gloves repelling dew, sweat, and light rain while providing uncompromised shot feedback.'
+  },
+  {
+    code: 'GW-GG-07',
+    name: 'Safety Line Apex Precision Micro-Mesh Golf Gloves',
+    livery: 'Pearl White / Emerald Green Logo',
+    image: gg7Img,
+    slideImage: gg7Img,
+    badge: 'Apex Precision',
+    flameRating: 'High-Tack Micro-Mesh Construction',
+    palmMatrix: 'High-Tack Cabretta Leather Palm with Heel Patch',
+    seamType: 'Double-Stitched High-Friction Stress Zones',
+    knuckleArmor: 'Precision Micro-Mesh Knuckle Inserts',
+    targetDiscipline: 'High-Speed Swings, Driving Range & Championship Play',
+    summary: 'Lightweight tour golf gloves featuring micro-mesh knuckle inserts and high-tack Cabretta thumb saddle for smooth swing mechanics.'
+  },
+  {
+    code: 'GW-GG-08',
+    name: 'Safety Line Championship Gold Medal Tour Golf Gloves',
+    livery: 'Championship White / Satin Gold Tab',
+    image: gg8Img,
+    slideImage: gg8Img,
+    badge: 'Gold Medal Tour',
+    flameRating: 'Select Grade-AAA Championship Cabretta',
+    palmMatrix: 'Velvet-Soft Hand-Tailored Cabretta Leather',
+    seamType: 'Gold-Embossed Ergonomic Tab Closure',
+    knuckleArmor: 'Seamless Contour Fit with Zero Bunching',
+    targetDiscipline: 'Championship Finals, Trophy Rounds & Pro-Am',
+    summary: 'Championship-grade Cabretta leather golf gloves with gold medal accent tab and Tour-validated fit designed to commemorate victory on the course.'
+  }
+];
+
 export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   window: currentWindow,
   products,
@@ -222,8 +347,9 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
 }) => {
   const isCarRacing = currentWindow.slug === 'motorcars-gloves' || currentWindow.slug === 'car-racing';
   const isCycling = currentWindow.slug === 'cycling-gloves';
-  const isHasHeroSlide = isCarRacing || isCycling;
-  const activeSlideModels = isCarRacing ? CAR_RACING_GLOVE_MODELS : CYCLING_GLOVE_MODELS;
+  const isGolf = currentWindow.slug === 'golf-gloves';
+  const isHasHeroSlide = isCarRacing || isCycling || isGolf;
+  const activeSlideModels = isCarRacing ? CAR_RACING_GLOVE_MODELS : isCycling ? CYCLING_GLOVE_MODELS : GOLF_GLOVE_MODELS;
 
   // Search, size and view filter states
   const [searchQuery, setSearchQuery] = useState('');
@@ -231,7 +357,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [inquiryProductTitle, setInquiryProductTitle] = useState<string>(
-    isCarRacing ? 'Car Racing Gloves Series' : isCycling ? 'Cycling Gloves Series' : `${currentWindow.title} Line`
+    isCarRacing ? 'Car Racing Gloves Series' : isCycling ? 'Cycling Gloves Series' : isGolf ? 'Golf Gloves Series' : `${currentWindow.title} Line`
   );
 
   // Auto slide animation index
@@ -823,12 +949,20 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                           {product.productCode}
                         </div>
 
-                        {/* Homologation / Safety Badge */}
-                        {isCarProduct && (
+                        {/* Homologation / Safety / Quality Badge */}
+                        {isCarProduct ? (
                           <div className="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
                             FIA 8856
                           </div>
-                        )}
+                        ) : product.productCode?.startsWith('GW-CG') ? (
+                          <div className="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
+                            UCI Aero Pro
+                          </div>
+                        ) : product.productCode?.startsWith('GW-GG') ? (
+                          <div className="absolute top-3 right-3 bg-[#0B3D3B]/90 backdrop-blur-xs text-white border border-[#0B3D3B] px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
+                            AAA Cabretta
+                          </div>
+                        ) : null}
 
                         {/* Quick View Button on Hover */}
                         <div className="absolute bottom-3 right-3 bg-slate-900/85 text-white px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold flex items-center gap-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
@@ -959,11 +1093,19 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                             {product.productCode}
                           </div>
 
-                          {isCarProduct && (
+                          {isCarProduct ? (
                             <div className="absolute top-2.5 right-2.5 bg-slate-900/90 text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
                               FIA 8856-2018
                             </div>
-                          )}
+                          ) : product.productCode?.startsWith('GW-CG') ? (
+                            <div className="absolute top-2.5 right-2.5 bg-slate-900/90 text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
+                              UCI Aero Pro
+                            </div>
+                          ) : product.productCode?.startsWith('GW-GG') ? (
+                            <div className="absolute top-2.5 right-2.5 bg-[#0B3D3B]/90 text-white border border-[#0B3D3B] px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
+                              AAA Cabretta
+                            </div>
+                          ) : null}
                         </div>
 
                         {/* Livery info */}
@@ -1016,7 +1158,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                             <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                               <span className="text-[10px] font-mono text-slate-400 uppercase block">Homologation</span>
                               <span className="font-semibold text-[#EA2227] text-[11px] truncate block">
-                                {isCarProduct ? 'FIA 8856-2018 / SFI 3.3/5' : 'EN ISO Safety Standard'}
+                                {isCarProduct ? 'FIA 8856-2018 / SFI 3.3/5' : isGolf ? 'Tour Precision Grade AAA' : isCycling ? 'UCI Aero Pro Certified' : 'EN ISO Safety Standard'}
                               </span>
                             </div>
                           </div>
@@ -1180,7 +1322,9 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   <span className="px-2.5 py-0.5 rounded bg-[#EA2227] text-white text-[10px] font-mono font-bold">
                     {inspectGlove.code}
                   </span>
-                  <span className="text-xs font-mono text-slate-300">Motorsport Specification Sheet</span>
+                  <span className="text-xs font-mono text-slate-300">
+                    {inspectGlove.code.startsWith('GW-CR') ? 'Motorsport Specification Sheet' : inspectGlove.code.startsWith('GW-CG') ? 'Aero Cycling Specification Sheet' : 'Tour Golf Specification Sheet'}
+                  </span>
                 </div>
                 <button
                   onClick={() => setInspectGlove(null)}
@@ -1204,7 +1348,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
 
                   <div className="space-y-3">
                     <span className="text-xs font-mono font-bold text-[#EA2227] uppercase">
-                      Livery: {inspectGlove.livery}
+                      Livery / Style: {inspectGlove.livery}
                     </span>
                     <h4 className="font-display font-black text-xl text-slate-900 leading-tight">
                       {inspectGlove.name}
@@ -1214,7 +1358,9 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                     </p>
                     <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
                       <div className="flex justify-between">
-                        <span className="text-slate-500">Flame Rating:</span>
+                        <span className="text-slate-500">
+                          {inspectGlove.code.startsWith('GW-CR') ? 'Flame Rating:' : inspectGlove.code.startsWith('GW-CG') ? 'Protection Rating:' : 'Leather & Rating:'}
+                        </span>
                         <span className="font-mono font-bold text-[#EA2227]">{inspectGlove.flameRating}</span>
                       </div>
                       <div className="flex justify-between">

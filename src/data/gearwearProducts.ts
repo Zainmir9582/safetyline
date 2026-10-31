@@ -24,6 +24,16 @@ import cy5Img from '../assets/images/cycling_glove_safetyline_5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
 import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
 
+// Golf Gloves Assets
+import gg1Img from '../assets/images/golf_glove_1.jpeg';
+import gg2Img from '../assets/images/golf_glove_2.jpeg';
+import gg3Img from '../assets/images/golf_glove_3.jpeg';
+import gg4Img from '../assets/images/golf_glove_4.jpeg';
+import gg5Img from '../assets/images/golf_glove_5.jpeg';
+import gg6Img from '../assets/images/golf_glove_6.jpeg';
+import gg7Img from '../assets/images/golf_glove_7.jpeg';
+import gg8Img from '../assets/images/golf_glove_8.jpeg';
+
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
   {
@@ -375,6 +385,224 @@ export const gearwearProducts: Product[] = [
     seoTitle: 'Safety Line All-Weather Gravel & MTB Cycling Gloves | Slate',
     seoDescription: 'Rugged all-weather gravel and mountain biking gloves with TPR impact guards.',
     createdAt: '2026-03-17T08:00:00.000Z'
+  },
+
+  // 2.5. Golf Gloves Category (GW-GG)
+  {
+    id: 'prod-gg-01',
+    name: 'Safety Line Tour Precision Cabretta Golf Gloves',
+    slug: 'safety-line-tour-precision-cabretta-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'Tour-grade AAA Indonesian Cabretta leather golf gloves with micro-perforated airflow design and Velcro precision tab.',
+    longDescription: 'Precision-tailored golf gloves crafted from Grade-AAA Indonesian Cabretta leather for velvet-soft tactile feedback, all-weather moisture control, and zero-slip club head stability in competitive play.',
+    material: '0.45mm AAA Cabretta Leather & Micro-Porated Airflow Mesh',
+    sizes: ['S', 'M', 'ML', 'L', 'XL'],
+    colors: ['Tour Pearl White / Stealth Black Tab'],
+    features: [
+      'Grade-AAA Ethiopian & Indonesian Cabretta leather for supple second-skin fit',
+      'Micro-perforation arrays across fingers for rapid sweat dispersion',
+      'Angled ergonomic Velcro tab closure with elasticized wrist contouring',
+      'Reinforced palm heel pad for extended durability across 100+ rounds'
+    ],
+    productCode: 'GW-GG-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: gg1Img,
+    galleryImages: [gg1Img],
+    seoTitle: 'Safety Line Tour Precision Cabretta Golf Gloves | Tour Grade',
+    seoDescription: 'Tour-grade AAA Cabretta leather golf gloves with micro-perforated airflow design and Velcro tab.',
+    createdAt: '2026-03-18T08:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-02',
+    name: 'Safety Line Pure Grip All-Weather Golf Gloves',
+    slug: 'safety-line-pure-grip-all-weather-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'All-weather golf gloves engineered with tacky synthetic leather palm matrix and 4-way stretch flex mesh for high humidity.',
+    longDescription: 'Engineered to maintain maximum club face control in damp, humid, or rainy conditions. Combines hydrophobic microfiber palm texture with flexible knuckle inserts.',
+    material: 'Hydrophobic Microfiber Suede & 4-Way Stretch PowerMesh',
+    sizes: ['S', 'M', 'ML', 'L', 'XL'],
+    colors: ['Optic White / Signal Red Accent'],
+    features: [
+      'Hydrophobic tacky synthetic leather palm for zero-slip wet grip',
+      'Flexible 4-way stretch mesh over knuckles and finger joints',
+      'Moisture-wicking interior lining for dry hands in hot climates',
+      'Precision Velcro closure tab with Safety Line branding'
+    ],
+    productCode: 'GW-GG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: gg2Img,
+    galleryImages: [gg2Img],
+    seoTitle: 'Safety Line Pure Grip All-Weather Golf Gloves | Hydrophobic',
+    seoDescription: 'All-weather golf gloves with tacky synthetic palm and 4-way stretch mesh.',
+    createdAt: '2026-03-18T10:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-03',
+    name: 'Safety Line Master Tour Soft Cabretta Golf Gloves',
+    slug: 'safety-line-master-tour-soft-cabretta-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'Ultra-thin 0.40mm AAA Cabretta leather golf gloves with seamless palm overlay and precision elastic wrist band.',
+    longDescription: 'Crafted for low-handicap players and PGA tournament contenders seeking ultimate feel. Features hand-selected featherlight Cabretta leather.',
+    material: '0.40mm Ultra-Thin AAA Ethiopian Cabretta Leather',
+    sizes: ['S', 'M', 'ML', 'L', 'XL', 'XXL'],
+    colors: ['Classic White / Midnight Black'],
+    features: [
+      'Hand-selected 0.40mm ultra-soft Ethiopian Cabretta leather',
+      'Seamless palm surface ensuring pure feedback on leather or rubber grips',
+      'Targeted finger perforations for continuous airflow',
+      'Elasticized wrist binding with micro-velcro closure'
+    ],
+    productCode: 'GW-GG-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: gg3Img,
+    galleryImages: [gg3Img],
+    seoTitle: 'Safety Line Master Tour Soft Cabretta Golf Gloves | PGA Tour',
+    seoDescription: 'Ultra-thin 0.40mm AAA Cabretta leather golf gloves for PGA tournament precision.',
+    createdAt: '2026-03-18T12:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-04',
+    name: 'Safety Line Pro-Feel Perforated Tour Golf Gloves',
+    slug: 'safety-line-pro-feel-perforated-tour-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'High-ventilation tour golf gloves featuring full-back laser micro-perforations and anatomical palm padding.',
+    longDescription: 'Optimized for warm summer rounds and intense practice sessions. Features high-density laser-drilled perforations along all fingers and backhand.',
+    material: 'Perforated AAA Cabretta Leather & Moisture-Wicking Spandex',
+    sizes: ['S', 'M', 'ML', 'L', 'XL'],
+    colors: ['Pearl White / Carbon Grey Accent'],
+    features: [
+      'Full laser-perforated finger and dorsal panels for max ventilation',
+      'Anatomically contoured palm patch for reduced grip pressure',
+      'Soft terry wrist lining absorbing sweat before reaching palms',
+      'Ergonomic angled pull-tab closure'
+    ],
+    productCode: 'GW-GG-04',
+    status: 'Active',
+    displayOrder: 4,
+    coverImage: gg4Img,
+    galleryImages: [gg4Img],
+    seoTitle: 'Safety Line Pro-Feel Perforated Tour Golf Gloves | Perforated',
+    seoDescription: 'High-ventilation tour golf gloves with laser micro-perforations and soft wrist lining.',
+    createdAt: '2026-03-19T08:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-05',
+    name: 'Safety Line Elite Comfort Stretch Hybrid Golf Gloves',
+    slug: 'safety-line-elite-comfort-stretch-hybrid-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'Hybrid golf gloves combining premium Cabretta leather palm grip with 3D stretch Lycra backhand flexibility.',
+    longDescription: 'Designed for golfers seeking the ideal blend of leather grip tactile sensitivity and synthetic stretch mobility across all 18 holes.',
+    material: 'AAA Cabretta Leather Palm & 3D Elastic Stretch Lycra Back',
+    sizes: ['S', 'M', 'ML', 'L', 'XL'],
+    colors: ['Pure White / Slate Grey Elastic'],
+    features: [
+      'AAA Cabretta leather palm and thumb for maximum club tackiness',
+      'Flexible 3D Lycra backhand conforming to every hand shape',
+      'Quick-drying stretch fabric preventing glove distortion over time',
+      'Reinforced thumb saddle for high-frequency driving range sessions'
+    ],
+    productCode: 'GW-GG-05',
+    status: 'Active',
+    displayOrder: 5,
+    coverImage: gg5Img,
+    galleryImages: [gg5Img],
+    seoTitle: 'Safety Line Elite Comfort Stretch Hybrid Golf Gloves | Hybrid',
+    seoDescription: 'Hybrid golf gloves combining Cabretta leather palm with 3D stretch Lycra back.',
+    createdAt: '2026-03-19T10:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-06',
+    name: 'Safety Line Tour Select Hydrophobic Cabretta Golf Gloves',
+    slug: 'safety-line-tour-select-hydrophobic-cabretta-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'Hydrophobic nano-treated Cabretta leather golf gloves repelling dew, sweat, and light rain.',
+    longDescription: 'Nano-treated Cabretta leather shields hands against morning dew and summer humidity while delivering uncompromised shot feedback.',
+    material: 'Nano-Treated Hydrophobic Cabretta Leather',
+    sizes: ['S', 'M', 'ML', 'L', 'XL'],
+    colors: ['Optic White / Royal Blue Trim'],
+    features: [
+      'Nano-coating repels water and sweat while maintaining natural leather softness',
+      'Reinforced palm heel pad providing long-lasting abrasion resistance',
+      'Micro-porous finger sidewalls ensuring rapid thermal release',
+      'Embroidered Safety Line tab logo with secure Velcro fastening'
+    ],
+    productCode: 'GW-GG-06',
+    status: 'Active',
+    displayOrder: 6,
+    coverImage: gg6Img,
+    galleryImages: [gg6Img],
+    seoTitle: 'Safety Line Tour Select Hydrophobic Golf Gloves | Nano Treated',
+    seoDescription: 'Hydrophobic nano-treated Cabretta leather golf gloves repelling dew and sweat.',
+    createdAt: '2026-03-19T12:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-07',
+    name: 'Safety Line Apex Precision Micro-Mesh Golf Gloves',
+    slug: 'safety-line-apex-precision-micro-mesh-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'Lightweight tour golf gloves featuring micro-mesh knuckle inserts and high-tack Cabretta thumb saddle.',
+    longDescription: 'Engineered for smooth swing mechanics and effortless wrist cocking. Features precision micro-mesh breathability across stress points.',
+    material: 'Cabretta Leather & Breathable Micro-Mesh Framing',
+    sizes: ['S', 'M', 'ML', 'L', 'XL'],
+    colors: ['Pearl White / Emerald Green Logo'],
+    features: [
+      'Micro-mesh inserts along knuckles and between fingers for maximum mobility',
+      'High-tack Cabretta palm providing immediate feedback on irons and woods',
+      'Elastic wrist band holding glove snug through full high-speed swings',
+      'Durable double stitching across high-friction palm zones'
+    ],
+    productCode: 'GW-GG-07',
+    status: 'Active',
+    displayOrder: 7,
+    coverImage: gg7Img,
+    galleryImages: [gg7Img],
+    seoTitle: 'Safety Line Apex Precision Micro-Mesh Golf Gloves | Apex Tour',
+    seoDescription: 'Precision golf gloves with micro-mesh inserts and high-tack Cabretta thumb saddle.',
+    createdAt: '2026-03-20T08:00:00.000Z'
+  },
+  {
+    id: 'prod-gg-08',
+    name: 'Safety Line Championship Gold Medal Tour Golf Gloves',
+    slug: 'safety-line-championship-gold-medal-tour-golf-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'golf-gloves',
+    shortDescription: 'Championship-grade Cabretta leather golf gloves with gold medal accent tab and Tour-validated fit.',
+    longDescription: 'Designed to commemorate championship victories. Features master-crafted Cabretta leather, gold-embossed Safety Line emblem, and flawless second-skin fit.',
+    material: 'Select Grade-AAA Cabretta Leather & Satin Gold Trim',
+    sizes: ['S', 'M', 'ML', 'L', 'XL', 'XXL'],
+    colors: ['Championship White / Satin Gold Tab'],
+    features: [
+      'Select Grade-AAA Cabretta leather for the ultimate velvet-soft grip feel',
+      'Gold-embossed Safety Line insignia on the ergonomic tab closure',
+      'Precision hand-tailored finger seams for zero bunching during swing',
+      'PGA & European Tour compliant specifications'
+    ],
+    productCode: 'GW-GG-08',
+    status: 'Active',
+    displayOrder: 8,
+    coverImage: gg8Img,
+    galleryImages: [gg8Img],
+    seoTitle: 'Safety Line Championship Gold Medal Golf Gloves | Gold Edition',
+    seoDescription: 'Championship-grade Cabretta leather golf gloves with gold medal accent tab.',
+    createdAt: '2026-03-20T10:00:00.000Z'
   },
 
   // 3. Car Racing Category (Featuring Official Safety Line CG1 to CG5 Lineup)
