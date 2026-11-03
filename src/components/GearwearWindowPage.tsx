@@ -56,6 +56,27 @@ import gg6Img from '../assets/images/golf_glove_6.png';
 import gg7Img from '../assets/images/golf_glove_7.png';
 import gg8Img from '../assets/images/golf_glove_8.png';
 
+// Fish Gloves Assets
+import fg1Img from '../assets/images/fish_glove_1.png';
+import fg2Img from '../assets/images/fish_glove_2.png';
+import fg3Img from '../assets/images/fish_glove_3.png';
+
+// Work Gloves Assets
+import wg1Img from '../assets/images/work_glove_1.png';
+import wg2Img from '../assets/images/work_glove_2.png';
+import wg3Img from '../assets/images/work_glove_3.png';
+
+// Mechanics Gloves Assets
+import mg1Img from '../assets/images/mechanics_glove_1.png';
+import mg2Img from '../assets/images/mechanics_glove_2.png';
+import mg3Img from '../assets/images/mechanics_glove_3.png';
+
+// Weight Lifting Assets
+import wl1Img from '../assets/images/weight_lifting_1.png';
+import wl2Img from '../assets/images/weight_lifting_2.png';
+import wl3Img from '../assets/images/weight_lifting_3.png';
+import wl4Img from '../assets/images/weight_lifting_4.png';
+
 interface GearwearWindowPageProps {
   window: GearwearWindow;
   products: Product[];
@@ -340,6 +361,200 @@ export const GOLF_GLOVE_MODELS: CarRacingGloveSpec[] = [
   }
 ];
 
+export const FISH_GLOVE_MODELS: CarRacingGloveSpec[] = [
+  {
+    code: 'GW-FG-01',
+    name: 'Safety Line Marine Kevlar® Anti-Puncture Fishing Gloves',
+    livery: 'Ocean Blue / Slate Grey',
+    image: fg1Img,
+    slideImage: fg1Img,
+    badge: 'Marine Kevlar®',
+    flameRating: 'Puncture Resistance ANSI Level 3 / EN 388',
+    palmMatrix: 'High-Traction Silicone Fish-Scale Grip Matrix',
+    seamType: 'Water-Repellent Neoprene with Pull Tab Cuff',
+    knuckleArmor: 'Puncture-Guard Dorsal Reinforcements',
+    targetDiscipline: 'Saltwater Angling, Wire Leadering & Wet-Deck Handling',
+    summary: 'Heavy-duty marine fishing gloves featuring puncture-resistant Kevlar® palmar lining, high-traction silicone fish-scale grip, and water-repellent neoprene.'
+  },
+  {
+    code: 'GW-FG-02',
+    name: 'Safety Line Steel-Core Fillet & Cut-Resistant Gloves',
+    livery: 'Silver-Grey Knit / Navy Blue Dipped',
+    image: fg2Img,
+    slideImage: fg2Img,
+    badge: 'ANSI Cut Level 5',
+    flameRating: 'ANSI A5 / EN 388 Level 5 Cut Protection',
+    palmMatrix: 'Crinkle Textured Crinkle Nitrile Wet Palm',
+    seamType: 'Seamless 13-Gauge Breathable Knit Elastic Wrist',
+    knuckleArmor: 'Micro-Wire Woven Dorsal Shield',
+    targetDiscipline: 'Fish Filleting, Processing & Blade Handling',
+    summary: 'Cut-resistant fish filleting gloves woven with stainless steel core fibers and crinkle nitrile dipped palm for knife safety.'
+  },
+  {
+    code: 'GW-FG-03',
+    name: 'Safety Line Offshore Big Game Leadering Gloves',
+    livery: 'Cyan Teal / Stealth Black',
+    image: fg3Img,
+    slideImage: fg3Img,
+    badge: 'Big Game Offshore',
+    flameRating: 'Heavy Wire Leader & Friction Certified',
+    palmMatrix: 'Double-Layer Heavy Kevlar® Palmar Armor',
+    seamType: 'Heavy-Duty Brass Grommet Pull Tab Cuff',
+    knuckleArmor: 'Molded Rubber Impact Finger Bumpers',
+    targetDiscipline: 'Offshore Tournament Angling & Marlin Leadering',
+    summary: 'Heavy-duty offshore leadering fishing gloves featuring reinforced double-layer Kevlar® palm pads, cyan flex webbing, and grommet pull tab.'
+  }
+];
+
+export const WORK_GLOVE_MODELS: CarRacingGloveSpec[] = [
+  {
+    code: 'GW-WG-01',
+    name: 'Safety Line Heavy-Duty Split Cowhide Leather Work Gloves',
+    livery: 'Golden Tan Cowhide / Natural Canvas',
+    image: wg1Img,
+    slideImage: wg1Img,
+    badge: 'Heavy Industrial Duty',
+    flameRating: 'EN 388 Level 4 Abrasion Resistant',
+    palmMatrix: '1.2mm Select Split Cowhide Leather Palm & Tips',
+    seamType: 'Double-Needle Kevlar® Thread Stitching',
+    knuckleArmor: 'Rubberized Heavy Safety Cuff & Knuckle Strap',
+    targetDiscipline: 'Job-Site Construction, Rigging & Lumber Handling',
+    summary: 'Industrial heavy-duty work gloves built with golden tan select split cowhide leather, keystone thumb, and rubberized safety cuff.'
+  },
+  {
+    code: 'GW-WG-02',
+    name: 'Safety Line High-Visibility Site Utility Work Gloves',
+    livery: 'High-Vis Lime Yellow / Stealth Black',
+    image: wg2Img,
+    slideImage: wg2Img,
+    badge: 'High-Vis Construction',
+    flameRating: 'Daytime High-Visibility Signal Certified',
+    palmMatrix: 'Padded Abrasion-Resistant Microfiber Palm',
+    seamType: 'Adjustable Hook-and-Loop Velcro Wrist Closure',
+    knuckleArmor: 'Fluorescent 4-Way Stretch Breathable Back',
+    targetDiscipline: 'Commercial Construction & Equipment Operation',
+    summary: 'Modern construction site utility work gloves featuring high-visibility fluorescent lime-yellow backhand and microfiber synthetic leather palm.'
+  },
+  {
+    code: 'GW-WG-03',
+    name: 'Safety Line Extreme Rigging TPR Impact Work Gloves',
+    livery: 'Safety Orange / Stealth Black Armor',
+    image: wg3Img,
+    slideImage: wg3Img,
+    badge: 'Rigging TPR Impact',
+    flameRating: 'ANSI/ISEA 138 Level 2 Impact Rated',
+    palmMatrix: 'Abrasion-Resistant Leather with Kevlar® Stitching',
+    seamType: 'Wide Neoprene Wrist Cuff with Pull Tab',
+    knuckleArmor: 'Segmented Thermal TPR Armor across Knuckles & Fingers',
+    targetDiscipline: 'Oil & Gas Drilling, Steel Erection & Heavy Rigging',
+    summary: 'Heavy-duty oilfield and rigging impact work gloves featuring safety orange dorsal mesh and flexible segmented black TPR impact armor.'
+  }
+];
+
+export const MECHANICS_GLOVE_MODELS: CarRacingGloveSpec[] = [
+  {
+    code: 'GW-MG-01',
+    name: 'Safety Line Stealth TPR Armor Automotive Mechanics Gloves',
+    livery: 'Stealth Matte Black',
+    image: mg1Img,
+    slideImage: mg1Img,
+    badge: 'Workshop TPR Armor',
+    flameRating: 'ANSI/ISEA 138 Level 2 Impact Shield',
+    palmMatrix: 'Clarino Synthetic Leather with Silicone Hex Matrix',
+    seamType: 'Neoprene Wrist Cuff with Hook-and-Loop Closure',
+    knuckleArmor: 'Molded Low-Profile Black TPR Impact Armor',
+    targetDiscipline: 'Automotive Repair, Engine Teardowns & Pit Crews',
+    summary: 'Professional workshop mechanics gloves featuring molded TPR impact knuckle armor, silicone hex grip Clarino palm, and touchscreen fingers.'
+  },
+  {
+    code: 'GW-MG-02',
+    name: 'Safety Line Cobalt Precision Technician Mechanics Gloves',
+    livery: 'Cobalt Blue / Stealth Black',
+    image: mg2Img,
+    slideImage: mg2Img,
+    badge: 'High-Dexterity Tech',
+    flameRating: '0.6mm Ultra-Thin Tactile Sensitivity',
+    palmMatrix: 'Microfiber Synthetic Suede Palm with Conductive Tips',
+    seamType: 'Pre-Curved Ergonomic Finger Articulation',
+    knuckleArmor: 'Segmented Flex TPR Knuckle & Metacarpal Protectors',
+    targetDiscipline: 'Precision Diagnostics, Timing & Electrical Bays',
+    summary: 'High-dexterity automotive technician gloves featuring vibrant cobalt blue stretch spandex, TPR knuckle shields, and tactile grey Clarino palm.'
+  },
+  {
+    code: 'GW-MG-03',
+    name: 'Safety Line Diesel Heavy-Machinery Oily-Grip Gloves',
+    livery: 'Charcoal Grey / Hi-Vis Red Armor',
+    image: mg3Img,
+    slideImage: mg3Img,
+    badge: 'Oily-Grip Diesel',
+    flameRating: 'Hydrocarbon & Fuel Impermeable Palm',
+    palmMatrix: 'Double-Dipped Micro-Sandy Nitrile Oil Palm',
+    seamType: 'Seamless 13-Gauge Knit Extended Safety Cuff',
+    knuckleArmor: 'Molded Hi-Vis Red Rubber Impact Ribs',
+    targetDiscipline: 'Diesel Engines, Hydraulic Systems & Plant Machinery',
+    summary: 'Heavy-machinery diesel mechanic gloves with micro-sandy nitrile dipped palm, hi-vis red impact ribs, and seamless breathable knit.'
+  }
+];
+
+export const WEIGHT_LIFTING_MODELS: CarRacingGloveSpec[] = [
+  {
+    code: 'GW-WL-01',
+    name: 'Safety Line Pro-Series Padded Wrist-Wrap Gym Gloves',
+    livery: 'Stealth Black / Padded Suede',
+    image: wl1Img,
+    slideImage: wl1Img,
+    badge: 'Powerlifting Heavy',
+    flameRating: '500kg+ Barbell Load Tested',
+    palmMatrix: 'Dual-Layer Cushioned Suede & Leather Palm Pads',
+    seamType: 'Integrated 18-Inch Heavy Elastic Wrist Wrap Strap',
+    knuckleArmor: 'Half-Finger Ergonomic Grip Zone with Knurl Relief',
+    targetDiscipline: 'Heavy Bench Press, Deadlifts & Barbell Complexes',
+    summary: 'Professional bodybuilding weight lifting gloves featuring cushioned leather palm pads, integrated 18-inch wrist wrap support, and heavy-duty velcro lock.'
+  },
+  {
+    code: 'GW-WL-02',
+    name: 'Safety Line AeroMesh Hex-Grip Fitness Training Gloves',
+    livery: 'Charcoal Flex Mesh / Stealth Black',
+    image: wl2Img,
+    slideImage: wl2Img,
+    badge: 'AeroMesh Gym',
+    flameRating: 'High-Vapor Evaporative Heat Dumping',
+    palmMatrix: 'Silicone Honeycomb Callus-Shield Palm Cushioning',
+    seamType: 'Quick-Release Finger Pull Loops & Neoprene Cuff',
+    knuckleArmor: 'Breathable Flex Mesh Evaporative Backing',
+    targetDiscipline: 'Cross-Training, Pull-Ups & Dumbbell Conditioning',
+    summary: 'Ventilated fitness training gloves featuring breathable flex mesh, honeycomb silicone anti-slip palm cushioning, and quick-pull removal tabs.'
+  },
+  {
+    code: 'GW-WL-03',
+    name: 'Safety Line Titan 10mm Buffalo Leather Lever Powerlifting Belt',
+    livery: 'Matte Black Leather / Steel Lever',
+    image: wl3Img,
+    slideImage: wl3Img,
+    badge: 'IPF Spec 10mm',
+    flameRating: '500kg+ Tensile Core Resistance',
+    palmMatrix: 'Non-Stretch Suede Core with 4-Row Bonded Stitching',
+    seamType: 'Matte Black Quick-Release Alloy Lever Buckle',
+    knuckleArmor: 'Uniform 10mm Competition-Grade Buffalo Leather',
+    targetDiscipline: 'Maximal Squats, Deadlifts & Strongman Lifts',
+    summary: 'Heavy-duty 10mm genuine buffalo leather powerlifting belt equipped with a precision matte black steel quick-release lever.'
+  },
+  {
+    code: 'GW-WL-04',
+    name: 'Safety Line 7mm High-Density SCR Neoprene Knee Sleeves',
+    livery: 'Stealth Black / Charcoal Stitching',
+    image: wl4Img,
+    slideImage: wl4Img,
+    badge: '7mm Competition',
+    flameRating: 'High Rebound Joint Compression',
+    palmMatrix: 'Graduated Vascular Warmth Compression Core',
+    seamType: 'Heavy Reinforced Zig-Zag Flatlock Seams',
+    knuckleArmor: 'Anatomical 3D Contoured Patellar Guidance Shield',
+    targetDiscipline: 'Olympic Squats, Powerlifting Meets & Joint Warmth',
+    summary: 'High-density 7mm neoprene compression knee sleeves providing joint warmth, rebound assistance, and lateral knee stabilization.'
+  }
+];
+
 export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   window: currentWindow,
   products,
@@ -348,8 +563,28 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   const isCarRacing = currentWindow.slug === 'motorcars-gloves' || currentWindow.slug === 'car-racing';
   const isCycling = currentWindow.slug === 'cycling-gloves';
   const isGolf = currentWindow.slug === 'golf-gloves';
-  const isHasHeroSlide = isCarRacing || isCycling || isGolf;
-  const activeSlideModels = isCarRacing ? CAR_RACING_GLOVE_MODELS : isCycling ? CYCLING_GLOVE_MODELS : GOLF_GLOVE_MODELS;
+  const isFish = currentWindow.slug === 'fish-gloves';
+  const isWork = currentWindow.slug === 'work-gloves';
+  const isMechanics = currentWindow.slug === 'mechanics-gloves';
+  const isWeightLifting = currentWindow.slug === 'weight-lifting';
+
+  const isHasHeroSlide = isCarRacing || isCycling || isGolf || isFish || isWork || isMechanics || isWeightLifting;
+
+  const activeSlideModels = isCarRacing 
+    ? CAR_RACING_GLOVE_MODELS 
+    : isCycling 
+    ? CYCLING_GLOVE_MODELS 
+    : isGolf 
+    ? GOLF_GLOVE_MODELS 
+    : isFish
+    ? FISH_GLOVE_MODELS
+    : isWork
+    ? WORK_GLOVE_MODELS
+    : isMechanics
+    ? MECHANICS_GLOVE_MODELS
+    : isWeightLifting
+    ? WEIGHT_LIFTING_MODELS
+    : [];
 
   // Search, size and view filter states
   const [searchQuery, setSearchQuery] = useState('');
@@ -357,7 +592,14 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [inquiryProductTitle, setInquiryProductTitle] = useState<string>(
-    isCarRacing ? 'Car Racing Gloves Series' : isCycling ? 'Cycling Gloves Series' : isGolf ? 'Golf Gloves Series' : `${currentWindow.title} Line`
+    isCarRacing ? 'Car Racing Gloves Series' 
+    : isCycling ? 'Cycling Gloves Series' 
+    : isGolf ? 'Golf Gloves Series' 
+    : isFish ? 'Fish Gloves Series'
+    : isWork ? 'Work Gloves Series'
+    : isMechanics ? 'Mechanics Gloves Series'
+    : isWeightLifting ? 'Weight Lifting Equipment Series'
+    : `${currentWindow.title} Line`
   );
 
   // Auto slide animation index
@@ -580,7 +822,7 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                 <span className="text-[#EA2227]">SAFETY</span> <span className="text-slate-900">LINE</span>
               </span>
               <span className="text-[9px] font-mono tracking-wider text-slate-500 uppercase mt-0.5 font-bold">
-                Motorsport Handwear
+                {isCarRacing ? 'Motorsport Handwear' : isGolf ? 'Tour Precision Golf' : isCycling ? 'Aero Cycling Series' : isFish ? 'Marine Kevlar® Series' : isWork ? 'Industrial Safety Line' : isMechanics ? 'Workshop Mechanics Series' : isWeightLifting ? 'Strength & Conditioning' : currentWindow.badge}
               </span>
             </div>
           </div>
@@ -819,7 +1061,21 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
           {/* Item count & active label */}
           <div className="flex items-center space-x-3">
             <span className="font-display font-black text-lg text-slate-900">
-              {isCarRacing ? 'Official Safety Line Racing Gloves' : 'Products'}
+              {isCarRacing 
+                ? 'Official Safety Line Racing Gloves' 
+                : isGolf 
+                ? 'Official Safety Line Tour Golf Gloves' 
+                : isCycling 
+                ? 'Official Safety Line Aero Cycling Gloves' 
+                : isFish 
+                ? 'Official Safety Line Marine Fish Gloves' 
+                : isWork 
+                ? 'Official Safety Line Industrial Work Gloves' 
+                : isMechanics 
+                ? 'Official Safety Line Workshop Mechanics Gloves' 
+                : isWeightLifting 
+                ? 'Official Safety Line Strength & Weight Lifting' 
+                : 'Products'}
             </span>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#EA2227]/10 text-[#EA2227] border border-[#EA2227]/20">
               {filteredProducts.length} {filteredProducts.length === 1 ? 'Model' : 'Models'}
@@ -1153,7 +1409,21 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                             <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                               <span className="text-[10px] font-mono text-slate-400 uppercase block">Homologation</span>
                               <span className="font-semibold text-[#EA2227] text-[11px] truncate block">
-                                {isCarProduct ? 'FIA 8856-2018 / SFI 3.3/5' : isGolf ? 'Tour Precision Grade AAA' : isCycling ? 'UCI Aero Pro Certified' : 'EN ISO Safety Standard'}
+                                {isCarProduct 
+                                  ? 'FIA 8856-2018 / SFI 3.3/5' 
+                                  : isGolf 
+                                  ? 'Tour Precision Grade AAA' 
+                                  : isCycling 
+                                  ? 'UCI Aero Pro Certified' 
+                                  : isFish
+                                  ? 'ANSI A3 / EN 388 Marine Cut'
+                                  : isWork
+                                  ? 'EN 388 Industrial Heavy-Duty'
+                                  : isMechanics
+                                  ? 'ANSI/ISEA 138 Level 2 TPR'
+                                  : isWeightLifting
+                                  ? 'IPF Heavy Powerlifting Spec'
+                                  : 'EN ISO Safety Standard'}
                               </span>
                             </div>
                           </div>

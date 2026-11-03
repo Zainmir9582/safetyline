@@ -34,6 +34,27 @@ import gg6Img from '../assets/images/golf_glove_6.png';
 import gg7Img from '../assets/images/golf_glove_7.png';
 import gg8Img from '../assets/images/golf_glove_8.png';
 
+// Fish Gloves Assets
+import fg1Img from '../assets/images/fish_glove_1.png';
+import fg2Img from '../assets/images/fish_glove_2.png';
+import fg3Img from '../assets/images/fish_glove_3.png';
+
+// Work Gloves Assets
+import wg1Img from '../assets/images/work_glove_1.png';
+import wg2Img from '../assets/images/work_glove_2.png';
+import wg3Img from '../assets/images/work_glove_3.png';
+
+// Mechanics Gloves Assets
+import mg1Img from '../assets/images/mechanics_glove_1.png';
+import mg2Img from '../assets/images/mechanics_glove_2.png';
+import mg3Img from '../assets/images/mechanics_glove_3.png';
+
+// Weight Lifting Assets
+import wl1Img from '../assets/images/weight_lifting_1.png';
+import wl2Img from '../assets/images/weight_lifting_2.png';
+import wl3Img from '../assets/images/weight_lifting_3.png';
+import wl4Img from '../assets/images/weight_lifting_4.png';
+
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
   {
@@ -723,96 +744,100 @@ export const gearwearProducts: Product[] = [
     createdAt: '2026-03-11T08:00:00.000Z'
   },
 
-  // 4. Weight Lifting Category
+  // 4. Weight Lifting Category (GW-WL)
   {
     id: 'prod-wl-01',
-    name: 'Titan Buffalo Leather Powerlifting Lever Belt (10mm)',
-    slug: 'titan-buffalo-leather-powerlifting-lever-belt-10mm',
+    name: 'Safety Line Pro-Series Padded Wrist-Wrap Gym Gloves',
+    slug: 'safety-line-pro-series-padded-wrist-wrap-gym-gloves',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
     subcategory: 'weight-lifting',
-    shortDescription: 'Heavy-duty 10mm genuine buffalo leather powerlifting belt equipped with a precision matte black stainless steel quick-release lever.',
-    longDescription: 'Crafted for heavy barbell squats, deadlifts, and overhead presses. Spun from top-grain buffalo leather with uniform 10mm thickness, non-stretch suede interior, and heavy industrial bonded nylon four-row perimeter stitching.',
-    material: '100% Genuine Top-Grain Buffalo Leather & Matte Stainless Steel Lever',
-    sizes: ['S (26-32")', 'M (30-36")', 'L (34-40")', 'XL (38-44")', 'XXL (42-48")'],
+    shortDescription: 'Professional bodybuilding weight lifting gloves featuring cushioned leather palm pads, integrated 18-inch wrist wrap support, and heavy-duty velcro lock.',
+    longDescription: 'Engineered for heavy barbell bench presses, dumbbell rows, and high-volume bodybuilding workouts. Crafted with supple black leather, anatomical high-friction suede palm cushioning, and an extra-long 18-inch elastic wrist wrap providing cast-like joint stabilization.',
+    material: 'Full-Grain Black Leather, Suede Cushioning & 18-Inch Elastic Wrist Wrap',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Stealth Black / Padded Suede'],
     features: [
-      'Uniform 10mm competition-grade thickness (4-inch width)',
-      'Heavy-duty quick-release zinc-alloy lever buckle tested to 500kg+',
-      'Non-slip genuine suede inner lining preventing belt shifting',
-      'Four-row high-density bonded nylon structural stitching'
+      'Dual-layer anatomical suede palm padding absorbing bar knurling pressure',
+      'Integrated 18-inch elastic wrist wrap with industrial hook-and-loop stabilization',
+      'Breathable knuckle flex zone preventing hand fatigue under maximal loads',
+      'Half-finger ergonomic cut providing natural tactile feedback'
     ],
     productCode: 'GW-WL-01',
     status: 'Active',
     displayOrder: 1,
-    coverImage: weightLiftingImg,
-    galleryImages: [weightLiftingImg],
-    seoTitle: 'Titan 10mm Buffalo Leather Lever Belt | Safety Line Strength',
-    seoDescription: 'Competition 10mm genuine buffalo leather powerlifting lever belt tested to 500kg barbell loads.',
-    createdAt: '2026-03-10T08:00:00.000Z'
+    coverImage: wl1Img,
+    galleryImages: [wl1Img],
+    seoTitle: 'Safety Line Pro-Series Padded Wrist-Wrap Gym Gloves | Powerlifting',
+    seoDescription: 'Professional bodybuilding weight lifting gloves with padded leather palm and integrated 18-inch wrist wrap.',
+    createdAt: '2026-03-21T08:00:00.000Z'
   },
   {
     id: 'prod-wl-02',
-    name: 'IronGrip Padded Barbell Weightlifting Gloves',
-    slug: 'irongrip-padded-barbell-weightlifting-gloves',
+    name: 'Safety Line AeroMesh Hex-Grip Fitness Training Gloves',
+    slug: 'safety-line-aeromesh-hex-grip-fitness-training-gloves',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
     subcategory: 'weight-lifting',
-    shortDescription: 'Heavy-duty gym training gloves featuring silicone honeycomb padded palms, integrated wrist wrap support, and quick-pull finger tabs.',
-    longDescription: 'Engineered for bodybuilding, high-rep pull-ups, kettlebell swings, and dumbbell complexes. Features high-density silicone micro-cushioning that prevents calluses while the integrated 16-inch wrist wrap stabilizes joints.',
-    material: 'Breathable Mesh, Microfiber Suede & Silicone Honeycomb Cushioning',
+    shortDescription: 'Ventilated fitness training gloves featuring breathable flex mesh, honeycomb silicone anti-slip palm cushioning, and quick-pull removal tabs.',
+    longDescription: 'Designed for cross-training, kettlebell circuits, pull-ups, and gym workouts. Features high-ventilation dark grey mesh backing that dumps heat rapidly and silicone hexagonal textured palm padding.',
+    material: 'Breathable Flex Mesh, Microfiber Suede & Silicone Honeycomb Cushioning',
     sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Charcoal Flex Mesh / Stealth Black'],
     features: [
-      'Honeycomb silicone palm cushioning absorbing knurling barbell friction',
-      'Integrated 16-inch elastic wrist wrap with hook-and-loop stabilization',
-      'Breathable lycra mesh back preventing hand overheating',
-      'Dual quick-release finger tabs for effortless glove removal post-workout'
+      'Honeycomb silicone palm cushioning preventing calluses and blisters',
+      'Ultralight evaporative cooling mesh back keeping hands cool and dry',
+      'Quick-release finger pull loops for rapid post-workout removal',
+      'Low-profile adjustable neoprene wrist closure'
     ],
     productCode: 'GW-WL-02',
     status: 'Active',
     displayOrder: 2,
-    coverImage: fishGlovesImg,
-    galleryImages: [fishGlovesImg],
-    seoTitle: 'IronGrip Padded Weightlifting Gloves | Safety Line Strength',
-    seoDescription: 'Gym lifting gloves with honeycomb silicone palm padding and integrated 16-inch wrist wrap.',
-    createdAt: '2026-03-11T08:00:00.000Z'
+    coverImage: wl2Img,
+    galleryImages: [wl2Img],
+    seoTitle: 'Safety Line AeroMesh Hex-Grip Fitness Training Gloves | Gym Wear',
+    seoDescription: 'Ventilated fitness gloves with honeycomb silicone grip and quick-pull removal tabs.',
+    createdAt: '2026-03-21T10:00:00.000Z'
   },
   {
     id: 'prod-wl-03',
-    name: 'Heavy-Duty Elastic Thumb-Loop Wrist Wraps (18-Inch)',
-    slug: 'heavy-duty-elastic-thumb-loop-wrist-wraps-18-inch',
+    name: 'Safety Line Titan 10mm Buffalo Leather Lever Powerlifting Belt',
+    slug: 'safety-line-titan-10mm-buffalo-leather-lever-powerlifting-belt',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
     subcategory: 'weight-lifting',
-    shortDescription: 'Industrial-strength powerlifting wrist wraps with reinforced thumb loops and military-grade Velcro closure.',
-    longDescription: 'Provides cast-like immobilization for heavy bench presses, overhead squats, and Olympic clean & jerks. Woven with heavy-gauge elastodiene and premium cotton blend that maintains stiffness under maximal loads.',
-    material: '60% Heavy-Gauge Cotton, 40% Rubberized Elastodiene',
-    sizes: ['18-Inch Standard', '24-Inch Heavy Competition'],
+    shortDescription: 'Heavy-duty 10mm genuine buffalo leather powerlifting belt equipped with a precision matte black steel quick-release lever.',
+    longDescription: 'Engineered for competitive powerlifters, heavy squats, and maximal deadlifts. Constructed with uniform 10mm top-grain buffalo leather, non-stretch suede interior, four-row heavy-duty bonded perimeter stitching, and a matte black quick-release steel lever tested to 500kg+ loads.',
+    material: '100% Genuine Top-Grain Buffalo Leather & Matte Black Steel Lever',
+    sizes: ['S (26-32")', 'M (30-36")', 'L (34-40")', 'XL (38-44")', 'XXL (42-48")'],
+    colors: ['Matte Black Leather / Steel Lever'],
     features: [
-      'Heavy-gauge woven elastic providing maximum wrist joint casting',
-      'Reinforced thumb loop with flatlock seam to eliminate thumb pinch',
-      'Extra-wide 2-inch industrial hook-and-loop fastening',
-      'Left and right anatomical wrist orientation labeling'
+      'Uniform 10mm competition-grade thickness (4-inch width)',
+      'Heavy-duty quick-release zinc-alloy lever buckle tested to 500kg+',
+      'Non-slip genuine suede inner lining preventing belt shifting',
+      'Four-row high-density bonded nylon perimeter stitching'
     ],
     productCode: 'GW-WL-03',
     status: 'Active',
     displayOrder: 3,
-    coverImage: weightLiftingImg,
-    galleryImages: [weightLiftingImg],
-    seoTitle: 'Heavy-Duty 18-Inch Powerlifting Wrist Wraps | Safety Line',
-    seoDescription: 'Maximum stiffness 18-inch powerlifting wrist wraps for heavy bench press and overhead lifts.',
-    createdAt: '2026-03-12T08:00:00.000Z'
+    coverImage: wl3Img,
+    galleryImages: [wl3Img],
+    seoTitle: 'Safety Line Titan 10mm Buffalo Leather Lever Belt | Powerlifting',
+    seoDescription: 'Competition 10mm buffalo leather powerlifting belt with quick-release lever buckle.',
+    createdAt: '2026-03-21T12:00:00.000Z'
   },
   {
     id: 'prod-wl-04',
-    name: '7mm Neoprene Competition Knee Sleeves',
-    slug: '7mm-neoprene-competition-knee-sleeves',
+    name: 'Safety Line 7mm High-Density SCR Neoprene Knee Sleeves',
+    slug: 'safety-line-7mm-high-density-scr-neoprene-knee-sleeves',
     categoryId: 'cat-gearwear',
     categoryName: 'Gearwear',
     subcategory: 'weight-lifting',
     shortDescription: 'High-density 7mm neoprene compression knee sleeves providing joint warmth, rebound assistance, and lateral knee stabilization.',
-    longDescription: 'Spun from competition-grade 7mm SCR neoprene with ergonomic contoured cut that stays locked in place through deep squat sets. Promotes blood flow, joint warmth, and explosive rebound power out of the squat hole.',
-    material: '7mm High-Density SCR Neoprene with Bonded Nylon Seams',
+    longDescription: 'Spun from competition-grade 7mm SCR neoprene with an anatomical contoured 3D cut that stays locked in place through deep squat sets. Promotes joint warmth, blood circulation, and rebound power out of the squat hole.',
+    material: '7mm High-Density SCR Neoprene with Bonded Flatlock Seams',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Stealth Black / Charcoal Stitching'],
     features: [
       '7mm competition-grade high-density SCR neoprene core',
       'Anatomical 3D contour preventing slippage and bunching behind the knee',
@@ -822,10 +847,259 @@ export const gearwearProducts: Product[] = [
     productCode: 'GW-WL-04',
     status: 'Active',
     displayOrder: 4,
-    coverImage: golfGlovesImg,
-    galleryImages: [golfGlovesImg],
-    seoTitle: '7mm Neoprene Competition Knee Sleeves | Safety Line Strength',
+    coverImage: wl4Img,
+    galleryImages: [wl4Img],
+    seoTitle: 'Safety Line 7mm Neoprene Competition Knee Sleeves | Powerlifting',
     seoDescription: 'High-density 7mm neoprene compression knee sleeves for heavy squats and powerlifting.',
-    createdAt: '2026-03-13T08:00:00.000Z'
+    createdAt: '2026-03-22T08:00:00.000Z'
+  },
+
+  // 5. Fish Gloves Category (GW-FG)
+  {
+    id: 'prod-fg-01',
+    name: 'Safety Line Marine Kevlar® Anti-Puncture Fishing Gloves',
+    slug: 'safety-line-marine-kevlar-anti-puncture-fishing-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'fish-gloves',
+    shortDescription: 'Heavy-duty marine fishing gloves equipped with puncture-resistant Kevlar® palmar lining, textured silicone fish-scale grip, and water-repellent neoprene.',
+    longDescription: 'Engineered for big game angling, deck handling, and saltwater wire leadering. Built with puncture-resistant Kevlar® thread shielding against sharp dorsal spines and hooks, high-friction silicone fish-scale grip palm, quick-dry neoprene, and a safety wrist pull tab.',
+    material: 'Puncture-Resistant Kevlar® Stitching, Neoprene & Silicone Fish-Scale Palm',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Ocean Blue / Slate Grey'],
+    features: [
+      'Puncture-resistant Kevlar® palmar weave protecting against dorsal fins and wire leaders',
+      'High-traction silicone fish-scale palm pattern for non-slip grip on wet, slimy catches',
+      'Water-repellent neoprene backhand providing thermal insulation in cold spray',
+      'Extended wrist gauntlet with heavy-duty pull tab and velcro strap'
+    ],
+    productCode: 'GW-FG-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: fg1Img,
+    galleryImages: [fg1Img],
+    seoTitle: 'Safety Line Marine Kevlar Anti-Puncture Fishing Gloves | Offshore',
+    seoDescription: 'Heavy-duty saltwater angling gloves with Kevlar puncture protection and silicone fish-scale palm.',
+    createdAt: '2026-03-22T10:00:00.000Z'
+  },
+  {
+    id: 'prod-fg-02',
+    name: 'Safety Line Steel-Core Fillet & Cut-Resistant Gloves',
+    slug: 'safety-line-steel-core-fillet-cut-resistant-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'fish-gloves',
+    shortDescription: 'ANSI Level 5 cut-resistant fish filleting gloves woven with stainless steel core fibers and crinkle nitrile dipped palm for knife safety.',
+    longDescription: 'Engineered for commercial fish processing, offshore filleting, and razor-sharp knife work. Combines high-gauge stainless steel micro-wire core fibers with textured navy blue crinkle nitrile dipping that locks onto slippery fish skin.',
+    material: 'Stainless Steel Wire Core, HPPE Fiber Knit & Crinkle Nitrile Dipped Palm',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Silver-Grey Knit / Navy Blue Dipped'],
+    features: [
+      'ANSI A5 / EN 388 Level 5 cut resistance preventing accidental blade slices',
+      'Crinkle textured nitrile palm delivering superior grip in wet and oily conditions',
+      'Seamless 13-gauge breathable knit shell for unmatched fingertip dexterity',
+      'Snug elastic knit wrist keeping out scales and water runoff'
+    ],
+    productCode: 'GW-FG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: fg2Img,
+    galleryImages: [fg2Img],
+    seoTitle: 'Safety Line Steel-Core Fillet Cut-Resistant Gloves | ANSI Level 5',
+    seoDescription: 'Cut-resistant fish filleting gloves with stainless steel wire core and crinkle nitrile palm.',
+    createdAt: '2026-03-22T12:00:00.000Z'
+  },
+  {
+    id: 'prod-fg-03',
+    name: 'Safety Line Offshore Big Game Leadering Gloves',
+    slug: 'safety-line-offshore-big-game-leadering-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'fish-gloves',
+    shortDescription: 'Heavy-duty offshore leadering fishing gloves featuring reinforced double-layer Kevlar® palm pads, cyan flex webbing, and grommet pull tab.',
+    longDescription: 'Crafted for extreme offshore tournament angling, marlin wire leadering, and gaff handling. Features thick Kevlar® palmar armor that stops monofilament and fluorocarbon leader cuts, reinforced finger gussets, and quick-drying marine neoprene.',
+    material: 'Double-Layer Kevlar® Palmar Armor, Marine Neoprene & Cyan Grip Webbing',
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    colors: ['Cyan Teal / Stealth Black'],
+    features: [
+      'Double-layer heavy Kevlar® palm overlays engineered for heavy wire leader wraps',
+      'Molded rubber finger bumpers protecting against gunwale impact and line snaps',
+      'Quick-drying saltwater-resistant neoprene with drain ports',
+      'Heavy-duty brass grommet pull tab for easy clipping onto tackle gear'
+    ],
+    productCode: 'GW-FG-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: fg3Img,
+    galleryImages: [fg3Img],
+    seoTitle: 'Safety Line Offshore Big Game Leadering Gloves | Tournament Angling',
+    seoDescription: 'Heavy-duty offshore leadering gloves with double-layer Kevlar palm and marine neoprene.',
+    createdAt: '2026-03-22T14:00:00.000Z'
+  },
+
+  // 6. Work Gloves Category (GW-WG)
+  {
+    id: 'prod-wg-01',
+    name: 'Safety Line Heavy-Duty Split Cowhide Leather Work Gloves',
+    slug: 'safety-line-heavy-duty-split-cowhide-leather-work-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'work-gloves',
+    shortDescription: 'Industrial heavy-duty work gloves built with golden tan select split cowhide leather, keystone thumb, and rubberized safety cuff.',
+    longDescription: 'Rugged job-site work gloves built with premium split-grain cowhide leather, reinforced keystone thumb saddle, double-needle bonded nylon stitching, and rubberized safety cuff for lumber handling, brick masonry, and heavy rigging.',
+    material: '1.2mm Select Split Cowhide Leather & Heavy Duty Canvas Back',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Golden Tan Cowhide / Natural Canvas'],
+    features: [
+      'Heavy-duty 1.2mm select split cowhide leather palm and fingertips',
+      'Reinforced keystone thumb for natural grip ergonomics and reduced hand fatigue',
+      'Double-stitched palm stress zones with heat-resistant Kevlar® thread',
+      'Rubberized safety cuff protecting wrists and allowing rapid slip-off'
+    ],
+    productCode: 'GW-WG-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: wg1Img,
+    galleryImages: [wg1Img],
+    seoTitle: 'Safety Line Heavy-Duty Cowhide Leather Work Gloves | Industrial',
+    seoDescription: 'Heavy-duty split cowhide leather work gloves with keystone thumb and safety cuff.',
+    createdAt: '2026-03-23T08:00:00.000Z'
+  },
+  {
+    id: 'prod-wg-02',
+    name: 'Safety Line High-Visibility Site Utility Work Gloves',
+    slug: 'safety-line-high-visibility-site-utility-work-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'work-gloves',
+    shortDescription: 'Modern construction site utility work gloves featuring high-visibility fluorescent lime-yellow backhand and microfiber synthetic leather palm.',
+    longDescription: 'Engineered for commercial construction, equipment operators, and roadwork crews. Features fluorescent lime-yellow stretch mesh for maximum daytime worker visibility, padded abrasion-resistant microfiber palm, and an elastic wrist with hook-and-loop closure.',
+    material: 'Fluorescent Lime-Yellow Stretch Spandex & Microfiber Synthetic Leather',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['High-Vis Lime Yellow / Stealth Black'],
+    features: [
+      'High-visibility fluorescent lime-yellow backhand for daytime job-site signaling',
+      'Padded abrasion-resistant microfiber synthetic leather palm',
+      'Breathable 4-way stretch fabric between fingers for all-day comfort',
+      'Adjustable hook-and-loop velcro wrist strap keeping out sawdust and gravel'
+    ],
+    productCode: 'GW-WG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: wg2Img,
+    galleryImages: [wg2Img],
+    seoTitle: 'Safety Line High-Visibility Site Utility Work Gloves | Construction',
+    seoDescription: 'High-visibility construction utility gloves with padded microfiber palm and elastic wrist.',
+    createdAt: '2026-03-23T10:00:00.000Z'
+  },
+  {
+    id: 'prod-wg-03',
+    name: 'Safety Line Extreme Rigging TPR Impact Work Gloves',
+    slug: 'safety-line-extreme-rigging-tpr-impact-work-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'work-gloves',
+    shortDescription: 'Heavy-duty oilfield and rigging impact work gloves featuring safety orange dorsal mesh and flexible segmented black TPR impact armor.',
+    longDescription: 'Engineered for oil & gas drilling, heavy steel erection, and industrial rigging. Features molded thermal TPR impact guards running the length of each finger and knuckle to absorb heavy pinch and crush impacts, paired with a reinforced leather palm.',
+    material: 'Thermal TPR Impact Skeleton, High-Vis Orange Mesh & Leather Palm',
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    colors: ['Safety Orange / Stealth Black Armor'],
+    features: [
+      'ANSI/ISEA 138 Level 2 flexible TPR impact armor shielding knuckles and fingers',
+      'High-visibility safety orange mesh back for clear hand signaling around cranes',
+      'Abrasion-resistant black leather palm with high-tensile Kevlar® stitching',
+      'Wide neoprene wrist cuff with adjustable pull tab closure'
+    ],
+    productCode: 'GW-WG-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: wg3Img,
+    galleryImages: [wg3Img],
+    seoTitle: 'Safety Line Extreme Rigging TPR Impact Work Gloves | Oil & Gas',
+    seoDescription: 'Heavy-duty rigging impact work gloves with flexible TPR armor and safety orange backing.',
+    createdAt: '2026-03-23T12:00:00.000Z'
+  },
+
+  // 7. Mechanics Gloves Category (GW-MG)
+  {
+    id: 'prod-mg-01',
+    name: 'Safety Line Stealth TPR Armor Automotive Mechanics Gloves',
+    slug: 'safety-line-stealth-tpr-armor-automotive-mechanics-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'mechanics-gloves',
+    shortDescription: 'Professional workshop mechanics gloves featuring molded TPR impact knuckle armor, silicone hex grip Clarino palm, and touchscreen fingers.',
+    longDescription: 'Engineered for automotive technicians, engine overhauls, and race pit crews. Features full-coverage low-profile black TPR impact armor that deflects wrench slips, durable Clarino synthetic leather palm with silicone hex grip, and touchscreen compatibility.',
+    material: 'Clarino Synthetic Leather, Silicone Hex Matrix & Molded TPR Impact Ribs',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Stealth Matte Black'],
+    features: [
+      'Molded thermal TPR impact protection across knuckles and metacarpals',
+      'High-tactile Clarino synthetic leather palm with silicone hex grip matrix',
+      'EVA foam heel pad absorbing pneumatic impact wrench vibrations',
+      'Touchscreen conductive thumb and index finger pads for diagnostic tablets'
+    ],
+    productCode: 'GW-MG-01',
+    status: 'Active',
+    displayOrder: 1,
+    coverImage: mg1Img,
+    galleryImages: [mg1Img],
+    seoTitle: 'Safety Line Stealth TPR Armor Mechanics Gloves | Automotive Workshop',
+    seoDescription: 'Professional automotive mechanics gloves with molded TPR impact armor and silicone hex palm.',
+    createdAt: '2026-03-24T08:00:00.000Z'
+  },
+  {
+    id: 'prod-mg-02',
+    name: 'Safety Line Cobalt Precision Technician Mechanics Gloves',
+    slug: 'safety-line-cobalt-precision-technician-mechanics-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'mechanics-gloves',
+    shortDescription: 'High-dexterity automotive technician gloves featuring vibrant cobalt blue stretch spandex, TPR knuckle shields, and tactile grey Clarino palm.',
+    longDescription: 'Engineered for electrical wiring, precision engine timing, and tight engine bay maneuvering. Combines breathable 4-way stretch cobalt blue spandex with flexible segmented TPR knuckle protection and a 0.6mm ultra-sensitive grey Clarino palm.',
+    material: 'Cobalt Breathable Spandex, TPR Finger Flex Armor & Suede Palm',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Cobalt Blue / Stealth Black'],
+    features: [
+      '0.6mm ultra-sensitive synthetic suede palm for small nut and bolt tactile sensitivity',
+      'Segmented TPR knuckle flex armor that moves effortlessly with hand articulation',
+      'Breathable 4-way stretch cobalt blue mesh for evaporative cooling in hot shops',
+      'Reinforced thumb saddle for extended wrenching durability'
+    ],
+    productCode: 'GW-MG-02',
+    status: 'Active',
+    displayOrder: 2,
+    coverImage: mg2Img,
+    galleryImages: [mg2Img],
+    seoTitle: 'Safety Line Cobalt Precision Technician Mechanics Gloves | High-Dexterity',
+    seoDescription: 'High-dexterity mechanics gloves with cobalt blue stretch mesh and tactile suede palm.',
+    createdAt: '2026-03-24T10:00:00.000Z'
+  },
+  {
+    id: 'prod-mg-03',
+    name: 'Safety Line Diesel Heavy-Machinery Oily-Grip Gloves',
+    slug: 'safety-line-diesel-heavy-machinery-oily-grip-gloves',
+    categoryId: 'cat-gearwear',
+    categoryName: 'Gearwear',
+    subcategory: 'mechanics-gloves',
+    shortDescription: 'Heavy-machinery diesel mechanic gloves with micro-sandy nitrile dipped palm, hi-vis red impact ribs, and seamless breathable knit.',
+    longDescription: 'Engineered for diesel engine mechanics, hydraulic fluid lines, and heavy equipment maintenance. Incorporates a double-dipped micro-sandy nitrile palm that repels motor oils and fuels while maintaining maximum friction on greasy bolts.',
+    material: 'Micro-Sandy Nitrile Dipped Palm, Hi-Vis Red TPR & Seamless Knit Shell',
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    colors: ['Charcoal Grey / Hi-Vis Red Armor'],
+    features: [
+      'Double-dipped micro-sandy nitrile palm repelling motor oil, diesel fuel, and grease',
+      'Hi-vis red molded TPR impact ribs protecting dorsal knuckles and fingers',
+      'Seamless 13-gauge breathable knit shell preventing hand perspiration',
+      'Extended knit wrist cuff preventing grease ingress'
+    ],
+    productCode: 'GW-MG-03',
+    status: 'Active',
+    displayOrder: 3,
+    coverImage: mg3Img,
+    galleryImages: [mg3Img],
+    seoTitle: 'Safety Line Diesel Heavy-Machinery Oily-Grip Gloves | Oil-Resistant',
+    seoDescription: 'Oil-resistant diesel mechanic gloves with micro-sandy nitrile palm and hi-vis red impact ribs.',
+    createdAt: '2026-03-24T12:00:00.000Z'
   }
 ];

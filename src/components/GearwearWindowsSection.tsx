@@ -295,16 +295,16 @@ const WindowCard: React.FC<WindowCardProps> = ({
     >
       <div>
         {/* Category Showcase Image */}
-        <div className={`relative overflow-hidden bg-slate-100 ${isFeatured ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
+        <div className={`relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100/80 flex items-center justify-center p-3 ${isFeatured ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
           <SmoothImage
             src={window.image}
             alt={window.title}
             priority={idx < 4}
-            containerClassName="w-full h-full"
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-108"
+            containerClassName="w-full h-full flex items-center justify-center"
+            className="w-full h-full object-contain filter drop-shadow-[0_8px_16px_rgba(15,23,42,0.12)] transition-transform duration-500 ease-out group-hover:scale-108"
           />
           {/* Subtle gradient vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-30 group-hover:opacity-10 transition-opacity pointer-events-none" />
 
           {/* Badge & Item Count */}
           <div className="absolute top-2.5 left-2.5 bg-black/65 backdrop-blur-xs text-white px-2 py-0.5 rounded-md text-[10px] font-mono uppercase tracking-wider font-semibold flex items-center gap-1.5 shadow-xs">

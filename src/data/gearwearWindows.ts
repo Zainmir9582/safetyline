@@ -1,13 +1,13 @@
 import golfGlovesImg from '../assets/images/golf_glove_1.png';
-import fishGlovesImg from '../assets/images/blank_fish_glove_1792247591287.jpg';
-import workGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';
-import mechanicsGlovesImg from '../assets/images/blank_mechanic_glove_1792247541453.jpg';
+import fishGlovesImg from '../assets/images/fish_glove_1.png';
+import workGlovesImg from '../assets/images/work_glove_1.png';
+import mechanicsGlovesImg from '../assets/images/mechanics_glove_1.png';
 import tacticalPoliceGlovesImg from '../assets/images/blank_police_glove_1792247591145.jpg';
 import motorcarsGlovesImg from '../assets/images/blank_racing_glove_1792247541163.jpg';
 import cg1Img from '../assets/images/cg1.png';
 import cyclingGlovesImg from '../assets/images/cycling_glove_safetyline_1.png';
 import roadCyclingImg from '../assets/images/blank_road_cycling_1792247567857.jpg';
-import weightLiftingImg from '../assets/images/blank_weight_lifting_1792247542179.jpg';
+import weightLiftingImg from '../assets/images/weight_lifting_1.png';
 import tacticalGlovesImg from '../assets/images/blank_tactical_glove_1792247540904.jpg';
 import carRacingImg from '../assets/images/blank_racing_glove_1792247541163.jpg';
 
