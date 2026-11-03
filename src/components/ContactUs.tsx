@@ -200,6 +200,23 @@ export default function ContactUs({ settings }: ContactUsProps) {
                   </div>
                 )}
 
+                {/* Company Personal Mail */}
+                <div className="flex items-center space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10 hover:border-amber-400/40 transition-colors">
+                  <Mail className="w-4 h-4 text-amber-400 shrink-0" />
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[10px] text-white/60 uppercase font-semibold flex items-center gap-1.5">
+                      <span>Company Personal Mail</span>
+                      <span className="px-1.5 py-0.2 rounded text-[8px] font-mono bg-amber-400/20 text-amber-300 font-bold">Executive</span>
+                    </span>
+                    <a 
+                      href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
+                      className="text-white hover:text-amber-200 transition-colors font-medium break-all"
+                    >
+                      {settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}
+                    </a>
+                  </div>
+                </div>
+
                 {/* Business Hours */}
                 <div className="flex items-center space-x-3 bg-white/5 p-3.5 rounded-xl border border-white/10">
                   <Clock className="w-4 h-4 text-[#FF5A36] shrink-0" />
@@ -345,6 +362,20 @@ export default function ContactUs({ settings }: ContactUsProps) {
                     <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="text-[#0B3D3B] hover:text-[#FF5A36] font-semibold transition-colors flex items-center gap-1">
                       <Phone className="w-3.5 h-3.5" />
                       <span>{settings.contactPhone}</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400/80 transition-all space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-[#0B3D3B]">Company Personal Mail</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-200/80 text-amber-900 font-bold">Executive Office</span>
+                  </div>
+                  <p className="text-xs text-slate-600">Confidential business communications, official corporate correspondence, executive partnerships, and direct management inquiries.</p>
+                  <div className="flex items-center gap-4 text-xs font-mono pt-1">
+                    <a href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} className="text-[#0B3D3B] hover:text-[#FF5A36] font-semibold transition-colors flex items-center gap-1.5 break-all">
+                      <Mail className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      <span>{settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}</span>
                     </a>
                   </div>
                 </div>

@@ -579,6 +579,21 @@ export default function Home({ products, settings }: HomeProps) {
                   </div>
                 )}
 
+                <div className="flex items-center space-x-4 bg-[#FAFCFB] p-4 rounded-xl border border-slate-200 hover:border-amber-400/50 transition-colors">
+                  <div className="bg-amber-100 p-3 rounded-lg text-amber-800">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="block text-xs text-slate-400 font-mono uppercase">Company Personal Mail</span>
+                    <a 
+                      href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
+                      className="text-[#0B3D3B] font-semibold text-sm hover:text-amber-700 transition-colors block break-all"
+                    >
+                      {settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}
+                    </a>
+                  </div>
+                </div>
+
                 <div className="flex items-center space-x-4 bg-[#FAFCFB] p-4 rounded-xl border border-slate-200">
                   <div className="bg-[#D9F0EC] p-3 rounded-lg text-[#0B3D3B]">
                     <MapPin className="w-5 h-5" />

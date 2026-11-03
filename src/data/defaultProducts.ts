@@ -38,6 +38,7 @@ export const defaultSettings: Settings = {
   ownerRole: 'Owner & Managing Director',
   contactEmail: 'info@safetyline-ind.com',
   salesEmail: 'sales@safetyline-ind.com',
+  companyPersonalEmail: 'safetylineindustriesofficial@gmail.com',
   contactPhone: '+92 3040000445',
   whatsappNumber: '+923040000445',
   instagramHosiery: 'https://www.instagram.com/safetylineindustries__official/',

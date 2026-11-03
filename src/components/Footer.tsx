@@ -214,6 +214,16 @@ export default function Footer({ settings }: FooterProps) {
                   </a>
                 </li>
               )}
+              <li className="flex items-center space-x-2">
+                <Mail className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                <a 
+                  href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
+                  className="text-slate-600 hover:text-amber-700 transition-colors font-medium break-all"
+                  title="Company Personal Mail"
+                >
+                  {settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}
+                </a>
+              </li>
             </ul>
           </div>
 

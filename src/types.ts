@@ -37,6 +37,7 @@ export interface Settings {
   ownerRole?: string;
   contactEmail: string;
   salesEmail?: string;
+  companyPersonalEmail?: string;
   contactPhone: string;
   whatsappNumber: string;
   instagramHosiery?: string;

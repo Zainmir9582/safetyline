@@ -739,6 +739,16 @@ export default function CategoryHub({
                   </li>
                 )}
                 <li className="flex items-center space-x-2">
+                  <Mail className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <a 
+                    href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
+                    className="text-slate-700 hover:text-amber-700 font-mono font-medium transition-colors break-all"
+                    title="Company Personal Mail"
+                  >
+                    {settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}
+                  </a>
+                </li>
+                <li className="flex items-center space-x-2">
                   <PhoneCall className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
                   <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="font-mono text-slate-700 hover:text-[#0B3D3B] transition-colors font-medium">
                     {settings.contactPhone}

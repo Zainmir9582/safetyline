@@ -499,6 +499,15 @@ export default function PortalLanding() {
                   </a>
                 </>
               )}
+              <span className="text-white/20 hidden sm:inline">•</span>
+              <a 
+                href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
+                className="inline-flex items-center gap-2 hover:text-amber-300 transition-colors"
+                title="Company Personal Mail"
+              >
+                <Mail className="w-4 h-4 text-amber-400" />
+                <span>{settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}</span>
+              </a>
               {settings.googleMapsUrl && (
                 <>
                   <span className="text-white/20 hidden sm:inline">•</span>

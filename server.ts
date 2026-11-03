@@ -88,6 +88,8 @@ const fallbackSettings: Settings = {
   slogan: 'Textile Engineering & Fine Hosiery Atelier',
   aboutText: 'Specialized manufacturing facility in Sialkot, Pakistan delivering precision athletic gearwear and technical hosiery.',
   contactEmail: 'info@safetyline-ind.com',
+  salesEmail: 'sales@safetyline-ind.com',
+  companyPersonalEmail: 'safetylineindustriesofficial@gmail.com',
   contactPhone: '+923007130987',
   whatsappNumber: '+923007130987',
   officeAddress: 'Small Industrial Estate, Sialkot 51310, Punjab, Pakistan',
