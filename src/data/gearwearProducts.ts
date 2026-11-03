@@ -18,21 +18,21 @@ import cg5Img from '../assets/images/cg5.png';
 // Cycling Gloves Assets
 import cy1Img from '../assets/images/cycling_glove_safetyline_1.png';
 import cy2Img from '../assets/images/cycling_glove_safetyline_2.png';
-import cy3Img from '../assets/images/cycling_glove_safetyline_3.jpeg';
-import cy4Img from '../assets/images/cycling_glove_safetyline_4.jpeg';
+import cy3Img from '../assets/images/cycling_glove_safetyline_3.png';
+import cy4Img from '../assets/images/cycling_glove_safetyline_4.png';
 import cy5Img from '../assets/images/cycling_glove_safetyline_5.png';
 import cy6Img from '../assets/images/cycling_glove_safetyline_6.png';
-import cy9Img from '../assets/images/cycling_glove_safetyline_9.jpeg';
+import cy9Img from '../assets/images/cycling_glove_safetyline_9.png';
 
 // Golf Gloves Assets
-import gg1Img from '../assets/images/golf_glove_1.jpeg';
-import gg2Img from '../assets/images/golf_glove_2.jpeg';
-import gg3Img from '../assets/images/golf_glove_3.jpeg';
-import gg4Img from '../assets/images/golf_glove_4.jpeg';
-import gg5Img from '../assets/images/golf_glove_5.jpeg';
-import gg6Img from '../assets/images/golf_glove_6.jpeg';
-import gg7Img from '../assets/images/golf_glove_7.jpeg';
-import gg8Img from '../assets/images/golf_glove_8.jpeg';
+import gg1Img from '../assets/images/golf_glove_1.png';
+import gg2Img from '../assets/images/golf_glove_2.png';
+import gg3Img from '../assets/images/golf_glove_3.png';
+import gg4Img from '../assets/images/golf_glove_4.png';
+import gg5Img from '../assets/images/golf_glove_5.png';
+import gg6Img from '../assets/images/golf_glove_6.png';
+import gg7Img from '../assets/images/golf_glove_7.png';
+import gg8Img from '../assets/images/golf_glove_8.png';
 
 export const gearwearProducts: Product[] = [
   // 1. Tactical Gloves Category
