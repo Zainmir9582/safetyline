@@ -1,5 +1,9 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { 
+  ChevronRight,
+  Sparkles
+} from 'lucide-react';
+import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
 import { ACCESSORIES_WINDOWS } from '../data/accessoriesWindows';
 import { Product } from '../types';
@@ -12,6 +16,7 @@ interface AccessoriesWindowsSectionProps {
 export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps> = ({
   products
 }) => {
+  // Count products for each window
   const getWindowProductCount = (slug: string) => {
     return products.filter(p => {
       const matchCat = p.categoryId === 'cat-hosiery' || p.categoryId === 'cat-accessories';
@@ -21,70 +26,92 @@ export const AccessoriesWindowsSection: React.FC<AccessoriesWindowsSectionProps>
   };
 
   return (
-    <section id="accessories-windows-section" className="py-14 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E2DFD7] pb-6">
+    <section id="accessories-windows-section" className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      {/* Section Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/80 pb-5">
         <div className="space-y-1.5">
-          <span className="text-[11px] font-mono uppercase tracking-[0.16em] text-[#D92227] font-semibold block">
-            Manufacturing Divisions
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#141918] tracking-tight">
-            Accessories &amp; Active Apparel
+          <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-[#D9F0EC] text-[#0B3D3B] text-[11px] font-mono font-bold tracking-wider uppercase">
+            <Sparkles className="w-3 h-3 text-[#FF5A36]" />
+            <span>Product Categories</span>
+          </div>
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0B3D3B] tracking-tight">
+            Accessories
           </h2>
-          <p className="text-sm text-[#525957]">
-            Select an apparel line below to review fabric weights, sizing grades, and wholesale product entries.
+          <p className="text-slate-500 font-normal text-xs sm:text-sm">
+            Select a specialized category below to explore technical specifications and product lines.
           </p>
         </div>
 
-        <span className="text-xs font-mono text-[#525957] tabular-nums shrink-0">
-          {ACCESSORIES_WINDOWS.length} Specialized Lines
-        </span>
+        <div className="text-xs font-mono text-slate-400">
+          <span>5 Specialized Categories</span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+      {/* 5 Compact Category Windows Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
         {ACCESSORIES_WINDOWS.map((window, idx) => {
           const productCount = getWindowProductCount(window.slug);
 
           return (
-            <article
+            <motion.div
               key={window.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: idx * 0.06 }}
               onClick={() => navigate(window.routePath)}
-              className="group cursor-pointer bg-white rounded-sm border border-[#E2DFD7] hover:border-[#141918] transition-colors duration-150 flex flex-col justify-between overflow-hidden"
+              className="group cursor-pointer bg-white rounded-2xl border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               <div>
-                <div className="aspect-[4/3] bg-[#F7F6F2] relative overflow-hidden border-b border-[#E2DFD7]">
+                {/* Category Showcase Image */}
+                <div className="aspect-[4/3] bg-slate-100 relative overflow-hidden">
                   <SmoothImage
                     src={window.image}
                     alt={window.title}
                     priority={idx < 3}
                     containerClassName="w-full h-full"
-                    className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-108"
                   />
-                </div>
+                  {/* Subtle gradient vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-                <div className="p-4 space-y-2">
-                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-[#525957] tabular-nums">
-                    <span className="font-semibold text-[#D92227]">{window.codePrefix}</span>
-                    <span>{productCount} {productCount === 1 ? 'Item' : 'Items'}</span>
+                  {/* Badge & Item Count */}
+                  <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-xs text-white px-2 py-0.5 rounded text-[9px] font-mono uppercase tracking-wider font-semibold">
+                    {window.badge}
                   </div>
 
-                  <h3 className="font-display font-bold text-base text-[#141918] group-hover:text-[#D92227] transition-colors leading-snug truncate">
+                  <div className="absolute bottom-2.5 right-2.5 bg-white/90 backdrop-blur-xs text-[#0B3D3B] px-2 py-0.5 rounded text-[9px] font-mono font-bold">
+                    {productCount} {productCount === 1 ? 'Item' : 'Items'}
+                  </div>
+                </div>
+
+                {/* Card Content: Topic & Miner Detail */}
+                <div className="p-3.5 sm:p-4 space-y-1">
+                  {/* Topic */}
+                  <h3 className="font-display font-extrabold text-sm sm:text-base text-[#0B3D3B] leading-snug truncate">
                     {window.title}
                   </h3>
 
-                  <p className="text-[#525957] text-xs leading-relaxed line-clamp-2">
+                  {/* Miner Detail */}
+                  <p className="text-slate-600 text-xs font-normal leading-relaxed line-clamp-2">
                     {window.minorDetail}
                   </p>
                 </div>
               </div>
 
-              <div className="px-4 py-3 border-t border-[#ECE9E1] flex items-center justify-between text-xs font-semibold text-[#141918] group-hover:text-[#D92227] transition-colors">
-                <span className="text-[11px] font-mono uppercase tracking-wider">Explore {window.shortTitle}</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover:translate-x-1" />
+              {/* Action Footer */}
+              <div className="px-3.5 pb-3.5 pt-1">
+                <div className="btn-glow-shine w-full py-2 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider inline-flex items-center justify-between transition-all bg-[#D9F0EC] group-hover:bg-[#0B3D3B] text-[#0B3D3B] group-hover:text-white shadow-xs group-hover:shadow-md">
+                  <span>Explore {window.shortTitle}</span>
+                  <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+                </div>
               </div>
-            </article>
+
+            </motion.div>
           );
         })}
       </div>
+
     </section>
   );
 };

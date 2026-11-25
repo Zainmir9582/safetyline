@@ -2,10 +2,7 @@ import React, { useMemo } from 'react';
 import { Clock, Calendar, Share2, ArrowLeft, ArrowRight, Check, Twitter, Linkedin, MessageCircle, Link2 } from 'lucide-react';
 import { navigate } from '../lib/router';
 import { articles } from '../data/articles';
-import { settings } from '../data';
 import SEO from './SEO';
-import SiteHeader from './SiteHeader';
-import Footer from './Footer';
 
 interface BlogDetailsProps {
   slug: string;
@@ -20,14 +17,14 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
 
   const isGearwear = useMemo(() => {
     if (!article) return false;
-    return article.slug.includes('gearwear') ||
-      article.slug.includes('activewear') ||
-      article.slug.includes('bio-polymer') ||
+    return article.slug.includes('gearwear') || 
+      article.slug.includes('activewear') || 
+      article.slug.includes('bio-polymer') || 
       article.tags.some(t => t.toLowerCase().includes('activewear') || t.toLowerCase().includes('gearwear'));
   }, [article]);
 
-  const categoryHubPath = isGearwear ? '/gearwear' : '/accessories';
-  const categoryHubLabel = isGearwear ? 'Gearwear' : 'Accessories';
+  const categoryHubPath = isGearwear ? '/gearwear' : '/hosiery';
+  const categoryHubLabel = isGearwear ? 'Gearwear' : 'Hosiery';
 
   const relatedArticles = useMemo(() => {
     if (!article) return [];
@@ -38,22 +35,17 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-[#F7F6F2] flex flex-col text-[#141918]">
-        <SiteHeader variant="obsidian" />
-        <div className="flex-grow flex flex-col items-center justify-center px-4 py-24 text-center">
-          <h2 className="font-display text-2xl font-extrabold text-[#141918]">Article Not Found</h2>
-          <p className="text-[#525957] text-sm max-w-sm mt-2">
-            The requested technical publication could not be located.
-          </p>
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="mt-6 bg-[#0E1A19] hover:bg-[#122B29] text-white px-6 py-3 rounded-sm text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer"
-          >
-            Return to Portal Home
-          </button>
-        </div>
-        <Footer settings={settings} />
+      <div className="min-h-screen bg-[#FAFCFB] flex flex-col items-center justify-center pt-28 px-4 text-center">
+        <h2 className="font-display text-2xl font-bold text-[#0B3D3B]">Article Not Found</h2>
+        <p className="text-slate-500 font-normal text-sm max-w-sm mt-2">
+          The requested technical publication could not be located.
+        </p>
+        <button
+          onClick={() => navigate('/')}
+          className="mt-6 bg-[#0B3D3B] hover:bg-[#072725] text-white px-6 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer"
+        >
+          Return to Portal Home
+        </button>
       </div>
     );
   }
@@ -87,7 +79,51 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
   };
 
   return (
-    <div id="blog-details-page" className="bg-[#F7F6F2] min-h-screen font-sans text-[#141918] flex flex-col">
+    <div id="blog-details-page" className="bg-[#FAFCFB] min-h-screen pt-20 pb-24 font-sans text-[#1A1A1A]">
+      {/* Category-Specific Top Navigation Bar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B3D3B] text-white py-3.5 px-4 sm:px-8 border-b border-white/10 shadow-lg shadow-[#0B3D3B]/20">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div 
+            onClick={() => navigate(categoryHubPath)}
+            className="flex items-center space-x-3 cursor-pointer"
+          >
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-display font-black text-sm ${
+              isGearwear ? 'bg-[#FF5A36] text-white' : 'bg-[#D9F0EC] text-[#0B3D3B]'
+            }`}>
+              {isGearwear ? 'G' : 'H'}
+            </div>
+            <div>
+              <div className="flex items-baseline space-x-1.5">
+                <span className="font-display font-extrabold text-sm uppercase">
+                  <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
+                </span>
+                <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/10 text-white font-bold">
+                  {categoryHubLabel}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={() => navigate('/')}
+              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              Portal
+            </button>
+            <button
+              onClick={() => navigate(categoryHubPath)}
+              className={`px-3.5 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+                isGearwear ? 'bg-[#FF5A36] text-white hover:bg-[#e44e2b]' : 'bg-[#D9F0EC] text-[#0B3D3B] hover:bg-white'
+              }`}
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to {categoryHubLabel} Hub</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
       <SEO
         title={`${article.title} | Safety Line`}
         description={article.excerpt}
@@ -97,64 +133,67 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
         schema={articleSchema}
       />
 
-      <SiteHeader variant="obsidian" />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 flex-grow w-full">
-        {/* Breadcrumb & Back Row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E2DFD7] pb-4 text-xs font-mono text-[#525957]">
-          <div className="flex items-center space-x-2">
-            <button onClick={() => navigate('/')} className="hover:text-[#141918] transition-colors cursor-pointer">
-              Portal
-            </button>
-            <span>/</span>
-            <button onClick={() => navigate(categoryHubPath)} className="hover:text-[#141918] transition-colors cursor-pointer">
-              {categoryHubLabel}
-            </button>
-            <span>/</span>
-            <span className="text-[#141918] font-bold truncate max-w-xs">{article.category}</span>
-          </div>
-
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 pt-8">
+        {/* Navigation Breadcrumb */}
+        <div className="flex items-center space-x-2 text-xs font-mono text-slate-500">
           <button
-            type="button"
-            onClick={() => navigate(categoryHubPath)}
-            className="inline-flex items-center gap-1.5 font-bold text-[#141918] hover:text-[#D92227] uppercase tracking-wider transition-colors cursor-pointer"
+            onClick={() => navigate('/')}
+            className="hover:text-[#0B3D3B] transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to {categoryHubLabel} Hub</span>
+            Portal
           </button>
+          <span>/</span>
+          <button
+            onClick={() => navigate(categoryHubPath)}
+            className="hover:text-[#0B3D3B] transition-colors cursor-pointer"
+          >
+            {categoryHubLabel}
+          </button>
+          <span>/</span>
+          <span className="text-[#0B3D3B] font-bold truncate max-w-xs">{article.category}</span>
         </div>
+
+        {/* Back Link */}
+        <button
+          onClick={() => navigate(categoryHubPath)}
+          className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-wider text-slate-500 hover:text-[#0B3D3B] uppercase transition-colors cursor-pointer"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to {categoryHubLabel} Hub</span>
+        </button>
 
         {/* Article Header */}
         <header className="space-y-5">
-          <span className="text-[11px] font-mono font-semibold tracking-[0.16em] uppercase text-[#D92227] block">
+          <div className="inline-block px-3 py-1 rounded-md bg-[#D9F0EC] text-[#0B3D3B] text-xs font-mono font-bold tracking-wider uppercase">
             {article.category}
-          </span>
+          </div>
 
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#141918] tracking-tight leading-[1.08]">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B3D3B] tracking-tight leading-tight">
             {article.title}
           </h1>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-[#E2DFD7]">
+          {/* Author Meta Row */}
+          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-slate-200">
             <div className="flex items-center space-x-3">
               <img
                 src={article.author.avatar}
                 alt={article.author.name}
-                className="w-10 h-10 rounded-full object-cover border border-[#E2DFD7]"
+                className="w-10 h-10 rounded-full object-cover border border-slate-200"
               />
               <div>
-                <span className="block text-sm font-bold text-[#141918]">{article.author.name}</span>
-                <span className="block text-xs text-[#525957]">{article.author.role}</span>
+                <span className="block text-sm font-bold text-[#0B3D3B]">{article.author.name}</span>
+                <span className="block text-xs text-slate-500 font-normal">{article.author.role}</span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4 text-xs text-[#525957] font-mono">
+            <div className="flex items-center space-x-4 text-xs text-slate-500 font-mono">
               <div className="flex items-center space-x-1.5">
-                <Calendar className="w-3.5 h-3.5" />
+                <Calendar className="w-3.5 h-3.5 text-slate-400" />
                 <span>{article.publishedAt}</span>
               </div>
-              <span>·</span>
+              <span>•</span>
               <div className="flex items-center space-x-1.5">
-                <Clock className="w-3.5 h-3.5" />
+                <Clock className="w-3.5 h-3.5 text-slate-400" />
                 <span>{article.readTime}</span>
               </div>
             </div>
@@ -162,7 +201,7 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
         </header>
 
         {/* Cover Image */}
-        <div className="aspect-[16/9] w-full rounded-sm overflow-hidden border border-[#E2DFD7] bg-[#ECE9E1]">
+        <div className="aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-xs border border-slate-200 bg-slate-100">
           <img
             src={article.coverImage}
             alt={article.title}
@@ -170,18 +209,18 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
           />
         </div>
 
-        {/* Article Editorial Body */}
-        <div className="bg-white p-7 sm:p-10 rounded-sm border border-[#E2DFD7] space-y-7">
-          <p className="font-serif italic text-lg sm:text-xl text-[#141918] leading-relaxed bg-[#F7F6F2] p-5 border border-[#E2DFD7] rounded-sm">
-            &ldquo;{article.excerpt}&rdquo;
+        {/* Article Body */}
+        <div className="bg-white p-7 sm:p-10 rounded-2xl border border-slate-200 shadow-xs space-y-7">
+          <p className="text-base sm:text-lg font-normal text-slate-800 leading-relaxed italic border-l-4 border-[#FF5A36] pl-4 bg-[#FAFCFB] py-3 rounded-r-lg">
+            {article.excerpt}
           </p>
 
-          <div className="prose prose-slate max-w-none space-y-5 text-[#373E3C] text-sm sm:text-base leading-relaxed">
+          <div className="prose prose-slate max-w-none space-y-5 text-slate-700 font-normal text-sm sm:text-base leading-relaxed">
             {article.content.split('\n\n').map((block, idx) => {
               const trimmed = block.trim();
               if (trimmed.startsWith('### ')) {
                 return (
-                  <h3 key={idx} className="font-display text-xl sm:text-2xl font-extrabold text-[#141918] pt-4 pb-2 border-b border-[#E2DFD7]">
+                  <h3 key={idx} className="font-display text-xl sm:text-2xl font-bold text-[#0B3D3B] pt-4 pb-1 border-b border-slate-100">
                     {trimmed.replace('### ', '')}
                   </h3>
                 );
@@ -189,7 +228,7 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
               if (trimmed.startsWith('```')) {
                 const code = trimmed.replace(/```/g, '').trim();
                 return (
-                  <pre key={idx} className="bg-[#0E1A19] text-white/90 font-mono text-xs p-4 rounded-sm overflow-x-auto">
+                  <pre key={idx} className="bg-[#0B3D3B] text-[#D9F0EC] font-mono text-xs p-4 rounded-xl overflow-x-auto">
                     {code}
                   </pre>
                 );
@@ -197,7 +236,7 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
               if (trimmed.startsWith('* ')) {
                 const lines = trimmed.split('\n');
                 return (
-                  <ul key={idx} className="space-y-2 list-disc pl-5 text-[#525957]">
+                  <ul key={idx} className="space-y-2 list-disc pl-5 text-slate-600">
                     {lines.map((l, i) => (
                       <li key={i} dangerouslySetInnerHTML={{ __html: l.replace('* ', '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                     ))}
@@ -207,7 +246,7 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
               if (/^\d+\./.test(trimmed)) {
                 const lines = trimmed.split('\n');
                 return (
-                  <ol key={idx} className="space-y-2 list-decimal pl-5 text-[#525957]">
+                  <ol key={idx} className="space-y-2 list-decimal pl-5 text-slate-600">
                     {lines.map((l, i) => (
                       <li key={i} dangerouslySetInnerHTML={{ __html: l.replace(/^\d+\.\s*/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                     ))}
@@ -220,16 +259,16 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
             })}
           </div>
 
-          {/* Indexed Topics */}
-          <div className="pt-6 border-t border-[#E2DFD7] space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#525957] block font-semibold">
-              Indexed Topics &amp; Technologies
+          {/* Tags */}
+          <div className="pt-6 border-t border-slate-100 space-y-2">
+            <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block font-semibold">
+              Indexed Topics & Technologies
             </span>
             <div className="flex flex-wrap gap-2">
               {article.tags.map(tag => (
                 <span
                   key={tag}
-                  className="bg-[#F7F6F2] border border-[#E2DFD7] text-[#141918] text-xs px-2.5 py-1 rounded-sm font-mono"
+                  className="bg-[#D9F0EC] text-[#0B3D3B] text-xs px-2.5 py-1 rounded-md font-mono font-medium"
                 >
                   #{tag}
                 </span>
@@ -237,60 +276,63 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
             </div>
           </div>
 
-          {/* Share Row */}
-          <div className="pt-6 border-t border-[#E2DFD7] flex flex-wrap items-center justify-between gap-4">
-            <span className="text-xs font-mono font-bold text-[#141918] uppercase tracking-wider flex items-center gap-2">
-              <Share2 className="w-4 h-4 text-[#D92227]" />
+          {/* Social Share Bar */}
+          <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+            <span className="text-xs font-bold text-[#0B3D3B] uppercase tracking-wider flex items-center gap-2">
+              <Share2 className="w-4 h-4 text-[#FF5A36]" />
               Share Article
             </span>
 
             <div className="flex items-center space-x-2">
+              {/* WhatsApp Share */}
               <a
                 href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${article.title} - ${window.location.href}`)}`}
                 target="_blank"
                 referrerPolicy="no-referrer"
-                className="p-2 rounded-sm border border-[#E2DFD7] bg-[#F7F6F2] text-[#141918] hover:border-[#141918] transition-colors"
+                className="p-2 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-colors"
                 title="Share on WhatsApp"
               >
                 <MessageCircle className="w-4 h-4" />
               </a>
 
+              {/* Twitter / X Share */}
               <a
                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(window.location.href)}`}
                 target="_blank"
                 referrerPolicy="no-referrer"
-                className="p-2 rounded-sm border border-[#E2DFD7] bg-[#F7F6F2] text-[#141918] hover:border-[#141918] transition-colors"
+                className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-[#0B3D3B] hover:text-white transition-colors"
                 title="Share on X"
               >
                 <Twitter className="w-4 h-4" />
               </a>
 
+              {/* LinkedIn Share */}
               <a
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
                 target="_blank"
                 referrerPolicy="no-referrer"
-                className="p-2 rounded-sm border border-[#E2DFD7] bg-[#F7F6F2] text-[#141918] hover:border-[#141918] transition-colors"
+                className="p-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-700 hover:text-white transition-colors"
                 title="Share on LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
 
+              {/* Copy URL */}
               <button
-                type="button"
                 onClick={handleCopyLink}
-                className="inline-flex items-center space-x-1.5 px-3 py-2 rounded-sm border border-[#E2DFD7] bg-[#F7F6F2] hover:border-[#141918] text-[#141918] text-xs font-mono font-semibold transition-colors cursor-pointer"
+                className="inline-flex items-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#0B3D3B] text-xs font-mono font-semibold transition-colors cursor-pointer"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Link2 className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Link2 className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Link'}</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Related Articles */}
+        {/* Related Articles Section */}
         {relatedArticles.length > 0 && (
-          <div className="space-y-4 pt-2">
-            <h3 className="font-display text-xl font-extrabold text-[#141918]">
+          <div className="space-y-4 pt-4">
+            <h3 className="font-display text-xl font-bold text-[#0B3D3B]">
               Related Technical Publications
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -298,22 +340,22 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
                 <div
                   key={rel.id}
                   onClick={() => navigate(`/blog/${rel.slug}`)}
-                  className="group cursor-pointer bg-white p-5 rounded-sm border border-[#E2DFD7] hover:border-[#141918] transition-colors flex flex-col justify-between space-y-3"
+                  className="group cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-sm transition-all flex flex-col justify-between space-y-3"
                 >
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-mono uppercase font-bold text-[#D92227] block">
+                    <span className="text-[10px] font-mono uppercase font-bold text-[#FF5A36] block">
                       {rel.category}
                     </span>
-                    <h4 className="font-display font-bold text-sm text-[#141918] group-hover:text-[#D92227] transition-colors leading-snug">
+                    <h4 className="font-display font-bold text-sm text-[#0B3D3B] group-hover:text-[#FF5A36] transition-colors leading-snug">
                       {rel.title}
                     </h4>
-                    <p className="text-xs text-[#525957] line-clamp-2">
+                    <p className="text-xs text-slate-500 font-normal line-clamp-2">
                       {rel.excerpt}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-[#525957] font-mono pt-2 border-t border-[#E2DFD7]">
+                  <div className="flex items-center justify-between text-xs text-slate-400 font-mono pt-2 border-t border-slate-100">
                     <span>{rel.readTime}</span>
-                    <span className="text-[#141918] font-bold uppercase tracking-wider group-hover:text-[#D92227] inline-flex items-center gap-1">
+                    <span className="text-[#0B3D3B] font-bold uppercase tracking-wider group-hover:text-[#FF5A36] inline-flex items-center gap-1">
                       Read <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
@@ -322,9 +364,8 @@ export default function BlogDetails({ slug }: BlogDetailsProps) {
             </div>
           </div>
         )}
-      </div>
 
-      <Footer settings={settings} />
+      </div>
     </div>
   );
 }

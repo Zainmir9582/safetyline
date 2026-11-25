@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-  X, Send, CheckCircle2, MessageCircle
+import { 
+  X, Sparkles, Send, CheckCircle2, ShieldCheck, Cpu, 
+  MessageCircle, FileText, ChevronRight, Clock, Building2,
+  RefreshCw, Award, ArrowRight
 } from 'lucide-react';
 import { Settings } from '../types';
 
@@ -34,30 +36,32 @@ export default function InquiryLoadingModal({
 
   const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
   const [loadingStep, setLoadingStep] = useState(0);
-  const [referenceCode, setReferenceCode] = useState('');
-
-  useEffect(() => {
-    setCategory(defaultCategory);
-    setNotes(defaultProductTitle ? `Inquiry regarding certified specifications for: ${defaultProductTitle}` : '');
-  }, [defaultCategory, defaultProductTitle, isOpen]);
 
   const loadingSteps = [
     { title: 'Validating Technical Standards', desc: 'Cross-referencing OEKO-TEX Standard 100 & ISO 9001:2015 tolerances...' },
-    { title: 'Compiling OEM Specification File', desc: 'Preparing material composition, stitch gauges & swatch parameters...' },
-    { title: 'Routing to Sialkot Advisory Desk', desc: 'Preparing direct handover for manufacturing specialist review...' }
+    { title: 'Generating OEM CAD Spec Sheet', desc: 'Compiling material composition, stitch gauges & swatch data...' },
+    { title: 'Routing to Sialkot Advisory Desk', desc: 'Dispatching directly to direct manufacturer concierge channel...' }
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !contactName) return;
 
-    setReferenceCode(`SL-${Math.floor(100000 + Math.random() * 900000)}`);
     setSubmissionState('loading');
     setLoadingStep(0);
 
-    setTimeout(() => setLoadingStep(1), 650);
-    setTimeout(() => setLoadingStep(2), 1400);
-    setTimeout(() => setSubmissionState('success'), 2200);
+    // Multi-step animated progress simulation
+    setTimeout(() => {
+      setLoadingStep(1);
+    }, 700);
+
+    setTimeout(() => {
+      setLoadingStep(2);
+    }, 1500);
+
+    setTimeout(() => {
+      setSubmissionState('success');
+    }, 2400);
   };
 
   const handleReset = () => {
@@ -67,69 +71,74 @@ export default function InquiryLoadingModal({
   };
 
   const whatsappDirectUrl = `https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    `Hello Safety Line Advisory Desk, I submitted an official specification request (${referenceCode || 'NEW'}) for ${contactName} (${companyName || 'Private Client'}). Category: ${category}. Notes: ${notes}`
+    `Hello Safety Line Advisory Desk, I submitted an official specification request for ${contactName} (${companyName || 'Private Client'}). Category: ${category}. Notes: ${notes}`
   )}`;
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      {/* Radiant Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.16 }}
         onClick={submissionState === 'loading' ? undefined : onClose}
-        className="fixed inset-0 bg-[#0E1A19]/75 backdrop-blur-xs"
+        className="fixed inset-0 bg-[#041615]/80 backdrop-blur-md transition-opacity"
       />
 
+      {/* Modal Dialog Card with Radiant Border */}
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 12 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-xl bg-white text-[#141918] rounded-sm border border-[#E2DFD7] shadow-2xl overflow-hidden z-10"
+        initial={{ opacity: 0, scale: 0.95, y: 15 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 15 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-xl bg-[#072422] text-white rounded-3xl border border-white/20 shadow-[0_0_50px_rgba(45,212,191,0.25)] overflow-hidden z-10"
       >
-        <div className="h-1 w-full bg-[#D92227]" />
+        {/* Radiant Top Light Bar */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-[#FF5A36] via-[#5EEAD4] via-[#FFE27D] to-[#FF5A36] animate-shimmer bg-[length:200%_auto]" />
 
+        {/* Close Button */}
         {submissionState !== 'loading' && (
           <button
-            type="button"
             onClick={onClose}
-            aria-label="Close modal"
-            className="absolute top-5 right-5 p-2 rounded-sm text-[#525957] hover:text-[#141918] hover:bg-[#F7F6F2] transition-colors cursor-pointer z-20"
+            className="absolute top-5 right-5 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-all cursor-pointer z-20"
           >
             <X className="w-5 h-5" />
           </button>
         )}
 
-        <div className="p-6 sm:p-8 pb-5 border-b border-[#E2DFD7] bg-[#F7F6F2]">
-          <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.14em] text-[#D92227] block mb-1.5">
-            Safety Line · OEM Specification Desk
-          </span>
-          <h3 className="text-xl sm:text-2xl font-display font-bold tracking-tight text-[#141918]">
-            Direct OEM &amp; Sample Inquiry
+        {/* Modal Header */}
+        <div className="p-6 sm:p-8 pb-4 border-b border-white/10">
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-300 uppercase tracking-widest mb-1.5">
+            <Sparkles className="w-4 h-4 text-[#FF5A36] animate-spin" style={{ animationDuration: '6s' }} />
+            <span>Safety Line • Technical Spec Desk</span>
+          </div>
+          <h3 className="text-2xl font-display font-black tracking-tight text-white flex items-center gap-2">
+            <span>Direct OEM & Spec Inquiry</span>
           </h3>
-          <p className="text-xs text-[#525957] mt-1">
-            Request material specifications, laboratory compliance sheets, and private-label quotes.
+          <p className="text-xs text-slate-300 mt-1">
+            Request official material specifications, laboratory certificates, and private-label production quotes.
           </p>
         </div>
 
+        {/* Modal Body */}
         <div className="p-6 sm:p-8">
           <AnimatePresence mode="wait">
+            {/* STATE 1: Interactive Inquiry Form */}
             {submissionState === 'idle' && (
               <motion.form
                 key="form-idle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
                 onSubmit={handleSubmit}
                 className="space-y-4 text-xs font-sans"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
-                      Full Name *
+                    <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
+                      Your Full Name *
                     </label>
                     <input
                       type="text"
@@ -137,12 +146,12 @@ export default function InquiryLoadingModal({
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="e.g. Marcus Vance"
-                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-[#141918] placeholder-[#8A908E] outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/15 focus:border-[#5EEAD4] focus:ring-2 focus:ring-[#5EEAD4]/30 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-400 outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
+                    <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
                       Company / Brand Name
                     </label>
                     <input
@@ -150,14 +159,14 @@ export default function InquiryLoadingModal({
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="e.g. Tactical Athletics Ltd"
-                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-[#141918] placeholder-[#8A908E] outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/15 focus:border-[#5EEAD4] focus:ring-2 focus:ring-[#5EEAD4]/30 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-400 outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
+                    <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
                       Corporate Email *
                     </label>
                     <input
@@ -166,12 +175,12 @@ export default function InquiryLoadingModal({
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="procurement@company.com"
-                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-[#141918] placeholder-[#8A908E] outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/15 focus:border-[#5EEAD4] focus:ring-2 focus:ring-[#5EEAD4]/30 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-400 outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
+                    <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
                       WhatsApp / Phone
                     </label>
                     <input
@@ -179,23 +188,23 @@ export default function InquiryLoadingModal({
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+1 (555) 019-2834"
-                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-[#141918] placeholder-[#8A908E] outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/15 focus:border-[#5EEAD4] focus:ring-2 focus:ring-[#5EEAD4]/30 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-400 outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
-                      Production Line
+                    <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
+                      Target Production Window
                     </label>
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-[#141918] outline-none transition-colors cursor-pointer"
+                      className="w-full bg-[#051C1A] border border-white/15 focus:border-[#5EEAD4] rounded-xl px-3.5 py-2.5 text-white outline-none transition-all cursor-pointer"
                     >
                       <option value="Tactical Gloves (Golf, Fish, Police, Mechanics)">Tactical Handwear (Golf, Police, Mechanics)</option>
-                      <option value="Car & Motorsport Gloves (Motorcars, Cycling)">Car &amp; Motorsport Gloves</option>
+                      <option value="Car & Motorsport Gloves (Motorcars, Cycling)">Car & Motorsport Gloves</option>
                       <option value="Performance GymWear">Performance GymWear</option>
                       <option value="Technical T-shirts">Technical T-shirts</option>
                       <option value="Weatherproof Jackets">Weatherproof Jackets</option>
@@ -206,13 +215,13 @@ export default function InquiryLoadingModal({
                   </div>
 
                   <div>
-                    <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
-                      Inquiry Scope
+                    <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
+                      Order / Inquiry Scope
                     </label>
                     <select
                       value={orderType}
                       onChange={(e) => setOrderType(e.target.value)}
-                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-[#141918] outline-none transition-colors cursor-pointer"
+                      className="w-full bg-[#051C1A] border border-white/15 focus:border-[#5EEAD4] rounded-xl px-3.5 py-2.5 text-white outline-none transition-all cursor-pointer"
                     >
                       <option value="Physical Material Sample Swatch Pack">Physical Material Sample Swatch Pack</option>
                       <option value="OEM / Private Label Production">OEM / Private Label Production</option>
@@ -223,102 +232,119 @@ export default function InquiryLoadingModal({
                 </div>
 
                 <div>
-                  <label className="block text-[#525957] font-mono text-[11px] uppercase tracking-wider mb-1.5 font-semibold">
-                    Specifications &amp; Requirements
+                  <label className="block text-slate-300 font-mono text-[11px] uppercase tracking-wider mb-1 font-bold">
+                    Specifications & Requirements
                   </label>
                   <textarea
                     rows={3}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Provide target volume, material requirements (Cabretta, Kevlar, Fleece), or custom branding notes..."
-                    className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm p-3 text-[#141918] placeholder-[#8A908E] outline-none transition-colors resize-none"
+                    placeholder="Provide details on target volume, material requirements (Cabretta, Kevlar, Fleece), or custom labeling..."
+                    className="w-full bg-white/5 border border-white/15 focus:border-[#5EEAD4] focus:ring-2 focus:ring-[#5EEAD4]/30 rounded-xl p-3 text-white placeholder-slate-400 outline-none transition-all resize-none"
                   />
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-[#D92227] hover:bg-[#B5191D] text-white font-semibold text-xs uppercase tracking-[0.12em] py-3.5 px-6 rounded-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                    className="w-full btn-glow-shine bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white font-bold text-xs uppercase tracking-widest py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-xl shadow-[#FF5A36]/30 active:scale-[0.98] transition-all cursor-pointer border border-[#FF7A59]/40"
                   >
-                    <span>Submit Specification Request</span>
-                    <Send className="w-3.5 h-3.5" />
+                    <span>Submit Official Spec Request</span>
+                    <Send className="w-4 h-4" />
                   </button>
                 </div>
               </motion.form>
             )}
 
+            {/* STATE 2: Dynamic Multi-Stage Animated Loading Form */}
             {submissionState === 'loading' && (
               <motion.div
                 key="form-loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 className="py-10 px-4 text-center space-y-6"
               >
+                {/* Radiant Pulsing Circuit Spinner */}
+                <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-full border-4 border-emerald-400/20 border-t-emerald-400 animate-spin" />
+                  <div className="absolute inset-2 rounded-full border-4 border-[#FF5A36]/20 border-b-[#FF5A36] animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.2s' }} />
+                  <div className="relative z-10 w-14 h-14 rounded-full bg-[#0B3D3B] flex items-center justify-center shadow-[0_0_20px_rgba(94,234,212,0.6)]">
+                    <Cpu className="w-7 h-7 text-emerald-300 animate-pulse" />
+                  </div>
+                </div>
+
+                {/* Animated Loading Text */}
                 <div className="space-y-2 max-w-sm mx-auto">
-                  <span className="text-[11px] font-mono font-semibold text-[#D92227] uppercase tracking-widest tabular-nums">
-                    Step 0{loadingStep + 1} of 03
-                  </span>
-                  <h4 className="font-display font-bold text-lg text-[#141918]">
+                  <motion.h4 
+                    key={loadingStep}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="font-display font-black text-lg text-white"
+                  >
                     {loadingSteps[loadingStep].title}
-                  </h4>
-                  <p className="text-xs text-[#525957]">
+                  </motion.h4>
+                  <p className="text-xs font-mono text-emerald-300/90">
                     {loadingSteps[loadingStep].desc}
                   </p>
                 </div>
 
+                {/* Animated Shimmer Progress Bar */}
                 <div className="max-w-md mx-auto space-y-2">
-                  <div className="h-1.5 w-full bg-[#ECE9E1] rounded-sm overflow-hidden">
-                    <div className="h-full bg-[#122B29] animate-form-progress" />
+                  <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden p-0.5">
+                    <div className="h-full bg-gradient-to-r from-[#FF5A36] via-[#5EEAD4] to-white rounded-full animate-form-progress" />
                   </div>
-                  <div className="flex justify-between text-[10px] font-mono text-[#525957] uppercase tracking-wider">
-                    <span>ISO 9001:2015</span>
-                    <span>Sialkot Manufacturing Desk</span>
+                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
+                    <span>STEP 0{loadingStep + 1} OF 03</span>
+                    <span>ENCRYPTED SIALKOT DISPATCH</span>
                   </div>
                 </div>
               </motion.div>
             )}
 
+            {/* STATE 3: Success Confirmation with Direct Actions */}
             {submissionState === 'success' && (
               <motion.div
                 key="form-success"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
                 className="py-6 text-center space-y-6"
               >
-                <div className="w-14 h-14 mx-auto rounded-sm bg-[#ECE9E1] text-[#122B29] flex items-center justify-center">
-                  <CheckCircle2 className="w-7 h-7" />
+                {/* Glowing Success Icon */}
+                <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center shadow-[0_0_30px_rgba(52,211,153,0.5)]">
+                  <CheckCircle2 className="w-9 h-9" />
                 </div>
 
                 <div className="space-y-2 max-w-md mx-auto">
-                  <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#D92227] tabular-nums">
-                    Reference: {referenceCode}
-                  </span>
-                  <h4 className="font-display font-bold text-2xl text-[#141918]">
-                    Specification File Prepared
+                  <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-[11px] font-mono font-bold uppercase tracking-wider">
+                    Official Reference: SL-{Math.floor(100000 + Math.random() * 900000)}
+                  </div>
+                  <h4 className="font-display font-black text-2xl text-white">
+                    Specification File Generated
                   </h4>
-                  <p className="text-xs text-[#525957] leading-relaxed">
-                    Thank you, <strong className="text-[#141918]">{contactName}</strong>. Your OEM inquiry for <strong className="text-[#141918]">{category}</strong> is ready. Connect directly via WhatsApp for immediate material confirmation.
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Thank you, <strong className="text-white">{contactName}</strong>. Your OEM request for <strong className="text-emerald-300">{category}</strong> has been prioritized. Our advisory desk typically responds with certified data within 12 hours.
                   </p>
                 </div>
 
+                {/* Action Buttons */}
                 <div className="pt-2 flex flex-col sm:flex-row gap-3">
                   <a
                     href={whatsappDirectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-[#122B29] hover:bg-[#0E1A19] text-white font-semibold text-xs uppercase tracking-wider py-3.5 px-4 rounded-sm inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                    className="flex-1 btn-glow-shine bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider py-3.5 px-4 rounded-xl inline-flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20 transition-all cursor-pointer"
                   >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Continue on WhatsApp</span>
+                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <span>Instant WhatsApp Handshake</span>
                   </a>
 
                   <button
-                    type="button"
                     onClick={handleReset}
-                    className="bg-[#ECE9E1] hover:bg-[#E2DFD7] text-[#141918] font-semibold text-xs uppercase tracking-wider py-3.5 px-5 rounded-sm transition-colors cursor-pointer"
+                    className="btn-glow-shine bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider py-3.5 px-4 rounded-xl inline-flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
-                    Done
+                    <span>Done & Return</span>
                   </button>
                 </div>
               </motion.div>

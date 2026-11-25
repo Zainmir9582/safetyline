@@ -311,17 +311,17 @@ export default function App() {
 
     // 404 Fallback
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7F6F2] text-center px-4 text-[#141918]">
-        <div className="w-14 h-14 bg-[#0E1A19] rounded-sm flex items-center justify-center mb-6">
-          <Award className="w-7 h-7 text-[#D92227]" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAFCFB] text-center px-4 pt-32 text-[#1A1A1A]">
+        <div className="w-16 h-16 bg-[#0B3D3B] rounded-2xl flex items-center justify-center shadow-xl mb-6">
+          <Award className="w-8 h-8 text-[#FF5A36]" />
         </div>
-        <h2 className="font-display text-2xl font-extrabold text-[#141918] tracking-tight">404 — Coordinate Not Found</h2>
-        <p className="text-[#525957] text-sm max-w-sm mt-2">
-          The requested coordinate lies outside Safety Line&apos;s digital catalogue routes.
+        <h2 className="font-display text-2xl font-extrabold text-[#0B3D3B] tracking-tight">404 - Coordinate Not Found</h2>
+        <p className="text-slate-500 font-normal text-sm max-w-sm mt-2">
+          The requested coordinate lies outside Safety Line's digital catalogue routes.
         </p>
         <button
           onClick={() => navigate('/')}
-          className="mt-6 bg-[#0E1A19] hover:bg-[#122B29] text-white px-7 py-3 rounded-sm text-xs font-mono font-bold tracking-widest uppercase transition-colors inline-flex items-center gap-2 cursor-pointer"
+          className="mt-6 bg-[#0B3D3B] hover:bg-[#072725] text-white px-8 py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase transition-all shadow-md shadow-[#0B3D3B]/20 inline-flex items-center gap-2 cursor-pointer"
         >
           <span>Return to Division Selector</span>
           <ArrowRight className="w-4 h-4" />
@@ -331,7 +331,7 @@ export default function App() {
   };
 
   return (
-    <div id="application-container" className="flex flex-col min-h-screen bg-[#F7F6F2] text-[#141918] font-sans relative">
+    <div id="application-container" className="flex flex-col min-h-screen bg-[#FAFCFB] text-[#1A1A1A] font-sans relative">
       <main className="flex-grow">
         {renderView()}
       </main>
