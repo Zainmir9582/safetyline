@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  X, Upload, Image as ImageIcon, Plus, Trash2, Check, AlertCircle, Sparkles 
+import {
+  X, Upload, Image as ImageIcon, Trash2, Check, AlertCircle
 } from 'lucide-react';
 import { Product } from '../types';
 
@@ -219,25 +219,22 @@ export default function ListingModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
       <div 
         id="listing-modal-container" 
-        className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-8"
+        className="relative w-full max-w-3xl bg-white rounded-sm shadow-2xl border border-[#E2DFD7] overflow-hidden my-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#0B3D3B] text-white px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Sparkles className="w-5 h-5 text-[#FF5A36]" />
-            <div>
-              <h2 className="font-display font-bold text-base">
-                {isEditing ? `Edit Product: ${productToEdit?.name}` : 'Add New Product'}
-              </h2>
-              <p className="text-xs text-[#D9F0EC]/80 font-mono">
-                {isEditing ? 'Update specifications, imagery, and variant parameters' : 'Enter product specifications, custom imagery, and parameters'}
-              </p>
-            </div>
+        <div className="bg-[#0E1A19] text-white px-6 py-4 flex items-center justify-between border-b border-white/10">
+          <div>
+            <h2 className="font-display font-bold text-base">
+              {isEditing ? `Edit Product: ${productToEdit?.name}` : 'Add New Product'}
+            </h2>
+            <p className="text-xs text-white/65 font-mono">
+              {isEditing ? 'Update specifications, imagery, and variant parameters' : 'Enter product specifications, custom imagery, and parameters'}
+            </p>
           </div>
           <button
             onClick={onClose}
-            className="text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+            className="text-white/75 hover:text-white p-1 rounded-sm hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Close Modal"
           >
             <X className="w-5 h-5" />
@@ -255,43 +252,43 @@ export default function ListingModal({
 
           {/* Section 1: Core Details */}
           <div className="space-y-4">
-            <h3 className="text-xs font-mono font-bold text-[#0B3D3B] uppercase tracking-wider border-b border-slate-100 pb-1.5">
+            <h3 className="text-xs font-mono font-bold text-[#141918] uppercase tracking-wider border-b border-[#E2DFD7] pb-1.5">
               1. General Information
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Product Name *</label>
+                <label className="text-xs font-semibold text-[#141918]">Product Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Apex Pro Aero Compression Tee"
                   value={name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none"
+                  className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Product Code / SKU *</label>
+                <label className="text-xs font-semibold text-[#141918]">Product Code / SKU *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. GW-1049"
                   value={productCode}
                   onChange={(e) => setProductCode(e.target.value)}
-                  className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs font-mono text-[#1A1A1A] outline-none"
+                  className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs font-mono text-[#141918] outline-none"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Division / Category</label>
+                <label className="text-xs font-semibold text-[#141918]">Division / Category</label>
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none"
+                  className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none"
                 >
                   <option value="cat-gearwear">Gearwear Products</option>
                   <option value="cat-hosiery">Accessories / Hosiery</option>
@@ -300,7 +297,7 @@ export default function ListingModal({
 
               {categoryId === 'cat-gearwear' ? (
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-[#FF5A36]">Production Window *</label>
+                  <label className="text-xs font-semibold text-[#D92227]">Production Window *</label>
                   <select
                     value={subcategory}
                     onChange={(e) => {
@@ -320,32 +317,32 @@ export default function ListingModal({
                         setProductCode(prefix + Math.floor(100 + Math.random() * 900));
                       }
                     }}
-                    className="w-full bg-[#FFF0ED] border border-[#FF5A36]/40 focus:border-[#FF5A36] rounded-lg px-3 py-2 text-xs font-bold text-[#0B3D3B] outline-none"
+                    className="w-full bg-[#F7F6F2] border border-[#D92227]/40 focus:border-[#D92227] rounded-sm px-3 py-2 text-xs font-bold text-[#141918] outline-none"
                   >
                     <optgroup label="Tacticals Categories">
-                      <option value="golf-gloves">⛳ Golf Gloves</option>
-                      <option value="fish-gloves">🐟 Fish Gloves</option>
-                      <option value="work-gloves">🔨 Work Gloves</option>
-                      <option value="mechanics-gloves">🔧 Mechanics Gloves</option>
-                      <option value="tactical-police-gloves">🛡️ Tactical Police Gloves</option>
+                      <option value="golf-gloves">Golf Gloves</option>
+                      <option value="fish-gloves">Fish Gloves</option>
+                      <option value="work-gloves">Work Gloves</option>
+                      <option value="mechanics-gloves">Mechanics Gloves</option>
+                      <option value="tactical-police-gloves">Tactical Police Gloves</option>
                     </optgroup>
                     <optgroup label="Car Categories">
-                      <option value="motorcars-gloves">🏎️ Motorcars Gloves</option>
-                      <option value="cycling-gloves">🚴 Cycling Gloves</option>
+                      <option value="motorcars-gloves">Motorcars Gloves</option>
+                      <option value="cycling-gloves">Cycling Gloves</option>
                     </optgroup>
                     <optgroup label="Athletic & Power">
-                      <option value="road-cycling-apparel">⚡ Road & Cycling Apparel</option>
-                      <option value="weight-lifting">🏋️ Weight Lifting</option>
+                      <option value="road-cycling-apparel">Road &amp; Cycling Apparel</option>
+                      <option value="weight-lifting">Weight Lifting</option>
                     </optgroup>
                   </select>
                 </div>
               ) : (
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700">Display Status</label>
+                  <label className="text-xs font-semibold text-[#141918]">Display Status</label>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value as 'Active' | 'Draft')}
-                    className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none"
+                    className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none"
                   >
                     <option value="Active">Active in Catalogue</option>
                     <option value="Draft">Draft / Hidden</option>
@@ -354,69 +351,69 @@ export default function ListingModal({
               )}
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">URL Slug *</label>
+                <label className="text-xs font-semibold text-[#141918]">URL Slug *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. tactical-operator-gloves"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                  className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs font-mono text-[#1A1A1A] outline-none"
+                  className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs font-mono text-[#141918] outline-none"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700">Material & Fiber Composition</label>
+              <label className="text-xs font-semibold text-[#141918]">Material &amp; Fiber Composition</label>
               <input
                 type="text"
                 placeholder="e.g. 82% Micro-Polyester, 18% Elastane Spandex"
                 value={material}
                 onChange={(e) => setMaterial(e.target.value)}
-                className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none"
+                className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700">Short Summary</label>
+              <label className="text-xs font-semibold text-[#141918]">Short Summary</label>
               <textarea
                 rows={2}
                 placeholder="Concise overview for catalog grid preview cards..."
                 value={shortDescription}
                 onChange={(e) => setShortDescription(e.target.value)}
-                className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none resize-none"
+                className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none resize-none"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700">Detailed Technical Description</label>
+              <label className="text-xs font-semibold text-[#141918]">Detailed Technical Description</label>
               <textarea
                 rows={3}
                 placeholder="Full yarn properties, knitting stitch patterns, recommended sport applications..."
                 value={longDescription}
                 onChange={(e) => setLongDescription(e.target.value)}
-                className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none resize-none"
+                className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none resize-none"
               />
             </div>
           </div>
 
           {/* Section 2: Product Imagery & Upload */}
           <div className="space-y-4">
-            <h3 className="text-xs font-mono font-bold text-[#0B3D3B] uppercase tracking-wider border-b border-slate-100 pb-1.5 flex items-center justify-between">
+            <h3 className="text-xs font-mono font-bold text-[#141918] uppercase tracking-wider border-b border-[#E2DFD7] pb-1.5 flex items-center justify-between">
               <span>2. Product Photography</span>
-              <span className="text-[10px] text-slate-400 font-normal">Supports URL or local image upload</span>
+              <span className="text-[10px] text-[#525957] font-normal">Supports URL or local image upload</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
               {/* Preview Thumbnail */}
-              <div className="md:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] font-mono text-slate-400 uppercase mb-2">Cover Preview</span>
+              <div className="md:col-span-4 bg-[#F7F6F2] border border-[#E2DFD7] rounded-sm p-3 flex flex-col items-center justify-center text-center">
+                <span className="text-[10px] font-mono text-[#525957] uppercase mb-2">Cover Preview</span>
                 {coverImage ? (
-                  <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-200 bg-white">
+                  <div className="w-full aspect-square rounded-sm overflow-hidden border border-[#E2DFD7] bg-white">
                     <img src={coverImage} alt="Cover preview" className="w-full h-full object-contain" />
                   </div>
                 ) : (
-                  <div className="w-full aspect-square rounded-lg border border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400">
+                  <div className="w-full aspect-square rounded-sm border border-dashed border-[#E2DFD7] flex flex-col items-center justify-center text-[#525957]">
                     <ImageIcon className="w-8 h-8 mb-1" />
                     <span className="text-[10px]">No image selected</span>
                   </div>
@@ -426,20 +423,20 @@ export default function ListingModal({
               {/* Input & Upload */}
               <div className="md:col-span-8 space-y-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700">Cover Image URL</label>
+                  <label className="text-xs font-semibold text-[#141918]">Cover Image URL</label>
                   <input
                     type="text"
                     placeholder="https://... or upload file below"
                     value={coverImage}
                     onChange={(e) => setCoverImage(e.target.value)}
-                    className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-2 text-xs text-[#1A1A1A] outline-none font-mono"
+                    className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-2 text-xs text-[#141918] outline-none font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Upload Photo from Computer</label>
-                  <label className="flex items-center justify-center gap-2 border border-dashed border-slate-300 hover:border-[#0B3D3B] bg-slate-50 hover:bg-white rounded-lg p-3 cursor-pointer transition-colors text-xs text-slate-600">
-                    <Upload className="w-4 h-4 text-[#FF5A36]" />
+                  <label className="block text-xs font-semibold text-[#141918] mb-1">Upload Photo from Computer</label>
+                  <label className="flex items-center justify-center gap-2 border border-dashed border-[#E2DFD7] hover:border-[#141918] bg-[#F7F6F2] hover:bg-white rounded-sm p-3 cursor-pointer transition-colors text-xs text-[#525957]">
+                    <Upload className="w-4 h-4 text-[#D92227]" />
                     <span>Choose Image File (JPG, PNG, WebP)</span>
                     <input
                       type="file"
@@ -461,16 +458,16 @@ export default function ListingModal({
                       placeholder="Add gallery image URL..."
                       value={newGalleryInput}
                       onChange={(e) => setNewGalleryInput(e.target.value)}
-                      className="flex-grow bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-1.5 text-xs text-[#1A1A1A] outline-none font-mono"
+                      className="flex-grow bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-1.5 text-xs text-[#141918] outline-none font-mono"
                     />
                     <button
                       type="button"
                       onClick={handleAddGalleryUrl}
-                      className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                      className="bg-[#ECE9E1] hover:bg-[#E2DFD7] text-[#141918] px-3 py-1.5 rounded-sm text-xs font-bold transition-colors cursor-pointer"
                     >
                       Add URL
                     </button>
-                    <label className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1">
+                    <label className="bg-[#ECE9E1] hover:bg-[#E2DFD7] text-[#141918] px-3 py-1.5 rounded-sm text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1">
                       <Upload className="w-3.5 h-3.5" />
                       <input
                         type="file"
@@ -484,7 +481,7 @@ export default function ListingModal({
                   {galleryImages.length > 0 && (
                     <div className="flex flex-wrap gap-2 pt-1">
                       {galleryImages.map((img, idx) => (
-                        <div key={idx} className="relative group w-14 h-14 rounded-md overflow-hidden border border-slate-200 bg-white">
+                        <div key={idx} className="relative group w-14 h-14 rounded-sm overflow-hidden border border-[#E2DFD7] bg-white">
                           <img src={img} alt={`Angle ${idx}`} className="w-full h-full object-cover" />
                           <button
                             type="button"
@@ -504,21 +501,21 @@ export default function ListingModal({
 
           {/* Section 3: Technical Features & Sizes */}
           <div className="space-y-4">
-            <h3 className="text-xs font-mono font-bold text-[#0B3D3B] uppercase tracking-wider border-b border-slate-100 pb-1.5">
-              3. Sizing & Technical Highlights
+            <h3 className="text-xs font-mono font-bold text-[#141918] uppercase tracking-wider border-b border-[#E2DFD7] pb-1.5">
+              3. Sizing &amp; Technical Highlights
             </h3>
 
             {/* Sizes */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-700">Available Sizing Specifications</label>
+              <label className="text-xs font-semibold text-[#141918]">Available Sizing Specifications</label>
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {sizes.map((s, idx) => (
-                  <span key={idx} className="bg-slate-100 border border-slate-200 text-[#0B3D3B] text-[11px] font-mono px-2 py-0.5 rounded-md flex items-center gap-1.5">
+                  <span key={idx} className="bg-[#F7F6F2] border border-[#E2DFD7] text-[#141918] text-[11px] font-mono px-2 py-0.5 rounded-sm flex items-center gap-1.5">
                     <span>{s}</span>
                     <button
                       type="button"
                       onClick={() => setSizes(prev => prev.filter((_, i) => i !== idx))}
-                      className="text-slate-400 hover:text-rose-500 cursor-pointer"
+                      className="text-[#525957] hover:text-rose-600 cursor-pointer"
                     >
                       &times;
                     </button>
@@ -531,12 +528,12 @@ export default function ListingModal({
                   placeholder="e.g. XXL or 39-42 EU"
                   value={newSizeInput}
                   onChange={(e) => setNewSizeInput(e.target.value)}
-                  className="flex-grow bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-1.5 text-xs outline-none font-mono"
+                  className="flex-grow bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-1.5 text-xs outline-none font-mono"
                 />
                 <button
                   type="button"
                   onClick={handleAddSize}
-                  className="bg-[#0B3D3B] text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer"
+                  className="bg-[#0E1A19] text-white px-3 py-1.5 rounded-sm text-xs font-bold cursor-pointer"
                 >
                   Add
                 </button>
@@ -545,15 +542,15 @@ export default function ListingModal({
 
             {/* Feature Bullets */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-700">Engineering Highlights / Features</label>
+              <label className="text-xs font-semibold text-[#141918]">Engineering Highlights / Features</label>
               <div className="space-y-1.5">
                 {features.map((feat, idx) => (
-                  <div key={idx} className="flex items-center justify-between gap-2 bg-[#FAFCFB] border border-slate-200 px-3 py-1.5 rounded-lg text-xs">
-                    <span className="truncate text-slate-700 font-mono">• {feat}</span>
+                  <div key={idx} className="flex items-center justify-between gap-2 bg-[#F7F6F2] border border-[#E2DFD7] px-3 py-1.5 rounded-sm text-xs">
+                    <span className="truncate text-[#141918] font-mono">• {feat}</span>
                     <button
                       type="button"
                       onClick={() => setFeatures(prev => prev.filter((_, i) => i !== idx))}
-                      className="text-slate-400 hover:text-rose-500 shrink-0 cursor-pointer"
+                      className="text-[#525957] hover:text-rose-600 shrink-0 cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -566,12 +563,12 @@ export default function ListingModal({
                   placeholder="e.g. Targeted arch compression for plantar stabilization"
                   value={newFeatureInput}
                   onChange={(e) => setNewFeatureInput(e.target.value)}
-                  className="flex-grow bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] rounded-lg px-3 py-1.5 text-xs outline-none"
+                  className="flex-grow bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] rounded-sm px-3 py-1.5 text-xs outline-none"
                 />
                 <button
                   type="button"
                   onClick={handleAddFeature}
-                  className="bg-[#0B3D3B] text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer"
+                  className="bg-[#0E1A19] text-white px-3 py-1.5 rounded-sm text-xs font-bold cursor-pointer"
                 >
                   Add Highlight
                 </button>
@@ -609,9 +606,9 @@ export default function ListingModal({
               </button>
               <button
                 type="submit"
-                className="btn-glow-shine bg-gradient-to-r from-[#0B3D3B] to-[#125350] hover:from-[#072725] hover:to-[#0B3D3B] text-white px-6 py-2.5 rounded-xl text-xs font-bold tracking-wider uppercase transition-all shadow-md shadow-[#0B3D3B]/20 inline-flex items-center gap-2 cursor-pointer active:scale-95 border border-emerald-500/20"
+                className="bg-[#0E1A19] hover:bg-[#122B29] text-white px-6 py-2.5 rounded-sm text-xs font-mono font-bold tracking-wider uppercase transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
-                <Check className="w-4 h-4 text-[#FF5A36]" />
+                <Check className="w-4 h-4 text-[#D92227]" />
                 <span>{isEditing ? 'Save Product Changes' : 'Publish Product'}</span>
               </button>
             </div>

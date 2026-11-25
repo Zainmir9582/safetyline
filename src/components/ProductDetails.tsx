@@ -20,7 +20,13 @@ interface ProductDetailsProps {
 
 export default function ProductDetails({ slug, products, onUpdateProduct }: ProductDetailsProps) {
   const product = useMemo(() => {
-    return products.find(p => p.slug === slug);
+    const normalizedSlug = decodeURIComponent(slug || '').trim().toLowerCase();
+    return products.find(
+      (p) =>
+        p.slug.toLowerCase() === normalizedSlug ||
+        p.id.toLowerCase() === normalizedSlug ||
+        p.productCode.toLowerCase() === normalizedSlug
+    );
   }, [products, slug]);
 
   const relatedProducts = useMemo(() => {

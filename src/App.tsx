@@ -118,7 +118,7 @@ export default function App() {
           fetch('/api/settings').catch(() => null)
         ]);
 
-        if (prodRes && prodRes.ok) {
+        if (prodRes && prodRes.ok && prodRes.headers.get('content-type')?.includes('application/json')) {
           const p = await prodRes.json();
           if (Array.isArray(p) && p.length > 0) {
             setProducts(p);
@@ -127,9 +127,9 @@ export default function App() {
             } catch (e) {}
           }
         }
-        if (setRes && setRes.ok) {
+        if (setRes && setRes.ok && setRes.headers.get('content-type')?.includes('application/json')) {
           const s = await setRes.json();
-          if (s && s.companyName) setSettings(s);
+          if (s && s.companyName) setSettings({ ...defaultSettings, ...s });
         }
       } catch (err) {
         // Safe fallback to static dataset
@@ -146,16 +146,24 @@ export default function App() {
 
   // Routing render block with path normalization and direct alias routing
   const renderView = () => {
-    const cleanPath = currentPath.replace(/\/+$/, '').toLowerCase() || '/';
+    const cleanPath =
+      currentPath
+        .replace(/\/index\.html?$/i, '')
+        .replace(/\/+$/, '')
+        .toLowerCase() || '/';
 
     // 1. Root Gateway Portal (Landing page showing official emblem and division selector)
-    if (cleanPath === '/' || cleanPath === '') {
+    if (cleanPath === '/' || cleanPath === '' || cleanPath === '/home' || cleanPath === '/portal' || cleanPath === '/index') {
       return <PortalLanding />;
     }
 
     // 2. Dedicated Gearwear Division Page (Athletic Knits, Technical Outerwear, Specs)
     if (
       cleanPath === '/gearwear' || 
+      cleanPath === '/products' ||
+      cleanPath === '/catalog' ||
+      cleanPath === '/catalogue' ||
+      cleanPath === '/collections' ||
       cleanPath === '/products/gearwear' || 
       cleanPath === '/catalog/gearwear' || 
       cleanPath === '/sportswear' || 
@@ -295,12 +303,12 @@ export default function App() {
     }
 
     // 6. Corporate About Us Page
-    if (cleanPath === '/about' || cleanPath === '/about-us') {
+    if (cleanPath === '/about' || cleanPath === '/about-us' || cleanPath === '/company') {
       return <AboutUs settings={settings} />;
     }
 
     // 7. Contact & Wholesale Inquiry Desk
-    if (cleanPath === '/contact' || cleanPath === '/contact-us' || cleanPath === '/inquiry') {
+    if (cleanPath === '/contact' || cleanPath === '/contact-us' || cleanPath === '/inquiry' || cleanPath === '/support' || cleanPath === '/quote') {
       return <ContactUs settings={settings} />;
     }
 

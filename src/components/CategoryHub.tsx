@@ -1,19 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { 
-  Search, ShieldCheck, Cpu, ArrowRight, MessageCircle, Star, PhoneCall, 
-  Mail, Sparkles, Activity, Layers, Award, FileCheck2, 
-  CheckCircle2, Compass, Send, ArrowUpRight, Filter, ChevronRight, Menu, X,
-  Instagram, Facebook, ExternalLink, MapPin, Image as ImageIcon, Shirt, RefreshCw, ArrowLeftRight
+import { useState, useMemo } from 'react';
+import {
+  ArrowRight, Star, FileCheck2, ArrowUpRight, ChevronRight
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { navigate, useRoute, Link } from '../lib/router';
+import { motion } from 'motion/react';
+import { navigate } from '../lib/router';
 import { Product, Settings } from '../types';
 import { certifications, testimonials } from '../data';
 import SEO from './SEO';
 import ListingModal from './ListingModal';
-import ProductCard from './ProductCard';
 import SmoothImage from './SmoothImage';
-import brandLogo from '../assets/images/safetyline_landing.png';
+import SiteHeader from './SiteHeader';
+import Footer from './Footer';
+import InquiryLoadingModal from './InquiryLoadingModal';
 import gearwearHeroBg from '../assets/images/blank_tactical_glove_1792247540904.jpg';
 import hosieryHeroImg from '../assets/images/blank_tech_jacket_1792247565413.jpg';
 import GearwearWindowsSection from './GearwearWindowsSection';
@@ -29,29 +27,21 @@ interface CategoryHubProps {
   onDeleteProduct?: (productId: string) => void;
 }
 
-export default function CategoryHub({ 
-  categorySlug, 
-  products, 
+export default function CategoryHub({
+  categorySlug,
+  products,
   settings,
   onUpdateProduct,
   onAddProduct,
   onDeleteProduct
 }: CategoryHubProps) {
   const isGearwear = categorySlug === 'gearwear';
-  const { searchParams, setQuery } = useRoute();
 
-  // Mobile menu state
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Listing Window Modal state
+  // Listing & Inquiry modal states
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
-  const [productToEdit, setProductToEdit] = useState<Product | null>(null);
-  const [selectedWindowForModal, setSelectedWindowForModal] = useState<string>('tactical-gloves');
-
-  const openNewListingModal = () => {
-    setProductToEdit(null);
-    setIsListingModalOpen(true);
-  };
+  const [productToEdit] = useState<Product | null>(null);
+  const [selectedWindowForModal] = useState<string>('tactical-gloves');
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   const handleSaveListing = (savedProd: Product) => {
     if (productToEdit) {
@@ -61,148 +51,75 @@ export default function CategoryHub({
     }
   };
 
-  // Search and filter state for product items initialized from URL params
-  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') || '');
-  const [selectedSubcat, setSelectedSubcat] = useState<string>(() => searchParams.get('subcat') || 'All');
-  const [selectedSize, setSelectedSize] = useState<string>(() => searchParams.get('size') || 'All');
-
-  // Synchronize state changes to URL query parameters for deep linking
-  const handleSubcatChange = (subcat: string) => {
-    setSelectedSubcat(subcat);
-    setQuery({ subcat: subcat === 'All' ? null : subcat });
-  };
-
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-    setQuery({ q: query.trim() === '' ? null : query.trim() });
-  };
-
-  const handleSizeChange = (size: string) => {
-    setSelectedSize(size);
-    setQuery({ size: size === 'All' ? null : size });
-  };
-
   // Filter products by category
   const categoryProducts = useMemo(() => {
     return products.filter(p => {
-      const isMatch = isGearwear 
-        ? p.categoryId === 'cat-gearwear' 
+      const isMatch = isGearwear
+        ? p.categoryId === 'cat-gearwear'
         : (p.categoryId === 'cat-hosiery' || p.categoryId === 'cat-accessories');
       return isMatch && p.status === 'Active';
     });
   }, [products, isGearwear]);
-
-  // Extract available subcategories and sizes
-  const subcategories = useMemo(() => {
-    if (isGearwear) {
-      return ['All', 'Jackets & Outerwear', 'Tops & Compression', 'Tanks & Stringers', 'Bottoms & Shorts'];
-    } else {
-      return ['All', 'Tops & Compression', 'Tanks & Performance', 'Layering & Outerwear'];
-    }
-  }, [isGearwear]);
-
-  const allSizes = useMemo(() => {
-    const sizeSet = new Set<string>();
-    categoryProducts.forEach(p => {
-      p.sizes?.forEach(s => sizeSet.add(s));
-    });
-    return ['All', ...Array.from(sizeSet)];
-  }, [categoryProducts]);
-
-  // Filtered products list
-  const filteredProducts = useMemo(() => {
-    return categoryProducts.filter(p => {
-      // Query filter
-      const q = searchQuery.toLowerCase().trim();
-      const matchQuery = q === '' || 
-        p.name.toLowerCase().includes(q) ||
-        p.shortDescription.toLowerCase().includes(q) ||
-        p.material.toLowerCase().includes(q) ||
-        p.productCode.toLowerCase().includes(q);
-
-      // Subcategory heuristic
-      let matchSubcat = true;
-      if (selectedSubcat !== 'All') {
-        const nameDesc = (p.name + ' ' + p.shortDescription + ' ' + p.material).toLowerCase();
-        if (isGearwear) {
-          if (selectedSubcat === 'Jackets & Outerwear') matchSubcat = nameDesc.includes('jacket') || nameDesc.includes('puffer') || nameDesc.includes('parka') || nameDesc.includes('storm') || nameDesc.includes('shell') || nameDesc.includes('pullover');
-          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('tee') || nameDesc.includes('crew') || nameDesc.includes('pullover') || nameDesc.includes('compression') || nameDesc.includes('aero') || nameDesc.includes('top') || nameDesc.includes('activewear') || nameDesc.includes('sportswear') || nameDesc.includes('apparel') || nameDesc.includes('training') || nameDesc.includes('wear');
-          if (selectedSubcat === 'Tanks & Stringers') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('stringer') || nameDesc.includes('sleeveless') || nameDesc.includes('bra');
-          if (selectedSubcat === 'Bottoms & Shorts') matchSubcat = nameDesc.includes('short') || nameDesc.includes('legging') || nameDesc.includes('tights') || nameDesc.includes('set');
-        } else {
-          if (selectedSubcat === 'Tops & Compression') matchSubcat = nameDesc.includes('shirt') || nameDesc.includes('compression') || nameDesc.includes('layer') || nameDesc.includes('top') || nameDesc.includes('knit');
-          if (selectedSubcat === 'Tanks & Performance') matchSubcat = nameDesc.includes('tank') || nameDesc.includes('sleeveless') || nameDesc.includes('racerback') || nameDesc.includes('set');
-          if (selectedSubcat === 'Layering & Outerwear') matchSubcat = nameDesc.includes('zip') || nameDesc.includes('layer') || nameDesc.includes('jacket') || nameDesc.includes('thermal');
-        }
-      }
-
-      // Size filter
-      const matchSize = selectedSize === 'All' || (p.sizes && p.sizes.includes(selectedSize));
-
-      return matchQuery && matchSubcat && matchSize;
-    });
-  }, [categoryProducts, searchQuery, selectedSubcat, selectedSize, isGearwear]);
 
   // Category-specific features
   const categoryFeatures = useMemo(() => {
     if (isGearwear) {
       return [
         {
-          icon: <Cpu className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'AeroStrand™ Zoned Weave',
+          code: '01',
           tag: 'Dynamic Airflow',
+          title: 'AeroStrand™ Zoned Weave',
           description: 'Engineered capillary-action knit matrices that maximize convective cooling while stabilizing active muscle groups during high-velocity movement.'
         },
         {
-          icon: <ShieldCheck className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'Zero-Friction Micro-Seams',
+          code: '02',
           tag: 'Flatlock Tech',
-          description: 'Ultra-flat anatomical seams and circular knit tubular geometries prevent chafing, pressure marks, and skin abrasion over marathon distances.'
+          title: 'Zero-Friction Micro-Seams',
+          description: 'Ultra-flat anatomical seams and reverse external stitching prevent chafing, pressure points, and skin abrasion across extended sessions.'
         },
         {
-          icon: <Activity className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'Vascular Muscle Stabilization',
-          tag: 'Targeted Elasticity',
-          description: 'Multi-directional memory recoil dampens muscle micro-oscillations, reducing lactic accumulation and accelerating recovery windows.'
+          code: '03',
+          tag: 'Impact & Grip',
+          title: 'Ergonomic Tendon Articulation',
+          description: 'Pre-curved hand geometry with Kevlar® reinforcements, molded TPR shielding, and high-tack Cabretta palm overlays.'
         },
         {
-          icon: <Layers className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'OEKO-TEX Standard 100',
+          code: '04',
           tag: 'Certified Pure',
-          description: 'All raw polymers, dyes, and elastic anchor trims are laboratory tested and certified 100% free of harmful allergens and toxic substances.'
+          title: 'OEKO-TEX Standard 100',
+          description: 'All raw hides, aramid fibers, dyes, and elastic closures are laboratory tested and certified free of harmful substances.'
         }
       ];
     } else {
       return [
         {
-          icon: <Layers className="w-6 h-6 text-[#FF5A36]" />,
-          title: '400-Needle Italian Looms',
+          code: '01',
           tag: 'High-Gauge Knit',
-          description: 'Operating high-cylinder Italian circular knitting looms that deliver flawless denier uniformity, zero laddering, and a second-skin feel.'
+          title: '3D Circular Loom Architecture',
+          description: 'Precision knitting looms delivering consistent fabric density, zero laddering, and calibrated four-way stretch retention.'
         },
         {
-          icon: <Award className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'Grade-6A Mulberry Silk',
-          tag: 'Organic Fiber',
-          description: 'Spun from long-fiber organic mulberry silk offering a pearlescent natural sheen, breathability, and weightless thermal comfort.'
+          code: '02',
+          tag: 'Moisture Transfer',
+          title: 'Capillary Thermal Management',
+          description: 'Dual-density performance knits and brushed interior fleece engineered to dump heat under exertion or insulate in cold warm-ups.'
         },
         {
-          icon: <Activity className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'Graduated Hemodynamic Rating',
-          tag: '15-25 mmHg Support',
-          description: 'Calibrated millimeter-mercury pressure gradient from ankle to calf to enhance venous return for active individuals and travel.'
+          code: '03',
+          tag: 'Seam Integrity',
+          title: 'Reinforced Flatlock Joinery',
+          description: 'High-tension bonded thread joinery engineered to endure heavy barbell complexes, trail wind, and industrial wash cycles.'
         },
         {
-          icon: <ShieldCheck className="w-6 h-6 text-[#FF5A36]" />,
-          title: 'Hand-Linked Seamless Toes',
-          tag: 'Artisan Precision',
-          description: 'Every toe closure and waistband anchor is linked under high-power optical magnification to guarantee zero pressure points.'
+          code: '04',
+          tag: 'Tailored Grading',
+          title: 'Full Export Size Architecture',
+          description: 'Consistent anatomical grading from XS through 3XL across European and North American apparel sizing specifications.'
         }
       ];
     }
   }, [isGearwear]);
 
-  // Testimonials filtered or customized
   const categoryTestimonials = useMemo(() => {
     if (isGearwear) {
       return testimonials.filter(t => t.id === 't-02' || t.author.includes('Coach') || t.author.includes('Athletics'));
@@ -212,571 +129,283 @@ export default function CategoryHub({
   }, [isGearwear]);
 
   const navScroll = (id: string) => {
-    setMobileMenuOpen(false);
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = -90;
+      const yOffset = -84;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
-  const pageTitle = isGearwear 
-    ? "Gearwear Athletic Performance Showcase | Safety Line"
-    : "Technical Accessories & Performance Legwear Showcase | Safety Line";
+  const pageTitle = isGearwear
+    ? 'Gearwear & Tactical Handwear Catalogue | Safety Line'
+    : 'Technical Accessories & Activewear Catalogue | Safety Line';
   const pageDescription = isGearwear
-    ? "Explore Safety Line's high-compression athletic gearwear, seamless 3D knit tops, and weather stormshells engineered for professional athletes."
-    : "Explore Safety Line's engineered technical accessories, graduated compression socks, protective sleeves, and high-performance essentials.";
+    ? "Explore Safety Line's motorsport, golf, cycling, industrial work, mechanics, tactical, and strength gearwear engineered in Sialkot."
+    : "Explore Safety Line's engineered gymwear, technical t-shirts, weatherproof jackets, hoodies, and dual-season tracksuits.";
 
   return (
-    <div id={`${categorySlug}-hub-page`} className="bg-[#FAFCFB] min-h-screen text-[#1A1A1A] font-sans antialiased">
-      <SEO 
+    <div id={`${categorySlug}-hub-page`} className="bg-[#F7F6F2] min-h-screen text-[#141918] font-sans antialiased flex flex-col">
+      <SEO
         title={pageTitle}
         description={pageDescription}
-        keywords={isGearwear ? "Safety Line gearwear, compression wear, athletic activewear, 3D seamless sportswear" : "Safety Line accessories, compression socks, technical sleeves, athletic accessories, cashmere socks"}
+        keywords={isGearwear ? 'Safety Line gearwear, FIA racing gloves, golf gloves, mechanics gloves, tactical handwear' : 'Safety Line accessories, gymwear, technical jackets, athletic hoodies, tracksuits'}
       />
 
-      {/* =========================================================================
-          STICKY TOP NAVBAR (Category-Specific, Strict Separation)
-         ========================================================================= */}
-      <nav 
-        id={`${categorySlug}-navbar`}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#0B3D3B] text-white py-3.5 px-4 sm:px-8 border-b border-white/10 shadow-lg shadow-[#0B3D3B]/20"
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          
-          {/* Logo & Category Identification Badge */}
-          <Link to="/" className="flex items-center space-x-3 cursor-pointer group">
-            <img
-              src={brandLogo}
-              alt="Safety Line Logo"
-              className="h-9 w-auto object-contain filter drop-shadow-sm transition-transform group-hover:scale-105"
-            />
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-display font-black text-sm uppercase tracking-wider block leading-none">
-                  <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
-                </span>
-                <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.5 rounded bg-white/15 text-white tracking-wider">
-                  {isGearwear ? 'GEARWEAR' : 'ACCESSORIES'}
-                </span>
-              </div>
-              <span className="block text-[9px] text-[#D9F0EC]/80 font-mono tracking-[0.16em] uppercase font-semibold mt-1">
-                {isGearwear ? 'Athletic Performance Division' : 'Technical Accessories Division'}
-              </span>
-            </div>
-          </Link>
+      {/* Unified Top Architectural Navbar */}
+      <SiteHeader
+        variant="obsidian"
+        onOpenInquiry={() => setIsInquiryModalOpen(true)}
+        ctaLabel="Wholesale Inquiry"
+      />
 
-          {/* Desktop Navigation Links (Strictly for this category) */}
-          <div className="hidden lg:flex items-center space-x-6 text-xs font-semibold uppercase tracking-wider">
-            <button 
-              onClick={() => navScroll('items-section')}
-              className="text-white/80 hover:text-white transition-colors cursor-pointer py-1"
-            >
-              Collection ({categoryProducts.length})
-            </button>
-            <button 
-              onClick={() => navScroll('features-section')}
-              className="text-white/80 hover:text-white transition-colors cursor-pointer py-1"
-            >
-              Standards
-            </button>
-            <Link 
-              to="/about"
-              className="text-[#D9F0EC] hover:text-white transition-colors cursor-pointer py-1 font-bold"
-            >
-              About Us
-            </Link>
-            <Link 
-              to="/contact"
-              className="text-white/80 hover:text-[#FF5A36] transition-colors cursor-pointer py-1 font-bold"
-            >
-              Contact Us
-            </Link>
-          </div>
-
-          {/* Right Action: Return to Main Portal button & Contact Us CTA */}
-          <div className="hidden sm:flex items-center space-x-3">
-            <Link
-              to="/"
-              className="px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer inline-flex items-center gap-1.5"
-              title="Return to Division Selector"
-            >
-              <span>← Portal</span>
-            </Link>
-
-            <Link
-              to="/contact"
-              className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer inline-flex items-center gap-1.5 ${
-                isGearwear 
-                  ? 'bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-[#FF5A36]/30' 
-                  : 'bg-[#D9F0EC] hover:bg-white text-[#0B3D3B]'
-              }`}
-            >
-              <span>Inquire</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <div className="flex lg:hidden items-center space-x-2">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 cursor-pointer"
-              aria-label="Toggle Menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-
-        </div>
-
-        {/* Mobile Menu Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden mt-3 pt-3 border-t border-white/10 space-y-2 text-xs font-semibold uppercase tracking-wider animate-in slide-in-from-top">
-            <button 
-              onClick={() => navScroll('items-section')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white cursor-pointer"
-            >
-              Collection ({categoryProducts.length} Items)
-            </button>
-            <button 
-              onClick={() => navScroll('features-section')}
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-white cursor-pointer"
-            >
-              Standards & Tech
-            </button>
-            <Link 
-              to="/about"
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-[#D9F0EC] font-bold"
-            >
-              About Safety Line
-            </Link>
-            <Link 
-              to="/contact"
-              className="block w-full text-left py-2 px-3 rounded hover:bg-white/10 text-[#FF5A36] font-bold"
-            >
-              Contact Us Desk
-            </Link>
-            <div className="pt-2 border-t border-white/10 flex gap-2">
-              <Link
-                to="/"
-                className="w-1/2 py-2.5 text-center bg-white/10 text-white rounded-lg text-xs font-mono uppercase"
-              >
-                ← Main Portal
-              </Link>
-              <Link
-                to="/contact"
-                className={`w-1/2 py-2.5 text-center rounded-lg text-xs font-bold uppercase ${
-                  isGearwear ? 'bg-[#FF5A36] text-white' : 'bg-[#D9F0EC] text-[#0B3D3B]'
-                }`}
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* =========================================================================
-          HERO SECTION (Category Specific)
-         ========================================================================= */}
-      <section 
+      {/* =====================================================================
+          HERO SECTION: EDITORIAL ASYMMETRICAL SPLIT
+          ===================================================================== */}
+      <section
         id="hero-section"
-        className="relative pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-[#0B3D3B] text-white overflow-hidden"
+        className="bg-[#0E1A19] text-white border-b border-white/10"
       >
-        <div className="absolute inset-0 athletic-grid-pattern-dark opacity-35 pointer-events-none" />
-        <div className={`absolute top-1/4 -right-20 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none ${
-          isGearwear ? 'bg-[#FF5A36]/15' : 'bg-[#D9F0EC]/15'
-        }`} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono uppercase tracking-[0.16em] text-white/60">
+                <span className="text-[#D92227] font-semibold">
+                  {isGearwear ? 'Division 01 · Gearwear' : 'Division 02 · Accessories'}
+                </span>
+                <span>/</span>
+                <span className="tabular-nums">{categoryProducts.length} Active Models</span>
+                <span>/</span>
+                <span>Sialkot Manufacturing</span>
+              </div>
 
-        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Heading & CTAs */}
-          <div className="lg:col-span-7 space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#D9F0EC]/15 text-[#D9F0EC] text-xs font-mono font-bold tracking-wider uppercase border border-[#D9F0EC]/20"
-            >
-              <Sparkles className={`w-3.5 h-3.5 ${isGearwear ? 'text-[#FF5A36]' : 'text-[#D9F0EC]'}`} />
-              <span>{isGearwear ? 'Division: Athletic Gearwear' : 'Division: Technical Accessories'}</span>
-            </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="font-display text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-white tracking-[-0.025em] leading-[1.06]"
+              >
+                {isGearwear
+                  ? 'Precision Handwear & Tactical Gearwear'
+                  : 'Engineered Activewear & Technical Apparel'}
+              </motion.h1>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08]"
-            >
-              {isGearwear ? (
-                <>
-                  High-Performance <span className="text-[#FF5A36]">Gearwear</span> & Tactical Handwear
-                </>
-              ) : (
-                <>
-                  Precision Engineered <span className="text-[#D9F0EC]">Technical Accessories</span> & Performance Wear
-                </>
-              )}
-            </motion.h1>
+              <div className="py-3 border-y border-white/12 text-xs sm:text-sm font-mono text-white/85">
+                <RotatingText
+                  prefix="Focus:"
+                  phrases={isGearwear ? [
+                    'FIA-Grade Nomex® Car Racing & Road Cycling Gloves',
+                    'Grade-AAA Cabretta Tour Golf & Marine Kevlar® Gloves',
+                    'ANSI Level TPR Work & Workshop Mechanics Handwear',
+                    'Direct Sialkot OEM & Private Label Manufacturing'
+                  ] : [
+                    'High-Gauge Compression GymWear Sets',
+                    'Moisture-Wicking Micro-Mesh Technical T-Shirts',
+                    'Weather-Sealed Shell Jackets & Thermal Fleece Hoodies',
+                    'Dual-Season Summer & Winter Team Tracksuits'
+                  ]}
+                  interval={3500}
+                  className="text-white"
+                />
+              </div>
 
-            {/* Eye-catching Dynamic Transition Tagline */}
-            <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono text-[#D9F0EC] bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md border border-white/15 w-fit">
-              <Sparkles className="w-4 h-4 text-[#FF5A36] shrink-0" />
-              <RotatingText
-                phrases={isGearwear ? [
-                  'Cabretta Golf & Kevlar® Police Handwear Series',
-                  'Mechanics TPR Knuckle Protection Lines',
-                  'Motorcars & Road Cycling Technical Apparel',
-                  'Direct Sialkot Industrial OEM Production'
-                ] : [
-                  'High-Gauge Activewear & Moisture-Wick Knits',
-                  'All-Weather Technical Shell Jackets',
-                  'Thermal Fleece Warm-Up Hoodies',
-                  'Dual-Season Summer & Winter Tracksuit Sets'
-                ]}
-                interval={3500}
-                className="font-bold text-white"
-              />
+              <p className="text-white/75 text-base leading-relaxed max-w-2xl">
+                {isGearwear
+                  ? 'Constructed by 90 experienced leatherworkers and stitchers using press-cut ergonomic patterns, Kevlar® reinforcement, and homologated fire-retardant materials.'
+                  : 'Engineered with high-gauge circular knitting, capillary moisture-wicking matrices, and clean architectural seaming for athletic teams and global stockists.'}
+              </p>
+
+              {/* Actions */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  type="button"
+                  onClick={() => navScroll('items-section')}
+                  className="px-6 py-3.5 rounded-sm bg-[#D92227] hover:bg-[#B5191D] text-white font-semibold text-xs uppercase tracking-[0.12em] inline-flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  <span>Browse {isGearwear ? 'Production Lines' : 'Apparel Lines'}</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => navScroll('features-section')}
+                  className="px-5 py-3.5 rounded-sm border border-white/25 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.12em] inline-flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  <span>Manufacturing Standards</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Clean Unboxed Key Metrics */}
+              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/12 max-w-xl">
+                <div>
+                  <span className="block font-display font-bold text-2xl text-white tabular-nums">
+                    {isGearwear ? '9 Lines' : '5 Lines'}
+                  </span>
+                  <span className="text-[11px] font-mono text-white/55 uppercase">
+                    {isGearwear ? 'Specialized Gloves' : 'Apparel Series'}
+                  </span>
+                </div>
+                <div>
+                  <span className="block font-display font-bold text-2xl text-white tabular-nums">ISO 9001</span>
+                  <span className="text-[11px] font-mono text-white/55 uppercase">Quality Audited</span>
+                </div>
+                <div>
+                  <span className="block font-display font-bold text-2xl text-white tabular-nums">OEM / ODM</span>
+                  <span className="text-[11px] font-mono text-white/55 uppercase">Private Labeling</span>
+                </div>
+              </div>
             </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-slate-300 font-normal text-base sm:text-lg leading-relaxed max-w-2xl"
-            >
-              {isGearwear 
-                ? "Engineered with 3D seamless circular looms, graduated vascular compression, and moisture-wicking capillary matrices for elite endurance athletes and trainers."
-                : "Engineered with high-gauge circular knitting, graduated athletic compression, moisture-wicking capillary matrices, and ergonomic seaming."
-              }
-            </motion.p>
-
-            {/* Quick Action CTAs */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-4 pt-2"
-            >
-              <button
-                onClick={() => navScroll('items-section')}
-                className={`btn-glow-shine px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 transition-all shadow-lg active:scale-95 cursor-pointer ${
-                  isGearwear 
-                    ? 'bg-[#FF5A36] hover:bg-[#e44e2b] text-white shadow-[#FF5A36]/30 border border-[#FF7A59]/40' 
-                    : 'bg-[#D9F0EC] hover:bg-white text-[#0B3D3B] shadow-[#D9F0EC]/20 border border-white/40'
-                }`}
-              >
-                <span>Browse {isGearwear ? 'Gearwear' : 'Accessories'} Items</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => navigate('/contact')}
-                className="btn-glow-shine px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all active:scale-95 cursor-pointer"
-              >
-                <span>Contact & Wholesale Desk</span>
-                <ArrowUpRight className="w-4 h-4 text-[#D9F0EC]" />
-              </button>
-            </motion.div>
-
-            {/* Micro Highlights Strip */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-xl">
-              <div>
-                <span className="block font-display font-black text-2xl text-white">
-                  {isGearwear ? '100%' : 'Grade 6A'}
-                </span>
-                <span className="text-[10px] font-mono text-[#D9F0EC] uppercase">
-                  {isGearwear ? 'Seamless 3D Knits' : 'Organic Mulberry Silk'}
-                </span>
-              </div>
-              <div>
-                <span className="block font-display font-black text-2xl text-white">15-25</span>
-                <span className="text-[10px] font-mono text-[#D9F0EC] uppercase">mmHg Graduated</span>
-              </div>
-              <div>
-                <span className="block font-display font-black text-2xl text-white">ISO 9001</span>
-                <span className="text-[10px] font-mono text-[#D9F0EC] uppercase">Audited Facilities</span>
+            {/* Right Column: Clean Editorial Photography */}
+            <div className="lg:col-span-5">
+              <div className="aspect-[4/4] sm:aspect-[5/4] lg:aspect-[4/5] rounded-sm overflow-hidden border border-white/15 bg-[#122B29]">
+                <SmoothImage
+                  src={isGearwear ? gearwearHeroBg : hosieryHeroImg}
+                  alt={isGearwear ? 'Safety Line Tactical Gearwear' : 'Safety Line Technical Apparel'}
+                  priority={true}
+                  containerClassName="w-full h-full"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-          </div>
-
-          {/* Right Column: Hero Visual Frame */}
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 bg-slate-900"
-            >
-              <SmoothImage
-                src={isGearwear 
-                  ? gearwearHeroBg
-                  : hosieryHeroImg
-                }
-                alt={isGearwear ? "Athletic Gearwear" : "Technical Accessories Collection"}
-                priority={true}
-                containerClassName="w-full h-full"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          GEARWEAR PRODUCTION WINDOWS SECTION
-         ========================================================================= */}
-      {isGearwear && (
-        <GearwearWindowsSection 
-          products={products}
-        />
-      )}
+      {/* =====================================================================
+          PRODUCTION WINDOWS DIRECTORY
+          ===================================================================== */}
+      <div id="items-section">
+        {isGearwear ? (
+          <GearwearWindowsSection products={products} />
+        ) : (
+          <AccessoriesWindowsSection products={products} />
+        )}
+      </div>
 
-      {/* =========================================================================
-          ACCESSORIES PRODUCTION WINDOWS SECTION
-         ========================================================================= */}
-      {!isGearwear && (
-        <AccessoriesWindowsSection 
-          products={products}
-        />
-      )}
-
-      {/* =========================================================================
-          TECHNICAL FEATURES & QUALITY STANDARDS SECTION
-         ========================================================================= */}
-      <section id="features-section" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#D9F0EC] text-[#0B3D3B] text-xs font-mono font-bold uppercase tracking-wider">
-            <span>Technical Pillars</span>
+      {/* =====================================================================
+          TECHNICAL STANDARDS LEDGER (HAIRLINE NUMBERED INDEX)
+          ===================================================================== */}
+      <section id="features-section" className="py-16 sm:py-20 bg-white border-y border-[#E2DFD7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#E2DFD7] pb-6">
+            <div className="space-y-1.5 max-w-2xl">
+              <span className="text-[11px] font-mono uppercase font-semibold tracking-[0.16em] text-[#D92227] block">
+                Engineering Standards
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#141918] tracking-tight">
+                {isGearwear ? 'Built for Critical Handwear Performance' : 'Crafted for Endurance Apparel'}
+              </h2>
+            </div>
+            <p className="text-sm text-[#525957] max-w-md">
+              {isGearwear
+                ? 'Every hide cut, Kevlar® liner, and seam tolerance is verified before factory dispatch.'
+                : 'Every yarn cone, flatlock joint, and zipper seal undergoes tensile and shrinkage inspection.'}
+            </p>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#0B3D3B] tracking-tight">
-            {isGearwear ? 'Engineered For Athletic Supremacy' : 'Crafted For Weightless Elegance'}
-          </h2>
-          <p className="text-slate-600 font-normal text-sm">
-            {isGearwear 
-              ? "Every stitch count, elastomeric ratio, and moisture-wicking capillary channel is rigorously tested for high-velocity sports."
-              : "Every yarn cone, lace border, and silicone anchor band undergoes dermatological and tensile auditing."
-            }
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categoryFeatures.map((f, idx) => (
-            <div key={idx} className="bg-white p-7 rounded-2xl border border-slate-200 shadow-xs space-y-3 flex flex-col justify-between">
-              <div className="space-y-2.5">
-                <div className="bg-[#D9F0EC] p-3 rounded-xl inline-block">
-                  {f.icon}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#E2DFD7] divide-y sm:divide-y-0 sm:divide-x divide-[#E2DFD7]">
+            {categoryFeatures.map((f) => (
+              <div key={f.code} className="p-6 sm:p-7 space-y-3 bg-white">
+                <div className="flex items-center justify-between text-[11px] font-mono">
+                  <span className="font-bold text-[#D92227] tabular-nums">{f.code}</span>
+                  <span className="uppercase tracking-wider text-[#525957]">{f.tag}</span>
                 </div>
-                <span className="text-[10px] font-mono uppercase font-bold text-[#FF5A36] block">
-                  {f.tag}
-                </span>
-                <h3 className="font-display font-bold text-base text-[#0B3D3B]">
+                <h3 className="font-display font-bold text-base text-[#141918]">
                   {f.title}
                 </h3>
-                <p className="text-slate-600 font-normal text-xs leading-relaxed">
+                <p className="text-[#525957] text-xs leading-relaxed">
                   {f.description}
                 </p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Audited Certifications Banner */}
-        <div className="bg-[#0B3D3B] text-white p-8 sm:p-12 rounded-3xl grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <div className="space-y-1 md:col-span-1">
-            <span className="text-[#D9F0EC] font-mono text-xs font-bold uppercase tracking-wider block">Audited Compliance</span>
-            <h3 className="font-display font-extrabold text-2xl text-white">European Quality Benchmarks</h3>
-          </div>
-          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {certifications.slice(0, 2).map((c, i) => (
-              <div key={i} className="bg-white/10 p-4 rounded-xl border border-white/15 space-y-1">
-                <div className="flex items-center space-x-2 text-[#FF5A36]">
-                  <FileCheck2 className="w-4 h-4" />
-                  <span className="text-xs font-mono font-bold uppercase text-white">{c.name}</span>
-                </div>
-                <p className="text-[11px] text-slate-200 font-normal">{c.description}</p>
-              </div>
             ))}
+          </div>
+
+          {/* Compliance Architectural Strip */}
+          <div className="bg-[#0E1A19] text-white p-8 sm:p-10 rounded-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-4 space-y-2">
+              <span className="text-[#D92227] font-mono text-[11px] font-semibold uppercase tracking-[0.14em] block">
+                Audited Compliance
+              </span>
+              <h3 className="font-display font-bold text-2xl text-white">
+                International Export Benchmarks
+              </h3>
+            </div>
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {certifications.slice(0, 2).map((c, i) => (
+                <div key={i} className="border-t border-white/15 pt-4 space-y-1.5">
+                  <div className="flex items-center gap-2 text-white">
+                    <FileCheck2 className="w-4 h-4 text-[#D92227] shrink-0" />
+                    <span className="text-xs font-mono font-semibold uppercase">{c.name}</span>
+                  </div>
+                  <p className="text-xs text-white/65 leading-relaxed">{c.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      {/* =====================================================================
+          ENDORSEMENTS & PARTNER FEEDBACK
+          ===================================================================== */}
+      <section className="py-16 sm:py-20 bg-[#F7F6F2]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono uppercase font-semibold tracking-[0.16em] text-[#D92227] block">
+                Client Verification
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#141918]">
+                {isGearwear ? 'Team & Distributor Reports' : 'Stockist & Apparel Partner Feedback'}
+              </h2>
+            </div>
 
-
-      {/* =========================================================================
-          TESTIMONIALS SECTION
-         ========================================================================= */}
-      <section className="py-16 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono uppercase font-bold text-[#FF5A36]">Industry Endorsements</span>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-[#0B3D3B]">
-              {isGearwear ? 'What Athletic Coaches & Teams Say' : 'What Boutique Buyers & Stockists Say'}
-            </h2>
+            <button
+              type="button"
+              onClick={() => navigate('/contact')}
+              className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141918] hover:text-[#D92227] inline-flex items-center gap-1.5 cursor-pointer self-start sm:self-auto"
+            >
+              <span>Request Trade References</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {categoryTestimonials.map((t) => (
-              <div key={t.id} className="bg-[#FAFCFB] p-7 rounded-2xl border border-slate-200 space-y-4 shadow-xs">
-                <div className="flex items-center space-x-1 text-amber-500">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
+              <blockquote key={t.id} className="bg-white p-7 sm:p-8 rounded-sm border border-[#E2DFD7] flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-1 text-[#D92227]">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-[#141918] text-sm sm:text-base leading-relaxed font-serif italic">
+                    &ldquo;{t.message}&rdquo;
+                  </p>
                 </div>
-                <p className="text-slate-700 text-xs sm:text-sm italic leading-relaxed">
-                  "{t.message}"
-                </p>
-                <div className="border-t border-slate-200 pt-3">
-                  <span className="block font-bold text-xs text-[#0B3D3B]">{t.author}</span>
-                  <span className="block text-[11px] text-slate-500 font-mono">{t.role}</span>
-                </div>
-              </div>
+                <footer className="border-t border-[#ECE9E1] pt-4">
+                  <cite className="not-italic block font-bold text-xs text-[#141918]">{t.author}</cite>
+                  <span className="block text-[11px] text-[#525957] font-mono mt-0.5">{t.role}</span>
+                </footer>
+              </blockquote>
             ))}
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          CATEGORY-SPECIFIC FOOTER
-         ========================================================================= */}
-      <footer className="bg-white border-t border-slate-200 py-12 text-slate-600 font-sans text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-            
-            {/* Col 1: Brand & Division Specific Social */}
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <div className="flex items-baseline space-x-1">
-                  <span className="font-serif font-black text-xs uppercase tracking-wider">
-                    <span className="text-[#EA2227]">SAFETY</span> <span className="text-black">LINE</span>
-                  </span>
-                  <span className="text-[9px] font-mono font-bold text-[#FF5A36] uppercase ml-1">
-                    • {isGearwear ? 'GEARWEAR' : 'ACCESSORIES'}
-                  </span>
-                </div>
-              </div>
-              <p className="text-[11px] text-slate-500 leading-relaxed font-normal">
-                {isGearwear 
-                  ? "High-compression aerodynamic sportswear and seamless active knits engineered for elite athletes."
-                  : "Technical accessories, luxury legwear, pure mulberry silk stockings, and graduated compression gear."
-                }
-              </p>
+      {/* Unified Footer */}
+      <Footer settings={settings} />
 
-              {/* Division-Specific Instagram Link */}
-              <div className="pt-1">
-                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold mb-1.5">
-                  {isGearwear ? 'Gearwear Instagram' : 'Accessories Instagram'}
-                </span>
-                <a
-                  href={isGearwear ? settings.instagramGearwear : settings.instagramHosiery}
-                  target="_blank"
-                  referrerPolicy="no-referrer"
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-white font-mono text-[11px] font-bold shadow-xs transition-all ${
-                    isGearwear 
-                      ? 'bg-gradient-to-r from-[#E1306C] to-[#FF5A36] hover:brightness-110'
-                      : 'bg-gradient-to-r from-[#833AB4] to-[#E1306C] hover:brightness-110'
-                  }`}
-                >
-                  <Instagram className="w-3.5 h-3.5 shrink-0" />
-                  <span>{isGearwear ? '@safetyline_industries_official' : '@safetylineindustries__official'}</span>
-                  <ExternalLink className="w-3 h-3 opacity-70 ml-0.5" />
-                </a>
-              </div>
-            </div>
+      <InquiryLoadingModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        settings={settings}
+        defaultCategory={isGearwear ? 'Tactical Gloves (Golf, Fish, Police, Mechanics)' : 'Full OEM Product Line'}
+      />
 
-            {/* Col 2: Category Sections */}
-            <div>
-              <h4 className="font-display font-bold text-xs text-[#0B3D3B] uppercase tracking-wider mb-3">
-                {isGearwear ? 'Gearwear Sections' : 'Accessories Sections'}
-              </h4>
-              <ul className="space-y-2 text-slate-600">
-                <li><button onClick={() => navScroll('items-section')} className="hover:text-[#0B3D3B] cursor-pointer">Browse Catalogue Items</button></li>
-                <li><button onClick={() => navScroll('features-section')} className="hover:text-[#0B3D3B] cursor-pointer">Technical Specifications</button></li>
-                <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer font-medium">Factory Standards & Certs</button></li>
-                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Request Swatches & Samples</button></li>
-              </ul>
-            </div>
-
-            {/* Col 3: Corporate & Navigation */}
-            <div>
-              <h4 className="font-display font-bold text-xs text-[#0B3D3B] uppercase tracking-wider mb-3">
-                Corporate & Navigation
-              </h4>
-              <ul className="space-y-2 text-slate-600">
-                <li>
-                  <button onClick={() => navigate('/')} className="hover:text-[#FF5A36] cursor-pointer font-bold inline-flex items-center gap-1">
-                    <span>← Switch Division / Main Portal</span>
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => navigate(isGearwear ? '/accessories' : '/gearwear')} className="hover:text-[#0B3D3B] cursor-pointer">
-                    {isGearwear ? 'Visit Accessories Division' : 'Visit Gearwear Division'}
-                  </button>
-                </li>
-                <li><button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] cursor-pointer">About Safety Line Heritage</button></li>
-                <li><button onClick={() => navigate('/contact')} className="hover:text-[#0B3D3B] cursor-pointer">Wholesale & OEM Desk</button></li>
-              </ul>
-            </div>
-
-            {/* Col 4: Contact & Inquiries */}
-            <div className="space-y-3">
-              <h4 className="font-display font-bold text-xs text-[#0B3D3B] uppercase tracking-wider mb-3">
-                Direct Contact Desk
-              </h4>
-              <ul className="space-y-2 text-xs">
-                <li className="flex items-center space-x-2">
-                  <Mail className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
-                  <a href={`mailto:${settings.contactEmail}`} className="text-slate-700 hover:text-[#0B3D3B] font-mono font-medium transition-colors">
-                    {settings.contactEmail}
-                  </a>
-                </li>
-                {settings.salesEmail && (
-                  <li className="flex items-center space-x-2">
-                    <Mail className="w-3.5 h-3.5 text-[#0B3D3B] shrink-0" />
-                    <a href={`mailto:${settings.salesEmail}`} className="text-slate-700 hover:text-[#0B3D3B] font-mono font-medium transition-colors">
-                      {settings.salesEmail}
-                    </a>
-                  </li>
-                )}
-                <li className="flex items-center space-x-2">
-                  <Mail className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                  <a 
-                    href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
-                    className="text-slate-700 hover:text-amber-700 font-mono font-medium transition-colors break-all"
-                    title="Company Personal Mail"
-                  >
-                    {settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}
-                  </a>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <PhoneCall className="w-3.5 h-3.5 text-[#FF5A36] shrink-0" />
-                  <a href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} className="font-mono text-slate-700 hover:text-[#0B3D3B] transition-colors font-medium">
-                    {settings.contactPhone}
-                  </a>
-                </li>
-                <li className="flex items-start space-x-2 pt-1 text-[11px] text-slate-500">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
-                  <span>Sialkot Manufacturing Complex, Pakistan</span>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-
-          <div className="border-t border-slate-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400 font-mono">
-            <span>&copy; {new Date().getFullYear()} <span className="text-[#EA2227] font-bold">SAFETY</span> <span className="text-black font-bold">LINE</span> • {isGearwear ? 'GEARWEAR DIVISION' : 'ACCESSORIES DIVISION'}. ALL RIGHTS RESERVED.</span>
-            <div className="flex items-center gap-2">
-              <button onClick={() => navigate('/')} className="text-[#FF5A36] hover:underline cursor-pointer font-bold">
-                Main Portal Home
-              </button>
-              <span>•</span>
-              <span>Digital Showcase (No Checkout)</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Listing Modal for Adding/Editing Product Listings */}
       <ListingModal
         isOpen={isListingModalOpen}
         onClose={() => setIsListingModalOpen(false)}

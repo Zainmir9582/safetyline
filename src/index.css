@@ -1,187 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Sora", "Space Grotesk", sans-serif;
+  --font-display: "Archivo", "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Modern Athletic Minimalism Exact Palette */
-  --color-primary: #0B3D3B;     /* Deep teal */
-  --color-secondary: #FF5A36;   /* Coral-orange */
-  --color-accent: #D9F0EC;      /* Soft mint */
-  --color-page-bg: #FFFFFF;     /* Pure background */
-  --color-copy: #1A1A1A;        /* High-contrast body text */
+  /* Safety Line Industrial Atelier — 60/30/10 Palette */
+  --color-canvas: #F7F6F2;
+  --color-surface: #FFFFFF;
+  --color-stone: #ECE9E1;
+  --color-obsidian: #0E1A19;
+  --color-forest: #122B29;
+  --color-ink: #141918;
+  --color-muted: #525957;
+  --color-hairline: #E2DFD7;
+  --color-crimson: #D92227;
+  --color-crimson-hover: #B5191D;
+
+  /* Legacy alias mappings kept clean for compatibility */
+  --color-primary: #122B29;
+  --color-secondary: #D92227;
+  --color-accent: #ECE9E1;
+  --color-page-bg: #F7F6F2;
+  --color-copy: #141918;
 }
 
-/* Base resets & theme styles */
+/* Base resets & editorial defaults */
 html {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
-  background-color: #FFFFFF;
-  color: #1A1A1A;
+  background-color: #F7F6F2;
+  color: #141918;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  background-color: #FFFFFF;
-  color: #1A1A1A;
+  background-color: #F7F6F2;
+  color: #141918;
 }
 
-/* Custom Athletic Scrollbar */
+/* Typographic Discipline */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Clean Architectural Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F4FAF9;
+  background: #ECE9E1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B2DFD8;
-  border-radius: 4px;
+  background: #B8B4AA;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0B3D3B;
+  background: #122B29;
 }
 
-/* Selection */
 ::selection {
-  background-color: #FF5A36;
+  background-color: #D92227;
   color: #FFFFFF;
 }
 
-/* Subtle performance dot grid pattern utility */
+/* Focus accessibility ring */
+:focus-visible {
+  outline: 2px solid #D92227;
+  outline-offset: 2px;
+}
+
+/* Restrained Hairline Grid Texture (low-contrast architectural blueprint only) */
 .athletic-grid-pattern {
-  background-image: radial-gradient(rgba(11, 61, 59, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: linear-gradient(to right, rgba(20, 25, 24, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 25, 24, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 .athletic-grid-pattern-dark {
-  background-image: radial-gradient(rgba(217, 240, 236, 0.12) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 5s ease-in-out infinite;
-}
-
-@keyframes floatGlow {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-    opacity: 0.25;
-  }
-  50% {
-    transform: translateY(-10px) scale(1.08);
-    opacity: 0.45;
-  }
-}
-
-.animate-float-glow {
-  animation: floatGlow 6s ease-in-out infinite;
-}
-
-/* Radiant Shining Glow for the "L" Word (LINE) and Brand Insignia */
-@keyframes radiantLuminance {
-  0%, 100% {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 24px rgba(94, 234, 212, 0.6));
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(45, 212, 191, 0.6);
-  }
-  50% {
-    filter: drop-shadow(0 0 22px rgba(255, 255, 255, 1)) drop-shadow(0 0 40px rgba(94, 234, 212, 0.95));
-    text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 50px rgba(94, 234, 212, 0.9);
-  }
-}
-
-.animate-radiant-l-word {
-  animation: radiantLuminance 3.5s ease-in-out infinite;
-}
-
-/* Ambient Radial Light Sweeps */
-@keyframes ambientLightBeam {
-  0%, 100% {
-    opacity: 0.35;
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    opacity: 0.65;
-    transform: rotate(4deg) scale(1.05);
-  }
-}
-
-.animate-light-beam {
-  animation: ambientLightBeam 8s ease-in-out infinite;
-}
-
-/* Button & Card Shine Sweep Transition */
-.btn-glow-shine {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-glow-shine::after {
-  content: '';
-  position: absolute;
-  top: -60%;
-  left: -70%;
-  width: 45%;
-  height: 220%;
-  background: linear-gradient(
-    65deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: rotate(25deg);
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.btn-glow-shine:hover::after {
-  transform: translateX(450%) rotate(25deg);
-}
-
-/* Clean, Crisp Text Hover Motion (No Creepy Blur) */
-.text-hover-lift {
-  transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), color 0.2s ease, letter-spacing 0.22s ease;
-}
-
-.text-hover-lift:hover {
-  transform: translateY(-1.5px);
-  letter-spacing: 0.015em;
-}
-
-/* Animated Form Loading Spinner & Shimmer Bar */
+/* Modal inquiry progress bar */
 @keyframes formProgressPulse {
-  0% {
-    width: 0%;
-  }
-  30% {
-    width: 38%;
-  }
-  60% {
-    width: 72%;
-  }
-  100% {
-    width: 100%;
-  }
+  0% { width: 0%; }
+  30% { width: 38%; }
+  60% { width: 72%; }
+  100% { width: 100%; }
 }
 
 .animate-form-progress {
   animation: formProgressPulse 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

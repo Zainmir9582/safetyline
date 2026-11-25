@@ -1,20 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  ArrowLeft as ArrowLeftIcon, 
-  Search as SearchIcon, 
+import {
+  Search as SearchIcon,
   ChevronRight as ChevronRightIcon,
   ChevronLeft as ChevronLeftIcon,
-  ShieldCheck as ShieldCheckIcon,
   CheckCircle2 as CheckCircle2Icon,
   Filter as FilterIcon,
-  Sparkles as SparklesIcon,
-  Flame as FlameIcon,
-  Zap as ZapIcon,
   Eye as EyeIcon,
   LayoutGrid as LayoutGridIcon,
   List as ListIcon,
-  X as XIcon,
-  Gauge as GaugeIcon
+  X as XIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { navigate, Link } from '../lib/router';
@@ -22,7 +16,8 @@ import { GearwearWindow, GEARWEAR_WINDOWS } from '../data/gearwearWindows';
 import { Product, Settings } from '../types';
 import SmoothImage from './SmoothImage';
 import SEO from './SEO';
-import brandLogo from '../assets/images/safetyline_landing.png';
+import SiteHeader from './SiteHeader';
+import Footer from './Footer';
 import InquiryLoadingModal from './InquiryLoadingModal';
 
 // Four Official Motorsport Car Racing Gloves Assets (excluding removed cg2)
@@ -708,13 +703,13 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
   const nextGlove = activeSlideModels[nextGloveIdx];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      id="gearwear-category-page" 
-      className="min-h-screen font-sans bg-[#F8FAFC] text-[#0F172A] pb-24"
+      transition={{ duration: 0.2 }}
+      id="gearwear-category-page"
+      className="min-h-screen font-sans bg-[#F7F6F2] text-[#141918] flex flex-col"
     >
       <SEO
         title={`${isCarRacing ? 'FIA Car Racing Gloves' : currentWindow.title} | Safety Line Motorsport & Protective Handwear`}
@@ -723,301 +718,242 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         image={currentWindow.image}
       />
 
-      {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[#070D14]/95 backdrop-blur-md text-white border-b border-slate-800 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          
-          {/* Logo & Category Identification with Premium Presentation Badge */}
-          <Link to="/" className="flex items-center space-x-3 sm:space-x-3.5 cursor-pointer group">
-            {/* High-contrast Emblem Badge ensuring the red 'S' and black 'L' stand out brilliantly */}
-            <div className="relative shrink-0 flex items-center justify-center p-1.5 rounded-xl bg-gradient-to-b from-white via-white to-slate-100 shadow-md shadow-black/40 border border-white/80 group-hover:border-[#EA2227] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(234,34,39,0.35)]">
-              <img
-                src={brandLogo}
-                alt="Safety Line"
-                className="h-8 sm:h-8.5 w-auto object-contain filter drop-shadow-xs"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-black text-sm sm:text-base tracking-[0.16em] uppercase leading-none">
-                <span className="text-[#EA2227] drop-shadow-[0_0_10px_rgba(234,34,39,0.35)]">SAFETY</span>{' '}
-                <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]">LINE</span>
+      {/* Unified Architectural Header + Clean Production Line Switcher */}
+      <SiteHeader
+        variant="obsidian"
+        ctaLabel="Wholesale Inquiry"
+        onOpenInquiry={() => {
+          setInquiryProductTitle(isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`);
+          setIsInquiryModalOpen(true);
+        }}
+        subBar={
+          <div className="bg-[#091211] border-t border-white/10 px-4 sm:px-6 lg:px-8 overflow-x-auto scrollbar-none">
+            <div className="max-w-7xl mx-auto flex items-center gap-1 h-10 text-xs">
+              <span className="text-[10px] font-mono text-white/45 uppercase tracking-[0.14em] mr-3 hidden sm:inline shrink-0">
+                Gearwear Lines
               </span>
-              <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase mt-0.5 flex items-center gap-1.5 font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#EA2227] animate-pulse" />
-                <span>Gearwear • {currentWindow.shortTitle}</span>
-              </span>
+              {GEARWEAR_WINDOWS.map((win) => {
+                const isActive = win.slug === currentWindow.slug;
+                return (
+                  <button
+                    key={win.id}
+                    type="button"
+                    onClick={() => navigate(win.routePath)}
+                    className={`relative px-3 h-full text-xs font-medium whitespace-nowrap shrink-0 transition-colors cursor-pointer flex items-center ${
+                      isActive
+                        ? 'text-white font-semibold'
+                        : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    <span>{win.shortTitle}</span>
+                    {isActive && (
+                      <span className="absolute left-2 right-2 bottom-0 h-[2px] bg-[#D92227]" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
-          </Link>
-
-          {/* Top Actions */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            <button
-              onClick={() => navigate('/gearwear')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer border border-slate-700 hover:border-slate-500 shadow-sm"
-            >
-              <ArrowLeftIcon className="w-3.5 h-3.5" />
-              <span>All Gearwear</span>
-            </button>
-            <button
-              onClick={() => {
-                setInquiryProductTitle(isCarRacing ? 'Car Racing Gloves Series' : `${currentWindow.title} Line`);
-                setIsInquiryModalOpen(true);
-              }}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#EA2227] to-[#C91A1E] hover:from-[#f52d32] hover:to-[#EA2227] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md shadow-[#EA2227]/30 hover:shadow-[#EA2227]/50 active:scale-95"
-            >
-              <SparklesIcon className="w-3.5 h-3.5" />
-              <span>Wholesale Inquiry</span>
-            </button>
           </div>
+        }
+      />
 
-        </div>
-
-        {/* Quick Category Bar */}
-        <div className="bg-[#05090F] border-t border-slate-800/80 px-4 sm:px-8 py-1.5 overflow-x-auto scrollbar-none">
-          <div className="max-w-7xl mx-auto flex items-center gap-1.5 text-xs">
-            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">
-              Gearwear Windows:
-            </span>
-            {GEARWEAR_WINDOWS.map((win) => {
-              const isActive = win.slug === currentWindow.slug;
-              return (
-                <button
-                  key={win.id}
-                  onClick={() => navigate(win.routePath)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
-                    isActive
-                      ? 'bg-[#EA2227] text-white font-bold shadow-sm shadow-[#EA2227]/30'
-                      : 'text-slate-400 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <span>{win.shortTitle}</span>
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </header>
-
-      {/* =========================================================================
-          FULL HEADER BANNER (NORMAL BALANCED HEIGHT WHITE STUDIO SHOWCASE & SIDE LOGO)
-          ========================================================================= */}
+      {/* =====================================================================
+          STUDIO PRODUCT SHOWCASE BANNER (TRANSPARENT PNG SLIDE STAGE)
+          ===================================================================== */}
       {isHasHeroSlide ? (
-        <section className="relative w-full h-[340px] sm:h-[400px] lg:h-[450px] bg-white border-b border-slate-200 overflow-hidden flex items-center justify-center select-none">
-          
-          {/* Subtle Dynamic Light Grid Ambience */}
-          <div className="absolute inset-0 bg-[radial-gradient(#EA2227_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.05] pointer-events-none" />
-          
-          {/* Safety Line Brand Logo Badge on the Side */}
-          <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-6 z-30 flex items-center space-x-2.5 bg-white/95 backdrop-blur-md px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 group">
-            <div className="relative shrink-0 flex items-center justify-center p-1 rounded-lg bg-slate-50 border border-slate-100">
-              <img
-                src={brandLogo}
-                alt="Safety Line"
-                className="h-7 sm:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-black text-xs sm:text-sm tracking-[0.15em] uppercase leading-none">
-                <span className="text-[#EA2227]">SAFETY</span> <span className="text-slate-900">LINE</span>
-              </span>
-              <span className="text-[9px] font-mono tracking-wider text-slate-500 uppercase mt-0.5 font-bold">
-                {isCarRacing ? 'Motorsport Handwear' : isGolf ? 'Tour Precision Golf' : isCycling ? 'Aero Cycling Series' : isFish ? 'Marine Kevlar® Series' : isWork ? 'Industrial Safety Line' : isMechanics ? 'Workshop Mechanics Series' : isWeightLifting ? 'Strength & Conditioning' : currentWindow.badge}
-              </span>
-            </div>
-          </div>
+        <section className="relative w-full bg-white border-b border-[#E2DFD7] select-none">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            {/* Top Editorial Context Rail */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#ECE9E1] pb-5">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.14em] text-[#525957]">
+                  <Link to="/gearwear" className="hover:text-[#141918] transition-colors">Gearwear</Link>
+                  <span>/</span>
+                  <span className="text-[#D92227] font-semibold">{currentWindow.badge}</span>
+                </div>
+                <h1 className="font-display text-2xl sm:text-4xl font-extrabold text-[#141918] tracking-tight">
+                  {currentWindow.title}
+                </h1>
+              </div>
 
-          {/* Subtle Safety Line Crest Watermark on the Side Background */}
-          <div className="hidden lg:block absolute left-8 xl:left-12 top-1/2 -translate-y-1/2 w-64 xl:w-72 aspect-square opacity-[0.035] pointer-events-none">
-            <img
-              src={brandLogo}
-              alt=""
-              className="w-full h-full object-contain filter contrast-125"
-            />
-          </div>
-
-          {/* Studio Ambient Backlight behind Center Glove */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[380px] rounded-full bg-gradient-to-tr from-[#EA2227]/8 via-slate-100 to-cyan-400/8 blur-[100px] pointer-events-none" />
-
-          {/* Studio Center Floor Shadow & Racing Red Accent Pedestal */}
-          <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 w-[70%] max-w-xl h-10 bg-slate-900/10 rounded-[100%] blur-lg pointer-events-none" />
-          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 w-[40%] max-w-sm h-[2px] bg-gradient-to-r from-transparent via-[#EA2227]/50 to-transparent pointer-events-none" />
-
-          {/* Full Header Carousel Stage: Displays the Glove Slide Animation in Auto */}
-          <div className="relative w-full max-w-7xl h-full flex items-center justify-center px-4 sm:px-12">
-            
-            {/* Left Background Adjacent Glove (Visual Depth Preview - No Text) */}
-            <div 
-              onClick={goToPrevSlide}
-              className="hidden md:flex absolute left-4 lg:left-12 xl:left-16 z-10 w-44 sm:w-52 lg:w-64 aspect-square items-center justify-center opacity-30 hover:opacity-65 transition-all duration-300 cursor-pointer transform -translate-x-6 sm:-translate-x-10 scale-85 hover:scale-90"
-              title="Previous Model"
-            >
-              <img
-                src={prevGlove.slideImage}
-                alt=""
-                className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.12)]"
-              />
+              {/* Active Slide Metadata Telemetry */}
+              <div className="flex items-center gap-5 text-xs font-mono shrink-0">
+                <div className="text-left sm:text-right">
+                  <span className="block text-[10px] uppercase tracking-wider text-[#525957]">Featured Model</span>
+                  <span className="font-semibold text-[#141918] tabular-nums">
+                    {activeGlove?.code} · {activeGlove?.livery}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => activeGlove && setInspectGlove(activeGlove)}
+                  className="px-3.5 py-2 rounded-sm border border-[#E2DFD7] hover:border-[#141918] text-[#141918] text-[11px] font-mono font-semibold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  Inspect Specs
+                </button>
+              </div>
             </div>
 
-            {/* Center Active Glove: Animated Floating & Sliding Presentation on Crisp White Stage */}
-            <div className="relative z-20 w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[390px] aspect-square flex items-center justify-center">
-              
-              {/* Soft Ambient Halo behind active glove */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.55, 0.3]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute inset-4 sm:inset-6 rounded-full bg-gradient-to-tr from-[#EA2227]/10 via-slate-200/35 to-cyan-400/10 blur-2xl pointer-events-none"
-              />
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`hero-glove-${activeSlideIdx}`}
-                  initial={{ 
-                    opacity: 0, 
-                    x: slideDirection === 'next' ? 60 : -60,
-                    scale: 0.92 
-                  }}
-                  animate={{ 
-                    opacity: 1, 
-                    x: 0,
-                    scale: 1,
-                    y: [0, -10, 0]
-                  }}
-                  exit={{ 
-                    opacity: 0, 
-                    x: slideDirection === 'next' ? -60 : 60,
-                    scale: 0.92 
-                  }}
-                  transition={{
-                    opacity: { duration: 0.35 },
-                    x: { duration: 0.4 },
-                    scale: { duration: 0.4 },
-                    y: {
-                      duration: 3.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
-                  }}
-                  onClick={() => setInspectGlove(activeGlove)}
-                  className="relative z-10 w-full h-full flex items-center justify-center p-0 cursor-pointer"
+            {/* Clean Studio Carousel Stage */}
+            <div className="relative h-[260px] sm:h-[320px] lg:h-[360px] flex items-center justify-center overflow-hidden">
+              {/* Previous Model Ghost Preview */}
+              {prevGlove && activeSlideModels.length > 1 && (
+                <div
+                  onClick={goToPrevSlide}
+                  className="hidden md:flex absolute left-10 lg:left-16 z-10 w-44 lg:w-56 aspect-square items-center justify-center opacity-25 hover:opacity-55 transition-opacity duration-200 cursor-pointer scale-90"
+                  title="Previous Model"
                 >
                   <img
-                    src={activeGlove.slideImage}
-                    alt=""
-                    className="w-full h-full object-contain filter drop-shadow-[0_18px_30px_rgba(15,23,42,0.16)] drop-shadow-[0_5px_10px_rgba(15,23,42,0.08)] transition-transform duration-500 hover:scale-[1.04]"
+                    src={prevGlove.slideImage}
+                    alt={prevGlove.name}
+                    className="w-full h-full object-contain filter drop-shadow-[0_10px_18px_rgba(20,25,24,0.10)]"
                   />
-                </motion.div>
-              </AnimatePresence>
+                </div>
+              )}
 
+              {/* Center Featured Transparent Showcase */}
+              <div className="relative z-20 w-full max-w-[240px] sm:max-w-[290px] lg:max-w-[330px] aspect-square flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`hero-glove-${activeSlideIdx}`}
+                    initial={{
+                      opacity: 0,
+                      x: slideDirection === 'next' ? 44 : -44,
+                      scale: 0.96
+                    }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      scale: 1,
+                      y: [0, -6, 0]
+                    }}
+                    exit={{
+                      opacity: 0,
+                      x: slideDirection === 'next' ? -44 : 44,
+                      scale: 0.96
+                    }}
+                    transition={{
+                      opacity: { duration: 0.28 },
+                      x: { duration: 0.32, ease: [0.16, 1, 0.3, 1] },
+                      scale: { duration: 0.32 },
+                      y: {
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: 'easeInOut'
+                      }
+                    }}
+                    onClick={() => activeGlove && setInspectGlove(activeGlove)}
+                    className="relative z-10 w-full h-full flex items-center justify-center cursor-pointer"
+                  >
+                    <img
+                      src={activeGlove?.slideImage}
+                      alt={activeGlove?.name || currentWindow.title}
+                      className="w-full h-full object-contain filter drop-shadow-[0_18px_28px_rgba(20,25,24,0.14)]"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Next Model Ghost Preview */}
+              {nextGlove && activeSlideModels.length > 1 && (
+                <div
+                  onClick={goToNextSlide}
+                  className="hidden md:flex absolute right-10 lg:right-16 z-10 w-44 lg:w-56 aspect-square items-center justify-center opacity-25 hover:opacity-55 transition-opacity duration-200 cursor-pointer scale-90"
+                  title="Next Model"
+                >
+                  <img
+                    src={nextGlove.slideImage}
+                    alt={nextGlove.name}
+                    className="w-full h-full object-contain filter drop-shadow-[0_10px_18px_rgba(20,25,24,0.10)]"
+                  />
+                </div>
+              )}
+
+              {/* Architectural Prev / Next Controls */}
+              <button
+                type="button"
+                onClick={goToPrevSlide}
+                aria-label="Previous model"
+                className="absolute left-0 sm:left-2 z-30 p-2.5 rounded-sm bg-white hover:bg-[#141918] text-[#141918] hover:text-white border border-[#E2DFD7] hover:border-[#141918] transition-colors cursor-pointer"
+              >
+                <ChevronLeftIcon className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={goToNextSlide}
+                aria-label="Next model"
+                className="absolute right-0 sm:right-2 z-30 p-2.5 rounded-sm bg-white hover:bg-[#141918] text-[#141918] hover:text-white border border-[#E2DFD7] hover:border-[#141918] transition-colors cursor-pointer"
+              >
+                <ChevronRightIcon className="w-4 h-4" />
+              </button>
             </div>
 
-            {/* Right Background Adjacent Glove (Visual Depth Preview - No Text) */}
-            <div 
-              onClick={goToNextSlide}
-              className="hidden md:flex absolute right-4 lg:right-12 xl:right-16 z-10 w-44 sm:w-52 lg:w-64 aspect-square items-center justify-center opacity-30 hover:opacity-65 transition-all duration-300 cursor-pointer transform translate-x-6 sm:translate-x-10 scale-85 hover:scale-90"
-              title="Next Model"
-            >
-              <img
-                src={nextGlove.slideImage}
-                alt=""
-                className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(15,23,42,0.12)]"
-              />
+            {/* Bottom Progress Rail & Slide Selectors */}
+            <div className="pt-3 border-t border-[#ECE9E1] flex flex-wrap items-center justify-between gap-4">
+              <p className="text-xs text-[#525957] max-w-2xl">
+                {currentWindow.minorDetail}
+              </p>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-[11px] font-mono text-[#525957] tabular-nums mr-1">
+                  0{activeSlideIdx + 1} / 0{activeSlideModels.length}
+                </span>
+                {activeSlideModels.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => {
+                      setSlideDirection(idx > activeSlideIdx ? 'next' : 'prev');
+                      setActiveSlideIdx(idx);
+                    }}
+                    aria-label={`View slide ${idx + 1}`}
+                    className={`h-1.5 transition-all duration-200 cursor-pointer ${
+                      activeSlideIdx === idx
+                        ? 'w-7 bg-[#D92227]'
+                        : 'w-2.5 bg-[#E2DFD7] hover:bg-[#141918]/40'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
-
-            {/* Left Chevron Navigation Arrow (Glassmorphism Light Theme) */}
-            <button
-              onClick={goToPrevSlide}
-              className="absolute left-2.5 sm:left-6 lg:left-10 z-30 p-2.5 sm:p-3 rounded-xl bg-white/90 hover:bg-[#EA2227] text-slate-700 hover:text-white transition-all duration-300 backdrop-blur-md border border-slate-200/90 hover:border-[#EA2227] shadow-sm hover:shadow-md active:scale-90 cursor-pointer"
-              title="Previous Glove"
-            >
-              <ChevronLeftIcon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-            </button>
-
-            {/* Right Chevron Navigation Arrow (Glassmorphism Light Theme) */}
-            <button
-              onClick={goToNextSlide}
-              className="absolute right-2.5 sm:right-6 lg:right-10 z-30 p-2.5 sm:p-3 rounded-xl bg-white/90 hover:bg-[#EA2227] text-slate-700 hover:text-white transition-all duration-300 backdrop-blur-md border border-slate-200/90 hover:border-[#EA2227] shadow-sm hover:shadow-md active:scale-90 cursor-pointer"
-              title="Next Glove"
-            >
-              <ChevronRightIcon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-            </button>
-
-            {/* Carousel Slide Indicators at Bottom (Telemetry Light Theme - No Text) */}
-            <div className="absolute bottom-3.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200 shadow-sm">
-              {activeSlideModels.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setSlideDirection(idx > activeSlideIdx ? 'next' : 'prev');
-                    setActiveSlideIdx(idx);
-                  }}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${
-                    activeSlideIdx === idx 
-                      ? 'w-6 sm:w-8 h-1.5 sm:h-2 bg-[#EA2227] shadow-[0_0_8px_rgba(234,34,39,0.4)]' 
-                      : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-slate-200 hover:bg-slate-300'
-                  }`}
-                  title={`Slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
           </div>
-
         </section>
       ) : (
-        /* Standard Header Banner for other non-car categories */
-        <section className="bg-gradient-to-b from-[#0B151E] to-[#080D14] text-white py-10 sm:py-12 border-b border-slate-800 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
-            
-            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400">
-              <Link to="/" className="hover:text-white transition-colors">Home</Link>
-              <span>/</span>
-              <Link to="/gearwear" className="hover:text-white transition-colors">Gearwear</Link>
-              <span>/</span>
-              <span className="text-slate-300">{currentWindow.groupLabel}</span>
-              <span>/</span>
-              <span className="text-white font-bold">{currentWindow.title}</span>
-            </div>
-
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-              
-              <div className="space-y-3 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono font-semibold uppercase tracking-wider">
-                  <span>{currentWindow.badge}</span>
-                  <span>•</span>
-                  <span>{currentWindow.codePrefix} Series</span>
+        /* Asymmetric Editorial Header for Non-Carousel Windows */
+        <section className="bg-[#0E1A19] text-white border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+              <div className="space-y-4 max-w-2xl">
+                <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.14em] text-white/55">
+                  <Link to="/gearwear" className="hover:text-white transition-colors">Gearwear</Link>
+                  <span>/</span>
+                  <span className="text-[#D92227] font-semibold">{currentWindow.badge}</span>
                 </div>
 
-                <h1 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
+                <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
                   {currentWindow.title}
                 </h1>
 
-                <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
+                <p className="text-sm sm:text-base text-white/75 leading-relaxed">
                   {currentWindow.minorDetail}
                 </p>
 
                 <div className="pt-2">
                   <button
+                    type="button"
                     onClick={() => {
                       setInquiryProductTitle(`${currentWindow.title} Line`);
                       setIsInquiryModalOpen(true);
                     }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EA2227] hover:bg-[#d0171c] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md shadow-[#EA2227]/30 active:scale-95 transition-all cursor-pointer border border-[#FF5A36]/40"
+                    className="px-5 py-3 rounded-sm bg-[#D92227] hover:bg-[#B5191D] text-white text-xs font-semibold uppercase tracking-[0.12em] transition-colors cursor-pointer"
                   >
-                    <SparklesIcon className="w-3.5 h-3.5" />
-                    <span>Request OEM Spec Pack</span>
+                    Request OEM Spec Pack
                   </button>
                 </div>
               </div>
 
-              <div className="shrink-0 w-36 sm:w-48 aspect-[4/3] rounded-2xl overflow-hidden border-2 border-slate-700 shadow-xl bg-slate-900">
+              <div className="shrink-0 w-44 sm:w-56 aspect-[4/3] rounded-sm overflow-hidden border border-white/15 bg-[#122B29]">
                 <SmoothImage
                   src={currentWindow.image}
                   alt={currentWindow.title}
@@ -1026,76 +962,37 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                   className="w-full h-full object-cover"
                 />
               </div>
-
             </div>
-
           </div>
         </section>
       )}
 
-      {/* =========================================================================
-          PRODUCT CATALOGUE & FILTERS PORTION (CLEAN, SUITABLE MODERN E-COMMERCE DESIGN)
-          ========================================================================= */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 space-y-8">
-        
-        {/* Breadcrumb Trail */}
-        <div className="flex items-center space-x-2 text-xs font-mono text-slate-500">
-          <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
-          <span>/</span>
-          <Link to="/gearwear" className="hover:text-slate-900 transition-colors">Gearwear</Link>
-          <span>/</span>
-          {isCarRacing ? (
-            <>
-              <span className="text-[#EA2227] font-semibold">Motorsport Handwear</span>
-              <span>/</span>
-              <span className="text-slate-900 font-bold">Car Racing Gloves</span>
-            </>
-          ) : (
-            <span className="text-slate-900 font-bold">{currentWindow.title}</span>
-          )}
-        </div>
-
-        {/* Filter, View Switcher & Search Bar */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-          
-          {/* Item count & active label */}
-          <div className="flex items-center space-x-3">
-            <span className="font-display font-black text-lg text-slate-900">
-              {isCarRacing 
-                ? 'Official Safety Line Racing Gloves' 
-                : isGolf 
-                ? 'Official Safety Line Tour Golf Gloves' 
-                : isCycling 
-                ? 'Official Safety Line Aero Cycling Gloves' 
-                : isFish 
-                ? 'Official Safety Line Marine Fish Gloves' 
-                : isWork 
-                ? 'Official Safety Line Industrial Work Gloves' 
-                : isMechanics 
-                ? 'Official Safety Line Workshop Mechanics Gloves' 
-                : isWeightLifting 
-                ? 'Official Safety Line Strength & Weight Lifting' 
-                : 'Products'}
-            </span>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#EA2227]/10 text-[#EA2227] border border-[#EA2227]/20">
+      {/* =====================================================================
+          PRODUCT CATALOGUE & FILTER TOOLBAR
+          ===================================================================== */}
+      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 space-y-8">
+        {/* Toolbar */}
+        <div className="p-4 sm:p-5 rounded-sm bg-white border border-[#E2DFD7] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="flex items-baseline gap-3">
+            <h2 className="font-display font-bold text-lg text-[#141918]">
+              Specification Models
+            </h2>
+            <span className="text-xs font-mono text-[#D92227] font-semibold tabular-nums">
               {filteredProducts.length} {filteredProducts.length === 1 ? 'Model' : 'Models'}
             </span>
           </div>
 
-          {/* Search, Size Filters & View Mode Switcher */}
           <div className="flex flex-wrap items-center gap-3">
-            
-            {/* View Mode Switcher (Grid vs List) */}
-            <div className="inline-flex rounded-xl p-1 bg-slate-100 border border-slate-200 text-xs font-mono">
+            {/* Grid / Detailed List Toggle */}
+            <div className="inline-flex rounded-sm border border-[#E2DFD7] bg-[#F7F6F2] p-0.5 text-xs font-mono">
               <button
                 type="button"
                 onClick={() => setViewMode('grid')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm font-semibold transition-colors cursor-pointer ${
                   viewMode === 'grid'
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-[#141918] shadow-2xs'
+                    : 'text-[#525957] hover:text-[#141918]'
                 }`}
-                title="Grid View"
               >
                 <LayoutGridIcon className="w-3.5 h-3.5" />
                 <span>Grid</span>
@@ -1103,89 +1000,178 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
               <button
                 type="button"
                 onClick={() => setViewMode('list')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm font-semibold transition-colors cursor-pointer ${
                   viewMode === 'list'
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-[#141918] shadow-2xs'
+                    : 'text-[#525957] hover:text-[#141918]'
                 }`}
-                title="Detailed List View"
               >
                 <ListIcon className="w-3.5 h-3.5" />
-                <span>Detailed List</span>
+                <span>Spec List</span>
               </button>
             </div>
 
             {/* Search Input */}
             <div className="relative flex-grow sm:w-64">
-              <SearchIcon className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
+              <SearchIcon className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#525957]" />
               <input
                 type="text"
                 placeholder={`Search ${currentWindow.shortTitle}...`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl py-1.5 pl-8 pr-3 text-xs bg-slate-50 border border-slate-200 focus:border-[#EA2227] focus:bg-white text-slate-900 placeholder:text-slate-400 outline-none transition-colors"
+                className="w-full rounded-sm py-2 pl-8 pr-8 text-xs bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white text-[#141918] placeholder:text-[#8A908E] outline-none transition-colors"
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  aria-label="Clear search"
+                  className="absolute right-2.5 top-2 text-[#525957] hover:text-[#141918] cursor-pointer"
                 >
                   <XIcon className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
 
-            {/* Size Filter Dropdown */}
+            {/* Size Dropdown */}
             {availableSizes.length > 1 && (
-              <div className="flex items-center gap-1.5 text-xs font-mono text-slate-600">
-                <span className="hidden lg:inline text-slate-400">Size:</span>
-                <select
-                  value={selectedSize}
-                  onChange={(e) => setSelectedSize(e.target.value)}
-                  className="rounded-xl py-1.5 px-2.5 text-xs bg-slate-50 border border-slate-200 focus:border-[#EA2227] text-slate-800 outline-none cursor-pointer"
-                >
-                  {availableSizes.map(s => (
-                    <option key={s} value={s}>{s === 'All' ? 'All Sizes' : `Size ${s}`}</option>
-                  ))}
-                </select>
-              </div>
+              <select
+                value={selectedSize}
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className="rounded-sm py-2 px-3 text-xs font-mono bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] text-[#141918] outline-none cursor-pointer"
+              >
+                {availableSizes.map(s => (
+                  <option key={s} value={s}>{s === 'All' ? 'All Sizes' : `Size ${s}`}</option>
+                ))}
+              </select>
             )}
-
           </div>
-
         </div>
 
-        {/* =====================================================================
-            VIEW MODE 1: GRID VIEW (CLEAN, MODERN E-COMMERCE CARDS)
-            ===================================================================== */}
+        {/* VIEW MODE 1: GALLERY GRID */}
         {viewMode === 'grid' && (
-          <motion.div 
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProducts.map((product, idx) => {
-                const isCarProduct = product.productCode?.startsWith('GW-CR');
-                const matchingSpec = activeSlideModels.find(m => m.code === product.productCode);
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product, idx) => {
+              const isCarProduct = product.productCode?.startsWith('GW-CR');
+              const matchingSpec = activeSlideModels.find(m => m.code === product.productCode);
+              const certLabel = isCarProduct
+                ? 'FIA 8856'
+                : product.productCode?.startsWith('GW-CG')
+                ? 'UCI Aero'
+                : product.productCode?.startsWith('GW-GG')
+                ? 'AAA Cabretta'
+                : product.sizes?.length
+                ? `${product.sizes.length} Sizes`
+                : 'OEM Spec';
 
-                return (
-                  <motion.div
-                    key={product.id}
-                    layout
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.3, delay: idx * 0.04 }}
-                    className="group bg-white rounded-2xl border border-slate-200 hover:border-[#EA2227]/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
-                  >
-                    <div>
-                      {/* Product Image Frame */}
-                      <div 
-                        className="aspect-[4/3] bg-white relative overflow-hidden flex items-center justify-center p-4 border-b border-slate-100 cursor-pointer"
+              return (
+                <article
+                  key={product.id}
+                  className="group bg-white rounded-sm border border-[#E2DFD7] hover:border-[#141918] transition-colors duration-150 flex flex-col justify-between overflow-hidden"
+                >
+                  <div>
+                    <div
+                      onClick={() => {
+                        if (matchingSpec) setInspectGlove(matchingSpec);
+                        else navigate(`/product/${product.slug}`);
+                      }}
+                      className="aspect-[4/3] bg-[#F7F6F2] relative overflow-hidden flex items-center justify-center p-5 border-b border-[#E2DFD7] cursor-pointer"
+                    >
+                      <SmoothImage
+                        src={product.coverImage}
+                        alt={product.name}
+                        priority={idx < 4}
+                        fallbackText={product.productCode}
+                        containerClassName="w-full h-full flex items-center justify-center"
+                        className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(20,25,24,0.12)] transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+                      />
+                    </div>
+
+                    <div className="p-5 space-y-2.5">
+                      <div className="flex items-center justify-between gap-2 text-[11px] font-mono tabular-nums">
+                        <span className="font-semibold text-[#D92227] uppercase">{product.productCode}</span>
+                        <span className="text-[#525957]">{certLabel}</span>
+                      </div>
+
+                      <h3
                         onClick={() => {
                           if (matchingSpec) setInspectGlove(matchingSpec);
                           else navigate(`/product/${product.slug}`);
                         }}
+                        className="font-display font-bold text-base text-[#141918] group-hover:text-[#D92227] transition-colors leading-snug cursor-pointer line-clamp-1"
+                        title={product.name}
+                      >
+                        {product.name}
+                      </h3>
+
+                      <p className="text-xs text-[#525957] leading-relaxed line-clamp-2">
+                        {product.shortDescription}
+                      </p>
+
+                      {product.features && product.features.length > 0 && (
+                        <div className="pt-2.5 border-t border-[#ECE9E1] space-y-1">
+                          {product.features.slice(0, 2).map((feat, fIdx) => (
+                            <div key={fIdx} className="flex items-start gap-1.5 text-[11px] text-[#525957]">
+                              <CheckCircle2Icon className="w-3.5 h-3.5 text-[#122B29] shrink-0 mt-0.5" />
+                              <span className="leading-tight truncate">{feat}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="p-5 pt-0 grid grid-cols-2 gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (matchingSpec) setInspectGlove(matchingSpec);
+                        else navigate(`/product/${product.slug}`);
+                      }}
+                      className="py-2.5 px-3 rounded-sm font-mono font-semibold text-[11px] uppercase tracking-wider inline-flex items-center justify-center gap-1.5 bg-[#F7F6F2] hover:bg-[#ECE9E1] text-[#141918] border border-[#E2DFD7] transition-colors cursor-pointer"
+                    >
+                      <EyeIcon className="w-3.5 h-3.5" />
+                      <span>Specs</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setInquiryProductTitle(`${product.productCode} - ${product.name}`);
+                        setIsInquiryModalOpen(true);
+                      }}
+                      className="py-2.5 px-3 rounded-sm font-mono font-semibold text-[11px] uppercase tracking-wider inline-flex items-center justify-center bg-[#D92227] hover:bg-[#B5191D] text-white transition-colors cursor-pointer"
+                    >
+                      <span>Quote</span>
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+
+        {/* VIEW MODE 2: DETAILED SPECIFICATION LIST */}
+        {viewMode === 'list' && (
+          <div className="space-y-5">
+            {filteredProducts.map((product, idx) => {
+              const isCarProduct = product.productCode?.startsWith('GW-CR');
+              const matchingSpec = activeSlideModels.find(m => m.code === product.productCode);
+
+              return (
+                <article
+                  key={product.id}
+                  className="bg-white rounded-sm border border-[#E2DFD7] hover:border-[#141918] transition-colors overflow-hidden"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-6">
+                    {/* Studio Image */}
+                    <div className="lg:col-span-4 space-y-3">
+                      <div
+                        onClick={() => {
+                          if (matchingSpec) setInspectGlove(matchingSpec);
+                          else navigate(`/product/${product.slug}`);
+                        }}
+                        className="aspect-[4/3] rounded-sm bg-[#F7F6F2] border border-[#E2DFD7] flex items-center justify-center p-4 cursor-pointer group"
                       >
                         <SmoothImage
                           src={product.coverImage}
@@ -1193,485 +1179,295 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
                           priority={idx < 4}
                           fallbackText={product.productCode}
                           containerClassName="w-full h-full flex items-center justify-center"
-                          className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-108"
+                          className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(20,25,24,0.12)] transition-transform duration-300 group-hover:scale-[1.04]"
                         />
-
-                        {/* Product Code Badge */}
-                        <div className="absolute top-3 left-3 bg-[#EA2227] text-white px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase shadow-sm">
-                          {product.productCode}
-                        </div>
-
-                        {/* Homologation / Safety / Quality Badge */}
-                        {isCarProduct ? (
-                          <div className="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                            FIA 8856
-                          </div>
-                        ) : product.productCode?.startsWith('GW-CG') ? (
-                          <div className="absolute top-3 right-3 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                            UCI Aero Pro
-                          </div>
-                        ) : product.productCode?.startsWith('GW-GG') ? (
-                          <div className="absolute top-3 right-3 bg-[#0B3D3B]/90 backdrop-blur-xs text-white border border-[#0B3D3B] px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                            AAA Cabretta
-                          </div>
-                        ) : null}
-
-                        {/* Quick View Button on Hover */}
-                        <div className="absolute bottom-3 right-3 bg-slate-900/85 text-white px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold flex items-center gap-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
-                          <EyeIcon className="w-3 h-3 text-[#EA2227]" />
-                          <span>Quick View</span>
-                        </div>
                       </div>
 
-                      {/* Card Content */}
-                      <div className="p-5 space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#EA2227] font-bold">
+                      {product.colors && product.colors.length > 0 && (
+                        <div className="text-[11px] font-mono text-[#525957]">
+                          <span className="font-semibold text-[#141918]">Livery: </span>
+                          <span>{product.colors.join(' · ')}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Spec Breakdown */}
+                    <div className="lg:col-span-5 space-y-4">
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-3 text-[11px] font-mono tabular-nums">
+                          <span className="font-bold text-[#D92227] uppercase">{product.productCode}</span>
+                          <span className="text-[#525957]">/</span>
+                          <span className="text-[#525957] truncate">
                             {product.material ? product.material.split(',')[0] : currentWindow.title}
                           </span>
-                          {product.sizes && product.sizes.length > 0 && (
-                            <span className="text-[10px] font-mono text-slate-400">
-                              {product.sizes.length} Sizes Available
-                            </span>
-                          )}
                         </div>
 
-                        <h3 
+                        <h3
                           onClick={() => {
                             if (matchingSpec) setInspectGlove(matchingSpec);
                             else navigate(`/product/${product.slug}`);
                           }}
-                          className="font-display font-bold text-base text-slate-900 group-hover:text-[#EA2227] transition-colors leading-snug cursor-pointer line-clamp-1"
-                          title={product.name}
+                          className="font-display font-bold text-lg sm:text-xl text-[#141918] hover:text-[#D92227] transition-colors cursor-pointer"
                         >
                           {product.name}
                         </h3>
 
-                        <p className="text-xs text-slate-600 font-normal leading-relaxed line-clamp-2">
+                        <p className="text-xs sm:text-sm text-[#525957] leading-relaxed">
                           {product.shortDescription}
                         </p>
-
-                        {/* Features Snippet */}
-                        {product.features && product.features.length > 0 && (
-                          <div className="pt-2 border-t border-slate-100 space-y-1">
-                            {product.features.slice(0, 2).map((feat, fIdx) => (
-                              <div key={fIdx} className="flex items-start gap-1.5 text-xs text-slate-600">
-                                <CheckCircle2Icon className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                                <span className="leading-tight truncate">{feat}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
                       </div>
+
+                      <div className="grid grid-cols-2 gap-3 text-xs border-t border-[#ECE9E1] pt-3">
+                        <div>
+                          <span className="text-[10px] font-mono text-[#525957] uppercase block">Material Core</span>
+                          <span className="font-semibold text-[#141918] truncate block" title={product.material}>
+                            {product.material || 'Nomex® Aramid Matrix'}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono text-[#525957] uppercase block">Standard</span>
+                          <span className="font-semibold text-[#D92227] truncate block">
+                            {isCarProduct
+                              ? 'FIA 8856-2018 / SFI 3.3/5'
+                              : isGolf
+                              ? 'Tour Precision Grade AAA'
+                              : isCycling
+                              ? 'UCI Aero Pro Certified'
+                              : isFish
+                              ? 'ANSI A3 / EN 388 Marine'
+                              : isWork
+                              ? 'EN 388 Industrial'
+                              : isMechanics
+                              ? 'ANSI/ISEA 138 Level 2'
+                              : isWeightLifting
+                              ? 'IPF Heavy Spec'
+                              : 'EN ISO Certified'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {product.sizes && product.sizes.length > 0 && (
+                        <div className="flex items-center gap-2 flex-wrap text-[11px] font-mono text-[#525957]">
+                          <span className="uppercase">Sizes:</span>
+                          <span className="text-[#141918] font-semibold">{product.sizes.join(' · ')}</span>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Card Action Footer */}
-                    <div className="p-5 pt-0 space-y-2">
-                      <div className="grid grid-cols-2 gap-2">
-                        <button
-                          onClick={() => {
-                            if (matchingSpec) setInspectGlove(matchingSpec);
-                            else navigate(`/product/${product.slug}`);
-                          }}
-                          className="py-2 px-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors cursor-pointer"
-                        >
-                          <EyeIcon className="w-3.5 h-3.5 text-slate-600" />
-                          <span>Specs</span>
-                        </button>
+                    {/* Inquiry Actions */}
+                    <div className="lg:col-span-3 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-[#ECE9E1] pt-4 lg:pt-0 lg:pl-6 space-y-4">
+                      <div className="space-y-1.5 text-xs">
+                        <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#141918] block">
+                          OEM Capability
+                        </span>
+                        <ul className="text-[11px] text-[#525957] space-y-1">
+                          <li>· Custom Team Colorways</li>
+                          <li>· Direct Embroidery &amp; Labeling</li>
+                          <li>· Export-Grade Packaging</li>
+                        </ul>
+                      </div>
 
+                      <div className="space-y-2">
                         <button
+                          type="button"
                           onClick={() => {
                             setInquiryProductTitle(`${product.productCode} - ${product.name}`);
                             setIsInquiryModalOpen(true);
                           }}
-                          className="py-2 px-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1 bg-[#EA2227] hover:bg-[#d0171c] text-white shadow-xs transition-colors cursor-pointer"
+                          className="w-full py-2.5 px-4 rounded-sm font-mono font-semibold text-[11px] uppercase tracking-wider bg-[#D92227] hover:bg-[#B5191D] text-white transition-colors cursor-pointer"
                         >
-                          <SparklesIcon className="w-3.5 h-3.5" />
-                          <span>Quote</span>
+                          Request OEM Quote
                         </button>
-                      </div>
-                    </div>
 
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </motion.div>
-        )}
-
-        {/* =====================================================================
-            VIEW MODE 2: DETAILED LIST VIEW (EXHAUSTIVE MOTORSPORT SPECIFICATION)
-            ===================================================================== */}
-        {viewMode === 'list' && (
-          <div className="space-y-6">
-            <AnimatePresence mode="popLayout">
-              {filteredProducts.map((product, idx) => {
-                const isCarProduct = product.productCode?.startsWith('GW-CR');
-                const matchingSpec = activeSlideModels.find(m => m.code === product.productCode);
-
-                return (
-                  <motion.div
-                    key={product.id}
-                    layout
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.3, delay: idx * 0.04 }}
-                    className="bg-white rounded-2xl border border-slate-200 hover:border-[#EA2227]/80 hover:shadow-xl transition-all duration-300 overflow-hidden"
-                  >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-6">
-                      
-                      {/* Left: Product Image */}
-                      <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
-                        <div 
-                          className="aspect-[4/3] rounded-xl bg-white relative overflow-hidden flex items-center justify-center p-3 border border-slate-100 cursor-pointer group"
+                        <button
+                          type="button"
                           onClick={() => {
                             if (matchingSpec) setInspectGlove(matchingSpec);
                             else navigate(`/product/${product.slug}`);
                           }}
+                          className="w-full py-2.5 px-4 rounded-sm font-mono font-semibold text-[11px] uppercase tracking-wider bg-[#F7F6F2] hover:bg-[#ECE9E1] text-[#141918] border border-[#E2DFD7] transition-colors cursor-pointer"
                         >
-                          <SmoothImage
-                            src={product.coverImage}
-                            alt={product.name}
-                            priority={idx < 4}
-                            fallbackText={product.productCode}
-                            containerClassName="w-full h-full flex items-center justify-center"
-                            className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-108"
-                          />
-
-                          {/* Code Badge */}
-                          <div className="absolute top-2.5 left-2.5 bg-[#EA2227] text-white px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase shadow-sm">
-                            {product.productCode}
-                          </div>
-
-                          {isCarProduct ? (
-                            <div className="absolute top-2.5 right-2.5 bg-slate-900/90 text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                              FIA 8856-2018
-                            </div>
-                          ) : product.productCode?.startsWith('GW-CG') ? (
-                            <div className="absolute top-2.5 right-2.5 bg-slate-900/90 text-white border border-slate-700 px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                              UCI Aero Pro
-                            </div>
-                          ) : product.productCode?.startsWith('GW-GG') ? (
-                            <div className="absolute top-2.5 right-2.5 bg-[#0B3D3B]/90 text-white border border-[#0B3D3B] px-2 py-0.5 rounded text-[9px] font-mono font-semibold uppercase">
-                              AAA Cabretta
-                            </div>
-                          ) : null}
-                        </div>
-
-                        {/* Livery info */}
-                        {product.colors && product.colors.length > 0 && (
-                          <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500">
-                            <span className="font-semibold text-slate-700">Livery:</span>
-                            <div className="flex flex-wrap gap-1">
-                              {product.colors.map(c => (
-                                <span 
-                                  key={c} 
-                                  className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-700 border border-slate-200"
-                                >
-                                  {c}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                          Full Data Sheet
+                        </button>
                       </div>
-
-                      {/* Middle: Title, Description, Technical highlights */}
-                      <div className="lg:col-span-5 space-y-3 flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <span className="text-[11px] font-mono uppercase tracking-wider text-[#EA2227] font-bold block">
-                            {product.material ? product.material.split(',')[0] : currentWindow.title}
-                          </span>
-
-                          <h3 
-                            onClick={() => {
-                              if (matchingSpec) setInspectGlove(matchingSpec);
-                              else navigate(`/product/${product.slug}`);
-                            }}
-                            className="font-display font-bold text-lg sm:text-xl text-slate-900 hover:text-[#EA2227] transition-colors leading-snug cursor-pointer"
-                          >
-                            {product.name}
-                          </h3>
-
-                          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                            {product.shortDescription}
-                          </p>
-
-                          {/* Technical Highlights Grid */}
-                          <div className="pt-2 grid grid-cols-2 gap-2 text-xs">
-                            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                              <span className="text-[10px] font-mono text-slate-400 uppercase block">Material Core</span>
-                              <span className="font-semibold text-[11px] text-slate-900 truncate block" title={product.material}>
-                                {product.material || 'Nomex® Aramid Matrix'}
-                              </span>
-                            </div>
-                            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                              <span className="text-[10px] font-mono text-slate-400 uppercase block">Homologation</span>
-                              <span className="font-semibold text-[#EA2227] text-[11px] truncate block">
-                                {isCarProduct 
-                                  ? 'FIA 8856-2018 / SFI 3.3/5' 
-                                  : isGolf 
-                                  ? 'Tour Precision Grade AAA' 
-                                  : isCycling 
-                                  ? 'UCI Aero Pro Certified' 
-                                  : isFish
-                                  ? 'ANSI A3 / EN 388 Marine Cut'
-                                  : isWork
-                                  ? 'EN 388 Industrial Heavy-Duty'
-                                  : isMechanics
-                                  ? 'ANSI/ISEA 138 Level 2 TPR'
-                                  : isWeightLifting
-                                  ? 'IPF Heavy Powerlifting Spec'
-                                  : 'EN ISO Safety Standard'}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Available sizes */}
-                          {product.sizes && product.sizes.length > 0 && (
-                            <div className="pt-1 flex items-center gap-1.5 flex-wrap">
-                              <span className="text-[10px] font-mono text-slate-400 uppercase">Available Sizes:</span>
-                              {product.sizes.map(s => (
-                                <span 
-                                  key={s} 
-                                  className="w-6 h-6 rounded border border-slate-200 bg-slate-50 text-slate-800 font-mono text-[10px] font-bold flex items-center justify-center"
-                                >
-                                  {s}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Key Features */}
-                        {product.features && product.features.length > 0 && (
-                          <div className="pt-2 border-t border-slate-100 space-y-1">
-                            {product.features.slice(0, 3).map((feat, fIdx) => (
-                              <div key={fIdx} className="flex items-start gap-1.5 text-xs text-slate-600">
-                                <CheckCircle2Icon className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                                <span className="leading-tight">{feat}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Right: Actions, OEM Request */}
-                      <div className="lg:col-span-3 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6 space-y-3">
-                        
-                        <div className="rounded-xl p-3 bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
-                          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-slate-700 block">
-                            OEM Manufacturing
-                          </span>
-                          <ul className="text-[11px] text-slate-600 space-y-1">
-                            <li>• Custom Racing Team Liveries</li>
-                            <li>• Direct Nomex® Embroidery</li>
-                            <li>• Export-Grade Packaging</li>
-                          </ul>
-                        </div>
-
-                        <div className="space-y-2 pt-2">
-                          <button
-                            onClick={() => {
-                              setInquiryProductTitle(`${product.productCode} - ${product.name}`);
-                              setIsInquiryModalOpen(true);
-                            }}
-                            className="w-full py-2.5 px-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 transition-all bg-[#EA2227] hover:bg-[#d0171c] text-white shadow-xs cursor-pointer"
-                          >
-                            <SparklesIcon className="w-3.5 h-3.5" />
-                            <span>Request OEM Quote</span>
-                          </button>
-
-                          <button
-                            onClick={() => {
-                              if (matchingSpec) setInspectGlove(matchingSpec);
-                              else navigate(`/product/${product.slug}`);
-                            }}
-                            className="w-full py-2 px-3 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 transition-all bg-slate-100 hover:bg-slate-200 text-slate-800 cursor-pointer"
-                          >
-                            <EyeIcon className="w-3.5 h-3.5" />
-                            <span>Full Data Sheet</span>
-                          </button>
-                        </div>
-
-                      </div>
-
                     </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         )}
 
-        {/* Empty state if search yields no results */}
+        {/* Empty Filter State */}
         {filteredProducts.length === 0 && (
-          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center space-y-3 shadow-sm">
-            <FilterIcon className="w-8 h-8 text-slate-400 mx-auto" />
-            <h3 className="font-display font-bold text-base text-slate-900">
-              No products found matching your filter
+          <div className="rounded-sm border border-[#E2DFD7] bg-white p-12 text-center space-y-3">
+            <FilterIcon className="w-7 h-7 text-[#525957] mx-auto" />
+            <h3 className="font-display font-bold text-base text-[#141918]">
+              No models match your current filter
             </h3>
-            <p className="text-xs text-slate-500 max-w-xs mx-auto">
-              Try adjusting your search terms or clearing active filters.
+            <p className="text-xs text-[#525957] max-w-xs mx-auto">
+              Clear your search term or reset the size selection to inspect the complete line.
             </p>
             <button
+              type="button"
               onClick={() => { setSearchQuery(''); setSelectedSize('All'); }}
-              className="mt-2 bg-[#EA2227] text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider cursor-pointer shadow-xs"
+              className="mt-2 bg-[#141918] hover:bg-[#D92227] text-white px-5 py-2 rounded-sm text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
           </div>
         )}
 
-        {/* Other Gearwear Categories Switcher */}
-        <section className="pt-12 border-t border-slate-200/90 space-y-4">
+        {/* Switch Other Gearwear Lines */}
+        <section className="pt-10 border-t border-[#E2DFD7] space-y-5">
           <div className="flex items-center justify-between">
-            <h3 className="font-display font-bold text-lg text-slate-900">
-              Explore Other Gearwear Collections
+            <h3 className="font-display font-bold text-lg text-[#141918]">
+              Other Gearwear Production Lines
             </h3>
             <Link
               to="/gearwear"
-              className="text-xs font-mono font-bold text-[#EA2227] hover:underline uppercase inline-flex items-center gap-1"
+              className="text-xs font-mono font-semibold text-[#D92227] hover:underline uppercase inline-flex items-center gap-1"
             >
-              <span>View All Categories</span>
+              <span>View All 9 Lines</span>
               <ChevronRightIcon className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {otherWindows.map((win) => (
-              <div
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {otherWindows.slice(0, 4).map((win) => (
+              <button
                 key={win.id}
+                type="button"
                 onClick={() => navigate(win.routePath)}
-                className="group cursor-pointer p-4 rounded-xl border border-slate-200 bg-white hover:border-[#EA2227] transition-all hover:shadow-md flex items-center space-x-3.5"
+                className="group text-left cursor-pointer p-3.5 rounded-sm border border-[#E2DFD7] bg-white hover:border-[#141918] transition-colors flex items-center gap-3.5"
               >
-                <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-100">
+                <div className="w-12 h-12 rounded-sm overflow-hidden shrink-0 bg-[#F7F6F2] p-1 border border-[#ECE9E1] flex items-center justify-center">
                   <img
                     src={win.image}
                     alt={win.title}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="flex-grow min-w-0">
-                  <h4 className="font-display font-bold text-xs sm:text-sm text-slate-900 group-hover:text-[#EA2227] transition-colors truncate">
+                  <h4 className="font-display font-bold text-xs sm:text-sm text-[#141918] group-hover:text-[#D92227] transition-colors truncate">
                     {win.title}
                   </h4>
-                  <p className="text-[11px] text-slate-500 truncate font-normal">
-                    {win.minorDetail}
+                  <p className="text-[11px] text-[#525957] truncate">
+                    {win.shortTitle} Series
                   </p>
                 </div>
-                <ChevronRightIcon className="w-4 h-4 text-slate-400 group-hover:text-[#EA2227] group-hover:translate-x-0.5 transition-all shrink-0" />
-              </div>
+                <ChevronRightIcon className="w-4 h-4 text-[#525957] group-hover:text-[#D92227] shrink-0" />
+              </button>
             ))}
           </div>
         </section>
-
       </main>
 
-      {/* =========================================================================
-          QUICK GLOVE INSPECTION MODAL (FOR MOTORSPORT CAR RACING GLOVES)
-          ========================================================================= */}
+      {/* Unified Footer */}
+      <Footer settings={settings} />
+
+      {/* =====================================================================
+          QUICK SPECIFICATION INSPECTION MODAL
+          ===================================================================== */}
       <AnimatePresence>
         {inspectGlove && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0E1A19]/75 backdrop-blur-xs">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl relative text-slate-900"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.18 }}
+              className="bg-white rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E2DFD7] shadow-2xl relative text-[#141918]"
             >
-              {/* Modal Header */}
-              <div className="sticky top-0 z-10 bg-[#0B151E] text-white p-5 flex items-center justify-between border-b border-slate-800">
-                <div className="flex items-center gap-2.5">
-                  <span className="px-2.5 py-0.5 rounded bg-[#EA2227] text-white text-[10px] font-mono font-bold">
+              <div className="sticky top-0 z-10 bg-[#0E1A19] text-white px-6 py-4 flex items-center justify-between border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono font-bold text-[#D92227] tabular-nums">
                     {inspectGlove.code}
                   </span>
-                  <span className="text-xs font-mono text-slate-300">
-                    {inspectGlove.code.startsWith('GW-CR') ? 'Motorsport Specification Sheet' : inspectGlove.code.startsWith('GW-CG') ? 'Aero Cycling Specification Sheet' : 'Tour Golf Specification Sheet'}
+                  <span className="text-white/30">/</span>
+                  <span className="text-xs font-mono text-white/80 uppercase tracking-wider">
+                    Technical Specification Sheet
                   </span>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setInspectGlove(null)}
-                  className="p-1 rounded-full hover:bg-white/10 text-white transition-colors cursor-pointer"
+                  aria-label="Close modal"
+                  className="p-1.5 rounded-sm hover:bg-white/10 text-white transition-colors cursor-pointer"
                 >
-                  <XIcon className="w-5 h-5" />
+                  <XIcon className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Modal Body */}
-              <div className="p-6 space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                  <div className="aspect-square bg-slate-50 rounded-2xl flex items-center justify-center p-4 border border-slate-200">
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                  <div className="sm:col-span-5 aspect-square bg-[#F7F6F2] rounded-sm flex items-center justify-center p-5 border border-[#E2DFD7]">
                     <img
                       src={inspectGlove.image}
                       alt={inspectGlove.name}
-                      className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.18)]"
+                      className="w-full h-full object-contain filter drop-shadow-[0_14px_22px_rgba(20,25,24,0.14)]"
                     />
                   </div>
 
-                  <div className="space-y-3">
-                    <span className="text-xs font-mono font-bold text-[#EA2227] uppercase">
-                      Livery / Style: {inspectGlove.livery}
+                  <div className="sm:col-span-7 space-y-3">
+                    <span className="text-[11px] font-mono font-semibold text-[#D92227] uppercase tracking-wider block">
+                      {inspectGlove.livery}
                     </span>
-                    <h4 className="font-display font-black text-xl text-slate-900 leading-tight">
+                    <h4 className="font-display font-extrabold text-xl text-[#141918] leading-snug">
                       {inspectGlove.name}
                     </h4>
-                    <p className="text-slate-600 text-xs leading-relaxed">
+                    <p className="text-[#525957] text-xs leading-relaxed">
                       {inspectGlove.summary}
                     </p>
-                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
-                      <div className="flex justify-between">
-                        <span className="text-slate-500">
-                          {inspectGlove.code.startsWith('GW-CR') ? 'Flame Rating:' : inspectGlove.code.startsWith('GW-CG') ? 'Protection Rating:' : 'Leather & Rating:'}
-                        </span>
-                        <span className="font-mono font-bold text-[#EA2227]">{inspectGlove.flameRating}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-500">Seam Type:</span>
-                        <span className="font-semibold text-slate-800">{inspectGlove.seamType}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-500">Knuckle Armor:</span>
-                        <span className="font-semibold text-slate-800">{inspectGlove.knuckleArmor}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-500">Primary Discipline:</span>
-                        <span className="font-semibold text-slate-800">{inspectGlove.targetDiscipline}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
-                {/* Modal Footer Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-slate-200">
+                <div className="border-t border-[#E2DFD7] pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="p-3 bg-[#F7F6F2] rounded-sm border border-[#ECE9E1]">
+                    <span className="text-[10px] font-mono uppercase text-[#525957] block">Rating / Material</span>
+                    <span className="font-semibold text-[#D92227] mt-0.5 block">{inspectGlove.flameRating}</span>
+                  </div>
+                  <div className="p-3 bg-[#F7F6F2] rounded-sm border border-[#ECE9E1]">
+                    <span className="text-[10px] font-mono uppercase text-[#525957] block">Seam Construction</span>
+                    <span className="font-semibold text-[#141918] mt-0.5 block">{inspectGlove.seamType}</span>
+                  </div>
+                  <div className="p-3 bg-[#F7F6F2] rounded-sm border border-[#ECE9E1]">
+                    <span className="text-[10px] font-mono uppercase text-[#525957] block">Armor / Shielding</span>
+                    <span className="font-semibold text-[#141918] mt-0.5 block">{inspectGlove.knuckleArmor}</span>
+                  </div>
+                  <div className="p-3 bg-[#F7F6F2] rounded-sm border border-[#ECE9E1]">
+                    <span className="text-[10px] font-mono uppercase text-[#525957] block">Primary Discipline</span>
+                    <span className="font-semibold text-[#141918] mt-0.5 block">{inspectGlove.targetDiscipline}</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-[#E2DFD7]">
                   <button
+                    type="button"
                     onClick={() => {
                       setInquiryProductTitle(`${inspectGlove.code} - ${inspectGlove.name}`);
                       setInspectGlove(null);
                       setIsInquiryModalOpen(true);
                     }}
-                    className="flex-1 py-3 px-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 bg-[#EA2227] hover:bg-[#d0171c] text-white shadow-md shadow-[#EA2227]/25 cursor-pointer"
+                    className="flex-1 py-3 px-4 rounded-sm font-mono font-semibold text-xs uppercase tracking-wider bg-[#D92227] hover:bg-[#B5191D] text-white transition-colors cursor-pointer"
                   >
-                    <SparklesIcon className="w-4 h-4" />
-                    <span>Request Quotation & OEM Customization</span>
+                    Request Quotation &amp; OEM Pack
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => setInspectGlove(null)}
-                    className="py-3 px-5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer"
+                    className="py-3 px-5 rounded-sm text-xs font-mono font-semibold uppercase tracking-wider bg-[#F7F6F2] hover:bg-[#ECE9E1] text-[#141918] border border-[#E2DFD7] transition-colors cursor-pointer"
                   >
                     Close
                   </button>
                 </div>
               </div>
-
             </motion.div>
           </div>
         )}
       </AnimatePresence>
 
-      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
       <InquiryLoadingModal
         isOpen={isInquiryModalOpen}
         onClose={() => setIsInquiryModalOpen(false)}
@@ -1679,9 +1475,9 @@ export const GearwearWindowPage: React.FC<GearwearWindowPageProps> = ({
         defaultCategory={`Gearwear: ${currentWindow.title}`}
         defaultProductTitle={inquiryProductTitle}
       />
-
     </motion.div>
   );
 };
 
 export default GearwearWindowPage;
+

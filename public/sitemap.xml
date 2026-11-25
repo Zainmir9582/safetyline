@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>/gearwear</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>/accessories</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/golf-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/fish-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/work-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/mechanics-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/tactical-police-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/motorcars-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/cycling-gloves</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/road-cycling-apparel</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/gearwear/weight-lifting</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/accessories/gymwear</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/accessories/t-shirts</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/accessories/jackets</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/accessories/hoodies</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>/accessories/tracksuits</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>

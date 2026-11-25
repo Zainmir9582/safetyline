@@ -1,56 +1,42 @@
-import React, { useState } from 'react';
-import { 
-  ArrowRight, 
-  Sparkles, 
-  ShieldCheck, 
-  Cpu, 
-  Layers, 
-  Phone, 
-  Mail, 
-  Instagram, 
-  Facebook, 
-  MessageCircle, 
-  MapPin,
-  ChevronRight,
-  Shield,
-  Activity,
-  Award,
-  Globe2,
-  CheckCircle2,
-  ExternalLink
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState } from 'react';
+import { ArrowRight, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { motion } from 'motion/react';
 import { navigate, Link } from '../lib/router';
 import { settings } from '../data';
+import { GEARWEAR_WINDOWS } from '../data/gearwearWindows';
+import { ACCESSORIES_WINDOWS } from '../data/accessoriesWindows';
 import SEO from './SEO';
 import { RotatingText } from './TransitionText';
-import SmoothImage from './SmoothImage';
 import InquiryLoadingModal from './InquiryLoadingModal';
+import SiteHeader from './SiteHeader';
+import Footer from './Footer';
 
-// Visual Assets
+// Authentic Visual Assets
 import safetylineLandingLogo from '../assets/images/safetyline_landing.png';
 import factoryBg from '../assets/images/factory.jpeg';
-import tacticalGlovesImg from '../assets/images/blank_tactical_glove_1792247540904.jpg';
+import cg1Img from '../assets/images/cg1_slide.png';
+import gg1Img from '../assets/images/golf_glove_1.png';
+import wg1Img from '../assets/images/work_glove_1.png';
+import mg1Img from '../assets/images/mechanics_glove_1.png';
 import jacketsCatImg from '../assets/images/blank_tech_jacket_1792247565413.jpg';
+import gymwearCatImg from '../assets/images/blank_gymwear_set_1792247564534.jpg';
 
 export default function PortalLanding() {
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   const rotatingHeadlines = [
-    'PRECISION ATHLETIC GEARWEAR & ACTIVE KNITS',
-    'TACTICAL HAND PROTECTION & MOTORSPORT GLOVES',
-    'HIGH-PERFORMANCE GYMWEAR & APPAREL SERIES',
-    'DIRECT FROM SIALKOT INDUSTRIAL MANUFACTURING ATELIER',
-    'CUSTOM OEM & PRIVATE LABEL TECHNICAL SPECIFICATIONS'
+    'Tactical Handwear & FIA-Grade Motorsport Gloves',
+    'Precision Tour Golf Cabretta & Endurance Cycling Lines',
+    'High-Gauge Gymwear, Jackets, Hoodies & Tracksuits',
+    'Direct OEM & Private Label Manufacturing from Sialkot'
   ];
-
 
   const portalSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     'name': 'Safety Line',
     'url': typeof window !== 'undefined' ? window.location.origin : '',
-    'description': 'Safety Line - Premium Athletic Gearwear & Precision Accessories Digital Product Catalogue',
+    'description': 'Safety Line - High-Performance Gearwear & Technical Accessories Digital Product Catalogue',
     'logo': `${typeof window !== 'undefined' ? window.location.origin : ''}/safetyline_landing.png`,
     'telephone': settings.contactPhone,
     'email': settings.contactEmail,
@@ -62,36 +48,7 @@ export default function PortalLanding() {
   };
 
   return (
-    <div id="portal-landing-root" className="min-h-screen bg-[#041615] text-white flex flex-col justify-between font-sans relative selection:bg-[#FF5A36] selection:text-white overflow-x-hidden">
-      
-      {/* Dynamic Ambient Background & Factory Architectural Canvas */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Real Factory Facility with Atmospheric Architectural Scrims */}
-        <img
-          src={factoryBg}
-          alt="Safety Line Industrial Manufacturing Facility Sialkot"
-          className="w-full h-full object-cover object-[center_25%] scale-100 opacity-60 sm:opacity-65 filter contrast-105 brightness-90 saturate-95 transition-all duration-700"
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-          referrerPolicy="no-referrer"
-        />
-        
-        {/* Cinematic Multi-Stop Dark Teal Scrims for Flawless Readability & Industrial Mood */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#041615]/85 via-[#041615]/55 via-[#041615]/65 to-[#041615]/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_110%_85%_at_50%_30%,transparent_15%,rgba(4,22,21,0.60)_55%,rgba(4,22,21,0.95)_100%)]" />
-        
-        {/* Ambient Subtle Luster Glow */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-[radial-gradient(ellipse_at_top,rgba(94,234,212,0.18)_0%,rgba(255,90,54,0.10)_45%,transparent_70%)] blur-2xl pointer-events-none animate-light-beam" />
-        
-        {/* Soft Background Radial Accents */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF5A36]/15 rounded-full blur-3xl animate-float-glow pointer-events-none" />
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-[#2DD4BF]/15 rounded-full blur-3xl animate-float-glow pointer-events-none" style={{ animationDelay: '-4s' }} />
-        
-        {/* Precision Fine Grid Overlay */}
-        <div className="absolute inset-0 athletic-grid-pattern-dark opacity-15 pointer-events-none" />
-      </div>
-
+    <div id="portal-landing-root" className="min-h-screen bg-[#F7F6F2] text-[#141918] flex flex-col font-sans overflow-x-hidden">
       <SEO
         title="Safety Line | High-Performance Gearwear & Technical Accessories"
         description="Explore Safety Line's dual specialized manufacturing divisions: Tactical Gearwear & Precision Technical Accessories. Direct OEM & export catalogue from our Sialkot manufacturing complex."
@@ -99,508 +56,409 @@ export default function PortalLanding() {
         schema={portalSchema}
       />
 
-      {/* ========================================================
-          TOP HEADER SECTION: Brand Mark & Kinetic Heading Transition
-         ======================================================== */}
-      <header className="relative z-10 pt-8 sm:pt-12 pb-6 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto space-y-6">
-        
-        {/* Top Facility Badge & Live Production Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono"
-        >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span className="tracking-widest uppercase font-semibold text-[11px]">Direct Manufacturing • Sialkot, Pakistan</span>
-          </div>
-          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-slate-200 text-[11px] font-semibold uppercase tracking-wider">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#FF5A36]" />
-            <span>ISO 9001:2015 Certified</span>
-          </div>
-        </motion.div>
+      {/* Unified Architectural Top Navigation */}
+      <SiteHeader
+        variant="obsidian"
+        onOpenInquiry={() => setIsInquiryModalOpen(true)}
+        ctaLabel="OEM Spec Desk"
+      />
 
-        {/* Brand Monogram & Shimmer Brand Title */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col items-center space-y-4"
-        >
-          {/* Logo with Multi-Layer Radiant Glow Shine */}
-          <div className="relative group p-3">
-            {/* Ambient radiant disk shine */}
-            <div className="absolute -inset-6 bg-gradient-to-r from-emerald-400/35 via-white/40 via-[#FF5A36]/35 to-emerald-400/35 rounded-full blur-2xl group-hover:scale-115 transition-all duration-700 pointer-events-none animate-pulse" />
-            <div className="absolute -inset-2 bg-white/10 rounded-full blur-md" />
-            <img
-              src={safetylineLandingLogo}
-              alt="Safety Line Official Insignia"
-              className="relative h-28 sm:h-36 md:h-44 w-auto object-contain filter drop-shadow-[0_12px_28px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-105"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
-          </div>
-
-          {/* Brand Heading without shine on LINE */}
-          <div className="space-y-2 text-center max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-[0.2em] uppercase leading-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-              <span className="text-[#FF5A36] drop-shadow-[0_2px_15px_rgba(255,90,54,0.6)]">SAFETY</span>
-              <span className="text-white drop-shadow-sm font-black">LINE</span>
-              <span className="text-slate-300 text-xl sm:text-2xl font-black tracking-[0.16em] drop-shadow-sm">IND</span>
-            </h1>
-
-            <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[#5EEAD4] uppercase font-bold drop-shadow-[0_0_10px_rgba(94,234,212,0.4)]">
-              Textile Engineering & Technical Handwear Atelier
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Dynamic Text Transition Box with Crisp Motion */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="pt-1 max-w-2xl mx-auto space-y-3"
-        >
-          <div className="relative p-0.5 rounded-2xl bg-gradient-to-r from-emerald-400/40 via-white/40 via-[#FF5A36]/50 to-emerald-400/40 shadow-2xl shadow-emerald-950/50">
-            <div className="bg-[#072422]/95 backdrop-blur-md px-5 py-3 rounded-2xl flex items-center justify-center gap-2.5 text-center">
-              <Sparkles className="w-4 h-4 text-[#FF5A36] shrink-0" />
-              <div className="text-xs sm:text-sm font-mono font-bold tracking-wider text-slate-100">
-                <RotatingText 
-                  phrases={rotatingHeadlines} 
-                  interval={3600}
-                  className="text-white font-extrabold"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Interactive Button with Shine Sweep */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
-            <button
-              onClick={() => setIsInquiryModalOpen(true)}
-              className="btn-glow-shine inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-lg shadow-[#FF5A36]/30 hover:shadow-[#FF5A36]/50 active:scale-95 transition-all cursor-pointer border border-[#FF7A59]/50"
+      {/* =====================================================================
+          HERO BAND: ASYMMETRIC EDITORIAL INDUSTRIAL GATEWAY (DARK OBSIDIAN)
+          ===================================================================== */}
+      <section className="bg-[#0E1A19] text-white border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+            {/* Left Column: Authority Typography & Insignia */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              className="lg:col-span-7 flex flex-col justify-between space-y-8"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Direct OEM & Spec Inquiry</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-            <span className="text-xs text-slate-400 font-sans tracking-wide">
-              Certified technical specifications & live production lines
-            </span>
-          </div>
-        </motion.div>
-      </header>
-
-      {/* ========================================================
-          MAIN DUAL DIVISION CARDS: Stylized, Creative & High-Impact
-         ======================================================== */}
-      <main className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex-grow flex flex-col justify-center space-y-12">
-        
-        {/* Dual Division Showcase Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
-          
-          {/* ========================================================
-              DIVISION 01: GEARWEAR DIVISION (Stylized High-Contrast)
-             ======================================================== */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            onClick={() => navigate('/gearwear')}
-            className="group cursor-pointer relative bg-gradient-to-b from-[#0B2E2B]/90 to-[#061F1D]/95 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/15 hover:border-[#FF5A36] transition-all duration-400 hover:shadow-[0_0_40px_rgba(255,90,54,0.25)] shadow-2xl flex flex-col justify-between min-h-[440px]"
-          >
-            {/* Visual Preview Image Backdrop with Cinematic Scrim */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              <img
-                src={tacticalGlovesImg}
-                alt="Safety Line Gearwear Division"
-                className="w-full h-full object-cover object-center opacity-30 group-hover:opacity-45 group-hover:scale-105 transition-all duration-700 ease-out filter saturate-125"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#061F1D] via-[#061F1D]/80 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#061F1D]/90 via-transparent to-transparent" />
-            </div>
-
-            {/* Top Division Badges & Department Identifier */}
-            <div className="relative z-10 p-6 sm:p-8 flex items-center justify-between">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-[#FF5A36] text-white text-xs font-mono font-bold tracking-wider uppercase shadow-lg shadow-[#FF5A36]/30">
-                <Cpu className="w-3.5 h-3.5" />
-                <span>Division 01</span>
-              </div>
-              <span className="text-[11px] font-mono text-[#FF7A59] uppercase tracking-wider font-bold bg-[#FF5A36]/10 px-3 py-1 rounded-lg border border-[#FF5A36]/30 backdrop-blur-md">
-                Tactical Handwear & Motorsport
-              </span>
-            </div>
-
-            {/* Card Content & Interactive Spec Preview */}
-            <div className="relative z-10 p-6 sm:p-8 space-y-5">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-[#FF5A36] uppercase tracking-widest">
-                    Tactical Series
-                  </span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-xs font-mono text-slate-300">9 Active Production Windows</span>
+              <div className="space-y-6">
+                {/* Clean Unboxed Typographic Eyebrow */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono uppercase tracking-[0.16em] text-white/60">
+                  <span className="text-[#D92227] font-semibold">Est. 2008</span>
+                  <span>/</span>
+                  <span>Sialkot, Pakistan</span>
+                  <span>/</span>
+                  <span>ISO 9001:2015 Certified</span>
                 </div>
 
-                <h2 className="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
-                  Gearwear Division
-                </h2>
-                
-                <p className="text-slate-300 font-normal text-xs sm:text-sm leading-relaxed max-w-lg">
-                  Specialized tactical handwear and technical apparel engineered for defense, automotive motorsport, cycling, and weight training.
+                {/* Official Insignia + Primary Display Headline */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-sm bg-white p-2.5 flex items-center justify-center shrink-0 border border-white/15">
+                    <img
+                      src={safetylineLandingLogo}
+                      alt="Safety Line Official Insignia"
+                      className="w-full h-full object-contain"
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
+                    />
+                  </div>
+                  <div>
+                    <h1 className="font-display text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-[-0.025em] leading-[1.04] text-white">
+                      SAFETY <span className="text-[#D92227]">LINE</span>
+                    </h1>
+                    <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.18em] text-white/65 mt-2">
+                      Leathercraft, Tactical Handwear &amp; Technical Apparel
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-base sm:text-lg text-white/75 leading-relaxed max-w-xl">
+                  International manufacturer and direct exporter of specialized motorsport, athletic, tactical handwear and high-gauge active apparel—crafted by 90 full-time artisans in Sialkot.
                 </p>
+
+                {/* Clean Hairline Specialty Ticker */}
+                <div className="py-3 border-y border-white/12 text-xs sm:text-sm font-mono text-white/90">
+                  <RotatingText
+                    prefix="Specialty:"
+                    phrases={rotatingHeadlines}
+                    interval={3600}
+                    className="text-white"
+                  />
+                </div>
               </div>
 
-              {/* Categorized Production Windows Quick Pills */}
-              <div className="space-y-2 pt-1">
-                <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
-                  Featured Production Windows:
+              {/* Action Hierarchy: One Dominant Primary + Restrained Secondary Links */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsInquiryModalOpen(true)}
+                  className="px-6 py-3.5 rounded-sm bg-[#D92227] hover:bg-[#B5191D] text-white text-xs font-semibold uppercase tracking-[0.12em] inline-flex items-center gap-2 transition-colors duration-150 cursor-pointer whitespace-nowrap"
+                >
+                  <span>Request OEM Spec Pack</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <Link
+                  to="/gearwear"
+                  className="px-5 py-3.5 rounded-sm border border-white/25 hover:border-white text-white text-xs font-semibold uppercase tracking-[0.12em] inline-flex items-center gap-2 transition-colors duration-150 whitespace-nowrap"
+                >
+                  <span>Browse Gearwear</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+
+                <Link
+                  to="/about"
+                  className="px-3 py-3 text-xs font-mono uppercase tracking-wider text-white/65 hover:text-white underline underline-offset-4 transition-colors whitespace-nowrap"
+                >
+                  Company Profile
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Authentic Facility Photography */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.08 }}
+              className="lg:col-span-5 flex flex-col"
+            >
+              <div className="relative flex-1 min-h-[280px] sm:min-h-[340px] lg:min-h-0 rounded-sm overflow-hidden border border-white/15 bg-[#122B29]">
+                <img
+                  src={factoryBg}
+                  alt="Safety Line Industrial Manufacturing Facility, Sialkot"
+                  className="w-full h-full object-cover object-[center_25%]"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0E1A19] via-[#0E1A19]/75 to-transparent p-5 sm:p-6">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#D92227] font-semibold block">
+                    Manufacturing Complex · Sialkot
+                  </span>
+                  <p className="text-sm font-medium text-white mt-1">
+                    90 Full-Time Craftsmen · 70 Stitching Machines · Automated Press Cutting
+                  </p>
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          UNBOXED MANUFACTURING PROOF LEDGER (FULL WIDTH HAIRLINE STRIP)
+          ===================================================================== */}
+      <section className="bg-white border-b border-[#E2DFD7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-[#E2DFD7]">
+            <div className="lg:pr-8 space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#525957] block">Global Supply</span>
+              <span className="text-xl sm:text-2xl font-display font-bold text-[#141918] tabular-nums block">100% Export Ready</span>
+              <span className="text-xs text-[#525957] block">Europe, North America &amp; Middle East</span>
+            </div>
+            <div className="lg:px-8 space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#525957] block">Production Floor</span>
+              <span className="text-xl sm:text-2xl font-display font-bold text-[#141918] tabular-nums block">90 Craftsmen</span>
+              <span className="text-xs text-[#525957] block">Dedicated full-time leather &amp; knit team</span>
+            </div>
+            <div className="lg:px-8 space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#525957] block">Catalogue Scope</span>
+              <span className="text-xl sm:text-2xl font-display font-bold text-[#141918] tabular-nums block">14 Active Lines</span>
+              <span className="text-xs text-[#525957] block">From FIA racing gloves to winter tracksuits</span>
+            </div>
+            <div className="lg:pl-8 space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#525957] block">Compliance</span>
+              <span className="text-xl sm:text-2xl font-display font-bold text-[#141918] tabular-nums block">ISO 9001:2015</span>
+              <span className="text-xs text-[#525957] block">OEKO-TEX Standard 100 audited materials</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          MAIN DUAL DIVISION GATEWAY: EDITORIAL GALLERY PANELS
+          ===================================================================== */}
+      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 space-y-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#E2DFD7] pb-6">
+          <div className="space-y-1.5">
+            <span className="text-[11px] font-mono uppercase tracking-[0.16em] text-[#D92227] font-semibold block">
+              Catalogue Architecture
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#141918] tracking-tight">
+              Select a Manufacturing Division
+            </h2>
+          </div>
+          <p className="text-sm text-[#525957] max-w-md">
+            Each division houses dedicated specification catalogues, size matrices, and private-label customization options.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          {/* ==========================================================
+              DIVISION 01: GEARWEAR DIVISION
+              ========================================================== */}
+          <section className="bg-white border border-[#E2DFD7] rounded-sm flex flex-col justify-between overflow-hidden">
+            <div>
+              {/* Studio Product Showcase Mosaic */}
+              <div
+                onClick={() => navigate('/gearwear')}
+                className="cursor-pointer bg-[#F7F6F2] border-b border-[#E2DFD7] p-6 sm:p-8 group"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.14em] text-[#525957] mb-5">
+                  <span className="text-[#D92227] font-semibold">Division 01 · Gearwear</span>
+                  <span className="tabular-nums">{GEARWEAR_WINDOWS.length} Production Lines</span>
+                </div>
+
+                <div className="grid grid-cols-4 gap-3 items-center">
                   {[
-                    'Golf Gloves', 
-                    'Fish Gloves', 
-                    'Work Gloves', 
-                    'Mechanics Gloves', 
-                    'Tactical Police', 
-                    'Motorcars', 
-                    'Cycling Gloves',
-                    'Road & Cycling',
-                    'Weight Lifting'
-                  ].map((catName) => (
-                    <span 
-                      key={catName}
-                      className="text-[11px] font-mono bg-white/10 hover:bg-white/20 text-slate-200 px-2.5 py-1 rounded-md border border-white/10 transition-colors backdrop-blur-xs font-medium"
-                    >
-                      {catName}
-                    </span>
+                    { src: cg1Img, label: 'Racing' },
+                    { src: gg1Img, label: 'Golf' },
+                    { src: wg1Img, label: 'Work' },
+                    { src: mg1Img, label: 'Mechanics' },
+                  ].map((item) => (
+                    <div key={item.label} className="bg-white border border-[#E2DFD7] rounded-sm aspect-square p-2.5 flex items-center justify-center">
+                      <img
+                        src={item.src}
+                        alt={item.label}
+                        className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
 
-              {/* Technical Specifications Highlights */}
-              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10 text-slate-300 text-[11px] font-mono">
-                <div>
-                  <span className="block text-white font-bold">AAA Cabretta</span>
-                  <span className="text-[10px] text-slate-400">Tour Grade Leather</span>
+              {/* Division Description & Direct Line Index */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="space-y-2">
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#141918] tracking-tight">
+                    Gearwear &amp; Tactical Handwear
+                  </h3>
+                  <p className="text-sm text-[#525957] leading-relaxed">
+                    Precision-cut protective gloves and performance gear engineered for motorsport circuits, tour golf, heavy construction, automotive bays, marine angling, and strength sports.
+                  </p>
                 </div>
-                <div>
-                  <span className="block text-white font-bold">Kevlar® Fiber</span>
-                  <span className="text-[10px] text-slate-400">Cut & Puncture Guard</span>
+
+                {/* Clickable Production Windows Directory */}
+                <div className="space-y-2.5">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#525957] block font-semibold">
+                    Direct Access by Production Line
+                  </span>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {GEARWEAR_WINDOWS.map((win) => (
+                      <button
+                        key={win.id}
+                        type="button"
+                        onClick={() => navigate(win.routePath)}
+                        className="text-left px-3 py-2 rounded-sm bg-[#F7F6F2] hover:bg-[#122B29] text-[#141918] hover:text-white border border-[#E2DFD7] hover:border-[#122B29] text-xs font-medium transition-colors duration-150 truncate cursor-pointer"
+                      >
+                        {win.shortTitle}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <span className="block text-white font-bold">TPR Knuckle</span>
-                  <span className="text-[10px] text-slate-400">Impact Shielding</span>
+
+                {/* Spec Baseline Row */}
+                <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#ECE9E1] text-xs">
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[#525957] block">Leather</span>
+                    <span className="font-semibold text-[#141918]">AAA Cabretta</span>
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[#525957] block">Protection</span>
+                    <span className="font-semibold text-[#141918]">Nomex® &amp; Kevlar®</span>
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[#525957] block">Impact</span>
+                    <span className="font-semibold text-[#141918]">Molded TPR</span>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Enter Button CTA with Radiant Shine Sweep */}
+            <div className="px-6 sm:px-8 pb-6 sm:pb-8">
               <Link
                 id="enter-gearwear-btn"
                 to="/gearwear"
-                className="btn-glow-shine w-full mt-3 bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white font-bold text-xs sm:text-sm tracking-widest uppercase py-4 px-6 rounded-2xl inline-flex items-center justify-center space-x-2 transition-all shadow-xl shadow-[#FF5A36]/30 hover:shadow-[#FF5A36]/50 cursor-pointer active:scale-[0.98] border border-[#FF7A59]/50"
+                className="w-full py-3.5 px-6 rounded-sm bg-[#D92227] hover:bg-[#B5191D] text-white font-semibold text-xs uppercase tracking-[0.12em] inline-flex items-center justify-between transition-colors duration-150"
               >
-                <span>Enter Gearwear Showcase</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
+                <span>Enter Gearwear Catalogue</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-          </motion.div>
+          </section>
 
-          {/* ========================================================
-              DIVISION 02: ACCESSORIES DIVISION (Stylized Emerald Slate)
-             ======================================================== */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            onClick={() => navigate('/accessories')}
-            className="group cursor-pointer relative bg-gradient-to-b from-[#0B2E2B]/90 to-[#061F1D]/95 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/15 hover:border-[#2DD4BF] transition-all duration-400 hover:shadow-[0_0_40px_rgba(45,212,191,0.2)] shadow-2xl flex flex-col justify-between min-h-[440px]"
-          >
-            {/* Visual Preview Image Backdrop with Cinematic Scrim */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              <img
-                src={jacketsCatImg}
-                alt="Safety Line Accessories Division"
-                className="w-full h-full object-cover object-center opacity-30 group-hover:opacity-45 group-hover:scale-105 transition-all duration-700 ease-out filter saturate-125"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#061F1D] via-[#061F1D]/80 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#061F1D]/90 via-transparent to-transparent" />
-            </div>
+          {/* ==========================================================
+              DIVISION 02: ACCESSORIES DIVISION
+              ========================================================== */}
+          <section className="bg-white border border-[#E2DFD7] rounded-sm flex flex-col justify-between overflow-hidden">
+            <div>
+              {/* Studio Product Showcase Mosaic */}
+              <div
+                onClick={() => navigate('/accessories')}
+                className="cursor-pointer bg-[#F7F6F2] border-b border-[#E2DFD7] p-6 sm:p-8 group"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.14em] text-[#525957] mb-5">
+                  <span className="text-[#122B29] font-semibold">Division 02 · Accessories</span>
+                  <span className="tabular-nums">{ACCESSORIES_WINDOWS.length} Apparel Lines</span>
+                </div>
 
-            {/* Top Division Badges & Department Identifier */}
-            <div className="relative z-10 p-6 sm:p-8 flex items-center justify-between">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-[#0F534F] text-emerald-200 text-xs font-mono font-bold tracking-wider uppercase shadow-lg border border-emerald-500/30">
-                <Layers className="w-3.5 h-3.5" />
-                <span>Division 02</span>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white border border-[#E2DFD7] rounded-sm aspect-[16/9] overflow-hidden">
+                    <img
+                      src={jacketsCatImg}
+                      alt="Weatherproof Technical Jackets"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="bg-white border border-[#E2DFD7] rounded-sm aspect-[16/9] overflow-hidden">
+                    <img
+                      src={gymwearCatImg}
+                      alt="Performance GymWear Sets"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
               </div>
-              <span className="text-[11px] font-mono text-[#5EEAD4] uppercase tracking-wider font-bold bg-[#0F534F]/30 px-3 py-1 rounded-lg border border-[#2DD4BF]/30 backdrop-blur-md">
-                Technical Apparel & Activewear
-              </span>
-            </div>
 
-            {/* Card Content & Interactive Spec Preview */}
-            <div className="relative z-10 p-6 sm:p-8 space-y-5">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-[#5EEAD4] uppercase tracking-widest">
-                    Performance Knits
+              {/* Division Description & Direct Line Index */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="space-y-2">
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#141918] tracking-tight">
+                    Technical Apparel &amp; Accessories
+                  </h3>
+                  <p className="text-sm text-[#525957] leading-relaxed">
+                    Precision athletic gymwear, moisture-wicking micro-knit t-shirts, weather-sealed storm jackets, heavyweight fleece hoodies, and dual-season summer &amp; winter tracksuits.
+                  </p>
+                </div>
+
+                {/* Clickable Production Windows Directory */}
+                <div className="space-y-2.5">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#525957] block font-semibold">
+                    Direct Access by Apparel Line
                   </span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-xs font-mono text-slate-300">5 Active Production Windows</span>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {ACCESSORIES_WINDOWS.map((win) => (
+                      <button
+                        key={win.id}
+                        type="button"
+                        onClick={() => navigate(win.routePath)}
+                        className="text-left px-3 py-2 rounded-sm bg-[#F7F6F2] hover:bg-[#122B29] text-[#141918] hover:text-white border border-[#E2DFD7] hover:border-[#122B29] text-xs font-medium transition-colors duration-150 truncate cursor-pointer"
+                      >
+                        {win.shortTitle}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                <h2 className="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
-                  Accessories Division
-                </h2>
-                
-                <p className="text-slate-300 font-normal text-xs sm:text-sm leading-relaxed max-w-lg">
-                  Precision athletic gymwear, technical high-filament t-shirts, weather-resistant jackets, warm-up hoodies, and dual-season tracksuits.
-                </p>
-              </div>
-
-              {/* Categorized Production Windows Quick Pills */}
-              <div className="space-y-2 pt-1">
-                <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
-                  Featured Production Windows:
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {[
-                    'GymWear', 
-                    'T-shirts', 
-                    'Jackets', 
-                    'Hoodies', 
-                    'Tracksuits (Summer & Winter)'
-                  ].map((catName) => (
-                    <span 
-                      key={catName}
-                      className="text-[11px] font-mono bg-white/10 hover:bg-white/20 text-slate-200 px-2.5 py-1 rounded-md border border-white/10 transition-colors backdrop-blur-xs font-medium"
-                    >
-                      {catName}
-                    </span>
-                  ))}
+                {/* Spec Baseline Row */}
+                <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#ECE9E1] text-xs">
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[#525957] block">Knitting</span>
+                    <span className="font-semibold text-[#141918]">High-Gauge 3D</span>
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[#525957] block">Warmth</span>
+                    <span className="font-semibold text-[#141918]">Brushed Fleece</span>
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] uppercase text-[#525957] block">Moisture</span>
+                    <span className="font-semibold text-[#141918]">Capillary Matrix</span>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Technical Specifications Highlights */}
-              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10 text-slate-300 text-[11px] font-mono">
-                <div>
-                  <span className="block text-white font-bold">High-Gauge Knit</span>
-                  <span className="text-[10px] text-slate-400">Micro-Mesh Breathability</span>
-                </div>
-                <div>
-                  <span className="block text-white font-bold">Thermal Fleece</span>
-                  <span className="text-[10px] text-slate-400">Brushed Cold-Shield</span>
-                </div>
-                <div>
-                  <span className="block text-white font-bold">Capillary Tech</span>
-                  <span className="text-[10px] text-slate-400">Moisture-Wicking Matrix</span>
-                </div>
-              </div>
-
-              {/* Enter Button CTA with Radiant Shine Sweep */}
+            <div className="px-6 sm:px-8 pb-6 sm:pb-8">
               <Link
                 id="enter-accessories-btn"
                 to="/accessories"
-                className="btn-glow-shine w-full mt-3 bg-gradient-to-r from-[#0E4D48] to-[#146B64] hover:from-[#115E58] hover:to-[#0E4D48] text-emerald-100 font-bold text-xs sm:text-sm tracking-widest uppercase py-4 px-6 rounded-2xl inline-flex items-center justify-center space-x-2 transition-all shadow-xl shadow-black/40 hover:shadow-emerald-900/50 cursor-pointer active:scale-[0.98] border border-[#2DD4BF]/50"
+                className="w-full py-3.5 px-6 rounded-sm bg-[#122B29] hover:bg-[#0E1A19] text-white font-semibold text-xs uppercase tracking-[0.12em] inline-flex items-center justify-between transition-colors duration-150"
               >
-                <span>Enter Accessories Showcase</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 text-[#5EEAD4]" />
+                <span>Enter Accessories Catalogue</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-          </motion.div>
-
+          </section>
         </div>
 
-
-
-        {/* ========================================================
-            FACILITY TRUST METRICS STRIP: High-Tech Manufacturing Proof
-           ======================================================== */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-[#FF5A36] mb-1">
-              <Globe2 className="w-4 h-4" />
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">Global Reach</span>
+        {/* Bottom Architectural OEM Callout Strip */}
+        <section className="bg-white border border-[#E2DFD7] rounded-sm p-6 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1.5 max-w-2xl">
+            <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.14em] text-[#D92227] font-semibold">
+              <ShieldCheck className="w-4 h-4" />
+              <span>Private Label &amp; Export Sourcing</span>
             </div>
-            <div className="text-2xl font-display font-black text-white">100% Export</div>
-            <div className="text-[11px] text-slate-400 mt-1">North America & European certified standards</div>
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-[#141918]">
+              Looking for Custom Team Kits, Packaging, or Material Swatches?
+            </h3>
+            <p className="text-sm text-[#525957]">
+              Submit your specifications directly to our Sialkot manufacturing desk for custom embroidery, woven labels, blister packaging, and wholesale lead times.
+            </p>
           </div>
-
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-emerald-400 mb-1">
-              <Shield className="w-4 h-4" />
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">Compliance</span>
-            </div>
-            <div className="text-2xl font-display font-black text-white">ISO 9001:2015</div>
-            <div className="text-[11px] text-slate-400 mt-1">Strict tensile & tolerance laboratory tests</div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-[#FF5A36] mb-1">
-              <Activity className="w-4 h-4" />
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">Production</span>
-            </div>
-            <div className="text-2xl font-display font-black text-white">50+ Windows</div>
-            <div className="text-[11px] text-slate-400 mt-1">From Cabretta golf to Kevlar® police gloves</div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-emerald-400 mb-1">
-              <Award className="w-4 h-4" />
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">Solutions</span>
-            </div>
-            <div className="text-2xl font-display font-black text-white">Custom OEM</div>
-            <div className="text-[11px] text-slate-400 mt-1">Private label embroidery, sublimation & tech packs</div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <button
+              type="button"
+              onClick={() => setIsInquiryModalOpen(true)}
+              className="px-5 py-3 rounded-sm bg-[#D92227] hover:bg-[#B5191D] text-white text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Launch Spec Request
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/contact')}
+              className="px-5 py-3 rounded-sm border border-[#E2DFD7] hover:border-[#141918] text-[#141918] text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Direct Directory
+            </button>
           </div>
         </section>
-
       </main>
 
-      {/* ========================================================
-          BOTTOM INFORMATION FOOTER: Luxury Industrial Form
-         ======================================================== */}
-      <footer className="relative z-10 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="bg-[#061F1D]/90 backdrop-blur-xl border border-white/15 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-          
-          {/* Top row: Direct Contacts and Social Links */}
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-white/10 text-xs font-mono">
-            
-            {/* Direct Contact Details */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-slate-300">
-              <a 
-                href={`tel:${settings.contactPhone.replace(/\s+/g, '')}`} 
-                className="inline-flex items-center gap-2 hover:text-[#FF5A36] font-semibold transition-colors"
-              >
-                <Phone className="w-4 h-4 text-[#FF5A36]" />
-                <span>{settings.contactPhone}</span>
-              </a>
-              <span className="text-white/20 hidden sm:inline">•</span>
-              <a 
-                href={`mailto:${settings.contactEmail}`} 
-                className="inline-flex items-center gap-2 hover:text-[#FF5A36] transition-colors"
-              >
-                <Mail className="w-4 h-4 text-[#FF5A36]" />
-                <span>{settings.contactEmail}</span>
-              </a>
-              {settings.salesEmail && (
-                <>
-                  <span className="text-white/20 hidden sm:inline">•</span>
-                  <a 
-                    href={`mailto:${settings.salesEmail}`} 
-                    className="inline-flex items-center gap-2 hover:text-emerald-400 transition-colors"
-                  >
-                    <Mail className="w-4 h-4 text-emerald-400" />
-                    <span>{settings.salesEmail}</span>
-                  </a>
-                </>
-              )}
-              <span className="text-white/20 hidden sm:inline">•</span>
-              <a 
-                href={`mailto:${settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}`} 
-                className="inline-flex items-center gap-2 hover:text-amber-300 transition-colors"
-                title="Company Personal Mail"
-              >
-                <Mail className="w-4 h-4 text-amber-400" />
-                <span>{settings.companyPersonalEmail || 'safetylineindustriesofficial@gmail.com'}</span>
-              </a>
-              {settings.googleMapsUrl && (
-                <>
-                  <span className="text-white/20 hidden sm:inline">•</span>
-                  <a 
-                    href={settings.googleMapsUrl} 
-                    target="_blank" 
-                    referrerPolicy="no-referrer" 
-                    className="inline-flex items-center gap-2 text-emerald-300 hover:text-[#FF5A36] font-semibold transition-colors"
-                  >
-                    <MapPin className="w-4 h-4 text-[#FF5A36]" />
-                    <span>Sialkot Factory on Google Maps</span>
-                    <ExternalLink className="w-3 h-3 opacity-60" />
-                  </a>
-                </>
-              )}
-            </div>
+      {/* Unified Footer */}
+      <Footer settings={settings} />
 
-            {/* Social Media Links & WhatsApp */}
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] text-slate-400 font-sans mr-1 hidden sm:inline">Connect Direct:</span>
-              {settings.instagramGearwear && (
-                <a
-                  href={settings.instagramGearwear}
-                  target="_blank"
-                  referrerPolicy="no-referrer"
-                  title="Instagram: Gearwear"
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-[#E1306C] hover:text-white text-slate-300 flex items-center justify-center transition-all border border-white/10 shadow-sm"
-                >
-                  <Instagram className="w-4 h-4" />
-                </a>
-              )}
-              {settings.instagramHosiery && (
-                <a
-                  href={settings.instagramHosiery}
-                  target="_blank"
-                  referrerPolicy="no-referrer"
-                  title="Instagram: Accessories"
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-[#833AB4] hover:text-white text-slate-300 flex items-center justify-center transition-all border border-white/10 shadow-sm"
-                >
-                  <Instagram className="w-4 h-4" />
-                </a>
-              )}
-              {settings.facebookUrl && (
-                <a
-                  href={settings.facebookUrl}
-                  target="_blank"
-                  referrerPolicy="no-referrer"
-                  title="Facebook: Safety Line"
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-[#1877F2] hover:text-white text-slate-300 flex items-center justify-center transition-all border border-white/10 shadow-sm"
-                >
-                  <Facebook className="w-4 h-4" />
-                </a>
-              )}
-              <a
-                href={`https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`}
-                target="_blank"
-                referrerPolicy="no-referrer"
-                title="Direct WhatsApp Advisory"
-                className="w-9 h-9 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white flex items-center justify-center transition-all shadow-md"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-              </a>
-              <button
-                onClick={() => navigate('/contact')}
-                className="btn-glow-shine ml-2 text-xs font-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white transition-all cursor-pointer shadow-md shadow-[#FF5A36]/30 active:scale-95 border border-[#FF7A59]/40"
-              >
-                Contact Us
-              </button>
-            </div>
-          </div>
-
-          {/* Bottom Row: Facility Certification Notice */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 font-mono">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#FF5A36]" />
-              <span>Safety Line • Sialkot, Pakistan • ISO 9001:2015</span>
-            </div>
-
-            <div className="flex items-center gap-2 text-[11px] text-[#A7F3D0]">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF5A36]" />
-              <span>Direct Manufacturer Digital Showcase & Technical Specs Catalogue</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
       <InquiryLoadingModal
         isOpen={isInquiryModalOpen}
         onClose={() => setIsInquiryModalOpen(false)}
         settings={settings}
       />
-
     </div>
   );
 }

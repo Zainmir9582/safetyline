@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ImageOff, Sparkles } from 'lucide-react';
+import { ImageOff } from 'lucide-react';
 
 // Global cache to track previously loaded image URLs across re-renders and page transitions
 const loadedImageCache = new Set<string>();
@@ -69,26 +69,21 @@ export const SmoothImage: React.FC<SmoothImageProps> = ({
 
   return (
     <div className={`relative overflow-hidden ${containerClassName}`}>
-      {/* Skeleton Loading Shimmer Placeholder */}
+      {/* Quiet architectural stone placeholder */}
       {!isLoaded && !hasError && (
-        <div className="absolute inset-0 z-0 bg-[#F1F5F4] flex items-center justify-center animate-pulse pointer-events-none">
-          <div className="w-full h-full bg-gradient-to-r from-[#F1F5F4] via-[#E2ECE9] to-[#F1F5F4] bg-[length:200%_100%] animate-[shimmer_1.6s_infinite]" />
-          <div className="absolute inset-0 flex items-center justify-center opacity-30">
-            <Sparkles className="w-5 h-5 text-[#0B3D3B]" />
-          </div>
-        </div>
+        <div className="absolute inset-0 z-0 bg-[#ECE9E1]/60 pointer-events-none" />
       )}
 
       {/* Graceful Error Fallback */}
       {hasError ? (
-        <div className="w-full h-full min-h-[160px] bg-[#F8FAFB] flex flex-col items-center justify-center p-4 text-center border border-slate-200/60 rounded-xl space-y-2">
-          <div className="w-10 h-10 rounded-full bg-[#D9F0EC] flex items-center justify-center text-[#0B3D3B]">
+        <div className="w-full h-full min-h-[160px] bg-[#F7F6F2] flex flex-col items-center justify-center p-4 text-center border border-[#E2DFD7] rounded-sm space-y-2">
+          <div className="w-10 h-10 rounded-sm bg-[#ECE9E1] flex items-center justify-center text-[#141918]">
             <ImageOff className="w-5 h-5 opacity-70" />
           </div>
-          <span className="text-[11px] font-mono text-slate-500 font-bold uppercase tracking-wider">
+          <span className="text-[11px] font-mono text-[#525957] font-semibold uppercase tracking-wider">
             {fallbackText}
           </span>
-          <span className="text-[10px] text-slate-400 font-sans">
+          <span className="text-[10px] text-[#525957] font-sans">
             Image Spec Preview
           </span>
         </div>
