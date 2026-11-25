@@ -6,4 +6,5 @@ Allow: /
 Disallow: /admin
 Disallow: /admin-dashboard
 
-Sitemap: /sitemap.xml
+# Sitemap location
+Sitemap: https://safetyline.com/sitemap.xml

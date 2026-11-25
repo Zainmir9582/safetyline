@@ -1,15 +1,33 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { 
-  ChevronLeft, ChevronRight, CornerDownLeft, ShieldCheck, HelpCircle, PhoneCall, 
-  AlertTriangle, MessageSquare, ZoomIn, ZoomOut, Maximize2, Minimize2, Move, RotateCcw, 
-  X, Star, Loader2, MessageCircle, ArrowRight, CheckCircle2, Sparkles, Scan, Mail
+import {
+  ChevronLeft,
+  ChevronRight,
+  CornerDownLeft,
+  ShieldCheck,
+  HelpCircle,
+  AlertTriangle,
+  MessageSquare,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Move,
+  RotateCcw,
+  X,
+  Star,
+  Loader2,
+  MessageCircle,
+  ArrowRight,
+  CheckCircle2,
+  Scan,
+  Mail,
 } from 'lucide-react';
-import { motion } from 'motion/react';
 import { navigate } from '../lib/router';
 import { Product, ProductFeedback } from '../types';
 import { settings } from '../data';
 import SEO from './SEO';
 import SmoothImage from './SmoothImage';
+import SiteHeader from './SiteHeader';
+import Footer from './Footer';
 import InquiryLoadingModal from './InquiryLoadingModal';
 
 interface ProductDetailsProps {
@@ -18,15 +36,9 @@ interface ProductDetailsProps {
   onUpdateProduct?: (product: Product) => void;
 }
 
-export default function ProductDetails({ slug, products, onUpdateProduct }: ProductDetailsProps) {
+export default function ProductDetails({ slug, products }: ProductDetailsProps) {
   const product = useMemo(() => {
-    const normalizedSlug = decodeURIComponent(slug || '').trim().toLowerCase();
-    return products.find(
-      (p) =>
-        p.slug.toLowerCase() === normalizedSlug ||
-        p.id.toLowerCase() === normalizedSlug ||
-        p.productCode.toLowerCase() === normalizedSlug
-    );
+    return products.find(p => p.slug === slug);
   }, [products, slug]);
 
   const relatedProducts = useMemo(() => {
@@ -36,7 +48,7 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
       .slice(0, 4);
   }, [product, products]);
 
-  // Gallery slider & Advanced Pan-Zoom states
+  // Gallery slider & Pan-Zoom state
   const [activeIndex, setActiveIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -47,7 +59,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   const [isFullscreenZoom, setIsFullscreenZoom] = useState(false);
   const [fullscreenScale, setFullscreenScale] = useState<number>(2.8);
   const [fullscreenZoomPos, setFullscreenZoomPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
-  const [isFullscreenHovering, setIsFullscreenHovering] = useState(false);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
 
@@ -72,7 +83,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Initialize selected size when product loads
   useEffect(() => {
     if (product) {
       if (product.sizes && product.sizes.length > 0) {
@@ -84,7 +94,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
     }
   }, [product]);
 
-  // Handle ESC key to close fullscreen inspector
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isFullscreenZoom) {
@@ -95,7 +104,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFullscreenZoom]);
 
-  // Cursor following calculations
   const handleStageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     if (rect.width > 0 && rect.height > 0) {
@@ -138,7 +146,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
     }
   };
 
-  // All gallery images
   const images = useMemo(() => {
     if (!product) return [];
     const list = [...(product.galleryImages || [])];
@@ -148,7 +155,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
     return Array.from(new Set(list));
   }, [product]);
 
-  // Autoplay gallery rotation
   useEffect(() => {
     if (!isAutoPlaying || images.length <= 1) return;
     const timer = setInterval(() => {
@@ -236,18 +242,23 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
 
   if (!product) {
     return (
-      <div id="product-not-found" className="min-h-screen flex flex-col items-center justify-center bg-[#FAFCFB] text-center px-4 pt-32">
-        <AlertTriangle className="w-16 h-16 text-[#FF5A36] mb-6" />
-        <h2 className="font-display text-2xl font-bold text-[#0B3D3B]">Product Not Found</h2>
-        <p className="text-slate-500 font-normal text-sm max-w-sm mt-2">
-          The requested product could not be located in our digital catalogue.
-        </p>
-        <button
-          onClick={() => navigate('/')}
-          className="mt-6 bg-[#0B3D3B] hover:bg-[#072725] text-white px-6 py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer"
-        >
-          Return to Catalogue Home
-        </button>
+      <div id="product-not-found" className="min-h-screen flex flex-col bg-[#F7F6F2] text-[#141918]">
+        <SiteHeader variant="obsidian" />
+        <div className="flex-grow flex flex-col items-center justify-center text-center px-4 py-24">
+          <AlertTriangle className="w-12 h-12 text-[#D92227] mb-5" />
+          <h2 className="font-display text-2xl font-extrabold text-[#141918]">Product Not Found</h2>
+          <p className="text-[#525957] text-sm max-w-sm mt-2">
+            The requested product could not be located in our digital catalogue.
+          </p>
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            className="mt-6 bg-[#0E1A19] hover:bg-[#122B29] text-white px-6 py-3 rounded-sm text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer"
+          >
+            Return to Catalogue Home
+          </button>
+        </div>
+        <Footer settings={settings} />
       </div>
     );
   }
@@ -261,59 +272,8 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
   const parentCategoryLabel = isGearwear ? 'Gearwear' : 'Accessories';
 
   return (
-    <div id="product-details-root" className="bg-[#FAFCFB] min-h-screen pt-20 pb-24 font-sans text-[#1A1A1A]">
-      {/* Category-Specific Top Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B3D3B] text-white py-3.5 px-4 sm:px-8 border-b border-white/10 shadow-lg shadow-[#0B3D3B]/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div 
-            onClick={() => navigate(`/${parentCategorySlug}`)}
-            className="flex items-center cursor-pointer group"
-          >
-            <div>
-              <div className="flex items-baseline space-x-1.5">
-                <span className="font-serif font-black text-sm uppercase tracking-wider transition-colors">
-                  <span className="text-[#EA2227]">SAFETY</span> <span className="text-white">LINE</span>
-                </span>
-                <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/10 text-white font-bold ml-1">
-                  {parentCategoryLabel}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            <button
-              onClick={() => navigate('/')}
-              className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
-            >
-              Portal
-            </button>
-            <button
-              onClick={() => navigate('/about')}
-              className="hidden sm:inline-block px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-white/90 hover:text-white text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
-            >
-              About
-            </button>
-            <button
-              onClick={() => navigate('/contact')}
-              className="hidden sm:inline-block px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-white/90 hover:text-white text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
-            >
-              Contact
-            </button>
-            <button
-              onClick={() => navigate(`/${parentCategorySlug}`)}
-              className={`px-3 sm:px-3.5 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
-                isGearwear ? 'bg-[#FF5A36] text-white hover:bg-[#e44e2b]' : 'bg-[#D9F0EC] text-[#0B3D3B] hover:bg-white'
-              }`}
-            >
-              <CornerDownLeft className="w-3.5 h-3.5" />
-              <span>Back to {parentCategoryLabel}</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <SEO 
+    <div id="product-details-root" className="bg-[#F7F6F2] min-h-screen font-sans text-[#141918] flex flex-col">
+      <SEO
         title={`${product.seoTitle || product.name} | Safety Line`}
         description={product.seoDescription || product.shortDescription}
         keywords={`${product.name}, ${product.productCode}, Safety Line, athletic ${product.categoryName}, ${product.material}`}
@@ -322,16 +282,24 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
         schema={productSchema}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 pt-8">
-        
-        {/* Navigation Breadcrumb & Back button */}
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center space-x-2 text-xs font-mono text-slate-500">
-            <button onClick={() => navigate('/')} className="hover:text-[#0B3D3B] transition-colors cursor-pointer">Portal</button>
+      <SiteHeader
+        variant="obsidian"
+        ctaLabel="Request OEM Spec"
+        onOpenInquiry={() => setIsInquiryModalOpen(true)}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-10 flex-grow w-full">
+
+        {/* Breadcrumb & Context Return Row */}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E2DFD7] pb-4">
+          <div className="flex items-center space-x-2 text-xs font-mono text-[#525957]">
+            <button onClick={() => navigate('/')} className="hover:text-[#141918] transition-colors cursor-pointer">
+              Portal
+            </button>
             <span>/</span>
-            <button 
+            <button
               onClick={() => navigate(`/${parentCategorySlug}`)}
-              className="hover:text-[#0B3D3B] transition-colors cursor-pointer font-bold"
+              className="hover:text-[#141918] transition-colors cursor-pointer font-semibold"
             >
               {parentCategoryLabel}
             </button>
@@ -340,38 +308,36 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 <span>/</span>
                 <button
                   onClick={() => navigate(`/${parentCategorySlug}/${product.subcategory}`)}
-                  className="hover:text-[#0B3D3B] transition-colors cursor-pointer font-bold capitalize"
+                  className="hover:text-[#141918] transition-colors cursor-pointer font-semibold capitalize"
                 >
                   {product.subcategory.replace(/-/g, ' ')}
                 </button>
               </>
             )}
             <span>/</span>
-            <span className="text-[#0B3D3B] font-bold truncate max-w-xs">{product.name}</span>
+            <span className="text-[#141918] font-bold truncate max-w-xs">{product.name}</span>
           </div>
 
-            <button
-              id="back-to-products-btn"
-              onClick={() => navigate(product.subcategory ? `/${parentCategorySlug}/${product.subcategory}` : `/${parentCategorySlug}`)}
-              className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-[#0B3D3B] transition-colors cursor-pointer"
-            >
-              <CornerDownLeft className="w-4 h-4 text-[#FF5A36]" />
-              <span>Back to {product.subcategory ? product.subcategory.replace(/-/g, ' ') : parentCategoryLabel}</span>
-            </button>
+          <button
+            id="back-to-products-btn"
+            type="button"
+            onClick={() => navigate(product.subcategory ? `/${parentCategorySlug}/${product.subcategory}` : `/${parentCategorySlug}`)}
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#525957] hover:text-[#141918] transition-colors cursor-pointer"
+          >
+            <CornerDownLeft className="w-3.5 h-3.5 text-[#D92227]" />
+            <span>Back to {product.subcategory ? product.subcategory.replace(/-/g, ' ') : parentCategoryLabel}</span>
+          </button>
         </div>
 
-        {/* 2-Column Athletic Details Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-xs">
-          
-          {/* ==========================================
-              LEFT SIDE: GALLERY SLIDER WITH ADVANCED PAN-ZOOM
-             ========================================== */}
+        {/* 2-Column Technical Specification Spread */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 bg-white p-6 sm:p-10 rounded-sm border border-[#E2DFD7]">
+
+          {/* Left: Studio Stage + Cursor Pan-Zoom */}
           <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
-            {/* Main Stage Frame with Cursor-Following Pan Zoom */}
             <div className="space-y-3">
-              <div 
+              <div
                 ref={stageRef}
-                className={`relative w-full aspect-[4/5] sm:aspect-square bg-slate-50 rounded-2xl overflow-hidden shadow-xs border border-slate-200 flex items-center justify-center p-2 sm:p-4 select-none ${
+                className={`relative w-full aspect-[4/5] sm:aspect-square bg-[#F7F6F2] rounded-sm overflow-hidden border border-[#E2DFD7] flex items-center justify-center p-4 sm:p-6 select-none ${
                   isZoomed ? 'cursor-move' : 'cursor-crosshair'
                 }`}
                 onMouseEnter={() => {
@@ -388,7 +354,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 onTouchMove={handleStageTouchMove}
                 onClick={() => setIsZoomed(!isZoomed)}
               >
-                {/* Main Image with Real-time Cursor Pan-Zoom */}
                 <img
                   src={images[activeIndex]}
                   alt={`${product.name} showcase view`}
@@ -396,13 +361,13 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   style={{
                     mixBlendMode: 'multiply',
                     transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
-                    transform: isZoomed 
-                      ? `scale(${zoomScale})` 
-                      : isHovering 
-                        ? 'scale(1.45)' 
+                    transform: isZoomed
+                      ? `scale(${zoomScale})`
+                      : isHovering
+                        ? 'scale(1.45)'
                         : 'scale(1)',
-                    transition: (isHovering || isZoomed) 
-                      ? 'transform 0.15s ease-out, transform-origin 0.03s linear' 
+                    transition: (isHovering || isZoomed)
+                      ? 'transform 0.15s ease-out, transform-origin 0.03s linear'
                       : 'transform 0.35s ease-out, transform-origin 0.3s ease-out',
                   }}
                   loading="eager"
@@ -410,89 +375,89 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   fetchPriority="high"
                 />
 
-                {/* Slider Next/Prev Arrows */}
                 {images.length > 1 && (
                   <>
                     <button
+                      type="button"
                       onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 text-[#0B3D3B] hover:bg-[#FF5A36] hover:text-white p-2 rounded-full shadow-md transition-colors z-20 cursor-pointer"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-white border border-[#E2DFD7] text-[#141918] hover:border-[#141918] p-2 rounded-sm transition-colors z-20 cursor-pointer"
                       aria-label="Previous Image"
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
+                      type="button"
                       onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 text-[#0B3D3B] hover:bg-[#FF5A36] hover:text-white p-2 rounded-full shadow-md transition-colors z-20 cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-white border border-[#E2DFD7] text-[#141918] hover:border-[#141918] p-2 rounded-sm transition-colors z-20 cursor-pointer"
                       aria-label="Next Image"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-4 h-4" />
                     </button>
                   </>
                 )}
 
-                {/* Category tag badge */}
                 <div className="absolute top-3 left-3 z-10">
-                  <span className="bg-[#0B3D3B] text-white text-[10px] font-mono tracking-wider uppercase px-3 py-1 rounded-md shadow-xs font-bold">
+                  <span className="bg-[#0E1A19] text-white text-[10px] font-mono tracking-wider uppercase px-2.5 py-1 rounded-sm font-semibold">
                     {product.categoryName}
                   </span>
                 </div>
 
-                {/* Fullscreen Inspect Button */}
                 <div className="absolute top-3 right-3 z-20">
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       setIsFullscreenZoom(true);
                     }}
                     title="Open Fullscreen Macro Inspector"
-                    className="bg-white/90 hover:bg-[#0B3D3B] hover:text-white text-slate-700 p-2 rounded-lg shadow-sm border border-slate-200 transition-colors flex items-center space-x-1 text-xs font-mono cursor-pointer"
+                    className="bg-white hover:bg-[#0E1A19] hover:text-white text-[#141918] p-2 rounded-sm border border-[#E2DFD7] transition-colors flex items-center text-xs font-mono cursor-pointer"
                   >
                     <Maximize2 className="w-4 h-4" />
                   </button>
                 </div>
 
-                {/* Cursor Tracking Lens HUD */}
                 {(isHovering || isZoomed) && (
-                  <div className="absolute bottom-3 left-3 bg-neutral-900/85 backdrop-blur-xs text-white px-2.5 py-1 rounded-lg text-[10px] font-mono tracking-wider z-20 flex items-center space-x-1.5 shadow-sm">
-                    <Scan className="w-3.5 h-3.5 text-[#FF5A36] animate-pulse" />
-                    <span>Focus: {Math.round(zoomPos.x)}%, {Math.round(zoomPos.y)}% ({isZoomed ? `${zoomScale}x Lock` : '1.45x Follow'})</span>
+                  <div className="absolute bottom-3 left-3 bg-[#0E1A19]/90 text-white px-2.5 py-1 rounded-sm text-[10px] font-mono tracking-wider z-20 flex items-center gap-1.5">
+                    <Scan className="w-3.5 h-3.5 text-[#D92227]" />
+                    <span className="tabular-nums">
+                      Focus: {Math.round(zoomPos.x)}%, {Math.round(zoomPos.y)}% ({isZoomed ? `${zoomScale}x Lock` : '1.45x Follow'})
+                    </span>
                   </div>
                 )}
 
-                {/* Zoom status hint */}
-                <div className="absolute bottom-3 right-3 bg-black/75 backdrop-blur-xs text-white flex items-center space-x-1.5 px-3 py-1 rounded-md text-[10px] font-mono tracking-wider z-20">
+                <div className="absolute bottom-3 right-3 bg-[#0E1A19]/85 text-white flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[10px] font-mono tracking-wider z-20">
                   {isZoomed ? (
                     <>
-                      <Move className="w-3.5 h-3.5 text-[#FF5A36]" />
-                      <span>Pan to Move (Click to Reset)</span>
+                      <Move className="w-3.5 h-3.5 text-[#D92227]" />
+                      <span>Pan to Move · Click to Reset</span>
                     </>
                   ) : (
                     <>
-                      <ZoomIn className="w-3.5 h-3.5 text-[#D9F0EC]" />
+                      <ZoomIn className="w-3.5 h-3.5 text-white/80" />
                       <span>Hover / Click to Zoom</span>
                     </>
                   )}
                 </div>
               </div>
 
-              {/* Advanced Zoom Controls Toolbar */}
-              <div className="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-100/75 rounded-xl border border-slate-200 text-xs font-mono">
-                <div className="flex items-center space-x-1.5">
-                  <span className="text-slate-500 font-bold uppercase text-[10px] tracking-wider flex items-center space-x-1">
-                    <Sparkles className="w-3 h-3 text-[#FF5A36]" />
-                    <span>Zoom Level:</span>
+              {/* Magnification Toolbar */}
+              <div className="flex flex-wrap items-center justify-between gap-2 p-3 bg-[#F7F6F2] rounded-sm border border-[#E2DFD7] text-xs font-mono">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[#525957] font-semibold uppercase text-[10px] tracking-wider mr-1">
+                    Magnification:
                   </span>
                   {[1.75, 2.5, 3.5].map((lvl) => (
                     <button
                       key={lvl}
+                      type="button"
                       onClick={() => {
                         setZoomScale(lvl);
                         setIsZoomed(true);
                       }}
-                      className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-sm text-[11px] font-semibold tabular-nums transition-colors cursor-pointer border ${
                         zoomScale === lvl && isZoomed
-                          ? 'bg-[#0B3D3B] text-white shadow-2xs'
-                          : 'bg-white text-slate-700 hover:bg-slate-200 border border-slate-300/60'
+                          ? 'bg-[#0E1A19] text-white border-[#0E1A19]'
+                          : 'bg-white text-[#141918] hover:border-[#141918] border-[#E2DFD7]'
                       }`}
                     >
                       {lvl}x
@@ -500,18 +465,19 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   ))}
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <button
+                    type="button"
                     onClick={() => {
                       setIsZoomed(!isZoomed);
                       if (isZoomed) {
                         setZoomPos({ x: 50, y: 50 });
                       }
                     }}
-                    className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors cursor-pointer flex items-center space-x-1 ${
-                      isZoomed 
-                        ? 'bg-[#FF5A36] text-white shadow-2xs' 
-                        : 'bg-white text-[#0B3D3B] border border-slate-300 hover:bg-slate-50'
+                    className={`px-2.5 py-1 rounded-sm text-[11px] font-semibold transition-colors cursor-pointer flex items-center gap-1 border ${
+                      isZoomed
+                        ? 'bg-[#D92227] text-white border-[#D92227]'
+                        : 'bg-white text-[#141918] border-[#E2DFD7] hover:border-[#141918]'
                     }`}
                   >
                     {isZoomed ? <ZoomOut className="w-3 h-3" /> : <ZoomIn className="w-3 h-3" />}
@@ -519,8 +485,9 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => setIsFullscreenZoom(true)}
-                    className="px-2.5 py-1 rounded text-[11px] font-bold bg-[#0B3D3B] text-white hover:bg-[#082C2A] transition-colors cursor-pointer flex items-center space-x-1 shadow-2xs"
+                    className="px-2.5 py-1 rounded-sm text-[11px] font-semibold bg-[#0E1A19] text-white hover:bg-[#122B29] transition-colors cursor-pointer flex items-center gap-1"
                   >
                     <Maximize2 className="w-3 h-3" />
                     <span>Full Screen</span>
@@ -529,25 +496,25 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               </div>
             </div>
 
-            {/* Thumbnail Navigation Strip */}
             {images.length > 1 && (
               <div className="grid grid-cols-5 gap-2.5 pt-1">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
+                    type="button"
                     onClick={() => handleThumbnailClick(idx)}
-                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer bg-white flex items-center justify-center p-1.5 ${
+                    className={`aspect-square rounded-sm overflow-hidden border transition-all cursor-pointer bg-[#F7F6F2] flex items-center justify-center p-1.5 ${
                       idx === activeIndex
-                        ? 'border-[#FF5A36] ring-2 ring-[#FF5A36]/20 scale-95 shadow-xs'
-                        : 'border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400'
+                        ? 'border-[#D92227] ring-1 ring-[#D92227]'
+                        : 'border-[#E2DFD7] opacity-75 hover:opacity-100 hover:border-[#141918]'
                     }`}
                   >
-                    <SmoothImage 
-                      src={img} 
-                      alt={`Thumbnail view ${idx + 1}`} 
+                    <SmoothImage
+                      src={img}
+                      alt={`Thumbnail view ${idx + 1}`}
                       style={{ mixBlendMode: 'multiply' }}
                       containerClassName="w-full h-full flex items-center justify-center"
-                      className="w-full h-full object-contain" 
+                      className="w-full h-full object-contain"
                       priority={idx < 2}
                     />
                   </button>
@@ -556,78 +523,73 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
             )}
           </div>
 
-          {/* ==========================================
-              RIGHT SIDE: DETAILED SPECIFICATIONS
-             ========================================== */}
+          {/* Right: Detailed Product Specification Ledger */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
             <div className="space-y-6">
-              
-              {/* Heading & Code */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[#FF5A36] font-mono text-xs uppercase tracking-wider font-bold">
+              <div className="space-y-2 pb-5 border-b border-[#E2DFD7]">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[#D92227] font-mono text-xs uppercase tracking-wider font-bold tabular-nums">
                     CODE: {product.productCode}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-[#0B3D3B] bg-[#D9F0EC] px-2.5 py-1 rounded-md font-bold uppercase">
-                      Catalogue Active
-                    </span>
-                  </div>
+                  <span className="text-[10px] font-mono text-[#525957] uppercase tracking-wider">
+                    Catalogue Active
+                  </span>
                 </div>
-                
-                <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#0B3D3B] tracking-tight leading-tight">
+
+                <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#141918] tracking-tight leading-tight">
                   {product.name}
                 </h1>
-                
-                <div className="inline-block bg-slate-100 border border-slate-200 rounded-md px-3 py-1 text-[11px] text-[#0B3D3B] font-mono font-bold">
+
+                <p className="text-xs font-mono text-[#525957] pt-0.5">
                   {product.material.split(',')[0]}
-                </div>
+                </p>
               </div>
 
-              <hr className="border-slate-100" />
-
-              {/* Description */}
               <div className="space-y-2">
-                <h3 className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider">
-                  Product Overview & Function
-                </h3>
-                <p className="text-slate-600 font-normal leading-relaxed text-sm">
+                <h2 className="font-mono font-bold text-[#141918] text-xs uppercase tracking-[0.14em]">
+                  Product Overview &amp; Function
+                </h2>
+                <p className="text-[#525957] leading-relaxed text-sm sm:text-base">
                   {product.longDescription || product.shortDescription}
                 </p>
               </div>
 
-              {/* Material Composition & QC Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-[#FAFCFB] p-4 rounded-xl border border-slate-200 space-y-1">
-                  <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider block font-bold">Fiber Composition</span>
-                  <span className="text-[#0B3D3B] text-xs font-bold">{product.material}</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 border border-[#E2DFD7] divide-y sm:divide-y-0 sm:divide-x divide-[#E2DFD7] bg-[#F7F6F2]/60">
+                <div className="p-4 space-y-1">
+                  <span className="text-[10px] text-[#525957] font-mono uppercase tracking-wider block font-semibold">
+                    Material / Fiber Composition
+                  </span>
+                  <span className="text-[#141918] text-xs font-semibold block">{product.material}</span>
                 </div>
-                <div className="bg-[#FAFCFB] p-4 rounded-xl border border-slate-200 space-y-1">
-                  <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider block font-bold">Quality Standard</span>
-                  <span className="text-[#0B3D3B] text-xs font-bold inline-flex items-center gap-1">
-                    <ShieldCheck className="w-4 h-4 text-[#FF5A36]" /> OEKO-TEX Standard 100
+                <div className="p-4 space-y-1">
+                  <span className="text-[10px] text-[#525957] font-mono uppercase tracking-wider block font-semibold">
+                    Quality Standard
+                  </span>
+                  <span className="text-[#141918] text-xs font-semibold inline-flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-[#D92227]" />
+                    <span>OEKO-TEX Standard 100</span>
                   </span>
                 </div>
               </div>
 
-              {/* Available Sizes - Hidden for Gearwear */}
               {!isGearwear && product.sizes && product.sizes.length > 0 && (
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <div className="flex justify-between items-center">
-                    <h3 className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider">
+                    <h3 className="font-mono font-bold text-[#141918] text-xs uppercase tracking-[0.14em]">
                       Available Sizes
                     </h3>
-                    <span className="text-[10px] text-slate-400 font-mono">Selected: {selectedSize}</span>
+                    <span className="text-[11px] text-[#525957] font-mono">Selected: {selectedSize}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {product.sizes.map((s) => (
                       <button
                         key={s}
+                        type="button"
                         onClick={() => setSelectedSize(s)}
-                        className={`text-xs font-mono font-bold px-3.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                        className={`text-xs font-mono font-semibold px-3.5 py-1.5 rounded-sm border transition-colors cursor-pointer ${
                           selectedSize === s
-                            ? 'bg-[#0B3D3B] text-white border-[#0B3D3B] shadow-xs'
-                            : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-800'
+                            ? 'bg-[#0E1A19] text-white border-[#0E1A19]'
+                            : 'bg-white hover:border-[#141918] border-[#E2DFD7] text-[#141918]'
                         }`}
                       >
                         {s}
@@ -637,16 +599,15 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 </div>
               )}
 
-              {/* Key Features list */}
               {product.features && product.features.length > 0 && (
-                <div className="space-y-2">
-                  <h3 className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider">
+                <div className="space-y-2.5">
+                  <h3 className="font-mono font-bold text-[#141918] text-xs uppercase tracking-[0.14em]">
                     Performance Features
                   </h3>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-2">
                     {product.features.map((f, i) => (
-                      <li key={i} className="flex items-start text-xs text-slate-600 font-normal">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FF5A36] mr-2 mt-0.5 shrink-0" />
+                      <li key={i} className="flex items-start text-xs sm:text-sm text-[#525957]">
+                        <CheckCircle2 className="w-4 h-4 text-[#D92227] mr-2 mt-0.5 shrink-0" />
                         <span className="leading-relaxed">{f}</span>
                       </li>
                     ))}
@@ -654,102 +615,93 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 </div>
               )}
 
-              {/* Safety Line Ind Official Manufacturing Passport Card */}
-              <div className="p-4 sm:p-5 bg-gradient-to-r from-slate-50 via-white to-slate-50 border-2 border-slate-200/80 rounded-2xl shadow-xs flex items-center justify-between gap-4">
-                <div className="flex items-center">
-                  <div>
-                    <div className="flex items-baseline space-x-1.5">
-                      <span className="font-serif font-black text-xs sm:text-sm uppercase tracking-wider">
-                        <span className="text-[#EA2227]">SAFETY</span> <span className="text-black">LINE</span>
-                      </span>
-                    </div>
-                    <p className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-                      Official Specification File • Serial SL-{product.productCode}
-                    </p>
-                    <span className="text-[9px] text-emerald-700 font-mono font-bold inline-flex items-center gap-1 mt-0.5">
-                      <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                      100% Guaranteed European Textile Standard
-                    </span>
-                  </div>
+              {/* Specification Serial Bar */}
+              <div className="p-4 sm:p-5 bg-[#F7F6F2] border border-[#E2DFD7] rounded-sm flex items-center justify-between gap-4">
+                <div>
+                  <span className="font-display font-extrabold text-xs sm:text-sm uppercase tracking-[0.12em] block">
+                    <span className="text-[#D92227]">SAFETY</span> <span className="text-[#141918]">LINE</span>
+                  </span>
+                  <p className="text-[11px] font-mono text-[#525957] uppercase tracking-wider mt-0.5">
+                    Official Specification File · Serial SL-{product.productCode}
+                  </p>
                 </div>
 
                 <div className="hidden sm:block text-right shrink-0">
-                  <span className="text-[9px] font-mono uppercase text-slate-400 block font-bold">Standard</span>
-                  <span className="text-xs font-mono font-bold text-[#0B3D3B] bg-[#D9F0EC] px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-mono uppercase text-[#525957] block">Standard</span>
+                  <span className="text-xs font-mono font-bold text-[#141918]">
                     ISO 9001:2015
                   </span>
                 </div>
               </div>
 
-              {/* Digital Catalogue Notice (Strictly NO Cart / NO Price) */}
-              <div className="p-4 bg-[#D9F0EC]/30 border border-[#D9F0EC] rounded-xl space-y-1">
-                <span className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <HelpCircle className="w-4 h-4 text-[#FF5A36] shrink-0" />
-                  Showcase & Wholesale Procurement Note
+              <div className="p-4 border border-[#E2DFD7] rounded-sm space-y-1 bg-white">
+                <span className="font-mono font-bold text-[#141918] text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+                  <HelpCircle className="w-3.5 h-3.5 text-[#D92227] shrink-0" />
+                  <span>Showcase &amp; Wholesale Procurement Note</span>
                 </span>
-                <p className="text-slate-600 text-xs font-normal leading-relaxed">
+                <p className="text-[#525957] text-xs leading-relaxed">
                   This item is part of our digital product catalogue. Direct ordering, bespoke team specifications, and wholesale sample swatch packs are handled directly by our concierge.
                 </p>
               </div>
             </div>
 
-            {/* Action Buttons with Radiant Button Transitions & Loading Form Trigger */}
-            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+            {/* Action Buttons */}
+            <div className="pt-6 border-t border-[#E2DFD7] grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href={whatsappInquiryUrl}
                 target="_blank"
                 referrerPolicy="no-referrer"
-                className="btn-glow-shine flex-grow bg-gradient-to-r from-[#FF5A36] to-[#FF7A59] hover:from-[#e44e2b] hover:to-[#FF5A36] text-white font-bold text-xs tracking-wider uppercase py-4 px-6 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-md shadow-[#FF5A36]/25 active:scale-95 cursor-pointer"
+                className="bg-[#D92227] hover:bg-[#B5191D] text-white font-mono font-bold text-xs tracking-wider uppercase py-3.5 px-5 rounded-sm inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 text-white" />
+                <MessageCircle className="w-4 h-4" />
                 <span>Inquire via WhatsApp</span>
               </a>
 
               <button
+                type="button"
                 onClick={() => setIsInquiryModalOpen(true)}
-                className="btn-glow-shine bg-[#0B3D3B] hover:bg-[#072725] text-white font-bold text-xs tracking-wider uppercase py-4 px-5 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95 cursor-pointer border border-emerald-500/30"
+                className="bg-[#0E1A19] hover:bg-[#122B29] text-white font-mono font-bold text-xs tracking-wider uppercase py-3.5 px-5 rounded-sm inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 text-emerald-300" />
                 <span>Request OEM Spec Pack</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
 
               <a
                 href={`mailto:${settings.contactEmail}?subject=${encodeURIComponent(`Catalogue Inquiry: ${product.name} (SL-${product.productCode})`)}&body=${encodeURIComponent(`Hello Safety Line Advisory Desk,\n\nI am inquiring regarding the ${product.name} (Code: SL-${product.productCode}). Please send the complete specification sheet and sample details.\n\nThank you.`)}`}
-                className="btn-glow-shine bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs tracking-wider uppercase py-4 px-5 rounded-xl inline-flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+                className="bg-white hover:bg-[#ECE9E1] text-[#141918] border border-[#E2DFD7] font-mono font-bold text-xs tracking-wider uppercase py-3.5 px-5 rounded-sm inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 title={`Email directly to ${settings.contactEmail}`}
               >
-                <Mail className="w-4 h-4 text-[#D9F0EC]" />
+                <Mail className="w-4 h-4 text-[#D92227]" />
                 <span>Email Specs</span>
               </a>
 
               <button
+                type="button"
                 onClick={() => navigate(`/${parentCategorySlug}`)}
-                className="btn-glow-shine bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs tracking-wider uppercase py-4 px-4 rounded-xl inline-flex items-center justify-center space-x-2 transition-all active:scale-95 cursor-pointer"
+                className="bg-[#F7F6F2] hover:bg-[#ECE9E1] text-[#141918] border border-[#E2DFD7] font-mono font-bold text-xs tracking-wider uppercase py-3.5 px-5 rounded-sm inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                <span>{parentCategoryLabel}</span>
+                <span>Browse {parentCategoryLabel}</span>
               </button>
             </div>
           </div>
-
         </div>
 
-        {/* ==========================================
-            RELATED PRODUCTS RECOMMENDATION SECTION
-           ========================================== */}
+        {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="space-y-6 pt-4">
-            <div className="flex items-center justify-between">
+          <section className="space-y-6 pt-4">
+            <div className="flex items-end justify-between border-b border-[#E2DFD7] pb-4">
               <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#D9F0EC] text-[#0B3D3B] text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
-                  <span>Related Products</span>
-                </div>
-                <h3 className="font-display text-2xl font-extrabold text-[#0B3D3B] tracking-tight">
-                  Complementary Designs
+                <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.16em] text-[#D92227] block">
+                  Related Designs
+                </span>
+                <h3 className="font-display text-2xl font-extrabold text-[#141918] tracking-tight mt-0.5">
+                  Complementary Lines
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => navigate(`/${parentCategorySlug}`)}
-                className="text-xs font-bold text-[#0B3D3B] hover:text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer transition-colors"
+                className="text-xs font-mono font-bold text-[#141918] hover:text-[#D92227] uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer transition-colors"
               >
                 <span>View Full Line</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -761,143 +713,142 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 <div
                   key={rel.id}
                   onClick={() => navigate(`/product/${rel.slug}`)}
-                  className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-[#FF5A36] shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
+                  className="group cursor-pointer bg-white rounded-sm overflow-hidden border border-[#E2DFD7] hover:border-[#141918] transition-colors flex flex-col"
                 >
-                  <div className="aspect-[4/5] bg-slate-100 overflow-hidden relative">
+                  <div className="aspect-[4/5] bg-[#F7F6F2] overflow-hidden relative p-4 flex items-center justify-center">
                     <img
                       src={rel.coverImage}
                       alt={rel.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ mixBlendMode: 'multiply' }}
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
-                    <div className="absolute top-2.5 right-2.5 bg-[#0B3D3B] text-white px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase">
-                      {rel.productCode}
-                    </div>
                   </div>
-                  <div className="p-4 space-y-1">
-                    <p className="text-[10px] text-slate-400 font-mono uppercase font-semibold">
-                      {rel.material.split(',')[0]}
-                    </p>
-                    <h4 className="font-display font-bold text-[#0B3D3B] text-sm group-hover:text-[#FF5A36] transition-colors line-clamp-1">
+                  <div className="p-4 border-t border-[#E2DFD7] space-y-1.5">
+                    <div className="flex items-center justify-between gap-2 text-[10px] font-mono text-[#525957]">
+                      <span className="truncate">{rel.material.split(',')[0]}</span>
+                      <span className="font-bold text-[#D92227] tabular-nums shrink-0">{rel.productCode}</span>
+                    </div>
+                    <h4 className="font-display font-bold text-[#141918] text-sm group-hover:text-[#D92227] transition-colors line-clamp-1">
                       {rel.name}
                     </h4>
-                    <span className="text-[10px] font-bold text-[#FF5A36] uppercase tracking-wider inline-flex items-center gap-1 pt-1">
-                      <span>View Specifications</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </span>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </section>
         )}
 
-        {/* ==========================================
-            PRODUCT FEEDBACK SECTION
-           ========================================== */}
-        <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-8">
-          <div className="border-b border-slate-100 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="text-left">
-              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#D9F0EC] text-[#0B3D3B] text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
-                <span>Verified Field Reviews</span>
-              </div>
-              <h2 className="font-display text-2xl font-extrabold text-[#0B3D3B] tracking-tight">
-                Feedback & Wear Notes for {product.name}
+        {/* Product Feedback & Field Notes */}
+        <section className="bg-white rounded-sm p-6 sm:p-10 border border-[#E2DFD7] space-y-8">
+          <div className="border-b border-[#E2DFD7] pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.16em] text-[#D92227] block">
+                Verified Field Reviews
+              </span>
+              <h2 className="font-display text-2xl font-extrabold text-[#141918] tracking-tight mt-0.5">
+                Feedback &amp; Wear Notes for {product.name}
               </h2>
-              <p className="text-slate-500 text-xs font-normal mt-1">
+              <p className="text-[#525957] text-xs mt-1">
                 Submit evaluation notes or view verified feedback from stockists and athletes.
               </p>
             </div>
-            
-            <div className="flex items-center gap-2 bg-[#FAFCFB] border border-slate-200 rounded-lg px-3.5 py-2 self-start md:self-center">
-              <MessageSquare className="w-4 h-4 text-[#FF5A36]" />
-              <span className="text-xs font-mono font-bold text-[#0B3D3B]">
+
+            <div className="flex items-center gap-2 bg-[#F7F6F2] border border-[#E2DFD7] rounded-sm px-3.5 py-2 self-start md:self-center">
+              <MessageSquare className="w-4 h-4 text-[#D92227]" />
+              <span className="text-xs font-mono font-semibold text-[#141918] tabular-nums">
                 {feedbacks.length} Feedback Entr{feedbacks.length !== 1 ? 'ies' : 'y'}
               </span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 text-left">
-            
-            {/* Submit feedback form */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-5 space-y-5">
-              <h3 className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider">
+              <h3 className="font-mono font-bold text-[#141918] text-xs uppercase tracking-[0.14em]">
                 Submit Product Feedback
               </h3>
-              
+
               <form onSubmit={handleSubmitFeedback} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="block text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Your Name *</label>
+                    <label className="block text-[10px] font-mono text-[#525957] uppercase tracking-wider font-semibold">
+                      Your Name *
+                    </label>
                     <input
                       type="text"
                       required
                       placeholder="e.g. Erik Sundberg"
                       value={author}
                       onChange={(e) => setAuthor(e.target.value)}
-                      className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] focus:bg-white rounded-lg px-3.5 py-2 text-xs text-[#1A1A1A] outline-none transition-all"
+                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-xs text-[#141918] outline-none transition-colors"
                     />
                   </div>
-                  
+
                   <div className="space-y-1">
-                    <label className="block text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Email Address *</label>
+                    <label className="block text-[10px] font-mono text-[#525957] uppercase tracking-wider font-semibold">
+                      Email Address *
+                    </label>
                     <input
                       type="email"
                       required
                       placeholder="e.g. erik@athletic.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] focus:bg-white rounded-lg px-3.5 py-2 text-xs text-[#1A1A1A] outline-none transition-all"
+                      className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-xs text-[#141918] outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="block text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Rating</label>
-                  <div className="flex items-center space-x-1">
+                  <label className="block text-[10px] font-mono text-[#525957] uppercase tracking-wider font-semibold">
+                    Rating
+                  </label>
+                  <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
                         onClick={() => setRating(star)}
-                        className="p-1 focus:outline-none transition-transform active:scale-110 cursor-pointer"
+                        className="p-1 focus:outline-none cursor-pointer"
                         aria-label={`Rate ${star} Stars`}
                       >
-                        <Star 
+                        <Star
                           className={`w-5 h-5 ${
-                            star <= rating 
-                              ? 'text-[#FF5A36] fill-[#FF5A36]' 
-                              : 'text-slate-200 hover:text-[#FF5A36]/60'
+                            star <= rating
+                              ? 'text-[#D92227] fill-[#D92227]'
+                              : 'text-[#E2DFD7] hover:text-[#D92227]/60'
                           } transition-colors`}
                         />
                       </button>
                     ))}
-                    <span className="text-xs font-mono text-slate-500 font-semibold ml-2">
+                    <span className="text-xs font-mono text-[#525957] font-semibold ml-2 tabular-nums">
                       ({rating}/5 Stars)
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">Wear Experience / Technical Notes *</label>
+                  <label className="block text-[10px] font-mono text-[#525957] uppercase tracking-wider font-semibold">
+                    Wear Experience / Technical Notes *
+                  </label>
                   <textarea
                     required
                     rows={4}
                     placeholder="Describe material feel, fit accuracy, and compression performance..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-[#FAFCFB] border border-slate-200 focus:border-[#0B3D3B] focus:bg-white rounded-lg px-3.5 py-2 text-xs text-[#1A1A1A] outline-none transition-all resize-none"
+                    className="w-full bg-[#F7F6F2] border border-[#E2DFD7] focus:border-[#141918] focus:bg-white rounded-sm px-3.5 py-2.5 text-xs text-[#141918] outline-none transition-colors resize-none"
                   />
                 </div>
 
                 {successMsg && (
-                  <div className="p-3 bg-emerald-50 text-emerald-800 rounded-lg text-xs border border-emerald-200 font-normal">
+                  <div className="p-3 bg-emerald-50 text-emerald-900 rounded-sm text-xs border border-emerald-200">
                     {successMsg}
                   </div>
                 )}
 
                 {errorMsg && (
-                  <div className="p-3 bg-rose-50 text-rose-800 rounded-lg text-xs border border-rose-200 font-normal">
+                  <div className="p-3 bg-rose-50 text-rose-900 rounded-sm text-xs border border-rose-200">
                     {errorMsg}
                   </div>
                 )}
@@ -905,11 +856,11 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-[#0B3D3B] hover:bg-[#072725] disabled:opacity-50 text-white font-bold text-xs tracking-wider uppercase py-3 rounded-lg inline-flex items-center justify-center space-x-2 transition-all shadow-xs cursor-pointer"
+                  className="w-full bg-[#0E1A19] hover:bg-[#122B29] disabled:opacity-50 text-white font-mono font-bold text-xs tracking-wider uppercase py-3 rounded-sm inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
                   {submitting ? (
                     <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-[#D9F0EC]" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       <span>Submitting...</span>
                     </>
                   ) : (
@@ -919,110 +870,89 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               </form>
             </div>
 
-            {/* Right side: Feedbacks list */}
             <div className="lg:col-span-7 space-y-3">
-              <h3 className="font-display font-bold text-[#0B3D3B] text-xs uppercase tracking-wider">
+              <h3 className="font-mono font-bold text-[#141918] text-xs uppercase tracking-[0.14em]">
                 Recent Feedback
               </h3>
-              
+
               {feedbacks.length === 0 ? (
-                <div className="bg-[#FAFCFB] border border-dashed border-slate-200 rounded-xl p-8 text-center">
-                  <MessageSquare className="w-6 h-6 text-slate-400 mx-auto mb-2" />
-                  <p className="text-slate-500 font-normal text-xs">
+                <div className="bg-[#F7F6F2] border border-[#E2DFD7] rounded-sm p-8 text-center">
+                  <MessageSquare className="w-6 h-6 text-[#525957] mx-auto mb-2" />
+                  <p className="text-[#525957] text-xs">
                     No active feedback entries for this product yet.
                   </p>
                 </div>
               ) : (
                 <div className="space-y-3 max-h-[440px] overflow-y-auto pr-1">
                   {feedbacks.map((f) => (
-                    <div key={f.id} className="bg-[#FAFCFB] p-4 rounded-xl border border-slate-200 space-y-2">
+                    <div key={f.id} className="bg-[#F7F6F2] p-4 rounded-sm border border-[#E2DFD7] space-y-2">
                       <div className="flex justify-between items-start gap-4">
                         <div>
-                          <h4 className="text-xs font-bold text-[#0B3D3B] font-display">{f.author}</h4>
-                          <span className="text-[10px] text-slate-400 font-mono">
+                          <h4 className="text-xs font-bold text-[#141918] font-display">{f.author}</h4>
+                          <span className="text-[10px] text-[#525957] font-mono">
                             {new Date(f.createdAt).toLocaleDateString(undefined, { dateStyle: 'medium' })}
                           </span>
                         </div>
-                        <div className="flex text-[#FF5A36] space-x-0.5 shrink-0 bg-white border border-slate-200 px-2 py-0.5 rounded">
+                        <div className="flex text-[#D92227] space-x-0.5 shrink-0 bg-white border border-[#E2DFD7] px-2 py-0.5 rounded-sm">
                           {[...Array(f.rating || 5)].map((_, idx) => (
                             <Star key={idx} className="w-3 h-3 fill-current" />
                           ))}
                         </div>
                       </div>
-                      
-                      <p className="text-slate-600 text-xs font-normal leading-relaxed whitespace-pre-line">
-                        "{f.message}"
+
+                      <p className="text-[#525957] text-xs leading-relaxed whitespace-pre-line">
+                        &ldquo;{f.message}&rdquo;
                       </p>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-
           </div>
-        </div>
-
+        </section>
       </div>
 
-      {/* Footer */}
-      <footer className="mt-20 border-t border-slate-200 bg-white py-8 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <div className="flex items-center space-x-2">
-            <ShieldCheck className="w-4 h-4 text-[#FF5A36]" />
-            <span>Safety Line {parentCategoryLabel} Technical Catalogue</span>
-          </div>
-          <div className="flex items-center space-x-4 uppercase font-bold">
-            <button onClick={() => navigate('/')} className="hover:text-[#0B3D3B] transition-colors cursor-pointer">Portal</button>
-            <button onClick={() => navigate(`/${parentCategorySlug}`)} className="hover:text-[#FF5A36] transition-colors cursor-pointer">{parentCategoryLabel}</button>
-            <button onClick={() => navigate('/about')} className="hover:text-[#0B3D3B] transition-colors cursor-pointer">About Us</button>
-            <button onClick={() => navigate('/contact')} className="hover:text-[#FF5A36] transition-colors cursor-pointer">Contact Us</button>
-          </div>
-        </div>
-      </footer>
+      <Footer settings={settings} />
 
-      {/* ==========================================
-          FULLSCREEN MACRO INSPECTOR MODAL
-         ========================================== */}
+      {/* Fullscreen Macro Inspector */}
       {isFullscreenZoom && (
-        <div 
-          className="fixed inset-0 z-50 bg-neutral-950/95 backdrop-blur-md flex flex-col select-none animate-in fade-in duration-200"
+        <div
+          className="fixed inset-0 z-50 bg-[#0E1A19]/96 flex flex-col select-none"
           onClick={() => setIsFullscreenZoom(false)}
         >
-          {/* Top Control Bar */}
-          <div 
-            className="flex items-center justify-between px-6 py-4 border-b border-neutral-800 bg-neutral-900/90 text-white z-30"
+          <div
+            className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0E1A19] text-white z-30"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center space-x-3">
-              <span className="text-[#FF5A36] font-mono font-bold text-xs uppercase tracking-wider">
+              <span className="text-[#D92227] font-mono font-bold text-xs uppercase tracking-wider tabular-nums">
                 {product.productCode}
               </span>
-              <span className="text-neutral-500">|</span>
+              <span className="text-white/30">|</span>
               <h3 className="text-sm font-bold font-display text-white truncate max-w-sm sm:max-w-md">
                 {product.name}
               </h3>
-              <span className="bg-neutral-800 text-neutral-300 text-[10px] font-mono px-2 py-0.5 rounded">
+              <span className="bg-white/10 text-white/80 text-[10px] font-mono px-2 py-0.5 rounded-sm tabular-nums">
                 {activeIndex + 1} / {images.length}
               </span>
             </div>
 
-            {/* Scale Controls & Info */}
             <div className="flex items-center space-x-3">
-              <div className="hidden md:flex items-center space-x-2 bg-neutral-800 px-3 py-1 rounded-lg text-xs font-mono text-neutral-300">
-                <Scan className="w-3.5 h-3.5 text-[#FF5A36] animate-pulse" />
+              <div className="hidden md:flex items-center space-x-2 bg-white/5 border border-white/10 px-3 py-1 rounded-sm text-xs font-mono text-white/80 tabular-nums">
+                <Scan className="w-3.5 h-3.5 text-[#D92227]" />
                 <span>Pan: {Math.round(fullscreenZoomPos.x)}%, {Math.round(fullscreenZoomPos.y)}%</span>
               </div>
 
-              {/* Scale presets */}
-              <div className="flex items-center space-x-1 bg-neutral-800 p-1 rounded-lg">
+              <div className="flex items-center space-x-1 bg-white/5 border border-white/10 p-1 rounded-sm">
                 {[1.5, 2.5, 3.5, 5.0].map((s) => (
                   <button
                     key={s}
+                    type="button"
                     onClick={() => setFullscreenScale(s)}
-                    className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-all cursor-pointer ${
+                    className={`px-2.5 py-1 rounded-sm text-xs font-mono font-bold tabular-nums transition-colors cursor-pointer ${
                       fullscreenScale === s
-                        ? 'bg-[#FF5A36] text-white'
-                        : 'text-neutral-400 hover:text-white hover:bg-neutral-700'
+                        ? 'bg-[#D92227] text-white'
+                        : 'text-white/65 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     {s}x
@@ -1030,58 +960,57 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
                 ))}
               </div>
 
-              {/* Zoom Step Buttons */}
               <div className="flex items-center space-x-1">
                 <button
+                  type="button"
                   onClick={() => setFullscreenScale(prev => Math.max(1.2, prev - 0.5))}
                   title="Zoom Out"
-                  className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors cursor-pointer"
+                  className="p-1.5 rounded-sm bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                 >
                   <ZoomOut className="w-4 h-4" />
                 </button>
                 <button
+                  type="button"
                   onClick={() => setFullscreenScale(prev => Math.min(6.0, prev + 0.5))}
                   title="Zoom In"
-                  className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors cursor-pointer"
+                  className="p-1.5 rounded-sm bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                 >
                   <ZoomIn className="w-4 h-4" />
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     setFullscreenScale(2.5);
                     setFullscreenZoomPos({ x: 50, y: 50 });
                   }}
                   title="Reset Coordinates"
-                  className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white transition-colors cursor-pointer"
+                  className="p-1.5 rounded-sm bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Close Button */}
               <button
+                type="button"
                 onClick={() => setIsFullscreenZoom(false)}
                 title="Close Inspector (ESC)"
-                className="p-1.5 rounded-lg bg-[#FF5A36] hover:bg-[#E04826] text-white transition-colors cursor-pointer ml-2"
+                className="p-1.5 rounded-sm bg-[#D92227] hover:bg-[#B5191D] text-white transition-colors cursor-pointer ml-2"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          {/* Interactive Inspection Canvas Area */}
-          <div 
-            className="flex-1 relative overflow-hidden flex items-center justify-center p-6 cursor-crosshair"
+          <div
+            className="flex-1 relative overflow-hidden flex items-center justify-center p-6 cursor-crosshair bg-white/95"
             onClick={(e) => e.stopPropagation()}
             onMouseMove={handleFullscreenMouseMove}
             onTouchMove={handleFullscreenTouchMove}
-            onMouseEnter={() => setIsFullscreenHovering(true)}
-            onMouseLeave={() => setIsFullscreenHovering(false)}
           >
             <img
               src={images[activeIndex]}
               alt={`${product.name} Fullscreen Inspection`}
-              className="max-w-full max-h-full object-contain pointer-events-none will-change-transform drop-shadow-2xl"
+              className="max-w-full max-h-full object-contain pointer-events-none will-change-transform"
               style={{
                 transformOrigin: `${fullscreenZoomPos.x}% ${fullscreenZoomPos.y}%`,
                 transform: `scale(${fullscreenScale})`,
@@ -1089,19 +1018,20 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               }}
             />
 
-            {/* Previous/Next Image Navigation Arrows */}
             {images.length > 1 && (
               <>
                 <button
+                  type="button"
                   onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  className="absolute left-6 top-1/2 -translate-y-1/2 bg-neutral-900/80 hover:bg-[#FF5A36] text-white p-3 rounded-full backdrop-blur-md shadow-xl transition-all cursor-pointer z-30"
+                  className="absolute left-6 top-1/2 -translate-y-1/2 bg-[#0E1A19] hover:bg-[#D92227] text-white p-3 rounded-sm transition-colors cursor-pointer z-30"
                   aria-label="Previous image"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
+                  type="button"
                   onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                  className="absolute right-6 top-1/2 -translate-y-1/2 bg-neutral-900/80 hover:bg-[#FF5A36] text-white p-3 rounded-full backdrop-blur-md shadow-xl transition-all cursor-pointer z-30"
+                  className="absolute right-6 top-1/2 -translate-y-1/2 bg-[#0E1A19] hover:bg-[#D92227] text-white p-3 rounded-sm transition-colors cursor-pointer z-30"
                   aria-label="Next image"
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -1109,33 +1039,32 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
               </>
             )}
 
-            {/* Instruction Floating Pill */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-neutral-900/85 backdrop-blur-md text-neutral-300 border border-neutral-800 px-4 py-1.5 rounded-full text-xs font-mono flex items-center space-x-2 pointer-events-none shadow-lg z-30">
-              <Move className="w-3.5 h-3.5 text-[#FF5A36] animate-pulse" />
-              <span>Move cursor anywhere to inspect high-definition fabric & seams • ESC to close</span>
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[#0E1A19]/90 text-white px-4 py-1.5 rounded-sm text-xs font-mono flex items-center gap-2 pointer-events-none z-30">
+              <Move className="w-3.5 h-3.5 text-[#D92227]" />
+              <span>Move cursor anywhere to inspect fabric &amp; seams · ESC to close</span>
             </div>
           </div>
 
-          {/* Bottom Thumbnails Strip */}
           {images.length > 1 && (
-            <div 
-              className="px-6 py-3 border-t border-neutral-800 bg-neutral-900/80 flex items-center justify-center space-x-3 z-30 overflow-x-auto"
+            <div
+              className="px-6 py-3 border-t border-white/10 bg-[#0E1A19] flex items-center justify-center space-x-3 z-30 overflow-x-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {images.map((img, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => setActiveIndex(idx)}
-                  className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all cursor-pointer bg-neutral-800 p-1 flex items-center justify-center shrink-0 ${
+                  className={`w-14 h-14 rounded-sm overflow-hidden border transition-all cursor-pointer bg-white p-1 flex items-center justify-center shrink-0 ${
                     idx === activeIndex
-                      ? 'border-[#FF5A36] ring-2 ring-[#FF5A36]/40 scale-105'
-                      : 'border-neutral-700 opacity-60 hover:opacity-100 hover:border-neutral-500'
+                      ? 'border-[#D92227] ring-1 ring-[#D92227]'
+                      : 'border-white/20 opacity-70 hover:opacity-100'
                   }`}
                 >
-                  <img 
-                    src={img} 
-                    alt="Thumbnail" 
-                    className="w-full h-full object-contain" 
+                  <img
+                    src={img}
+                    alt="Thumbnail"
+                    className="w-full h-full object-contain"
                   />
                 </button>
               ))}
@@ -1144,7 +1073,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
         </div>
       )}
 
-      {/* Interactive Multi-Stage Animated Spec & OEM Loading Form Modal */}
       {product && (
         <InquiryLoadingModal
           isOpen={isInquiryModalOpen}
@@ -1154,7 +1082,6 @@ export default function ProductDetails({ slug, products, onUpdateProduct }: Prod
           defaultProductTitle={`${product.name} (Code: SL-${product.productCode})`}
         />
       )}
-
     </div>
   );
 }
